@@ -1,7 +1,7 @@
 # Software Engineering Project - Klotski 🧩
 by Gruppo 2 (Bellinato, Bordin, Caon, Menegale)
 
-![piece3](img/piece3.png) ![piece1](img/piece1.png) ![piece2](img/piece2.png) ![piece0](img/piece0.png)
+![piece3](src/img/piece3.png) ![piece1](src/img/piece1.png) ![piece2](src/img/piece2.png) ![piece0](src/img/piece0.png)
 
 _**piece3**, **piece1**, **piece2**, **piece0**_ 
 
