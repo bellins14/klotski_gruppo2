@@ -1,8 +1,8 @@
-module com.project.klotski {
+module com.example.progetto {
     requires javafx.controls;
     requires javafx.fxml;
-            
-                            
-    opens com.project.klotski to javafx.fxml;
-    exports com.project.klotski;
+
+
+    opens com.example.progetto to javafx.fxml;
+    exports com.example.progetto;
 }
