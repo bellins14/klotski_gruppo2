@@ -5,13 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.project</groupId>
-  <artifactId>klotski</artifactId>
+  <artifactId>Progetto</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>klotski_gruppo2</name>
+  <name>Progetto</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>5.9.1</junit.version>      </properties>
+    <junit.version>5.9.1</junit.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -24,7 +25,7 @@
       <artifactId>javafx-fxml</artifactId>
       <version>20-ea+4</version>
     </dependency>
-                                    
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -36,11 +37,12 @@
       <artifactId>junit-jupiter-engine</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
-    </dependency>              </dependencies>
+    </dependency>
+  </dependencies>
 
   <build>
-        <plugins>
-            <plugin>
+    <plugins>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.10.1</version>
@@ -48,7 +50,7 @@
           <source>20</source>
           <target>20</target>
         </configuration>
-            </plugin>
+      </plugin>
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
@@ -69,6 +71,6 @@
           </execution>
         </executions>
       </plugin>
-          </plugins>
+    </plugins>
   </build>
 </project>

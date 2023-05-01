@@ -11,13 +11,17 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        //prendo i dati dal file ".fxml"
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        String css = Objects.requireNonNull(Main.class.getResource("style.css")).toExternalForm();
-        scene.getStylesheets().add(css);
-        stage.setTitle("Klotski");
+        //creo una nuova "scene"
+        Scene scene = new Scene(fxmlLoader.load(), 700, 700);
+
         stage.setScene(scene);
+        //Controller controller = fxmlLoader.getController();
+        //imposto una dimensione fissa della schermata, ovvero decido che l'utente non può ingrandirla
+        stage.setResizable(false);
         stage.show();
+
     }
 
     public static void main(String[] args) {
