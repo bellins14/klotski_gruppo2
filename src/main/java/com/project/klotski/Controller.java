@@ -1,10 +1,10 @@
 package com.project.klotski;
 
+import com.jfoenix.controls.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
 
 public class Controller {
     //Pannello "Pane" dove andrò ad inserire i vari Piece
@@ -24,7 +25,7 @@ public class Controller {
     private Text textcounter;
 
     @FXML
-    private Button reset;
+    private JFXButton reset;
 
     //counter per le mosse
     private int counter = 0;
@@ -147,10 +148,10 @@ public class Controller {
     //reset della configuarazione attuale
     @FXML
     void reset(MouseEvent event) {
-        counter = 0;
-        textcounter.setText("Moves : " + counter);
-        buttonGrid.getChildren().clear();
-        initialize();
+     counter = 0;
+     textcounter.setText("Moves : " + counter);
+     buttonGrid.getChildren().clear();
+     initialize();
     }
 
     //cambio configurazione e azzeramento
@@ -167,4 +168,8 @@ public class Controller {
             initialize();
         }
     }
+
+
+
+
 }

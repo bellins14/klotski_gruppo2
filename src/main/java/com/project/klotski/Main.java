@@ -13,9 +13,9 @@ public class Main extends Application {
         //prendo i dati dal file ".fxml"
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view.fxml"));
         //creo una nuova "scene"
-        Scene scene = new Scene(fxmlLoader.load(), 700, 700);
-
+        Scene scene = new Scene(fxmlLoader.load(),1000,700);
         stage.setScene(scene);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         //Controller controller = fxmlLoader.getController();
         //imposto una dimensione fissa della schermata, ovvero decido che l'utente non può ingrandirla
         stage.setResizable(false);

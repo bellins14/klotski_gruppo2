@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Configuration {
+
     //configurazione scelta
     private final int _configuration;
 
@@ -55,7 +56,7 @@ public class Configuration {
 
         switch (this._configuration) {
             case 1 -> {
-                positionX = new int[]{0, 100, 300, 0, 100, 200, 100, 200, 300, 200};
+                positionX = new int[]{0, 100, 300, 0, 100, 200, 100, 200, 300, 100};
                 positionY = new int[]{0, 0, 0, 200, 200, 200, 300, 300, 200, 400,};
             }
             case 2 -> {
@@ -82,4 +83,6 @@ public class Configuration {
 
         return positions;
     }
+
+
 }

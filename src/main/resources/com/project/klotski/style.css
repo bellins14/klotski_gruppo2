@@ -4,3 +4,13 @@
     -fx-background-size: 400 500;
     -fx-background-position: center center;
 }
+
+
+.reset{
+
+    -fx-background-color: #725a7a;
+}
+
+#configuration JFXButton{
+    -fx-background-color: #725a7a;
+}

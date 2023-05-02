@@ -4,6 +4,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Piece extends Rectangle {
+
     //colore del Piece
     private final Color _color;
     public Piece(int a, Color color) {
@@ -34,4 +35,6 @@ public class Piece extends Rectangle {
     }
 
     public Color getColor() {return  this._color;}
+
+
 }
