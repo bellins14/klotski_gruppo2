@@ -188,6 +188,44 @@
   </tr>
 </table>
 
+### Use Case 6
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Visualizzare counter delle mosse effettuate</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il giocatore deve ruscire a visualizzare il counter delle mosse</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte fino a quel
+        momento
+    </td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Ogni volta che il giocatore fa una mossa, il counter viene aumentato</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>-</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
 ### Use Case 7
 <table>
   <tr>
