@@ -45,7 +45,7 @@
 </table>
 
 # Grafo Use Cases
-```UML
+```plantuml
 # PlantUML Editor
 
 @startuml
