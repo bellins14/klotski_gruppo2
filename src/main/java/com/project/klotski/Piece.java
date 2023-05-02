@@ -66,7 +66,7 @@ public class Piece extends Rectangle {
         this._image = imageName;
     }
 
-    public String getImageName(){ return "/img" +this._image;}
+    public String getImageName(){ return this._image;}
 
 
 }

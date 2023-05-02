@@ -1,7 +1,5 @@
 package com.project.klotski;
 
-import javafx.scene.paint.Color;
-
 import java.util.HashMap;
 import java.util.Map;
 
