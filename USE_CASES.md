@@ -76,7 +76,7 @@
   </tr>
     <tr>
     <td><b>Note</b></td>
-    <td>Il movimento di una posizione consiste nello spostare un blocco di 10 px</td>
+    <td>-</td>
   </tr>
 </table>
 
