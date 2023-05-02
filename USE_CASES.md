@@ -152,6 +152,42 @@
   </tr>
 </table>
 
+### Use Case 8
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Ripristinare partita salvata</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Gioco</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultimo stato salvato</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Non viene applicata alcuna modifica allo stato di gioco</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
 # Grafo Use Cases
 ```plantuml
 # PlantUML Editor
