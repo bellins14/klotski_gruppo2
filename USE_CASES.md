@@ -152,6 +152,42 @@
   </tr>
 </table>
 
+### Use Case 5
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Next Best Move</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore(?)</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Viene fornita la mossa migliore per quella configurazione</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>La partita non deve essere finita</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>ogni volta che si clicca su questo bottone un blocco alla volta verrà spostato in modo da ottenere la vittoria nel minor numero di mosse necessarie.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Viene visualizzato il messaggio "Mossa non disponibile"</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Incrementare il counter delle mosse, salvare lo stato corrente, calcolare la next best move</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
 ### Use Case 7
 <table>
   <tr>
