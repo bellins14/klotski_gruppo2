@@ -152,6 +152,42 @@
   </tr>
 </table>
 
+### Use Case 7
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Salvare lo stato corrente</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Gioco</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il gioco deve sempre salvare lo stato corrente </td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), il gioco deve salvare automaticamente lo stato della partita, in modo che, se il programma dovesse essere chiuso, all'avvio successivo lo stato della partita possa essere ripristinato</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>-</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>Lo stato corrente deve comprendere la configurazione dei blocchi, le configurazioni iniziali, il counter delle mosse, lo storico delle mosse</td>
+  </tr>
+</table>
+
 # Grafo Use Cases
 ```plantuml
 # PlantUML Editor
