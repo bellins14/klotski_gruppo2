@@ -16,6 +16,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.util.Objects;
+
 
 public class Controller {
     //Pannello "Pane" dove andrò ad inserire i vari Piece
@@ -58,7 +60,9 @@ public class Controller {
         for (int i = 0; i < buttons.length; i++) {
             Piece button = buttons[i];
             //Color color = buttons[i].getColor();
-            button.setFill(new ImagePattern(new Image(getClass().getResource(button.getImageName()).toExternalForm())));
+            //button.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("com/project/klotski/piece0.png"))));
+            Image image = new Image(getClass().getResource("img/"+button.getImageName()).toString());
+            button.setFill(new ImagePattern(image));
             button.setLayoutX(positions[i].getX());
             button.setLayoutY(positions[i].getY());
             //assegno un bordo nero di spessore 3
