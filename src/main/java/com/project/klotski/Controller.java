@@ -7,9 +7,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -55,8 +57,8 @@ public class Controller {
         //con questo ciclo for inizializzo la pane
         for (int i = 0; i < buttons.length; i++) {
             Piece button = buttons[i];
-            Color color = buttons[i].getColor();
-            button.setFill(color);
+            //Color color = buttons[i].getColor();
+            button.setFill(new ImagePattern(new Image("com/media/img/piece0.png")));
             button.setLayoutX(positions[i].getX());
             button.setLayoutY(positions[i].getY());
             //assegno un bordo nero di spessore 3

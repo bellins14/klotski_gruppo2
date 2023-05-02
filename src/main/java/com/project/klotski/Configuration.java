@@ -24,11 +24,16 @@ public class Configuration {
     public Piece[] getButtons() {
         Piece[] buttons = new Piece[10];
 
-        Map<Integer, Color> colorMap = new HashMap<>();
-        colorMap.put(0, Color.LIGHTCORAL);
-        colorMap.put(1, Color.GREEN);
-        colorMap.put(2, Color.LIGHTBLUE);
-        colorMap.put(3, Color.BROWN);
+        Map<Integer, String> imageMap = new HashMap<>();
+        /*imageMap.put(0, Color.LIGHTCORAL);
+        imageMap.put(1, Color.GREEN);
+        imageMap.put(2, Color.LIGHTBLUE);
+        imageMap.put(3, Color.BROWN);
+*/
+        imageMap.put(0, "piece0.png");
+        imageMap.put(1, "piece1.png");
+        imageMap.put(2, "piece2.png");
+        imageMap.put(3, "piece2.png");
         int[] values;
         switch (this._configuration) {
             case 1 -> values = new int[]{1, 3, 1, 1, 0, 0, 0, 0, 1, 2};
@@ -42,8 +47,8 @@ public class Configuration {
 
         for (int i = 0; i < buttons.length; i++) {
             int value = values[i];
-            Color color = colorMap.get(value);
-            buttons[i] = new Piece(value, color);
+            String image = imageMap.get(value);
+            buttons[i] = new Piece(value, image);
         }
 
         return buttons;
