@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -77,7 +78,16 @@ public class Controller {
                     b.setEffect(null);
                 }
                 // Attiva l'illuminazione del pulsante selezionato
-                button.setEffect(new Glow(0.5));
+                selectedButton.setStyle("-fx-background-color: #4CAF50; -fx-border-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 16px;");
+                DropShadow dropShadow = new DropShadow();
+                dropShadow.setRadius(5.0);
+                dropShadow.setOffsetX(3.0);
+                dropShadow.setOffsetY(3.0);
+                dropShadow.setColor(javafx.scene.paint.Color.rgb(0, 0, 0, 0.3));
+
+                button.setOnMousePressed(event1 -> button.setEffect(dropShadow));
+                button.setOnMouseReleased(event1 -> button.setEffect(null));
+               // button.setEffect(new Glow(0.3));
                 selectedButton = button;
             });
         }
