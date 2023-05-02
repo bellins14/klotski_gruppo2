@@ -80,6 +80,43 @@
   </tr>
 </table>
 
+
+### Use Case 3
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Utilizzare funzione di reset</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il giocatore può resettare la partita attraverso un tasto dedicato. </td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>In qualsiasi momento l giocatore può decidere di resettare la partita premendo il tasto "reset". I blocchi devono essere sistemati nella configurazione iniziale</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Resettare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
 # Grafo Use Cases
 ```plantuml
 # PlantUML Editor
