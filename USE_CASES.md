@@ -44,6 +44,42 @@
   </tr>
 </table>
 
+### Use Case 2
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Muovere i blocchi nelle posizioni consentite</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il giocatore può muovere i blocchi in uno degli spazi liberi sufficientemente grandi</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Deve esistere una posizione consentita, ossia uno spazio libero</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Il blocco selezionato viene spostato di una posizione nella direzione scelta dal giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Il blocco selezionato non si muove</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Incrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>Il movimento di una posizione consiste nello spostare un blocco di 10 px</td>
+  </tr>
+</table>
+
 # Grafo Use Cases
 ```plantuml
 # PlantUML Editor
