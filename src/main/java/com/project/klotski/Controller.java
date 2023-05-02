@@ -1,25 +1,31 @@
 package com.project.klotski;
 
 import com.jfoenix.controls.*;
+import javafx.animation.StrokeTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
+import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.util.Objects;
 
 
 public class Controller {
+
+
     //Pannello "Pane" dove andrò ad inserire i vari Piece
     @FXML
     private Pane buttonGrid;
@@ -56,6 +62,9 @@ public class Controller {
         Piece [] buttons = configuration.getButtons();
         Tuple [] positions = configuration.getPositions();
 
+        buttonGrid.setMaxWidth(400);
+        buttonGrid.setMaxHeight(500);
+
         //con questo ciclo for inizializzo la pane
         for (int i = 0; i < buttons.length; i++) {
             Piece button = buttons[i];
@@ -70,15 +79,24 @@ public class Controller {
             button.setStrokeWidth(3);
 
             buttonGrid.getChildren().add(button);
+            buttonGrid.setStyle("-fx-border-color: black");
             // Aggiunge un gestore eventi per la selezione di un bottone
             button.setOnMouseClicked(event -> {
                 selectedButton = (Piece) event.getSource();
                 for (Piece b : buttons) {
                     b.setEffect(null);
+                    b.setStrokeWidth(3);
                 }
                 // Attiva l'illuminazione del pulsante selezionato
-                button.setEffect(new Glow(0.5));
+                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), button);
+                strokeTransition.setFromValue(Color.grayRgb(3));
+                strokeTransition.setToValue(Color.grayRgb(6));
+                strokeTransition.setCycleCount(2);
+                strokeTransition.setAutoReverse(true);
+                strokeTransition.play();
                 selectedButton = button;
+                // aumenta lo spessore del bordo
+                button.setStrokeWidth(6);
             });
         }
 
