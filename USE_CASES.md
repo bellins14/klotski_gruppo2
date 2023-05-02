@@ -170,6 +170,7 @@ Giocatore --> (Utilizzare funzione di undo)
 Giocatore --> (Richiedere «next best move»)
 Giocatore --> (Visualizzare counter delle mosse effettuate)
 Giocatore --> (Salvare lo stato corrente)
+Giocatore --> (Ripristinare la partita salvata)
 
 @enduml
 ```
