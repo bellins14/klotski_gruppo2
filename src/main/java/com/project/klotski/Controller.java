@@ -58,7 +58,7 @@ public class Controller {
         for (int i = 0; i < buttons.length; i++) {
             Piece button = buttons[i];
             //Color color = buttons[i].getColor();
-            button.setFill(new ImagePattern(new Image("com/media/img/piece0.png")));
+            button.setFill(new ImagePattern(new Image(getClass().getResource(button.getImageName()).toExternalForm())));
             button.setLayoutX(positions[i].getX());
             button.setLayoutY(positions[i].getY());
             //assegno un bordo nero di spessore 3

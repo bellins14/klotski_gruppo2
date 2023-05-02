@@ -1,14 +1,12 @@
 package com.project.klotski;
 
-import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Piece extends Rectangle {
 
     //colore del Piece
     //private final Color _color;
-    private final String _image = "";
+    private String _image = "";
     /*public Piece(int a, Color color) {
         //richiamo il costruttore del rettangolo
         super();
@@ -65,10 +63,10 @@ public class Piece extends Rectangle {
     //public Color getColor() {return  this._color;}
 
     public void setImage(String imageName) {
-        this._image.getClass().getResource("media/img/"+imageName);
+        this._image = imageName;
     }
 
-    public String getImageName(){ return this._image;}
+    public String getImageName(){ return "/img" +this._image;}
 
 
 }

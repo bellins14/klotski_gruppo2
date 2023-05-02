@@ -33,7 +33,7 @@ public class Configuration {
         imageMap.put(0, "piece0.png");
         imageMap.put(1, "piece1.png");
         imageMap.put(2, "piece2.png");
-        imageMap.put(3, "piece2.png");
+        imageMap.put(3, "piece3.png");
         int[] values;
         switch (this._configuration) {
             case 1 -> values = new int[]{1, 3, 1, 1, 0, 0, 0, 0, 1, 2};
