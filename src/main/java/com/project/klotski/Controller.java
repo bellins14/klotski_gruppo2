@@ -70,7 +70,7 @@ public class Controller {
             Piece button = buttons[i];
             //Color color = buttons[i].getColor();
             //button.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("com/project/klotski/piece0.png"))));
-            Image image = new Image(getClass().getResource("img/"+button.getImageName()).toString());
+            Image image = new Image(Objects.requireNonNull(getClass().getResource("img/" + button.getImageName())).toString());
             button.setFill(new ImagePattern(image));
             button.setLayoutX(positions[i].getX());
             button.setLayoutY(positions[i].getY());
