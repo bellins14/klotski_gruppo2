@@ -1,7 +1,5 @@
 package com.project.klotski;
 
-import java.lang.*;
-
 public class Tuple {
     //coordinata X del Piece
     public final int x;
