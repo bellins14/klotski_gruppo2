@@ -33,6 +33,8 @@ public class Configuration {
         imageMap.put(2, "piece2.png");
         imageMap.put(3, "piece3.png");
         int[] values;
+
+        // assegna ordine rettangoli per sezione
         switch (this._configuration) {
             case 1 -> values = new int[]{1, 3, 1, 1, 0, 0, 0, 0, 1, 2};
             case 2 -> values = new int[]{0, 3, 0, 1, 1, 1, 0, 0, 2, 2};
@@ -43,6 +45,7 @@ public class Configuration {
             }
         }
 
+        // assegna immagine corrispondente al piece*n*
         for (int i = 0; i < buttons.length; i++) {
             int value = values[i];
             String image = imageMap.get(value);

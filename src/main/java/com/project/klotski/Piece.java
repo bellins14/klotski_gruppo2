@@ -7,6 +7,7 @@ public class Piece extends Rectangle {
     //colore del Piece
     //private final Color _color;
     private String _image = "";
+    private String _id = "";
     /*public Piece(int a, Color color) {
         //richiamo il costruttore del rettangolo
         super();
@@ -43,18 +44,22 @@ public class Piece extends Rectangle {
             case 0 -> {
                 this.setHeight(100);
                 this.setWidth(100);
+                this._id = "a";
             }
             case 1 -> {
                 this.setHeight(200);
                 this.setWidth(100);
+                this._id = "b";
             }
             case 2 -> {
                 this.setHeight(100);
                 this.setWidth(200);
+                this._id = "c";
             }
             case 3 -> {
                 this.setHeight(200);
                 this.setWidth(200);
+                this._id = "d";
             }
         }
 
@@ -68,5 +73,25 @@ public class Piece extends Rectangle {
 
     public String getImageName(){ return this._image;}
 
+    // rende stringa la Tuple, sempre in 3 cifre (zeri aggiunti all'inizio se serve)
+    // da usare per data base, richiesta next best move (bisogna fare metodo che printa la tupla dell'attuale stato in cui si richiede)
+    @Override
+    public String toString(){
+        StringBuilder coords = new StringBuilder(_id);
+        int x_length = Integer.toString((int) getLayoutX()).length();
+        int y_length = Integer.toString((int) getLayoutY()).length();
+
+        if(x_length < 3){
+            coords.append("0".repeat(3 - x_length));
+        }
+        coords.append((int) getLayoutX());
+
+        if(y_length < 3){
+            coords.append("0".repeat(3 - y_length));
+        }
+        coords.append((int) getLayoutY());
+
+        return coords.toString();
+    }
 
 }

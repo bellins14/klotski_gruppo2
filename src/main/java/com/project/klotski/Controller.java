@@ -97,6 +97,7 @@ public class Controller {
                 selectedButton = button;
                 // aumenta lo spessore del bordo
                 button.setStrokeWidth(6);
+                System.out.println(selectedButton);
             });
         }
 
