@@ -14,7 +14,7 @@
 . Il giovatore deve cominciare una altra partita dopo che ha concluso quella precedente.
 . Il DB viene resettato.
 
-## 1
+## #1
 Grafico con la classe concettuale "Klotski"
 
 ```uml
@@ -51,7 +51,7 @@ Partita "1" o- "0..1" NBM : Ha
 @enduml
 ```
 
-## 2
+## #2
 Grafo senza la classe concettuale Klotski
 
 ```uml
