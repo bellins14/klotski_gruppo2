@@ -7,9 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -54,7 +51,7 @@ public class Controller {
     }
 
 
-    //primo metodo chiamato di defautl
+    //primo metodo chiamato di default
     public void initialize() {
         textcounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
         //istanzio un oggetto configuration e gli passo come parametro la configurazione iniziale
@@ -68,8 +65,6 @@ public class Controller {
         //con questo ciclo for inizializzo la pane
         for (int i = 0; i < buttons.length; i++) {
             Piece button = buttons[i];
-            //Color color = buttons[i].getColor();
-            //button.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("com/project/klotski/piece0.png"))));
             Image image = new Image(Objects.requireNonNull(getClass().getResource("img/" + button.getImageName())).toString());
             button.setFill(new ImagePattern(image));
             button.setLayoutX(positions[i].getX());
@@ -106,7 +101,7 @@ public class Controller {
             if (selectedButton != null) {
                 //di quanto si deve spostare il mio bottone selezionato
                 double moveAmount = 100;
-                //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponnga con altri bottoni
+                //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
                 //getCode mi traduce il comando da tastiera in un codice
                 switch (event.getCode()) {
                     case UP -> {
@@ -170,7 +165,7 @@ public class Controller {
         return true;
     }
 
-    //reset della configuarazione attuale
+    //reset della configurazione attuale
     @FXML
     void reset(MouseEvent event) {
      counter = 0;

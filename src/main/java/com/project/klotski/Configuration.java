@@ -23,11 +23,7 @@ public class Configuration {
         Piece[] buttons = new Piece[10];
 
         Map<Integer, String> imageMap = new HashMap<>();
-        /*imageMap.put(0, Color.LIGHTCORAL);
-        imageMap.put(1, Color.GREEN);
-        imageMap.put(2, Color.LIGHTBLUE);
-        imageMap.put(3, Color.BROWN);
-*/
+
         imageMap.put(0, "piece0.png");
         imageMap.put(1, "piece1.png");
         imageMap.put(2, "piece2.png");
