@@ -86,3 +86,5 @@ ActionEvent -up-> Controller : Descrizione del che cosa fa
 
 @enduml
 ```
+
+![Class Diagram](https://github.com/bellins14/klotski_gruppo2/blob/main/docs/imgs/ClassDiagram.png)
