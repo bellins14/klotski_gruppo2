@@ -23,7 +23,7 @@
   * configurazioni_iniziali
 
 * Configurazione: 
- * tipo blocchi + disposizione blocchi per ogni stato
+  * tipo blocchi + disposizione blocchi per ogni stato
 * Configurazione iniziale = una delle 4 config di partenza
   * c'è sempre possibilità di sapere da quale si è partiti (per il `reset()`)
   * appena viene eseguita una mossa, il counter aumenta, si entra in una nuova `configurazione_corrente` != `configurazione_iniziale`
