@@ -9,3 +9,15 @@
 
 # Domande per il Professore
 * Partendo dagli use cases, e creando il domain model, è possibile e/o opportuno inserire le funzioni in qualche modo?
+* Che differenza c'è tra internal e system sequence diagram? cosa si intende con l'uno e con l'altro? 
+  
+
+# Struttura 
+* Stato corrente:
+  * configurazione_corrente
+  * configurazione_iniziale (per fare il reset)
+  * counter (numero delle mosse effettuate)
+
+* Database:
+  * storico_stati
+  * configurazioni_iniziali
