@@ -91,3 +91,5 @@ Undo -- Partita : Modifica
 
 @enduml
 ```
+
+![Domain Model](src/main/docs/imgs/DomainModel.png)
