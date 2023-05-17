@@ -1,4 +1,4 @@
-# Annotazioni
+# Link Utili
 * [Cartella google drive](https://drive.google.com/drive/folders/1akJS9H8smdbRZ23X_Sjkz1RkiikFJabz?usp=sharing)
 * [File pdf del progetto](https://stem.elearning.unipd.it/pluginfile.php/512482/mod_resource/content/1/SE_ExamProject.pdf)
 * [PlantUML - Nuova Versione](https://plantuml-editor.kkeisuke.dev/)
@@ -6,6 +6,7 @@
 * [PlanText](https://www.planttext.com/)
 * [Documentazione PlantUML](https://plantuml.com/)
 * [Diritti Mojang](https://www.minecraft.net/it-it/terms#commercial)
+
 
 # Step da fare:
 * Documento di specifiche (4-5 pagine)
@@ -40,6 +41,7 @@ solito corrispondono 1-1 alle classi software significative.
   * Indicazioni su ambienti di esecuzione, vincoli su version java, etc.
   * Un’indicazione delle principali funzioni riutilizzate da librerie esistenti (secluse quella banali, log4j, java.utils....)
 
+
 # Domande per il Professore
 * Partendo dagli use cases, e creando il domain model, è possibile e/o opportuno inserire le funzioni in qualche modo?
 * Che differenza c'è tra internal e system sequence diagram? cosa si intende con l'uno e con l'altro? 
@@ -63,3 +65,8 @@ solito corrispondono 1-1 alle classi software significative.
   * appena viene eseguita una mossa, il counter aumenta, si entra in una nuova `configurazione_corrente` != `configurazione_iniziale`
   * se si fa `reset()` si ritorna a `configurazione_iniziale` scelta
   * se si preme un pulsante di una qualsiasi delle 4 configurazioni possibili di partenza, il gioco si resetta alla config scelta e riparte da zero, ergo la `configurazione_iniziale` cambia (a meno che non si sia scelta la stessa di prima)
+
+
+# Note sul codice
+L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una configurazione
+
