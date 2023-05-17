@@ -7,6 +7,13 @@
 * [Documentazione PlantUML](https://plantuml.com/)
 * [Diritti Mojang](https://www.minecraft.net/it-it/terms#commercial)
 
+# Step da fare:
+* Documento di design (4-5 pagine)
+  * Domain model (se è utile con una descrizione testuale)
+  * System sequence diagram
+  * Design class model
+  * Internal sequence diagrams
+
 # Domande per il Professore
 * Partendo dagli use cases, e creando il domain model, è possibile e/o opportuno inserire le funzioni in qualche modo?
 * Che differenza c'è tra internal e system sequence diagram? cosa si intende con l'uno e con l'altro? 
