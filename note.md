@@ -35,10 +35,10 @@ solito corrispondono 1-1 alle classi software significative.
   * Il report è quello generato automaticamente da junit
 
 * Un manuale (2-3 pagine)
- * Una descrizione ad alto livello del Progetto (1 pag max)
- * le istruzioni su come installare e lanciare il software.
- * Indicazioni su ambienti di esecuzione, vincoli su version java, etc.
- * Un’indicazione delle principali funzioni riutilizzate da librerie esistenti (secluse quella banali, log4j, java.utils....)
+  * Una descrizione ad alto livello del Progetto (1 pag max)
+  * le istruzioni su come installare e lanciare il software.
+  * Indicazioni su ambienti di esecuzione, vincoli su version java, etc.
+  * Un’indicazione delle principali funzioni riutilizzate da librerie esistenti (secluse quella banali, log4j, java.utils....)
 
 # Domande per il Professore
 * Partendo dagli use cases, e creando il domain model, è possibile e/o opportuno inserire le funzioni in qualche modo?
