@@ -18,7 +18,7 @@
 Grafo senza la classe concettuale Klotski
 ![Domain Model](https://github.com/bellins14/klotski_gruppo2/blob/main/docs/imgs/DomainModel.png)
 
-```uml
+```plantuml
 # PlantUML Editor
 
 @startuml
