@@ -12,7 +12,7 @@ Class Configuration{
 }
 
 Class Controller{
-  - Pane buttonGrid;
+  - Pane blockGrid;
   - Text textcounter;
   - JFXButton reset;
   - int counter;
@@ -20,7 +20,7 @@ Class Controller{
   - int conf;
   - int selectedConf;
   + void initialize();
-  - boolean isNotOverlapping(Piece button, double deltaX, double deltaY); 
+  - boolean isNotOverlapping(Piece block, double deltaX, double deltaY); 
   + void reset(MouseEvent event);
   + void configurationClicked(ActionEvent event);
 }

@@ -19,8 +19,8 @@ public class Configuration {
 
 
     //in base alla conf, mi ritornano i Piece con i rispettivi colori
-    public Piece[] getButtons() {
-        Piece[] buttons = new Piece[10];
+    public Piece[] getBlocks() {
+        Piece[] blocks = new Piece[10];
 
         Map<Integer, String> imageMap = new HashMap<>();
         /*imageMap.put(0, Color.LIGHTCORAL);
@@ -43,13 +43,13 @@ public class Configuration {
             }
         }
 
-        for (int i = 0; i < buttons.length; i++) {
+        for (int i = 0; i < blocks.length; i++) {
             int value = values[i];
             String image = imageMap.get(value);
-            buttons[i] = new Piece(value, image);
+            blocks[i] = new Piece(value, image);
         }
 
-        return buttons;
+        return blocks;
     }
 
     //in base alla conf mi ritornano le posizioni su come mettere i vari blocchi

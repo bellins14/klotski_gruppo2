@@ -7,9 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
-import javafx.scene.effect.PerspectiveTransform;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -28,7 +25,7 @@ public class Controller {
 
     //Pannello "Pane" dove andrò ad inserire i vari Piece
     @FXML
-    private Pane buttonGrid;
+    private Pane blockGrid;
 
     //Testo per il numero di mosse
     @FXML
@@ -59,49 +56,49 @@ public class Controller {
         textcounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
         //istanzio un oggetto configuration e gli passo come parametro la configurazione iniziale
         Configuration configuration = new Configuration(conf);
-        Piece [] buttons = configuration.getButtons();
+        Piece [] blocks = configuration.getBlocks();
         Tuple [] positions = configuration.getPositions();
 
-        buttonGrid.setMaxWidth(400);
-        buttonGrid.setMaxHeight(500);
+        blockGrid.setMaxWidth(400);
+        blockGrid.setMaxHeight(500);
 
         //con questo ciclo for inizializzo la pane
-        for (int i = 0; i < buttons.length; i++) {
-            Piece button = buttons[i];
-            //Color color = buttons[i].getColor();
-            //button.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("com/project/klotski/piece0.png"))));
-            Image image = new Image(Objects.requireNonNull(getClass().getResource("img/" + button.getImageName())).toString());
-            button.setFill(new ImagePattern(image));
-            button.setLayoutX(positions[i].getX());
-            button.setLayoutY(positions[i].getY());
+        for (int i = 0; i < blocks.length; i++) {
+            Piece block = blocks[i];
+            //Color color = blocks[i].getColor();
+            //block.setFill(new ImagePattern(new Image(getClass().getResourceAsStream("com/project/klotski/piece0.png"))));
+            Image image = new Image(Objects.requireNonNull(getClass().getResource("img/" + block.getImageName())).toString());
+            block.setFill(new ImagePattern(image));
+            block.setLayoutX(positions[i].getX());
+            block.setLayoutY(positions[i].getY());
             //assegno un bordo nero di spessore 3
-            button.setStroke(Color.BLACK);
-            button.setStrokeWidth(3);
+            block.setStroke(Color.BLACK);
+            block.setStrokeWidth(3);
 
-            buttonGrid.getChildren().add(button);
-            buttonGrid.setStyle("-fx-border-color: black");
+            blockGrid.getChildren().add(block);
+            blockGrid.setStyle("-fx-border-color: black");
             // Aggiunge un gestore eventi per la selezione di un bottone
-            button.setOnMouseClicked(event -> {
+            block.setOnMouseClicked(event -> {
                 selectedButton = (Piece) event.getSource();
-                for (Piece b : buttons) {
+                for (Piece b : blocks) {
                     b.setEffect(null);
                     b.setStrokeWidth(3);
                 }
                 // Attiva l'illuminazione del pulsante selezionato
-                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), button);
+                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), block);
                 strokeTransition.setFromValue(Color.grayRgb(3));
                 strokeTransition.setToValue(Color.grayRgb(6));
                 strokeTransition.setCycleCount(2);
                 strokeTransition.setAutoReverse(true);
                 strokeTransition.play();
-                selectedButton = button;
+                selectedButton = block;
                 // aumenta lo spessore del bordo
-                button.setStrokeWidth(6);
+                block.setStrokeWidth(6);
             });
         }
 
         // Aggiunge un gestore eventi per la pressione dei tasti freccia
-        buttonGrid.setOnKeyPressed(event -> {
+        blockGrid.setOnKeyPressed(event -> {
             if (selectedButton != null) {
                 //di quanto si deve spostare il mio bottone selezionato
                 double moveAmount = 100;
@@ -142,24 +139,24 @@ public class Controller {
             }
         });
         // Per consentire il focus della tastiera sul pannello
-        buttonGrid.setFocusTraversable(true);
+        blockGrid.setFocusTraversable(true);
     }
 
     //controllo che non ci sia overlapping
-    private boolean isNotOverlapping(Piece button, double deltaX, double deltaY) {
+    private boolean isNotOverlapping(Piece block, double deltaX, double deltaY) {
         // Calcola la nuova posizione del bottone
-        double newX = button.getLayoutX() + deltaX;
-        double newY = button.getLayoutY() + deltaY;
+        double newX = block.getLayoutX() + deltaX;
+        double newY = block.getLayoutY() + deltaY;
 
         // Itera su tutti gli elementi figli della Pane
-        ObservableList<Node> children = buttonGrid.getChildren();
+        ObservableList<Node> children = blockGrid.getChildren();
         for (Node child : children) {
             // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
-            if (child instanceof Piece otherButton && child != button) {
+            if (child instanceof Piece otherButton && child != block) {
                 // Verifica se il nuovo bottone si sovrappone all'altro bottone
-                if (newX + button.getWidth() > otherButton.getLayoutX() &&
+                if (newX + block.getWidth() > otherButton.getLayoutX() &&
                         newX < otherButton.getLayoutX() + otherButton.getWidth() &&
-                        newY + button.getHeight() > otherButton.getLayoutY() &&
+                        newY + block.getHeight() > otherButton.getLayoutY() &&
                         newY < otherButton.getLayoutY() + otherButton.getHeight()) {
                     return false;
                 }
@@ -169,12 +166,12 @@ public class Controller {
         return true;
     }
 
-    //reset della configuarazione attuale
+    //reset della configurazione attuale
     @FXML
     void reset(MouseEvent event) {
      counter = 0;
      textcounter.setText("Moves : " + counter);
-     buttonGrid.getChildren().clear();
+     blockGrid.getChildren().clear();
      initialize();
     }
 
@@ -188,7 +185,7 @@ public class Controller {
             textcounter.setText("Moves : " + counter);
             conf = configurationIndex;
             selectedConf = configurationIndex;
-            buttonGrid.getChildren().clear();
+            blockGrid.getChildren().clear();
             initialize();
         }
     }
