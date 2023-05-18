@@ -1,5 +1,5 @@
 # Sequence Diagram
-```uml
+```plantuml
 @startuml
 !theme materia-outline
 
