@@ -1,7 +1,7 @@
 # Class Diagram
 ![Class Diagram](https://github.com/bellins14/klotski_gruppo2/blob/main/docs/imgs/ClassDiagram.png)
 
-```uml
+```plantuml
 @startuml
 skinparam classAttributeIconSize 0
 
