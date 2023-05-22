@@ -10,74 +10,81 @@ public class Configuration {
 
     // Array di piece che rappresenta la configurazione
     // Saranno ordinati dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
-    // private Piece[] pieces
+    protected Piece[] blocks = new Piece[10];
+
+
+    //==============
+    // CONSTRUCTORS
+    //==============
+    //di default ho scelto la prima
+    public Configuration(){
+        this._configuration = 1;
+        setBlocks(_configuration);
+    }
 
     public Configuration(int configuration){
         this._configuration = configuration;
+        setBlocks(_configuration);
     }
 
-    //di defautl ho scelto la prima
-    public Configuration(){
-        this._configuration = 1;
-    }
-
-
-    //in base alla conf, mi ritornano i Piece con i rispettivi colori
     public Piece[] getBlocks() {
-        Piece[] blocks = new Piece[10];
+        return blocks;
+    }
 
-        Map<Integer, String> imageMap = new HashMap<>();
+    public void setBlocks(int c){
+        int[] blockTypes = getBlocksType(c);
+        Tuple[] positions = getPositions(c);
 
-        imageMap.put(0, "piece0.png");
-        imageMap.put(1, "piece1.png");
-        imageMap.put(2, "piece2.png");
-        imageMap.put(3, "piece3.png");
-        int[] values;
 
-        // assegna ordine rettangoli per sezione (da cambiare l'ordine)
-        switch (this._configuration) {
-            case 1 -> values = new int[]{1, 3, 1, 1, 0, 0, 0, 0, 1, 2};
-            case 2 -> values = new int[]{0, 3, 0, 1, 1, 1, 0, 0, 2, 2};
-            case 3 -> values = new int[]{1, 0, 0, 0, 1, 1, 3, 2, 0, 2};
-            case 4 -> values = new int[]{1, 3, 1, 1, 2, 0, 0, 1, 0, 0};
+        for (int j = 0; j < blocks.length; j++) {
+            int pieceType = blockTypes[j];
+            blocks[j] = new Piece(pieceType, "piece"+pieceType+".png");
+            blocks[j].setLayoutX(positions[j].getX());
+            blocks[j].setLayoutY(positions[j].getY());
+
+            // #### DEBUG ####
+            //System.out.println("Setted block "+blocks[j]);
+        }
+    }
+
+    public int[] getBlocksType(int c) {
+        int[] types;
+
+        // assegna ordine rettangoli per sezione (ordine decrescente)
+        switch (c) {
+            case 1, 4 -> types = new int[]{3, 2, 1, 1, 1, 1, 0, 0, 0, 0};
+            case 2, 3 -> types = new int[]{3, 2, 2, 1, 1, 1, 0, 0, 0, 0};
             default -> {
                 return null;
             }
         }
 
-        // assegna immagine corrispondente al piece*n*
-        for (int i = 0; i < blocks.length; i++) {
-            int value = values[i];
-            String image = imageMap.get(value);
-            blocks[i] = new Piece(value, image);
-        }
-
-        return blocks;
+        return types;
     }
 
     //in base alla conf mi ritornano le posizioni su come mettere i vari blocchi
-    public Tuple[] getPositions() {
+    public Tuple[] getPositions(int c) {
         int[] positionX;
         int[] positionY;
 
         // Le misure si riferiscono al pixel in angolo in alto a sinistra, dei blocchi rispettivi
         // scritti in getBlocks
-        switch (this._configuration) {
+        switch (c) {
             case 1 -> {
-                positionX = new int[]{0, 100, 300, 0, 100, 200, 100, 200, 300, 100};
-                positionY = new int[]{0, 0, 0, 200, 200, 200, 300, 300, 200, 400,};
+                positionX = new int[]{100, 100, 300, 0, 300, 0, 200, 100, 200, 100};
+                positionY = new int[]{0, 400, 200, 200, 0, 0, 300, 300, 200, 200};
             }
             case 2 -> {
-                positionX = new int[]{0, 100, 300, 0, 100, 300, 0, 300, 0, 200};
-                positionY = new int[]{0, 0, 0, 100, 200, 100, 300, 300, 400, 400};
+                positionX = new int[]{100, 200, 0, 300, 100, 0, 300, 0, 300, 0};
+                positionY = new int[]{0, 400, 400, 100, 200, 100, 300, 300, 0, 0};
             }
             case 3 -> {
-                positionX = new int[]{0, 100, 200, 300, 0, 100, 200, 100, 300, 200};
-                positionY = new int[]{0, 0, 0, 0, 200, 100, 100, 300, 300, 400};
+                positionX = new int[]{200, 200, 100, 0, 100, 0, 300, 300, 200, 100};
+                positionY = new int[]{100, 400, 300, 200, 100, 0, 300, 0, 0, 0};
             }
             case 4 -> {
-                positionX = new int[]{0, 100, 300, 0, 100, 100, 200, 300, 0, 300};
-                positionY = new int[]{0, 0, 0, 200, 200, 300, 300, 200, 400, 400};
+                positionX = new int[]{100, 100, 300, 0, 300, 0, 300, 200, 100, 0};
+                positionY = new int[]{0, 200, 200, 200, 0, 0, 400, 300, 300, 400};
             }
             default -> {
                 return null;
@@ -91,6 +98,4 @@ public class Configuration {
 
         return positions;
     }
-
-
 }

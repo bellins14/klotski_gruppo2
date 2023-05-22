@@ -7,17 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
-import java.util.Objects;
 
 
 public class Controller {
@@ -25,7 +21,7 @@ public class Controller {
 
     //Pannello "Pane" dove andrò ad inserire i vari Piece
     @FXML
-    private Pane blockGrid;
+    private Pane blockPane;
 
     //Testo per il numero di mosse
     @FXML
@@ -36,6 +32,8 @@ public class Controller {
 
     //counter per le mosse
     private int counter = 0;
+
+    protected Configuration _configuration;
 
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
@@ -54,27 +52,19 @@ public class Controller {
     //primo metodo chiamato di default
     public void initialize() {
         textcounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        //istanzio un oggetto configuration e gli passo come parametro la configurazione iniziale
-        Configuration configuration = new Configuration(conf);
-        Piece [] blocks = configuration.getBlocks();
-        Tuple [] positions = configuration.getPositions();
+        //inizializzo _configuration e gli passo come parametro la configurazione iniziale
+        _configuration = new Configuration(conf);
+        Piece[] blocks = _configuration.getBlocks();
 
-        blockGrid.setMaxWidth(400);
-        blockGrid.setMaxHeight(500);
+        blockPane.setMaxWidth(400);
+        blockPane.setMaxHeight(500);
 
         //con questo ciclo for inizializzo la pane
-        for (int i = 0; i < blocks.length; i++) {
-            Piece block = blocks[i];
-            Image image = new Image(Objects.requireNonNull(getClass().getResource("img/" + block.getImageName())).toString());
-            block.setFill(new ImagePattern(image));
-            block.setLayoutX(positions[i].getX());
-            block.setLayoutY(positions[i].getY());
-            //assegno un bordo nero di spessore 3
-            block.setStroke(Color.BLACK);
-            block.setStrokeWidth(3);
+        for (Piece block : blocks) {
+            blockPane.getChildren().add(block);
 
-            blockGrid.getChildren().add(block);
-            blockGrid.setStyle("-fx-border-color: black");
+            blockPane.setStyle("-fx-border-color: black");
+
             // Aggiunge un gestore eventi per la selezione di un bottone
             block.setOnMouseClicked(event -> {
                 selectedBlock = (Piece) event.getSource();
@@ -101,7 +91,7 @@ public class Controller {
 
 
         // Aggiunge un gestore eventi per la pressione dei tasti freccia
-        blockGrid.setOnKeyPressed(event -> {
+        blockPane.setOnKeyPressed(event -> {
             if (selectedBlock != null) {
                 //di quanto si deve spostare il mio bottone selezionato
                 double moveAmount = 100;
@@ -148,7 +138,7 @@ public class Controller {
 
         });
         // Per consentire il focus della tastiera sul pannello
-        blockGrid.setFocusTraversable(true);
+        blockPane.setFocusTraversable(true);
     }
 
     //controllo che non ci sia overlapping
@@ -158,7 +148,7 @@ public class Controller {
         double newY = block.getLayoutY() + deltaY;
 
         // Itera su tutti gli elementi figli della Pane
-        ObservableList<Node> children = blockGrid.getChildren();
+        ObservableList<Node> children = blockPane.getChildren();
         for (Node child : children) {
             // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
             if (child instanceof Piece otherBlock && child != block) {
@@ -180,7 +170,7 @@ public class Controller {
     void reset(MouseEvent event) {
         counter = 0;
         textcounter.setText("Moves : " + counter);
-        blockGrid.getChildren().clear();
+        blockPane.getChildren().clear();
         initialize();
     }
 
@@ -194,7 +184,7 @@ public class Controller {
             textcounter.setText("Moves : " + counter);
             conf = configurationIndex;
             selectedConf = configurationIndex;
-            blockGrid.getChildren().clear();
+            blockPane.getChildren().clear();
             initialize();
         }
     }
