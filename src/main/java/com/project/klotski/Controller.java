@@ -96,6 +96,10 @@ public class Controller {
             });
         }
 
+        // Stampa stato all'interno del file ConfigurationLog.json
+        // Inserisco il primo record relativo alla configurazione iniziale
+
+
         // Aggiunge un gestore eventi per la pressione dei tasti freccia
         blockGrid.setOnKeyPressed(event -> {
             if (selectedBlock != null) {
@@ -108,6 +112,9 @@ public class Controller {
                         if (selectedBlock.getLayoutY() - moveAmount >= 0 && isNotOverlapping(selectedBlock, 0, -moveAmount)) {
                             selectedBlock.setLayoutY(selectedBlock.getLayoutY() - moveAmount);
                             counter++;
+                            /* Aggiorna e stampa stato corrente nel ConfigurationLog. Lo facciamo qui per ogni case perché
+                            vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
+                            uguali, che sarebbe inutile.*/
                         }
                     }
                     case DOWN -> {
@@ -115,12 +122,14 @@ public class Controller {
                                 && isNotOverlapping(selectedBlock, 0, moveAmount)) {
                             selectedBlock.setLayoutY(selectedBlock.getLayoutY() + moveAmount);
                             counter++;
+                            // Aggiorna e stampa stato corrente nel ConfigurationLog
                         }
                     }
                     case LEFT -> {
                         if (selectedBlock.getLayoutX() - moveAmount >= 0 && isNotOverlapping(selectedBlock, -moveAmount, 0)) {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() - moveAmount);
                             counter++;
+                            // Aggiorna e stampa stato corrente nel ConfigurationLog
                         }
                     }
                     case RIGHT -> {
@@ -128,14 +137,15 @@ public class Controller {
                                 && isNotOverlapping(selectedBlock, moveAmount, 0)) {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() + moveAmount);
                             counter++;
+                            // Aggiorna e stampa stato corrente nel ConfigurationLog
                         }
                     }
                 }
 
                 textcounter.setText("Moves : " + counter);
 
-
             }
+
         });
         // Per consentire il focus della tastiera sul pannello
         blockGrid.setFocusTraversable(true);
@@ -168,13 +178,13 @@ public class Controller {
     //reset della configurazione attuale
     @FXML
     void reset(MouseEvent event) {
-     counter = 0;
-     textcounter.setText("Moves : " + counter);
-     blockGrid.getChildren().clear();
-     initialize();
+        counter = 0;
+        textcounter.setText("Moves : " + counter);
+        blockGrid.getChildren().clear();
+        initialize();
     }
 
-    //cambio configurazione e azzeramento
+    // cambio configurazione e azzeramento, pulsanti di configurazione 1, 2, 3, 4
     @FXML
     void configurationClicked(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
