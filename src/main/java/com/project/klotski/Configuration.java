@@ -8,6 +8,10 @@ public class Configuration {
     //configurazione scelta
     private final int _configuration;
 
+    // Array di piece che rappresenta la configurazione
+    // Saranno ordinati dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
+    // private Piece[] pieces
+
     public Configuration(int configuration){
         this._configuration = configuration;
     }
@@ -30,7 +34,7 @@ public class Configuration {
         imageMap.put(3, "piece3.png");
         int[] values;
 
-        // assegna ordine rettangoli per sezione
+        // assegna ordine rettangoli per sezione (da cambiare l'ordine)
         switch (this._configuration) {
             case 1 -> values = new int[]{1, 3, 1, 1, 0, 0, 0, 0, 1, 2};
             case 2 -> values = new int[]{0, 3, 0, 1, 1, 1, 0, 0, 2, 2};
@@ -56,6 +60,8 @@ public class Configuration {
         int[] positionX;
         int[] positionY;
 
+        // Le misure si riferiscono al pixel in angolo in alto a sinistra, dei blocchi rispettivi
+        // scritti in getBlocks
         switch (this._configuration) {
             case 1 -> {
                 positionX = new int[]{0, 100, 300, 0, 100, 200, 100, 200, 300, 100};
