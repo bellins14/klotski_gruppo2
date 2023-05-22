@@ -25,7 +25,7 @@ public class Controller {
 
     //Pannello "Pane" dove andrò ad inserire i vari Piece
     @FXML
-    private Pane buttonGrid;
+    private Pane blockGrid;
 
     //Testo per il numero di mosse
     @FXML
@@ -38,7 +38,7 @@ public class Controller {
     private int counter = 0;
 
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
-    private Piece selectedButton;
+    private Piece selectedBlock;
 
     //numero della configurazione
     private int conf = 1;
@@ -56,77 +56,77 @@ public class Controller {
         textcounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
         //istanzio un oggetto configuration e gli passo come parametro la configurazione iniziale
         Configuration configuration = new Configuration(conf);
-        Piece [] buttons = configuration.getButtons();
+        Piece [] blocks = configuration.getBlocks();
         Tuple [] positions = configuration.getPositions();
 
-        buttonGrid.setMaxWidth(400);
-        buttonGrid.setMaxHeight(500);
+        blockGrid.setMaxWidth(400);
+        blockGrid.setMaxHeight(500);
 
         //con questo ciclo for inizializzo la pane
-        for (int i = 0; i < buttons.length; i++) {
-            Piece button = buttons[i];
-            Image image = new Image(Objects.requireNonNull(getClass().getResource("img/" + button.getImageName())).toString());
-            button.setFill(new ImagePattern(image));
-            button.setLayoutX(positions[i].getX());
-            button.setLayoutY(positions[i].getY());
+        for (int i = 0; i < blocks.length; i++) {
+            Piece block = blocks[i];
+            Image image = new Image(Objects.requireNonNull(getClass().getResource("img/" + block.getImageName())).toString());
+            block.setFill(new ImagePattern(image));
+            block.setLayoutX(positions[i].getX());
+            block.setLayoutY(positions[i].getY());
             //assegno un bordo nero di spessore 3
-            button.setStroke(Color.BLACK);
-            button.setStrokeWidth(3);
+            block.setStroke(Color.BLACK);
+            block.setStrokeWidth(3);
 
-            buttonGrid.getChildren().add(button);
-            buttonGrid.setStyle("-fx-border-color: black");
+            blockGrid.getChildren().add(block);
+            blockGrid.setStyle("-fx-border-color: black");
             // Aggiunge un gestore eventi per la selezione di un bottone
-            button.setOnMouseClicked(event -> {
-                selectedButton = (Piece) event.getSource();
-                for (Piece b : buttons) {
+            block.setOnMouseClicked(event -> {
+                selectedBlock = (Piece) event.getSource();
+                for (Piece b : blocks) {
                     b.setEffect(null);
                     b.setStrokeWidth(3);
                 }
                 // Attiva l'illuminazione del pulsante selezionato
-                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), button);
+                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), block);
                 strokeTransition.setFromValue(Color.grayRgb(3));
                 strokeTransition.setToValue(Color.grayRgb(6));
                 strokeTransition.setCycleCount(2);
                 strokeTransition.setAutoReverse(true);
                 strokeTransition.play();
-                selectedButton = button;
+                selectedBlock = block;
                 // aumenta lo spessore del bordo
-                button.setStrokeWidth(6);
-                System.out.println(selectedButton);
+                block.setStrokeWidth(6);
+                System.out.println(selectedBlock);
             });
         }
 
         // Aggiunge un gestore eventi per la pressione dei tasti freccia
-        buttonGrid.setOnKeyPressed(event -> {
-            if (selectedButton != null) {
+        blockGrid.setOnKeyPressed(event -> {
+            if (selectedBlock != null) {
                 //di quanto si deve spostare il mio bottone selezionato
                 double moveAmount = 100;
                 //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
                 //getCode mi traduce il comando da tastiera in un codice
                 switch (event.getCode()) {
                     case UP -> {
-                        if (selectedButton.getLayoutY() - moveAmount >= 0 && isNotOverlapping(selectedButton, 0, -moveAmount)) {
-                            selectedButton.setLayoutY(selectedButton.getLayoutY() - moveAmount);
+                        if (selectedBlock.getLayoutY() - moveAmount >= 0 && isNotOverlapping(selectedBlock, 0, -moveAmount)) {
+                            selectedBlock.setLayoutY(selectedBlock.getLayoutY() - moveAmount);
                             counter++;
                         }
                     }
                     case DOWN -> {
-                        if (selectedButton.getLayoutY() + moveAmount + selectedButton.getHeight() <= 500
-                                && isNotOverlapping(selectedButton, 0, moveAmount)) {
-                            selectedButton.setLayoutY(selectedButton.getLayoutY() + moveAmount);
+                        if (selectedBlock.getLayoutY() + moveAmount + selectedBlock.getHeight() <= 500
+                                && isNotOverlapping(selectedBlock, 0, moveAmount)) {
+                            selectedBlock.setLayoutY(selectedBlock.getLayoutY() + moveAmount);
                             counter++;
                         }
                     }
                     case LEFT -> {
-                        if (selectedButton.getLayoutX() - moveAmount >= 0 && isNotOverlapping(selectedButton, -moveAmount, 0)) {
-                            selectedButton.setLayoutX(selectedButton.getLayoutX() - moveAmount);
+                        if (selectedBlock.getLayoutX() - moveAmount >= 0 && isNotOverlapping(selectedBlock, -moveAmount, 0)) {
+                            selectedBlock.setLayoutX(selectedBlock.getLayoutX() - moveAmount);
                             counter++;
                         }
                     }
                     case RIGHT -> {
-                        if (selectedButton.getLayoutX() + moveAmount + selectedButton.getWidth() <= 400
-                                && isNotOverlapping(selectedButton, moveAmount, 0)) {
-                            selectedButton.setLayoutX(selectedButton.getLayoutX() + moveAmount);
+                        if (selectedBlock.getLayoutX() + moveAmount + selectedBlock.getWidth() <= 400
+                                && isNotOverlapping(selectedBlock, moveAmount, 0)) {
+                            selectedBlock.setLayoutX(selectedBlock.getLayoutX() + moveAmount);
                             counter++;
                         }
                     }
@@ -138,25 +138,25 @@ public class Controller {
             }
         });
         // Per consentire il focus della tastiera sul pannello
-        buttonGrid.setFocusTraversable(true);
+        blockGrid.setFocusTraversable(true);
     }
 
     //controllo che non ci sia overlapping
-    private boolean isNotOverlapping(Piece button, double deltaX, double deltaY) {
+    private boolean isNotOverlapping(Piece block, double deltaX, double deltaY) {
         // Calcola la nuova posizione del bottone
-        double newX = button.getLayoutX() + deltaX;
-        double newY = button.getLayoutY() + deltaY;
+        double newX = block.getLayoutX() + deltaX;
+        double newY = block.getLayoutY() + deltaY;
 
         // Itera su tutti gli elementi figli della Pane
-        ObservableList<Node> children = buttonGrid.getChildren();
+        ObservableList<Node> children = blockGrid.getChildren();
         for (Node child : children) {
             // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
-            if (child instanceof Piece otherButton && child != button) {
+            if (child instanceof Piece otherBlock && child != block) {
                 // Verifica se il nuovo bottone si sovrappone all'altro bottone
-                if (newX + button.getWidth() > otherButton.getLayoutX() &&
-                        newX < otherButton.getLayoutX() + otherButton.getWidth() &&
-                        newY + button.getHeight() > otherButton.getLayoutY() &&
-                        newY < otherButton.getLayoutY() + otherButton.getHeight()) {
+                if (newX + block.getWidth() > otherBlock.getLayoutX() &&
+                        newX < otherBlock.getLayoutX() + otherBlock.getWidth() &&
+                        newY + block.getHeight() > otherBlock.getLayoutY() &&
+                        newY < otherBlock.getLayoutY() + otherBlock.getHeight()) {
                     return false;
                 }
             }
@@ -170,7 +170,7 @@ public class Controller {
     void reset(MouseEvent event) {
      counter = 0;
      textcounter.setText("Moves : " + counter);
-     buttonGrid.getChildren().clear();
+     blockGrid.getChildren().clear();
      initialize();
     }
 
@@ -184,7 +184,7 @@ public class Controller {
             textcounter.setText("Moves : " + counter);
             conf = configurationIndex;
             selectedConf = configurationIndex;
-            buttonGrid.getChildren().clear();
+            blockGrid.getChildren().clear();
             initialize();
         }
     }

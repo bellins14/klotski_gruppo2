@@ -17,7 +17,7 @@
       </Text>
    </bottom>
    <center>
-      <Pane fx:id="buttonGrid" prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="blockGrid" prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="50.0" />
          </BorderPane.margin>
