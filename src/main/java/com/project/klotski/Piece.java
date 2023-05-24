@@ -71,7 +71,7 @@ public class Piece extends Rectangle {
     //public Color getColor() {return  this._color;}
 
     public void setImageName(String imageName) {
-        this._image = imageName;
+        this._image += imageName;
     }
 
     //public String getImageName(){ return this._image;}

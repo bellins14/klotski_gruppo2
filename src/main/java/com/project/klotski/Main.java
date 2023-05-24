@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Main extends Application {
     @Override
@@ -15,7 +16,7 @@ public class Main extends Application {
         //creo una nuova "scene"
         Scene scene = new Scene(fxmlLoader.load(),1000,700);
         stage.setScene(scene);
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
         //Controller controller = fxmlLoader.getController();
         //imposto una dimensione fissa della schermata, ovvero decido che l'utente non può ingrandirla
         stage.setResizable(false);
