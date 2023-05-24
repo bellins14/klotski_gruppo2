@@ -1,3 +1,5 @@
+![SystemSequenceDiagram.png](imgs/SystemSequenceDiagram)
+
 # System Sequence Diagram
 ```plantuml
 @startuml
