@@ -1,6 +1,7 @@
+# System Sequence Diagram
+
 ![SystemSequenceDiagram.png](/docs/imgs/SystemSequenceDiagram.png)
 
-# System Sequence Diagram
 ```plantuml
 @startuml
 !theme materia-outline
@@ -55,6 +56,9 @@ end
 ```
 
 # Internal Sequence Diagram
+
+![InternalSequenceDiagram.png](/docs/imgs/InternalSequenceDiagram.png)
+
 ```plantuml
 @startuml
 !theme materia-outline
