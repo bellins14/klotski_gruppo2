@@ -1,4 +1,4 @@
-![SystemSequenceDiagram.png](/imgs/SystemSequenceDiagram)
+![SystemSequenceDiagram.png](/imgs/SystemSequenceDiagram.png)
 
 # System Sequence Diagram
 ```plantuml
