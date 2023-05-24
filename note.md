@@ -6,6 +6,7 @@
 * [PlanText](https://www.planttext.com/)
 * [Documentazione PlantUML](https://plantuml.com/)
 * [Diritti Mojang](https://www.minecraft.net/it-it/terms#commercial)
+* [Link repo github per API klotski solver](https://github.com/jeantimex/Klotski)
 
 
 # Step da fare:
