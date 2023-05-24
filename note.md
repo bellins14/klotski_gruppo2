@@ -66,7 +66,10 @@ solito corrispondono 1-1 alle classi software significative.
   * se si fa `reset()` si ritorna a `configurazione_iniziale` scelta
   * se si preme un pulsante di una qualsiasi delle 4 configurazioni possibili di partenza, il gioco si resetta alla config scelta e riparte da zero, ergo la `configurazione_iniziale` cambia (a meno che non si sia scelta la stessa di prima)
 
-
+* DATABASE: 
+  * il database contiene lo storico degli stati, da cui la partita richiede, ogni volta che lo necessita, richiede l'ultimo stato, e alla     fine di ogni mossa, il nuovo stato.
+  * (eventuale: la partita tiene uno storico degli stati, che a cui vien aggiunto l'ultimo stato e poi inviato su db alla fine di ogni       
+  mossa) 
 # Note sul codice
 L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una configurazione
 
