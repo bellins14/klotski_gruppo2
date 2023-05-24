@@ -299,6 +299,9 @@
 </table>
 
 # Grafo Use Cases
+
+![UseCasesDiagram.png](/docs/imgs/UseCasesDiagram.png)
+
 ```plantuml
 # PlantUML Editor
 
