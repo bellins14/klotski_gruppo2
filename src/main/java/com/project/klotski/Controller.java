@@ -39,7 +39,7 @@ public class Controller {
     private Piece selectedBlock;
 
     //numero della configurazione
-    private int conf = 1;
+    //private int conf = 1;
 
     //configurazione selezionata
     private int selectedConf = 1;
@@ -52,8 +52,9 @@ public class Controller {
     //primo metodo chiamato di default
     public void initialize() {
         textcounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+
         //inizializzo _configuration e gli passo come parametro la configurazione iniziale
-        _configuration = new Configuration(conf);
+        _configuration = new Configuration(selectedConf);
         Piece[] blocks = _configuration.getBlocks();
 
         blockPane.setMaxWidth(400);
@@ -63,6 +64,7 @@ public class Controller {
         for (Piece block : blocks) {
             blockPane.getChildren().add(block);
 
+            //forse va fuori
             blockPane.setStyle("-fx-border-color: black");
 
             // Aggiunge un gestore eventi per la selezione di un bottone
@@ -182,7 +184,7 @@ public class Controller {
         if(selectedConf != configurationIndex) {
             counter = 0;
             textcounter.setText("Moves : " + counter);
-            conf = configurationIndex;
+            //conf = configurationIndex;
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();
             initialize();
