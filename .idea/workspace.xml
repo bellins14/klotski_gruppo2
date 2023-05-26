@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="jfoenix library deleted" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExportTestResults" outputFolder="$PROJECT_DIR$" userTempatePath="" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+        <option value="JUnit5 Test Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="debug" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/project/klotski/Tuple.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2OkDUOLSkxTb68lGPyBFk0Ys1eo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "docs",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Program Files/Java/jfoenix",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.project.klotski" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.PieceTest">
+    <configuration name="ConfigurationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="klotski" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.klotski.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.klotski" />
+      <option name="MAIN_CLASS_NAME" value="com.project.klotski.ConfigurationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="klotski" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.klotski.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.klotski" />
+      <option name="MAIN_CLASS_NAME" value="com.project.klotski.ControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PieceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="klotski" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.project.klotski.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.project.klotski" />
+      <option name="MAIN_CLASS_NAME" value="com.project.klotski.PieceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.PieceTest" />
+        <item itemvalue="JUnit.ConfigurationTest" />
+        <item itemvalue="JUnit.ControllerTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="" />
+      <created>1682095703355</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682095703355</updated>
+      <workItem from="1682943255851" duration="1333000" />
+      <workItem from="1683009717825" duration="6542000" />
+      <workItem from="1683017224095" duration="1707000" />
+      <workItem from="1683018996335" duration="2701000" />
+      <workItem from="1683022204793" duration="583000" />
+      <workItem from="1683027400181" duration="2307000" />
+      <workItem from="1683040678237" duration="1119000" />
+      <workItem from="1683046797503" duration="58000" />
+      <workItem from="1683200949593" duration="685000" />
+      <workItem from="1683201659944" duration="259000" />
+      <workItem from="1683201978208" duration="662000" />
+      <workItem from="1683202697431" duration="171000" />
+      <workItem from="1683209403318" duration="2730000" />
+      <workItem from="1683215106091" duration="6852000" />
+      <workItem from="1683222847887" duration="437000" />
+      <workItem from="1683225774522" duration="1793000" />
+      <workItem from="1683648092340" duration="14953000" />
+      <workItem from="1683677263183" duration="5672000" />
+      <workItem from="1684415896544" duration="2060000" />
+      <workItem from="1684435668574" duration="91000" />
+      <workItem from="1684756444006" duration="2516000" />
+      <workItem from="1684759503473" duration="9356000" />
+      <workItem from="1684920206321" duration="5263000" />
+      <workItem from="1684997356900" duration="1193000" />
+      <workItem from="1685000742504" duration="82000" />
+      <workItem from="1685084520076" duration="786000" />
+      <workItem from="1685087249382" duration="339000" />
+    </task>
+    <task id="LOCAL-00001" summary="@Override metodo Tuple.toString()">
+      <created>1683212016180</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683212016180</updated>
+    </task>
+    <task id="LOCAL-00002" summary="@Override metodo Piece.toString()&#10;&#10;in più printa anche posizioni quando tocco">
+      <created>1683221051986</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683221051987</updated>
+    </task>
+    <task id="LOCAL-00003" summary="@Override metodo Piece.toString()&#10;&#10;in più printa anche posizioni quando tocco">
+      <created>1683221154303</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1683221154303</updated>
+    </task>
+    <task id="LOCAL-00004" summary="@Override metodo Piece.toString()&#10;&#10;in più printa anche posizioni quando tocco">
+      <created>1683223021718</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1683223021718</updated>
+    </task>
+    <task id="LOCAL-00005" summary="@Override metodo Piece.toString()&#10;&#10;in più printa anche posizioni quando tocco">
+      <created>1683223166959</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683223166959</updated>
+    </task>
+    <task id="LOCAL-00006" summary="@Override metodo Piece.toString()&#10;&#10;in più printa anche posizioni quando tocco">
+      <created>1683223181454</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683223181455</updated>
+    </task>
+    <task id="LOCAL-00007" summary="tolti blocchi di codice commentati">
+      <created>1683649174206</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683649174206</updated>
+    </task>
+    <task id="LOCAL-00008" summary="sostituzione `button` con `block`">
+      <created>1684416589218</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1684416589218</updated>
+    </task>
+    <task id="LOCAL-00009" summary="sostituzione `button` con `block`">
+      <created>1684759804675</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1684759804675</updated>
+    </task>
+    <task id="LOCAL-00010" summary="nuovo link nelle note">
+      <created>1684762089723</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1684762089723</updated>
+    </task>
+    <task id="LOCAL-00011" summary="ordinato meglio classi Configuration, Piece, Controller">
+      <created>1684769733756</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1684769733756</updated>
+    </task>
+    <task id="LOCAL-00012" summary="aggiustata imageFill">
+      <created>1684920569076</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1684920569076</updated>
+    </task>
+    <task id="LOCAL-00013" summary="creati test (da sviluppare)">
+      <created>1684999888057</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1684999888058</updated>
+    </task>
+    <task id="LOCAL-00014" summary="jfoenix library deleted">
+      <created>1685000791668</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1685000791668</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="@Override metodo Tuple.toString()" />
+    <MESSAGE value="@Override metodo Piece.toString()&#10;&#10;in più printa anche posizioni quando tocco" />
+    <MESSAGE value="tolti blocchi di codice commentati" />
+    <MESSAGE value="sostituzione `button` con `block`" />
+    <MESSAGE value="nuovo link nelle note" />
+    <MESSAGE value="ordinato meglio classi Configuration, Piece, Controller" />
+    <MESSAGE value="aggiustata imageFill" />
+    <MESSAGE value="creati test (da sviluppare)" />
+    <MESSAGE value="jfoenix library deleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="jfoenix library deleted" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
