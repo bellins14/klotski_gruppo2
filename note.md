@@ -76,4 +76,4 @@ L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una con
 
 # TODO list
 
-[] da fare
+[ ] da fare
