@@ -86,3 +86,5 @@ L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una con
 - [ ] Decidere se separare i Sequence diagrams
 - [ ] JavaDoc
 - [ ] Scrivere le Licenze e il codice altrui utilizzato
+- [ ] System Test (degli use cases a mano + report)
+- [ ] Manuale
