@@ -74,3 +74,6 @@ solito corrispondono 1-1 alle classi software significative.
 # Note sul codice
 L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una configurazione
 
+# TODO list
+
+[] da fare
