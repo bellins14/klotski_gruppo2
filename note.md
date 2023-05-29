@@ -85,3 +85,4 @@ L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una con
 - [ ] Rivedere design class model (aggiustare quello di Damiano con quello di INTELLIJ)
 - [ ] Decidere se separare i Sequence diagrams
 - [ ] JavaDoc
+- [ ] Scrivere le Licenze e il codice altrui utilizzato
