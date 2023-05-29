@@ -76,6 +76,7 @@ L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una con
 
 # TODO list
 
+- [ ] Design Patterns (verificare quali abbiamo utilizzato)
 - [ ] DB
 - [ ] JUNIT
 - [ ] Test (con documentazione)
@@ -83,3 +84,4 @@ L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una con
 - [ ] Sito
 - [ ] Rivedere design class model (aggiustare quello di Damiano con quello di INTELLIJ)
 - [ ] Decidere se separare i Sequence diagrams
+- [ ] JavaDoc
