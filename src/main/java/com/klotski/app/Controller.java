@@ -1,4 +1,4 @@
-package com.project.klotski;
+package com.klotski.app;
 
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;

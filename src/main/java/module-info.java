@@ -1,9 +1,9 @@
-module com.project.klotski {
+module com.klotski.app {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.jfoenix;
 
 
-    opens com.project.klotski to javafx.fxml;
-    exports com.project.klotski;
+    opens com.klotski.app to javafx.fxml;
+    exports com.klotski.app;
 }

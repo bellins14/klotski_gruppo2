@@ -1,7 +1,7 @@
 # Software Engineering Project - Klotski 🧩
 by Gruppo 2 (Bellinato, Bordin, Caon, Menegale)
 
-![piece3](src/main/resources/com/project/klotski/img/piece3.png) ![piece1](src/main/resources/com/project/klotski/img/piece1.png) ![piece2](src/main/resources/com/project/klotski/img/piece2.png) ![piece0](src/main/resources/com/project/klotski/img/piece0.png)
+![piece3](src/main/resources/com/klotski/app/img/piece3.png) ![piece1](src/main/resources/com/klotski/app/img/piece1.png) ![piece2](src/main/resources/com/klotski/app/img/piece2.png) ![piece0](src/main/resources/com/klotski/app/img/piece0.png)
 
 _**piece3**, **piece1**, **piece2**, **piece0**_ 
 
@@ -25,7 +25,7 @@ _**piece3**, **piece1**, **piece2**, **piece0**_
 ### Riferimento a database online fornito da prof
 > Utilizzare queste selezioni:
 
-![riferimento](src/main/resources/com/project/klotski/img/original/rif.png)
+![riferimento](src/main/resources/com/klotski/app/img/original/rif.png)
 
 [link](https://simonsays--tw-com.translate.goog/web/Klotski/game/klotskiDemo.html?_x_tr_sch=http&_x_tr_sl=auto&_x_tr_tl=it&_x_tr_hl=it&_x_tr_pto=wapp)
 
