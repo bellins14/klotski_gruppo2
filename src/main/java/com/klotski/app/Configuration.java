@@ -40,7 +40,7 @@ public class Configuration {
             blocks[j].setLayoutY(positions[j].getY());
 
             // #### DEBUG ####
-            //System.out.println("Setted block "+blocks[j]);
+            //System.out.println("Placed block "+blocks[j]);
         }
     }
 
@@ -98,15 +98,18 @@ public class Configuration {
 
     @Override
     public String toString(){
-        StringBuilder string  = new StringBuilder("{\n" +
-                "    blocks: [ ");
+        StringBuilder string  = new StringBuilder("""
+                {
+                    blocks: [
+                """);
         for(Piece block : this.blocks) {
             string.append(block.toString());
         }
-        string.append("],\n" +
-                "    boardSize: [5, 4],\n" +
-                "    escapePoint: [3, 1],\n" +
-                "}");
+        string.append("""
+                    ],
+                    boardSize: [5, 4],
+                    escapePoint: [3, 1],
+                }""");
         return string.toString();
     }
 }

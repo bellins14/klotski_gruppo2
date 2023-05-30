@@ -78,19 +78,17 @@ public class Piece extends Rectangle {
     //public String getImageName(){ return this._image;}
 
     // rende stringa il Piece, sempre in 3 cifre (zeri aggiunti all'inizio se serve)
-    // da usare per data base, richiesta next best move (bisogna fare metodo che printa la tupla dell'attuale stato in cui si richiede)
-    // tipo di output: _idxxxyyy
+    // da usare per data base, richiesta next best move (bisogna fare metodo che stampa la Tuple dell'attuale stato in cui si richiede)
+    // tipo di output: "_idxxxyyy"
     // esempio: a000100 = Piece 0 (che come _id ha 'a') in posizione x = 0 px, y = 100 px a partire da angolo in alto a sx
     @Override
     public String toString(){
-        StringBuilder string = new StringBuilder("{\"shape\": [");
-        string.append((int) (this.getHeight()/100) + ", ");
-        string.append((int) (this.getWidth()/100) + "], ");
 
-        string.append("\"position\": [");
-        string.append((int) (this.getLayoutY()/100) + ", ");
-        string.append((int) (this.getLayoutX()/100) + "] }, ");
-        return string.toString();
+        return "      {\"shape\": [" + (int) (this.getHeight() / 100) + ", " +
+                (int) (this.getWidth() / 100) + "], " +
+                "\"position\": [" +
+                (int) (this.getLayoutY() / 100) + ", " +
+                (int) (this.getLayoutX() / 100) + "] },\n";
     }
     /*public String toString(){
         StringBuilder coords = new StringBuilder(this.getId());

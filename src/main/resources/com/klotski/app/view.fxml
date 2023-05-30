@@ -8,10 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.shape.Rectangle?>
 <BorderPane prefHeight="724.0" prefWidth="632.0" style="-fx-background-color: #a3bded;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.klotski.app.Controller">
    <bottom>
-      <Text fx:id="textcounter" strokeType="OUTSIDE" strokeWidth="0.0" text="Moves : 0" wrappingWidth="138.13677978515625" BorderPane.alignment="CENTER">
+      <Text fx:id="textCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="Moves : 0" wrappingWidth="138.13677978515625" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" />
          </BorderPane.margin>

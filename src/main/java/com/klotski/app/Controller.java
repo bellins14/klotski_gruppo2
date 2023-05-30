@@ -18,13 +18,13 @@ import javafx.util.Duration;
 public class Controller {
 
 
-    //Pannello "Pane" dove andrò ad inserire i vari Piece
+    //Pannello "Pane" dove andrò a inserire i vari Piece
     @FXML
     private Pane blockPane;
 
     //Testo per il numero di mosse
     @FXML
-    private Text textcounter;
+    private Text textCounter;
 
     @FXML
     private JFXButton reset;
@@ -47,7 +47,7 @@ public class Controller {
 
     //primo metodo chiamato di default
     public void initialize() {
-        textcounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        textCounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
 
         //inizializzo _configuration e gli passo come parametro la configurazione iniziale
         _configuration = new Configuration(selectedConf);
@@ -135,7 +135,7 @@ public class Controller {
                     }
                 }
 
-                textcounter.setText("Moves : " + counter);
+                textCounter.setText("Moves : " + counter);
 
             }
 
@@ -172,7 +172,7 @@ public class Controller {
     @FXML
     void reset() {
         counter = 0;
-        textcounter.setText("Moves : " + counter);
+        textCounter.setText("Moves : " + counter);
         blockPane.getChildren().clear();
         initialize();
     }
@@ -184,7 +184,7 @@ public class Controller {
         int configurationIndex = Integer.parseInt(clickedButton.getUserData().toString());
         if(selectedConf != configurationIndex) {
             counter = 0;
-            textcounter.setText("Moves : " + counter);
+            textCounter.setText("Moves : " + counter);
             //conf = configurationIndex;
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();

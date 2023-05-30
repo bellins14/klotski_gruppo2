@@ -17,7 +17,6 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(),1000,700);
         stage.setScene(scene);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
-        //Controller controller = fxmlLoader.getController();
         //imposto una dimensione fissa della schermata, ovvero decido che l'utente non può ingrandirla
         stage.setResizable(false);
         stage.show();
