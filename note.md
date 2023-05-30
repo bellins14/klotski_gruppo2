@@ -7,7 +7,6 @@
 * [Documentazione PlantUML](https://plantuml.com/)
 * [Diritti Mojang](https://www.minecraft.net/it-it/terms#commercial)
 * [Link repo github per API klotski solver](https://github.com/jeantimex/Klotski)
-* [altro spunto per solver](https://github.com/jojonium/Klotski/blob/solve/Klotski/src/klotski/controller/SolvePuzzleController.java)
 
 
 # Step da fare:
