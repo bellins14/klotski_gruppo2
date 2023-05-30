@@ -1,4 +1,4 @@
-package com.project.klotski;
+package com.klotski.app;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ConfigurationTest {
+class PieceTest {
 
     @BeforeEach
     void setUp() {
@@ -17,18 +17,18 @@ class ConfigurationTest {
     }
 
     @Test
-    void getBlocks() {
+    void setType() {
     }
 
     @Test
-    void setBlocks() {
+    void setImageFill() {
     }
 
     @Test
-    void getBlocksType() {
+    void setImageName() {
     }
 
     @Test
-    void getPositions() {
+    void testToString() {
     }
 }

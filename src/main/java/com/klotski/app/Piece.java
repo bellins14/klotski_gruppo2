@@ -1,4 +1,4 @@
-package com.project.klotski;
+package com.klotski.app;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;

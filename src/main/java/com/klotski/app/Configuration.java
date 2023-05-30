@@ -1,7 +1,4 @@
-package com.project.klotski;
-
-import java.util.HashMap;
-import java.util.Map;
+package com.klotski.app;
 
 public class Configuration {
 

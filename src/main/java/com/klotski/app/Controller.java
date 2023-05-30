@@ -1,4 +1,4 @@
-package com.project.klotski;
+package com.klotski.app;
 
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;

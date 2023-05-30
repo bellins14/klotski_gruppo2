@@ -1,4 +1,4 @@
-package com.project.klotski;
+package com.klotski.app;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PieceTest {
+class ControllerTest {
 
     @BeforeEach
     void setUp() {
@@ -17,18 +17,14 @@ class PieceTest {
     }
 
     @Test
-    void setType() {
+    void initialize() {
     }
 
     @Test
-    void setImageFill() {
+    void reset() {
     }
 
     @Test
-    void setImageName() {
-    }
-
-    @Test
-    void testToString() {
+    void configurationClicked() {
     }
 }
