@@ -61,6 +61,7 @@ public class Piece extends Rectangle {
         }
     }
 
+    // controllo eccezione?
     public void setImageFill(String imageName) {
         setImageName(imageName);
         Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(_image)).toString());
@@ -82,6 +83,16 @@ public class Piece extends Rectangle {
     // esempio: a000100 = Piece 0 (che come _id ha 'a') in posizione x = 0 px, y = 100 px a partire da angolo in alto a sx
     @Override
     public String toString(){
+        StringBuilder string = new StringBuilder("{\"shape\": [");
+        string.append((int) (this.getHeight()/100) + ", ");
+        string.append((int) (this.getWidth()/100) + "], ");
+
+        string.append("\"position\": [");
+        string.append((int) (this.getLayoutY()/100) + ", ");
+        string.append((int) (this.getLayoutX()/100) + "] }, ");
+        return string.toString();
+    }
+    /*public String toString(){
         StringBuilder coords = new StringBuilder(this.getId());
         int x_length = Integer.toString((int) getLayoutX()).length();
         int y_length = Integer.toString((int) getLayoutY()).length();
@@ -97,6 +108,6 @@ public class Piece extends Rectangle {
         coords.append((int) getLayoutY());
 
         return coords.toString();
-    }
+    }*/
 
 }

@@ -38,9 +38,6 @@ public class Controller {
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
 
-    //numero della configurazione
-    //private int conf = 1;
-
     //configurazione selezionata
     private int selectedConf = 1;
 
@@ -84,7 +81,12 @@ public class Controller {
                 selectedBlock = block;
                 // aumenta lo spessore del bordo
                 block.setStrokeWidth(6);
-                System.out.println(selectedBlock);
+
+                // #### DEBUG ####
+                //System.out.println(selectedBlock);
+
+                // #### DEBUG ####
+                System.out.println(_configuration);
             });
         }
 
@@ -169,7 +171,7 @@ public class Controller {
 
     //reset della configurazione attuale
     @FXML
-    void reset(MouseEvent event) {
+    void reset() {
         counter = 0;
         textcounter.setText("Moves : " + counter);
         blockPane.getChildren().clear();

@@ -52,8 +52,8 @@ public class Configuration {
 
         // assegna ordine rettangoli per sezione (ordine decrescente)
         switch (c) {
-            case 1, 4 -> types = new int[]{3, 2, 1, 1, 1, 1, 0, 0, 0, 0};
-            case 2, 3 -> types = new int[]{3, 2, 2, 1, 1, 1, 0, 0, 0, 0};
+            case 1, 4 -> types = new int[]{3, 1, 1, 1, 1, 2, 0, 0, 0, 0};
+            case 2, 3 -> types = new int[]{3, 1, 1, 1, 2, 2, 0, 0, 0, 0};
             default -> {
                 return null;
             }
@@ -71,20 +71,20 @@ public class Configuration {
         // scritti in getBlocks
         switch (c) {
             case 1 -> {
-                positionX = new int[]{100, 100, 300, 0, 300, 0, 200, 100, 200, 100};
-                positionY = new int[]{0, 400, 200, 200, 0, 0, 300, 300, 200, 200};
+                positionY = new int[]{0, 0, 0, 200, 200, 400, 200, 200, 300, 300};
+                positionX = new int[]{100, 0, 300, 0, 300, 100,  100, 200, 100, 200};
             }
             case 2 -> {
-                positionX = new int[]{100, 200, 0, 300, 100, 0, 300, 0, 300, 0};
-                positionY = new int[]{0, 400, 400, 100, 200, 100, 300, 300, 0, 0};
+                positionY = new int[]{0, 100, 200, 100, 400, 400, 0, 0, 300, 300};
+                positionX = new int[]{100, 0, 100, 300, 0, 200, 0, 300, 0, 300};
             }
             case 3 -> {
-                positionX = new int[]{200, 200, 100, 0, 100, 0, 300, 300, 200, 100};
-                positionY = new int[]{100, 400, 300, 200, 100, 0, 300, 0, 0, 0};
+                positionY = new int[]{100, 0, 100, 200, 300, 400, 0, 0, 0, 300};
+                positionX = new int[]{200, 0, 100, 0, 100, 200, 100, 200, 300, 300};
             }
             case 4 -> {
-                positionX = new int[]{100, 100, 300, 0, 300, 0, 300, 200, 100, 0};
-                positionY = new int[]{0, 200, 200, 200, 0, 0, 400, 300, 300, 400};
+                positionY = new int[]{0, 0, 0, 200, 200, 200, 300, 300, 400, 400};
+                positionX = new int[]{100, 0, 300, 0, 300, 100, 100, 200, 0, 300};
             }
             default -> {
                 return null;
@@ -97,5 +97,19 @@ public class Configuration {
         }
 
         return positions;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder string  = new StringBuilder("{\n" +
+                "    blocks: [ ");
+        for(Piece block : this.blocks) {
+            string.append(block.toString());
+        }
+        string.append("],\n" +
+                "    boardSize: [5, 4],\n" +
+                "    escapePoint: [3, 1],\n" +
+                "}");
+        return string.toString();
     }
 }
