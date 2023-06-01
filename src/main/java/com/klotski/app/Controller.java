@@ -206,6 +206,8 @@ public class Controller {
 
     @FXML
     void nextBestMove(MouseEvent event) throws IOException, InterruptedException {
+        // creare metodo per scrivere questo file html
+        // ============================
         StringBuilder game = new StringBuilder("<html>\n" +
                 "<head>\n" +
                 "  <title>Klotski Game</title>\n" +
@@ -230,6 +232,7 @@ public class Controller {
         FileWriter file = new FileWriter("src/main/resources/com/klotski/app/prova.html");
         file.write(String.valueOf(game));
         file.close();
+        // ============================ method to implement
 
         loadHTMLFile();
         webEngine.setJavaScriptEnabled(true);
@@ -255,6 +258,9 @@ public class Controller {
 
                     Node node = blockPane.getChildren().get(blockIdx);
 
+                    // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
+                    // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
+                    // quando viene eseguito `initialize()`
                     switch (dirIdx){
                         //DOWN
                         case 0 ->{node.setLayoutY(node.getLayoutY() + 100);
