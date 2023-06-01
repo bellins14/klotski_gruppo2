@@ -12,6 +12,8 @@
 
 # TODO list
 
+- [ ] aggiungere condizione di vittoria
+- [ ] aggiungere messaggio assenza possibilità NBM
 - [ ] Design Patterns (verificare quali abbiamo utilizzato)
 - [ ] DB
 - [ ] JUNIT
