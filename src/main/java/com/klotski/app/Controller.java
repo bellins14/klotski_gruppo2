@@ -227,7 +227,7 @@ public class Controller {
                 "</script>"+
                 "</body>\n" +
                 "</html>");
-        FileWriter file = new FileWriter("D:\\JavaFxProjects\\klotski_gruppo2\\src\\main\\resources\\com\\klotski\\app\\prova.html");
+        FileWriter file = new FileWriter("src/main/resources/com/klotski/app/prova.html");
         file.write(String.valueOf(game));
         file.close();
 
@@ -278,7 +278,7 @@ public class Controller {
 
 
     private void loadHTMLFile() {
-        File prova = new File("D:\\JavaFxProjects\\klotski_gruppo2\\src\\main\\resources\\com\\klotski\\app\\prova.html");
+        File prova = new File("src/main/resources/com/klotski/app/prova.html");
         if (prova.exists()) {
             try {
                 StringBuilder contentBuilder = new StringBuilder();
