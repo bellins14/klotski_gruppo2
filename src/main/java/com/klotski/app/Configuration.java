@@ -98,18 +98,12 @@ public class Configuration {
 
     @Override
     public String toString(){
-        StringBuilder string  = new StringBuilder("""
-                {
-                    blocks: [
-                """);
+        StringBuilder string  = new StringBuilder();
         for(Piece block : this.blocks) {
-            string.append(block.toString());
+            string.append(block);
         }
-        string.append("""
-                    ],
-                    boardSize: [5, 4],
-                    escapePoint: [3, 1],
-                }""");
+        //string = new StringBuilder(string.substring(0, string.length() - 2));
+
         return string.toString();
     }
 }

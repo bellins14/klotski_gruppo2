@@ -55,14 +55,28 @@
       </VBox>
    </right>
    <left>
-      <JFXButton fx:id="reset" buttonType="RAISED" focusTraversable="false" onMouseClicked="#reset" styleClass="reset" text="RESET" BorderPane.alignment="CENTER">
+      <VBox prefHeight="603.0" prefWidth="97.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets left="20.0" />
          </BorderPane.margin>
-         <font>
-            <Font name="System Bold Italic" size="20.0" />
-         </font>
-      </JFXButton>
+         <children>
+            <JFXButton fx:id="reset" buttonType="RAISED" focusTraversable="false" onMouseClicked="#reset" styleClass="reset" text="RESET">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="NBM" buttonType="RAISED" focusTraversable="false" layoutX="10.0" layoutY="10.0" onMouseClicked="#nextBestMove" styleClass="reset" text="NBM">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="undo" buttonType="RAISED" focusTraversable="false" layoutX="10.0" layoutY="53.0" onMouseClicked="#undo" prefHeight="43.0" prefWidth="119.0" styleClass="reset" text="UNDO">
+               <font>
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </VBox>
    </left>
    <top>
       <Text stroke="#2e2727" strokeType="OUTSIDE" strokeWidth="2.0" text="KLOTSKI" textAlignment="CENTER" wrappingWidth="393.13232421875" BorderPane.alignment="TOP_CENTER">
