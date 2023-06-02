@@ -9,26 +9,31 @@ import java.util.Objects;
 
 public class Piece extends Rectangle {
 
-    //colore del Piece
-    //private final Color _color;
+    //
     private String _image = "img/";
 
+    //==============
+    // CONSTRUCTORS
+    //==============
+    //default
     public Piece(){
         //richiamo il costruttore del rettangolo
         super();
-
+        //decido che il piece di default è un quadrato (100x100)
         this.setType(0);
+        //immagine predefinta per il quadrato
         this.setImageFill("piece0.png");
         //assegno un bordo nero di spessore 3
         this.setStroke(Color.BLACK);
         this.setStrokeWidth(3);
     }
-
+    //con parametri
     public Piece(int pieceType, String imageName) {
         //richiamo il costruttore del rettangolo
         super();
-
+        //in base al numero del pieceType va a creare il piece scelto
         this.setType(pieceType);
+        //immagine predefinita per il piece scelto
         this.setImageFill(imageName);
         //assegno un bordo nero di spessore 3
         this.setStroke(Color.BLACK);
@@ -41,22 +46,22 @@ public class Piece extends Rectangle {
             case 0 -> {
                 this.setHeight(100);
                 this.setWidth(100);
-                this.setId("a");
+                //this.setId("a");
             }
             case 1 -> {
                 this.setHeight(200);
                 this.setWidth(100);
-                this.setId("b");
+                //this.setId("b");
             }
             case 2 -> {
                 this.setHeight(100);
                 this.setWidth(200);
-                this.setId("c");
+                //this.setId("c");
             }
             case 3 -> {
                 this.setHeight(200);
                 this.setWidth(200);
-                this.setId("d");
+               // this.setId("d");
             }
         }
     }
@@ -69,18 +74,13 @@ public class Piece extends Rectangle {
         this.setFill(piecePattern);
     }
 
-    //public Color getColor() {return  this._color;}
-
     public void setImageName(String imageName) {
         this._image += imageName;
     }
 
-    //public String getImageName(){ return this._image;}
 
-    // rende stringa il Piece, sempre in 3 cifre (zeri aggiunti all'inizio se serve)
-    // da usare per data base, richiesta next best move (bisogna fare metodo che stampa la Tuple dell'attuale stato in cui si richiede)
-    // tipo di output: "_idxxxyyy"
-    // esempio: a000100 = Piece 0 (che come _id ha 'a') in posizione x = 0 px, y = 100 px a partire da angolo in alto a sx
+    //Eseguo l'override del metodo toString, stampo per ogni piece una configurazione che mi servirà per
+    //la NBM.
     @Override
     public String toString(){
 
@@ -90,22 +90,5 @@ public class Piece extends Rectangle {
                 (int) (this.getLayoutY() / 100) + ", " +
                 (int) (this.getLayoutX() / 100) + "] },\n";
     }
-    /*public String toString(){
-        StringBuilder coords = new StringBuilder(this.getId());
-        int x_length = Integer.toString((int) getLayoutX()).length();
-        int y_length = Integer.toString((int) getLayoutY()).length();
-
-        if(x_length < 3){
-            coords.append("0".repeat(3 - x_length));
-        }
-        coords.append((int) getLayoutX());
-
-        if(y_length < 3){
-            coords.append("0".repeat(3 - y_length));
-        }
-        coords.append((int) getLayoutY());
-
-        return coords.toString();
-    }*/
 
 }

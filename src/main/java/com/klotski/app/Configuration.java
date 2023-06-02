@@ -24,10 +24,14 @@ public class Configuration {
         setBlocks(_configuration);
     }
 
+    //mi ritorna l'array di piece
     public Piece[] getBlocks() {
         return blocks;
     }
 
+    // Assegna i tipi di blocchi e le
+    // relative posizioni agli oggetti Piece all'interno dell'array blocks,
+    // in base ai dati forniti dai metodi ausiliari getBlocksType e getPositions.
     public void setBlocks(int c){
         int[] blockTypes = getBlocksType(c);
         Tuple[] positions = getPositions(c);
@@ -44,6 +48,7 @@ public class Configuration {
         }
     }
 
+    //ritorna array con i tipi di piece che andrò a creare
     public int[] getBlocksType(int c) {
         int[] types;
 
@@ -102,7 +107,6 @@ public class Configuration {
         for(Piece block : this.blocks) {
             string.append(block);
         }
-        //string = new StringBuilder(string.substring(0, string.length() - 2));
 
         return string.toString();
     }

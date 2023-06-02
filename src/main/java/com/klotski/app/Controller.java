@@ -7,6 +7,7 @@ import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -44,6 +45,7 @@ public class Controller {
 
     //counter per le mosse
     private int counter = 0;
+
 
     protected Configuration _configuration;
 
@@ -204,45 +206,27 @@ public class Controller {
         }
     }
 
-    @FXML
-    void nextBestMove(MouseEvent event) throws IOException, InterruptedException {
-        // creare metodo per scrivere questo file html
-        // ============================
-        StringBuilder game = new StringBuilder("<html>\n" +
-                "<head>\n" +
-                "  <title>Klotski Game</title>\n" +
-                "    <script src=\"https://unpkg.co/klotski/dist/klotski.min.js\"></script>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<script>\n" +
-                "      var klotski = new Klotski();\n" +
-                "      var game = {\n" +
-                "        blocks: [\n" +
-                "          ");
-        game.append(_configuration.toString());
-        game.append("],\n" +
-                "  boardSize: [5, 4],\n" +
-                "  escapePoint: [3, 1],\n" +
-                "};\n" +
-                "\n" +
-                "var result = klotski.solve(game);" +
-                "</script>"+
-                "</body>\n" +
-                "</html>");
-        FileWriter file = new FileWriter("src/main/resources/com/klotski/app/prova.html");
-        file.write(String.valueOf(game));
-        file.close();
-        // ============================ method to implement
 
+
+    // Abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
+    // Quando il caricamento è completato con successo (Worker.State.SUCCEEDED), viene eseguito uno script JavaScript nella pagina caricata (NBM).
+    // Il risultato della NBM prodotto dallo script viene utilizzato per spostare un nodo nell'interfaccia utente.
+    // In caso di errore durante il caricamento (Worker.State.FAILED), viene stampato un messaggio di errore.
+    @FXML
+    void nextBestMove() throws IOException {
+        //aggiorno il file html con la nuova configurazione
+        updateHTMLFile();
+        //carico il file html
         loadHTMLFile();
+        //abilito JavaScript
         webEngine.setJavaScriptEnabled(true);
         webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.SUCCEEDED) {
                 // Esegui lo script JavaScript nella pagina caricata nella WebView
                 Object result = webEngine.executeScript("JSON.stringify(window.klotski.solve(window.game))");
-                if (result instanceof String) {
-                    String jsonString = (String) result;
-                    jsonString = jsonString.substring(1,35);
+                if (result instanceof String jsonString) {
+                    if (jsonString.length() == 2) return;
+                    jsonString = jsonString.substring(1, 35);
                     //System.out.println(jsonString);
 
                     int blockIdxStart = jsonString.indexOf("\"blockIdx\":") + "\"blockIdx\":".length();
@@ -261,30 +245,42 @@ public class Controller {
                     // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
                     // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
                     // quando viene eseguito `initialize()`
-                    switch (dirIdx){
+                    switch (dirIdx) {
                         //DOWN
-                        case 0 ->{node.setLayoutY(node.getLayoutY() + 100);
-                            counter++;}
+                        case 0 -> {
+                            node.setLayoutY(node.getLayoutY() + 100);
+                            counter++;
+                        }
                         //RIGHT
-                        case 1 -> {node.setLayoutX(node.getLayoutX() + 100);
-                            counter++;}
+                        case 1 -> {
+                            node.setLayoutX(node.getLayoutX() + 100);
+                            counter++;
+                        }
                         //UP
-                        case 2->{  node.setLayoutY(node.getLayoutY() - 100);
-                            counter++;}
-                        case 3 ->{ node.setLayoutX(node.getLayoutX() - 100);
-                            counter++;}
+                        case 2 -> {
+                            node.setLayoutY(node.getLayoutY() - 100);
+                            counter++;
+                        }
+                        case 3 -> {
+                            node.setLayoutX(node.getLayoutX() - 100);
+                            counter++;
+                        }
                     }
-                textCounter.setText("Moves : " + counter);
-            }}
-            if(newValue == Worker.State.FAILED){
-                System.out.println("DIO");
+                    textCounter.setText("Moves : " + counter);
+                    checkWin();
+                }
+            }
+            if (newValue == Worker.State.FAILED) {
+                System.out.println("Errore");
             }
         });
     }
 
 
+
+
     private void loadHTMLFile() {
-        File prova = new File("src/main/resources/com/klotski/app/prova.html");
+        File prova = new File("src/main/resources/com/klotski/app/solver.html");
         if (prova.exists()) {
             try {
                 StringBuilder contentBuilder = new StringBuilder();
@@ -306,8 +302,46 @@ public class Controller {
         }
     }
 
+    void updateHTMLFile() throws IOException {
+        String game = "<html>\n" +
+                "<head>\n" +
+                "  <title>Klotski Game</title>\n" +
+                "    <script src=\"https://unpkg.co/klotski/dist/klotski.min.js\"></script>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<script>\n" +
+                "      var klotski = new Klotski();\n" +
+                "      var game = {\n" +
+                "        blocks: [\n" +
+                "          " + _configuration.toString() +
+                "],\n" +
+                "  boardSize: [5, 4],\n" +
+                "  escapePoint: [3, 1],\n" +
+                "};\n" +
+                "\n" +
+                "var result = klotski.solve(game);" +
+                "</script>" +
+                "</body>\n" +
+                "</html>";
+        FileWriter file = new FileWriter("src/main/resources/com/klotski/app/solver.html");
+        file.write(String.valueOf(game));
+        file.close();
+    }
+
+
+    public void checkWin(){
+        Node node = blockPane.getChildren().get(0);
+        if(node.getLayoutX() == 100 && node.getLayoutY() == 300){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("VITTORIA");
+            alert.setHeaderText(null);
+            alert.setContentText("HAI VINTO !");
+            alert.showAndWait();
+        }
+    }
+
     @FXML
-    void undo(MouseEvent event) {
+    void undo() {
 
     }
 

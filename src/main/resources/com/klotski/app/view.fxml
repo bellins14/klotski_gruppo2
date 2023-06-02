@@ -21,6 +21,9 @@
          <BorderPane.margin>
             <Insets left="50.0" />
          </BorderPane.margin>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
       </Pane>
    </center>
    <right>
