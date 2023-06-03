@@ -20,15 +20,14 @@ import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.util.Stack;
 
 
 public class Controller {
 
-
     //Pannello "Pane" dove andrò a inserire i vari Piece
     @FXML
     private Pane blockPane;
-
     @FXML
     private JFXButton undo;
     private WebView webView;
@@ -36,27 +35,22 @@ public class Controller {
     //Testo per il numero di mosse
     @FXML
     private Text textCounter;
-
     @FXML
     private JFXButton reset;
-
     @FXML
     private JFXButton NBM;
-
     //counter per le mosse
     private int counter = 0;
-
-
     protected Configuration _configuration;
-
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
-
     //configurazione selezionata
     private int selectedConf = 1;
+    private Stack<Configuration> log;
 
 
     public Controller() {
+        log = new Stack<>();
     }
 
 
@@ -67,6 +61,10 @@ public class Controller {
         //inizializzo _configuration e gli passo come parametro la configurazione iniziale
         _configuration = new Configuration(selectedConf);
         Piece[] blocks = _configuration.getBlocks();
+
+        // Memorizziamo la configurazione
+        log.push(_configuration);
+        UtilityJackson.serializeConfigurationLog(log);
 
         blockPane.setMaxWidth(400);
         blockPane.setMaxHeight(500);
@@ -158,6 +156,7 @@ public class Controller {
         blockPane.setFocusTraversable(true);
     }
 
+
     //controllo che non ci sia overlapping
     private boolean isNotOverlapping(Piece block, double deltaX, double deltaY) {
         // Calcola la nuova posizione del bottone
@@ -182,6 +181,7 @@ public class Controller {
         return true;
     }
 
+
     //reset della configurazione attuale
     @FXML
     void reset() {
@@ -190,6 +190,7 @@ public class Controller {
         blockPane.getChildren().clear();
         initialize();
     }
+
 
     // cambio configurazione e azzeramento, pulsanti di configurazione 1, 2, 3, 4
     @FXML
@@ -205,7 +206,6 @@ public class Controller {
             initialize();
         }
     }
-
 
 
     // Abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
@@ -277,8 +277,6 @@ public class Controller {
     }
 
 
-
-
     private void loadHTMLFile() {
         File prova = new File("src/main/resources/com/klotski/app/solver.html");
         if (prova.exists()) {
@@ -301,6 +299,7 @@ public class Controller {
             System.out.println("Il file HTML non esiste.");
         }
     }
+
 
     void updateHTMLFile() throws IOException {
         String game = "<html>\n" +
@@ -340,12 +339,13 @@ public class Controller {
         }
     }
 
+
+    /**
+     * Metodo che si occupa di gestire la logica dietro all'undo.
+     */
     @FXML
-    void undo() {
+    public void undo() {
 
     }
-
-
-
 
 }
