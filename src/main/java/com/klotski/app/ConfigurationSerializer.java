@@ -1,4 +1,4 @@
-package com.project.klotski;
+package com.klotski.app;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

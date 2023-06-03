@@ -12,8 +12,8 @@ import java.util.Map;
  * Una configurazione è intesa come l'insieme dei blocchi e relative posizioni che formano
  * il layout di gioco prima di una mossa.
  */
-@JsonSerialize(using = com.project.klotski.ConfigurationSerializer.class) // Dichiariamo a Jackson che questa classe ha un Serializer
-@JsonDeserialize(using = com.project.klotski.ConfigurationDeserializer.class) // Dichiariamo a Jackson che questa classe ha un Deserializer
+@JsonSerialize(using = ConfigurationSerializer.class) // Dichiariamo a Jackson che questa classe ha un Serializer
+@JsonDeserialize(using = ConfigurationDeserializer.class) // Dichiariamo a Jackson che questa classe ha un Deserializer
 public class Configuration {
 
     //configurazione scelta, sarebbe da togliere
