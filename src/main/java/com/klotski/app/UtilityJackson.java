@@ -1,10 +1,15 @@
 package com.klotski.app;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class UtilityJackson {
@@ -15,13 +20,68 @@ public class UtilityJackson {
      * @param l stack di configuration.
      */
     public static void  serializeConfigurationLog (Stack<Configuration> l){
+        File f;
+        FileWriter fw = null;
+
         try {
             ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-            File f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
-            FileWriter fw = new FileWriter(f); // Classe per la scrittura su file
+            f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
+            fw = new FileWriter(f); // Classe per la scrittura su file
             om.writeValue(fw, l);
+            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (fw != null) {
+                try {
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
+
+
+    /**
+     * Metodo di utility per ritornare uno stack già deserializzato di configurazioni.
+     * @return log stack deserializzato.
+     */
+    public static Stack<Configuration> deserializeConfigurationLog (){
+        Stack<Configuration> log = new Stack<>();
+        File f;
+        FileReader fr = null;
+
+        try {
+            ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
+            f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
+            fr= new FileReader(f); // Classe per la scrittura su file
+            JsonNode rootNode = om.readTree(fr);
+
+            ArrayNode configurationsNode = (ArrayNode) rootNode;
+
+            for (JsonNode configurationNode : configurationsNode) {
+                Configuration configuration = om.treeToValue(configurationNode, Configuration.class);
+                log.push(configuration);
+            }
+
+            // Configuration[] configurationArray = configurationList.toArray(new Configuration[0]);
+
+            fr.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fr != null) {
+                try {
+                    fr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return log;
+    }
+
 }

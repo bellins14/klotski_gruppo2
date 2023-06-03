@@ -37,7 +37,6 @@ public class ConfigurationDeserializer extends JsonDeserializer<Configuration> {
         int h = 0;
         int w = 0;
         boolean d_check = false;
-        System.out.println("Culo");
 
         while (i < 10) {
             jsonParser.nextToken();

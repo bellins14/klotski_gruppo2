@@ -57,14 +57,22 @@ public class Controller {
     //primo metodo chiamato di default
     public void initialize() {
         textCounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        Piece[] blocks;
 
-        //inizializzo _configuration e gli passo come parametro la configurazione iniziale
-        _configuration = new Configuration(selectedConf);
-        Piece[] blocks = _configuration.getBlocks();
-
-        // Memorizziamo la configurazione
-        log.push(_configuration);
-        UtilityJackson.serializeConfigurationLog(log);
+        // Controlliamo se il JSON è già inizializzato.
+        // Ci devono essere almeno 2 configurazioni inserite
+        log = UtilityJackson.deserializeConfigurationLog();
+        if(log.size() < 2){ // C'è solo una configurazione(che sarebbe iniziale) o 0 salvate.
+            log.clear();
+            _configuration = new Configuration(selectedConf);
+            log.push(_configuration);
+            UtilityJackson.serializeConfigurationLog(log);
+            blocks = _configuration.getBlocks();
+        } else {
+            // Ci sono delle configurazioni salvate da una partita precedente.
+            _configuration = log.peek();
+            blocks = _configuration.getBlocks();
+        }
 
         blockPane.setMaxWidth(400);
         blockPane.setMaxHeight(500);
@@ -204,6 +212,7 @@ public class Controller {
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();
             initialize();
+
         }
     }
 
