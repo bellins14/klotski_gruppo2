@@ -28,7 +28,6 @@ public class UtilityJackson {
             f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
             fw = new FileWriter(f); // Classe per la scrittura su file
             om.writeValue(fw, l);
-            fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -69,9 +68,6 @@ public class UtilityJackson {
             for(int i = 0; i < utility.size(); i++){
                 log.push(utility.pop());
             }
-
-            fr.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

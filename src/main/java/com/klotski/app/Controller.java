@@ -62,21 +62,28 @@ public class Controller {
         // Controlliamo se il JSON è già inizializzato.
         // Ci devono essere almeno 2 configurazioni inserite
         log = UtilityJackson.deserializeConfigurationLog();
+        System.out.println(log);
 
         if (log.size() == 0){ // Il log è vuoto
             _configuration = new Configuration(1);
             log.push(_configuration);
             UtilityJackson.serializeConfigurationLog(log);
             blocks = _configuration.getBlocks();
+            // Debug
+            System.out.println("JSON vuoto");
 
         } else if(log.size() == 1){ // C'è solo una configurazione(che sarebbe iniziale - è stato fatto un reset o partita salvata con 1 conf);
             _configuration = log.peek();
             blocks = _configuration.getBlocks();
+            // Debug
+            System.out.println("JSON 1 oggetto");
 
         } else {
             // Ci sono delle configurazioni salvate da una partita precedente.
             _configuration = log.peek();
             blocks = _configuration.getBlocks();
+            // Debug
+            System.out.println("Più configurazioni");
         }
 
         blockPane.setMaxWidth(400);
