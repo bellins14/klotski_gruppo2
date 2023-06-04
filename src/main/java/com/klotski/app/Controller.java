@@ -67,11 +67,12 @@ public class Controller {
         if (log.size() == 0){ // Il log è vuoto
             _configuration = new Configuration(1);
             selectedConf = 1;
-            log.push(_configuration);
+            log.push(new Configuration(_configuration.getBlocks()));
             UtilityJackson.serializeConfigurationLog(log);
             blocks = _configuration.getBlocks();
             // Debug
             System.out.println("JSON vuoto");
+            System.out.println("Configurazione Iniziale" + _configuration);
 
         } else if(log.size() == 1){ // C'è solo una configurazione(che sarebbe iniziale - è stato fatto un reset o partita salvata con 1 conf);
             _configuration = log.peek();
@@ -141,7 +142,7 @@ public class Controller {
                             /* Aggiorna e stampa stato corrente nel ConfigurationLog. Lo facciamo qui per ogni case perché
                             vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
                             uguali, che sarebbe inutile.*/
-                            log.push(_configuration);
+                            // log.push(_configuration);
                             System.out.println(log);
                             UtilityJackson.serializeConfigurationLog(log);
                         }
@@ -152,7 +153,7 @@ public class Controller {
                             selectedBlock.setLayoutY(selectedBlock.getLayoutY() + moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            log.push(_configuration);
+                            // log.push(_configuration);
                             System.out.println(log);
                             UtilityJackson.serializeConfigurationLog(log);
                         }
@@ -162,7 +163,7 @@ public class Controller {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() - moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            log.push(_configuration);
+                            // log.push(_configuration);
                             System.out.println(log);
                             UtilityJackson.serializeConfigurationLog(log);
                         }
@@ -173,7 +174,8 @@ public class Controller {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() + moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            log.push(_configuration);
+                            log.push(new Configuration(_configuration.getBlocks()));
+                            // System.out.println("Configurazione cambiata" + _configuration);
                             System.out.println(log);
                             UtilityJackson.serializeConfigurationLog(log);
                         }

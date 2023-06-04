@@ -65,11 +65,11 @@ public class UtilityJackson {
                 configurationList.add(configuration);
             }
 
-            System.out.println(configurationList);
-
             for(Configuration c : configurationList){
                 log.push(c);
             }
+
+            System.out.println(log);
 
         } catch (IOException e) {
             e.printStackTrace();

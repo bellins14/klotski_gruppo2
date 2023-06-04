@@ -64,6 +64,22 @@ public class Configuration {
 
 
     /**
+     * Metodo che ritorna una deep copy(si spera) dell'array di blocks.
+     * @return blks copia profonda dell'array blocks.
+     */
+    public Piece[] getCopyBlocks(){
+        Piece[] blks = new Piece[blocks.length];
+        for(int i = 0; i < blocks.length; i++){
+            // Usiamo il costruttore di blocks(h, w) per fare una copia degli oggietti. In questo modo riusciamo ad aggiungere
+            // oggetti diversi nello stack.
+            blks[i] = new Piece((int)blocks[i].getHeight(), (int)blocks[i].getWidth());
+        }
+        return blks;
+    }
+
+
+
+    /**
      * Metodo che setta i blocchi dell'array blocks.
      * @param c configurazione designata per i blocchi.
      */
