@@ -41,8 +41,8 @@ public class ConfigurationSerializer extends JsonSerializer<Configuration> {
             // Campo position dell'oggetto Block
             jsonGenerator.writeFieldName("position");
             jsonGenerator.writeStartArray();
-            jsonGenerator.writeNumber((int)blocks[i].getLayoutX()/100);
             jsonGenerator.writeNumber((int)blocks[i].getLayoutY()/100);
+            jsonGenerator.writeNumber((int)blocks[i].getLayoutX()/100);
             jsonGenerator.writeEndArray();
             jsonGenerator.writeEndObject();
             // Chiudi l'oggetto JSON Block

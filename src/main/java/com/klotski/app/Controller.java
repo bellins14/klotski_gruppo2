@@ -62,12 +62,17 @@ public class Controller {
         // Controlliamo se il JSON è già inizializzato.
         // Ci devono essere almeno 2 configurazioni inserite
         log = UtilityJackson.deserializeConfigurationLog();
-        if(log.size() < 2){ // C'è solo una configurazione(che sarebbe iniziale) o 0 salvate.
-            log.clear();
-            _configuration = new Configuration(selectedConf);
+
+        if (log.size() == 0){ // Il log è vuoto
+            _configuration = new Configuration(1);
             log.push(_configuration);
             UtilityJackson.serializeConfigurationLog(log);
             blocks = _configuration.getBlocks();
+
+        } else if(log.size() == 1){ // C'è solo una configurazione(che sarebbe iniziale - è stato fatto un reset o partita salvata con 1 conf);
+            _configuration = log.peek();
+            blocks = _configuration.getBlocks();
+
         } else {
             // Ci sono delle configurazioni salvate da una partita precedente.
             _configuration = log.peek();
@@ -205,7 +210,10 @@ public class Controller {
         textCounter.setText("Moves : " + counter);
         blockPane.getChildren().clear();
         // Resetto il log, e la parte di inizializzazione della pane dovrebbe funzionare in automatico.
-        log.clear();
+        for(int i=0; i < log.size()-1; i++){
+            log.pop();
+        }
+        System.out.println(log);
         UtilityJackson.serializeConfigurationLog(log);
         initialize();
     }
@@ -222,6 +230,11 @@ public class Controller {
             //conf = configurationIndex;
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();
+            // Resetto il log, e la parte di inizializzazione della pane dovrebbe funzionare in automatico, essendo
+            // già stata settata la selectedConf
+            log.clear();
+            log.push(new Configuration(selectedConf));
+            UtilityJackson.serializeConfigurationLog(log);
             initialize();
         }
     }

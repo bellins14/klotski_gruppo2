@@ -57,9 +57,9 @@ public class ConfigurationDeserializer extends JsonDeserializer<Configuration> {
                 jsonParser.nextToken();
 
                 // Arrivo al primo VALUE_NUMBER_INT di position
-                x = jsonParser.getValueAsInt();
-                jsonParser.nextToken();
                 y = jsonParser.getValueAsInt();
+                jsonParser.nextToken();
+                x = jsonParser.getValueAsInt();
 
                 // Creiamo il block
                 p = new Piece(h * 100, w * 100);

@@ -48,6 +48,7 @@ public class UtilityJackson {
      * @return log stack deserializzato.
      */
     public static Stack<Configuration> deserializeConfigurationLog (){
+        Stack<Configuration> utility = new Stack<>();
         Stack<Configuration> log = new Stack<>();
         File f;
         FileReader fr = null;
@@ -62,10 +63,12 @@ public class UtilityJackson {
 
             for (JsonNode configurationNode : configurationsNode) {
                 Configuration configuration = om.treeToValue(configurationNode, Configuration.class);
-                log.push(configuration);
+                utility.push(configuration);
             }
 
-            // Configuration[] configurationArray = configurationList.toArray(new Configuration[0]);
+            for(int i = 0; i < utility.size(); i++){
+                log.push(utility.pop());
+            }
 
             fr.close();
 

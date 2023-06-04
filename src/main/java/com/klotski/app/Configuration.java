@@ -148,6 +148,27 @@ public class Configuration {
 
 
     /**
+     * Metodo che verifica se la configurazione passata è uguale ad una delle configurazioni.
+     * @param conf configurazione da verificare.
+     * @return numero della configurazione corrispondente, altrimenti ritorna 0.
+     */
+    public static int isInitialConfiguration(Configuration conf){
+        Configuration initConf;
+
+        for(int i = 1; i <= 4; i++){
+            initConf = new Configuration(i);
+            // Controlliamo se la configurazione è uguale alla configurazione iniziale iterata.
+            if((conf.toString()).equals(initConf.toString())){
+                System.out.println(i);
+                return i;
+            }
+        }
+        // Nessuna corrispondenza trovata.
+        return 0;
+    }
+
+
+    /**
      * Metodo per stampare una configurazione.
      * @return sconf stringa che rappresenta la configurazione.
      */
