@@ -128,6 +128,8 @@ public class Controller {
                             /* Aggiorna e stampa stato corrente nel ConfigurationLog. Lo facciamo qui per ogni case perché
                             vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
                             uguali, che sarebbe inutile.*/
+                            log.push(_configuration);
+                            UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
                     case DOWN -> {
@@ -136,6 +138,8 @@ public class Controller {
                             selectedBlock.setLayoutY(selectedBlock.getLayoutY() + moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
+                            log.push(_configuration);
+                            UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
                     case LEFT -> {
@@ -143,6 +147,8 @@ public class Controller {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() - moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
+                            log.push(_configuration);
+                            UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
                     case RIGHT -> {
@@ -151,6 +157,8 @@ public class Controller {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() + moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
+                            log.push(_configuration);
+                            UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
                 }
@@ -196,6 +204,9 @@ public class Controller {
         counter = 0;
         textCounter.setText("Moves : " + counter);
         blockPane.getChildren().clear();
+        // Resetto il log, e la parte di inizializzazione della pane dovrebbe funzionare in automatico.
+        log.clear();
+        UtilityJackson.serializeConfigurationLog(log);
         initialize();
     }
 
@@ -212,7 +223,6 @@ public class Controller {
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();
             initialize();
-
         }
     }
 
