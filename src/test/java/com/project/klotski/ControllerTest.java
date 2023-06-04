@@ -27,4 +27,14 @@ class ControllerTest {
     @Test
     void configurationClicked() {
     }
+
+    //Test del metodo isNotOverlapping
+    @Test
+    void isNotOverlapping() {
+        System.out.println("test isNotOverlapping");
+
+        Controller controller = new Controller();
+
+        //controller.initialize()
+    }
 }

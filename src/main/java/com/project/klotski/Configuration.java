@@ -10,7 +10,7 @@ public class Configuration {
 
     // Array di piece che rappresenta la configurazione
     // Saranno ordinati dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
-    protected Piece[] blocks = new Piece[10];
+    protected Piece[] _blocks = new Piece[10];
 
 
     //==============
@@ -27,8 +27,11 @@ public class Configuration {
         setBlocks(_configuration);
     }
 
+    public int getConfiguration() {
+        return _configuration;
+    }
     public Piece[] getBlocks() {
-        return blocks;
+        return _blocks;
     }
 
     public void setBlocks(int c){
@@ -36,11 +39,11 @@ public class Configuration {
         Tuple[] positions = getPositions(c);
 
 
-        for (int j = 0; j < blocks.length; j++) {
+        for (int j = 0; j < _blocks.length; j++) {
             int pieceType = blockTypes[j];
-            blocks[j] = new Piece(pieceType, "piece"+pieceType+".png");
-            blocks[j].setLayoutX(positions[j].getX());
-            blocks[j].setLayoutY(positions[j].getY());
+            _blocks[j] = new Piece(pieceType); //Cambiato, basta mettere il tipo qui e mette il nome giusto all'immagine
+            _blocks[j].setLayoutX(positions[j].getX());
+            _blocks[j].setLayoutY(positions[j].getY());
 
             // #### DEBUG ####
             //System.out.println("Setted block "+blocks[j]);

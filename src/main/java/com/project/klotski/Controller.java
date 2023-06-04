@@ -7,13 +7,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
+import java.util.Objects;
 
 
 public class Controller {
@@ -61,8 +65,15 @@ public class Controller {
         blockPane.setMaxHeight(500);
 
         //con questo ciclo for inizializzo la pane
-        for (Piece block : blocks) {
+        for (int i=0; i<blocks.length; i++) {
+
+            // renderizza l'immagine per ogni blocco (parte che era in Piece)
+            Piece block = blocks[i];
+            Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(block.getImageName())).toString());
+            ImagePattern piecePattern = new ImagePattern(pieceImage);
+            block.setFill(piecePattern);
             blockPane.getChildren().add(block);
+
 
             //forse va fuori
             blockPane.setStyle("-fx-border-color: black");
