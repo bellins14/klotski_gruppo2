@@ -45,7 +45,7 @@ public class Controller {
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
     //configurazione selezionata
-    private int selectedConf = 1;
+    private int selectedConf;
     private Stack<Configuration> log;
 
 
@@ -62,10 +62,11 @@ public class Controller {
         // Controlliamo se il JSON è già inizializzato.
         // Ci devono essere almeno 2 configurazioni inserite
         log = UtilityJackson.deserializeConfigurationLog();
-        System.out.println(log);
+        System.out.println("Stampo log da controller" + log);
 
         if (log.size() == 0){ // Il log è vuoto
             _configuration = new Configuration(1);
+            selectedConf = 1;
             log.push(_configuration);
             UtilityJackson.serializeConfigurationLog(log);
             blocks = _configuration.getBlocks();
@@ -141,6 +142,7 @@ public class Controller {
                             vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
                             uguali, che sarebbe inutile.*/
                             log.push(_configuration);
+                            System.out.println(log);
                             UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
@@ -151,6 +153,7 @@ public class Controller {
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
                             log.push(_configuration);
+                            System.out.println(log);
                             UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
@@ -160,6 +163,7 @@ public class Controller {
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
                             log.push(_configuration);
+                            System.out.println(log);
                             UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
@@ -170,6 +174,7 @@ public class Controller {
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
                             log.push(_configuration);
+                            System.out.println(log);
                             UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
