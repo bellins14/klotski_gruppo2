@@ -79,9 +79,7 @@ public class Game {
             }
         }
         if(blockMoved){
-            UtilityJackson.serializeConfiguration(_configuration);
-            log.push(UtilityJackson.deserializeConfiguration());
-            UtilityJackson.serializeConfigurationLog(log);
+            jacksonSerialize(_configuration,log);
         }
 
     }
@@ -106,7 +104,7 @@ public class Game {
         return UtilityJackson.deserializeConfiguration();
     }
 
-    public void NBMDAJE(Pane blockPane, Configuration _configuration, Stack<Configuration>log,Text texcounter) throws IOException {
+    public void nextBestMove(Pane blockPane, Configuration _configuration, Stack<Configuration>log, Text texcounter) throws IOException {
         HelperFunctions.updateHTMLFile(_configuration);
         loadHTMLFile();
         webEngine.setJavaScriptEnabled(true);
@@ -135,7 +133,9 @@ public class Game {
         });
     }
 
-
+    /**
+     * Metodo che serve per caricare il file per il risolvimento della NBM.
+     */
     public  void loadHTMLFile() {
         File prova = new File("src/main/resources/com/klotski/app/solver.html");
         if (prova.exists()) {
@@ -159,7 +159,11 @@ public class Game {
         }
     }
 
-
+    public void jacksonSerialize(Configuration _configuration, Stack<Configuration> log){
+        UtilityJackson.serializeConfiguration(_configuration);
+        log.push(UtilityJackson.deserializeConfiguration());
+        UtilityJackson.serializeConfigurationLog(log);
+    }
 
 
 }

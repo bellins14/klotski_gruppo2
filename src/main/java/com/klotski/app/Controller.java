@@ -3,24 +3,18 @@ package com.klotski.app;
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
 import javafx.application.Platform;
-import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.util.Duration;
-
 import java.io.*;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Classe che gestisce tutta la logica dell'applicazione.
@@ -31,7 +25,6 @@ public class Controller {
     private Pane blockPane;
     @FXML
     private JFXButton undo;
-    private WebEngine webEngine = new WebEngine();
     //Testo per il numero di mosse
     @FXML
     private Text textCounter;
@@ -69,19 +62,12 @@ public class Controller {
         log = UtilityJackson.deserializeConfigurationLog();
         if (log.size() == HelperFunctions.EMPTY_LOG_SIZE) { // Il log è vuoto
             _configuration = new Configuration(selectedConf);
-            // ser(conf) -> des(conf) -> log.push(des(conf)) -> ser(stack);
-            UtilityJackson.serializeConfiguration(_configuration);
-            log.push(UtilityJackson.deserializeConfiguration());
-            UtilityJackson.serializeConfigurationLog(log);
-            // Debug
-            //System.out.println("Nessuna Configurazione Salvata");
+            game.jacksonSerialize(_configuration,log);
             game.setCounter(0);
 
         } else if (log.size() == HelperFunctions.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
             _configuration = UtilityJackson.deserializeConfiguration();
             selectedConf = Configuration.isInitialConfiguration(_configuration);
-            // Debug
-            //System.out.println("Una Configurazione Salvata");
             game.setCounter(0);
 
         } else { // Nel log c'è più di una configurazione
@@ -93,8 +79,6 @@ public class Controller {
             textCounter.setText("Moves : " + game.getCounter());
         }
 
-        // Inizializzo _configuration e gli passo come parametro la configurazione iniziale
-        // _configuration = new Configuration(selectedConf);
         Piece[] blocks = _configuration.getBlocks();
 
 
@@ -140,6 +124,9 @@ public class Controller {
                 //getCode mi traduce il comando da tastiera in un codice
                 int keyCode = event.getCode().ordinal();
                 game.moveBlock(selectedBlock,blockPane,keyCode,_configuration,log);
+                if(game.checkWin(blockPane)){
+                    reset();
+                }
                 textCounter.setText("Moves : " + game.getCounter());
 
             }
@@ -180,15 +167,11 @@ public class Controller {
         if (selectedConf != configurationIndex) {
             game.setCounter(0);
             textCounter.setText("Moves : " + game.getCounter());
-            //conf = configurationIndex;
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();
             log.clear();
             _configuration = new Configuration(selectedConf);
-            // ser(conf) -> des(conf) -> log.push(des(conf)) -> ser(stack);
-            UtilityJackson.serializeConfiguration(_configuration);
-            log.push(UtilityJackson.deserializeConfiguration());
-            UtilityJackson.serializeConfigurationLog(log);
+            game.jacksonSerialize(_configuration,log);
             initialize();
         }
     }
@@ -206,16 +189,10 @@ public class Controller {
     void nextBestMove() throws IOException {
         if (HelperFunctions.isInternetConnected()) {
             NBM.setDisable(true);
-            //NBM.setDisable(true);
-            //aggiorno il file html con la nuova configurazione
-
-            //carico il file html
-            game.NBMDAJE(blockPane, _configuration, log,textCounter);
+            game.nextBestMove(blockPane, _configuration, log,textCounter);
             if(game.checkWin(blockPane)){
                 reset();
             }
-            // utilizzo la classe Timer cosi tengo conto della corretta gestione del threading e non blocco
-            //l'interfaccia utente durante il ritardo
             Timer timer = new Timer();
             TimerTask enableButtonNBM = new TimerTask() {
                 @Override
@@ -229,13 +206,6 @@ public class Controller {
             HelperFunctions.setAlert(Alert.AlertType.ERROR, "ERRORE", "NBM NON DISPONBILE, CONNETTITI AD INTERNET");
         }
     }
-
-
-    /**
-     * Metodo che serve per caricare il file per il risolvimento della NBM.
-     */
-
-
     /**
      * Metodo che gestisce undo.
      */
