@@ -1,5 +1,5 @@
 # Class Diagram
-![Class Diagram](https://github.com/bellins14/klotski_gruppo2/blob/main/docs/imgs/ClassDiagram.png)
+![Class Diagram](https://github.com/bellins14/klotski_gruppo2/blob/docs/imgs/ClassDiagram.png)
 
 ```plantuml
 @startuml
