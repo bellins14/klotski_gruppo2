@@ -20,6 +20,7 @@ import java.io.*;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Classe che gestisce tutta la logica dell'applicazione.
@@ -207,37 +208,12 @@ public class Controller {
             NBM.setDisable(true);
             //NBM.setDisable(true);
             //aggiorno il file html con la nuova configurazione
-            HelperFunctions.updateHTMLFile(_configuration);
+
             //carico il file html
-            loadHTMLFile();
-            //abilito JavaScript
-            webEngine.setJavaScriptEnabled(true);
-            webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue == Worker.State.SUCCEEDED) {
-                    // Esegui lo script JavaScript nella pagina caricata nella WebView
-                    Object result = webEngine.executeScript("JSON.stringify(window.klotski.solve(window.game))");
-                    if (result instanceof String jsonString) {
-                        jsonString = jsonString.substring(1, 35);
-                        //System.out.println(jsonString);
-                        int blockIdx = HelperFunctions.extractIntValue(jsonString,"blockIdx");
-                        int dirIdx =  HelperFunctions.extractIntValue(jsonString,"dirIdx");
-                        Node node = blockPane.getChildren().get(blockIdx);
-
-                        // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
-                        // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
-                        // quando viene eseguito `initialize()`
-                        game.moveBlock((Piece) node,blockPane,dirIdx,_configuration,log);
-                        textCounter.setText("Moves : " + game.getCounter());
-                        if(game.checkWin(blockPane)){
-                            reset();
-                        }
-                    } // Fine if
-                }
-                if (newValue == Worker.State.FAILED) {
-                    HelperFunctions.setAlert(Alert.AlertType.ERROR, "ERRORE", "ERRORE NEL CARICAMENTO DELLO SCRIPT");
-                }
-            });
-
+            game.NBMDAJE(blockPane, _configuration, log,textCounter);
+            if(game.checkWin(blockPane)){
+                reset();
+            }
             // utilizzo la classe Timer cosi tengo conto della corretta gestione del threading e non blocco
             //l'interfaccia utente durante il ritardo
             Timer timer = new Timer();
@@ -259,28 +235,7 @@ public class Controller {
      * Metodo che serve per caricare il file per il risolvimento della NBM.
      */
 
-    public  void loadHTMLFile() {
-        File prova = new File("src/main/resources/com/klotski/app/solver.html");
-        if (prova.exists()) {
-            try {
-                StringBuilder contentBuilder = new StringBuilder();
-                FileReader reader = new FileReader(prova);
-                int character;
-                while ((character = reader.read()) != -1) {
-                    contentBuilder.append((char) character);
-                }
-                reader.close();
-                String htmlContent = contentBuilder.toString();
-                WebView webView = new WebView();
-                webEngine = webView.getEngine();
-                webEngine.loadContent(htmlContent); // Carica il contenuto HTML nella WebView
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Il file HTML non esiste.");
-        }
-    }
+
     /**
      * Metodo che gestisce undo.
      */
