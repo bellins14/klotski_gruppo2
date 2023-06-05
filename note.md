@@ -12,10 +12,13 @@
 
 # TODO list
 
-- [ ] aggiungere condizione di vittoria
-- [ ] aggiungere messaggio assenza possibilità NBM
+- [X] Aggiungere condizione di vittoria
+- [ ] Fare in modo che la partita riparta (resettata) dopo la vittoria
+- [ ] Aggiungere messaggio assenza possibilità NBM
+- [ ] Distanziare i bottoni NBM, Reset, Undo
+- [ ] Mettere un caricamento per l'nbm (se possibile)
 - [ ] Design Patterns (verificare quali abbiamo utilizzato)
-- [ ] DB
+- [X] DB
 - [ ] JUNIT
 - [ ] Test (con documentazione)
 - [ ] Aggiungere eccezioni
