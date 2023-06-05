@@ -438,7 +438,13 @@ public class Controller {
      */
     @FXML
     void undo() {
-
+        counter--;
+        textCounter.setText("Moves : " + counter);
+        blockPane.getChildren().clear();
+        log.pop();
+        UtilityJackson.serializeConfigurationLog(log);
+        UtilityJackson.serializeConfiguration(log.peek());
+        initialize();
     }
 
 
