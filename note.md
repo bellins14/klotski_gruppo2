@@ -26,7 +26,7 @@
 - [ ] Sito
 - [ ] Rivedere design class model (aggiustare quello di Damiano con quello di INTELLIJ)
 - [ ] Decidere se separare i Sequence diagrams
-- [ ] Cambiare nome a file `prova.html`
+- [X] Cambiare nome a file `prova.html`
 - [ ] "Pulire" file da codice commentato inutile
 - [ ] JavaDoc
 - [ ] Scrivere le Licenze e il codice altrui utilizzato
