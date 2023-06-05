@@ -54,7 +54,7 @@ public class UtilityJackson {
 
         try {
             ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-            f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
+            f = new File("src/main/resources/com/klotski/app/json/ConfigurationDC.json");
             fr = new FileReader(f); // Classe per la scrittura su file
             c = om.readValue(fr, Configuration.class);
 
