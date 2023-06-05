@@ -20,15 +20,15 @@ import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.util.Stack;
 
-
+/**
+ * Classe che gestisce tutta la logica dell'applicazione.
+ */
 public class Controller {
-
-
     //Pannello "Pane" dove andrò a inserire i vari Piece
     @FXML
     private Pane blockPane;
-
     @FXML
     private JFXButton undo;
     private WebView webView;
@@ -36,30 +36,33 @@ public class Controller {
     //Testo per il numero di mosse
     @FXML
     private Text textCounter;
-
     @FXML
     private JFXButton reset;
-
     @FXML
     private JFXButton NBM;
-
     //counter per le mosse
     private int counter = 0;
-
-
     protected Configuration _configuration;
-
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
-
     //configurazione selezionata
-    private int selectedConf = 1;
+    private int selectedConf;
+    private Stack<Configuration> log;
 
 
+    /**
+     * Costruttore di default
+     */
     public Controller() {
+        selectedConf = 1;
+        log = new Stack<>();
     }
 
 
+    /**
+     * Metodo chiamato di default all'avvio dell'applicazione.
+     * Inizializza la pane e gestisce gli input da tastiera e da moouse sui blocchi.
+     */
     //primo metodo chiamato di default
     public void initialize() {
         textCounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
@@ -68,6 +71,8 @@ public class Controller {
         _configuration = new Configuration(selectedConf);
         Piece[] blocks = _configuration.getBlocks();
 
+
+        // Da non occare
         blockPane.setMaxWidth(400);
         blockPane.setMaxHeight(500);
 
@@ -158,7 +163,14 @@ public class Controller {
         blockPane.setFocusTraversable(true);
     }
 
-    //controllo che non ci sia overlapping
+
+    /**
+     * Metodo che contolla che non ci sia overlapping tra blocchi durante il loro spostamento.
+     * @param block blocco che si vuove.
+     * @param deltaX quantità di cui si muove il blocco orizzontalmente.
+     * @param deltaY quantità di cui si muove il blocco verticalmente.
+     * @return false se si overlappa, true se è tutto a posto.
+     */
     private boolean isNotOverlapping(Piece block, double deltaX, double deltaY) {
         // Calcola la nuova posizione del bottone
         double newX = block.getLayoutX() + deltaX;
@@ -182,7 +194,10 @@ public class Controller {
         return true;
     }
 
-    //reset della configurazione attuale
+
+    /**
+     * Metodo che si occupa del reset alla configurazione di partenza designata.
+     */
     @FXML
     void reset() {
         counter = 0;
@@ -191,7 +206,11 @@ public class Controller {
         initialize();
     }
 
-    // cambio configurazione e azzeramento, pulsanti di configurazione 1, 2, 3, 4
+
+    /**
+     * Metodo che si occupa del cambio di configurazione una volta clickato il bottone apposito.
+     * @param event classe FXML che codifica un evento.
+     */
     @FXML
     void configurationClicked(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
@@ -207,11 +226,13 @@ public class Controller {
     }
 
 
-
-    // Abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
-    // Quando il caricamento è completato con successo (Worker.State.SUCCEEDED), viene eseguito uno script JavaScript nella pagina caricata (NBM).
-    // Il risultato della NBM prodotto dallo script viene utilizzato per spostare un nodo nell'interfaccia utente.
-    // In caso di errore durante il caricamento (Worker.State.FAILED), viene stampato un messaggio di errore.
+    /**
+     * Metodo che abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
+     * Quando il caricamento è completato con successo (Worker.State.SUCCEEDED), viene eseguito uno script JavaScript nella pagina caricata (NBM).
+     * Il risultato della NBM prodotto dallo script viene utilizzato per spostare un nodo nell'interfaccia utente.
+     * In caso di errore durante il caricamento (Worker.State.FAILED), viene stampato un messaggio di errore.
+     * @throws IOException
+     */
     @FXML
     void nextBestMove() throws IOException {
         //aggiorno il file html con la nuova configurazione
@@ -277,8 +298,9 @@ public class Controller {
     }
 
 
-
-
+    /**
+     * Metodo che serve per caricare il file per il risolvimento della NBM.
+     */
     private void loadHTMLFile() {
         File prova = new File("src/main/resources/com/klotski/app/solver.html");
         if (prova.exists()) {
@@ -302,6 +324,11 @@ public class Controller {
         }
     }
 
+
+    /**
+     * Metodo che serve per riscrivere il file per la richiesta della NBM.
+     * @throws IOException
+     */
     void updateHTMLFile() throws IOException {
         String game = "<html>\n" +
                 "<head>\n" +
@@ -329,6 +356,9 @@ public class Controller {
     }
 
 
+    /**
+     * Metodo che gestisce la vittoria.
+     */
     public void checkWin(){
         Node node = blockPane.getChildren().get(0);
         if(node.getLayoutX() == 100 && node.getLayoutY() == 300){
@@ -339,6 +369,7 @@ public class Controller {
             alert.showAndWait();
         }
     }
+
 
     @FXML
     void undo() {
