@@ -3,6 +3,7 @@ package com.klotski.app;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
@@ -21,7 +22,15 @@ import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 import java.io.*;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URL;
+import java.util.Enumeration;
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import java.net.HttpURLConnection;
 
 /**
  * Classe che gestisce tutta la logica dell'applicazione.
@@ -33,7 +42,7 @@ public class Controller {
     @FXML
     private JFXButton undo;
     private WebView webView;
-    private  WebEngine webEngine;
+    private WebEngine webEngine;
     //Testo per il numero di mosse
     @FXML
     private Text textCounter;
@@ -70,7 +79,7 @@ public class Controller {
         textCounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
 
         log = UtilityJackson.deserializeConfigurationLog(); // Leggiamo il log
-        if(log.size() == 0){ // Il log è vuoto
+        if (log.size() == 0) { // Il log è vuoto
             _configuration = new Configuration(selectedConf);
             // ser(conf) -> des(conf) -> log.push(des(conf)) -> ser(stack);
             UtilityJackson.serializeConfiguration(_configuration);
@@ -80,7 +89,7 @@ public class Controller {
             System.out.println("Nessuna Configurazione Salvata");
             counter = 0;
 
-        } else if (log.size() == 1){ // Nel log c'è solo una configurazione, quella iniziale.
+        } else if (log.size() == 1) { // Nel log c'è solo una configurazione, quella iniziale.
             _configuration = UtilityJackson.deserializeConfiguration();
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             // Debug
@@ -222,7 +231,8 @@ public class Controller {
 
     /**
      * Metodo che contolla che non ci sia overlapping tra blocchi durante il loro spostamento.
-     * @param block blocco che si vuove.
+     *
+     * @param block  blocco che si vuove.
      * @param deltaX quantità di cui si muove il blocco orizzontalmente.
      * @param deltaY quantità di cui si muove il blocco verticalmente.
      * @return false se si overlappa, true se è tutto a posto.
@@ -260,7 +270,7 @@ public class Controller {
         textCounter.setText("Moves : " + counter);
         blockPane.getChildren().clear();
         int ls = log.size();
-        for(int i = 1; i < ls; i++){
+        for (int i = 1; i < ls; i++) {
             log.pop();
         }
         UtilityJackson.serializeConfigurationLog(log); // Aggiorno lo storico
@@ -271,13 +281,14 @@ public class Controller {
 
     /**
      * Metodo che si occupa del cambio di configurazione una volta clickato il bottone apposito.
+     *
      * @param event classe FXML che codifica un evento.
      */
     @FXML
     void configurationClicked(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         int configurationIndex = Integer.parseInt(clickedButton.getUserData().toString());
-        if(selectedConf != configurationIndex) {
+        if (selectedConf != configurationIndex) {
             counter = 0;
             textCounter.setText("Moves : " + counter);
             //conf = configurationIndex;
@@ -299,73 +310,100 @@ public class Controller {
      * Quando il caricamento è completato con successo (Worker.State.SUCCEEDED), viene eseguito uno script JavaScript nella pagina caricata (NBM).
      * Il risultato della NBM prodotto dallo script viene utilizzato per spostare un nodo nell'interfaccia utente.
      * In caso di errore durante il caricamento (Worker.State.FAILED), viene stampato un messaggio di errore.
+     *
      * @throws IOException
      */
     @FXML
     void nextBestMove() throws IOException {
-        //aggiorno il file html con la nuova configurazione
-        updateHTMLFile();
-        //carico il file html
-        loadHTMLFile();
-        //abilito JavaScript
-        webEngine.setJavaScriptEnabled(true);
-        webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == Worker.State.SUCCEEDED) {
-                // Esegui lo script JavaScript nella pagina caricata nella WebView
-                Object result = webEngine.executeScript("JSON.stringify(window.klotski.solve(window.game))");
-                if (result instanceof String jsonString) {
-                    if (jsonString.length() == 2) return;
-                    jsonString = jsonString.substring(1, 35);
-                    //System.out.println(jsonString);
+        if(isInternetConnected()) {
+            NBM.setDisable(true);
+            //NBM.setDisable(true);
+            //aggiorno il file html con la nuova configurazione
+            updateHTMLFile();
+            //carico il file html
+            loadHTMLFile();
+            //abilito JavaScript
+            webEngine.setJavaScriptEnabled(true);
+            webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == Worker.State.SUCCEEDED) {
+                    // Esegui lo script JavaScript nella pagina caricata nella WebView
+                    Object result = webEngine.executeScript("JSON.stringify(window.klotski.solve(window.game))");
+                    if (result instanceof String jsonString) {
+                        jsonString = jsonString.substring(1, 35);
+                        //System.out.println(jsonString);
 
-                    int blockIdxStart = jsonString.indexOf("\"blockIdx\":") + "\"blockIdx\":".length();
-                    int blockIdxEnd = jsonString.indexOf(",", blockIdxStart);
-                    String blockIdxStr = jsonString.substring(blockIdxStart, blockIdxEnd).trim();
+                        int blockIdxStart = jsonString.indexOf("\"blockIdx\":") + "\"blockIdx\":".length();
+                        int blockIdxEnd = jsonString.indexOf(",", blockIdxStart);
+                        String blockIdxStr = jsonString.substring(blockIdxStart, blockIdxEnd).trim();
 
-                    int dirIdxStart = jsonString.indexOf("\"dirIdx\":") + "\"dirIdx\":".length();
-                    int dirIdxEnd = jsonString.indexOf("}", dirIdxStart);
-                    String dirIdxStr = jsonString.substring(dirIdxStart, dirIdxEnd).trim();
+                        int dirIdxStart = jsonString.indexOf("\"dirIdx\":") + "\"dirIdx\":".length();
+                        int dirIdxEnd = jsonString.indexOf("}", dirIdxStart);
+                        String dirIdxStr = jsonString.substring(dirIdxStart, dirIdxEnd).trim();
 
-                    int blockIdx = Integer.parseInt(blockIdxStr);
-                    int dirIdx = Integer.parseInt(dirIdxStr);
+                        int blockIdx = Integer.parseInt(blockIdxStr);
+                        int dirIdx = Integer.parseInt(dirIdxStr);
 
-                    Node node = blockPane.getChildren().get(blockIdx);
+                        Node node = blockPane.getChildren().get(blockIdx);
 
-                    // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
-                    // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
-                    // quando viene eseguito `initialize()`
-                    switch (dirIdx) {
-                        //DOWN
-                        case 0 -> {
-                            node.setLayoutY(node.getLayoutY() + 100);
-                            counter++;
-                        }
-                        //RIGHT
-                        case 1 -> {
-                            node.setLayoutX(node.getLayoutX() + 100);
-                            counter++;
-                        }
-                        //UP
-                        case 2 -> {
-                            node.setLayoutY(node.getLayoutY() - 100);
-                            counter++;
-                        }
-                        case 3 -> {
-                            node.setLayoutX(node.getLayoutX() - 100);
-                            counter++;
-                        }
-                    } // Fine switch
-                    textCounter.setText("Moves : " + counter);
-                    checkWin();
-                } // Fine if
-                UtilityJackson.serializeConfiguration(_configuration);
-                log.push(UtilityJackson.deserializeConfiguration());
-                UtilityJackson.serializeConfigurationLog(log);
-            }
-            if (newValue == Worker.State.FAILED) {
-                System.out.println("Errore");
-            }
-        });
+                        // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
+                        // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
+                        // quando viene eseguito `initialize()`
+                        switch (dirIdx) {
+                            //DOWN
+                            case 0 -> {
+                                node.setLayoutY(node.getLayoutY() + 100);
+                                counter++;
+                            }
+                            //RIGHT
+                            case 1 -> {
+                                node.setLayoutX(node.getLayoutX() + 100);
+                                counter++;
+                            }
+                            //UP
+                            case 2 -> {
+                                node.setLayoutY(node.getLayoutY() - 100);
+                                counter++;
+                            }
+                            case 3 -> {
+                                node.setLayoutX(node.getLayoutX() - 100);
+                                counter++;
+                            }
+                        } // Fine switch
+                        textCounter.setText("Moves : " + counter);
+                        checkWin();
+                    } // Fine if
+                    UtilityJackson.serializeConfiguration(_configuration);
+                    log.push(UtilityJackson.deserializeConfiguration());
+                    UtilityJackson.serializeConfigurationLog(log);
+                }
+                if (newValue == Worker.State.FAILED) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("ERRORE");
+                    alert.setHeaderText(null);
+                    alert.setContentText("ERRORE NEL CARICAMENTO DELLO SCRIPT");
+                    alert.showAndWait();
+                }
+            });
+
+            // utilizzo la classe Timer cosi tengo conto della corretta gestione del threading e non blocco
+            //l'interfaccia utente durante il ritardo
+            Timer timer = new Timer();
+            TimerTask enableButtonNBM = new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> NBM.setDisable(false));
+                }
+            };
+
+            timer.schedule(enableButtonNBM, 500);
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERRORE");
+            alert.setHeaderText(null);
+            alert.setContentText("NBM NON DISPONBILE, CONNETTITI AD INTERNET");
+            alert.showAndWait();
+        }
     }
 
 
@@ -398,6 +436,7 @@ public class Controller {
 
     /**
      * Metodo che serve per riscrivere il file per la richiesta della NBM.
+     *
      * @throws IOException
      */
     void updateHTMLFile() throws IOException {
@@ -418,7 +457,7 @@ public class Controller {
                 "</body>\n" +
                 "</html>";
         FileWriter file = new FileWriter("src/main/resources/com/klotski/app/solver.html");
-        file.write(String.valueOf(game));
+        file.write(game);
         file.close();
     }
 
@@ -426,14 +465,15 @@ public class Controller {
     /**
      * Metodo che gestisce la vittoria.
      */
-    public void checkWin(){
+    public void checkWin() {
         Node node = blockPane.getChildren().get(0);
-        if(node.getLayoutX() == 100 && node.getLayoutY() == 300){
+        if (node.getLayoutX() == 100 && node.getLayoutY() == 300) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("VITTORIA");
             alert.setHeaderText(null);
             alert.setContentText("HAI VINTO !");
             alert.showAndWait();
+            reset();
         }
     }
 
@@ -443,7 +483,7 @@ public class Controller {
      */
     @FXML
     void undo() {
-        if(counter != 0) {
+        if (counter != 0) {
             counter--;
             textCounter.setText("Moves : " + counter);
             blockPane.getChildren().clear();
@@ -457,23 +497,37 @@ public class Controller {
 
     /**
      * Metodo che estrapola la configurazione iniziale dal log.
+     *
      * @param log da cui estrapolare la configurazione iniziale.
      * @return initConf configurazione iniziale estrapolata.
      */
-    public Configuration getInitConfiguration(Stack<Configuration> log){
+    public Configuration getInitConfiguration(Stack<Configuration> log) {
         Stack<Configuration> utility = new Stack<>();
         int s = log.size();
-        for(int i = 1; i < s; i++){
+        for (int i = 1; i < s; i++) {
             utility.push(log.pop());
         }
         UtilityJackson.serializeConfiguration(log.peek());
         s = utility.size();
-        for(int i = 0; i < s; i++){
+        for (int i = 0; i < s; i++) {
             log.push(utility.pop());
         }
         return UtilityJackson.deserializeConfiguration();
     }
 
+
+    public static boolean isInternetConnected() {
+        try {
+            URL url = new URL("https://www.google.com"); // Sostituisci con l'URL di un server noto
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("HEAD");
+
+            int responseCode = connection.getResponseCode();
+            return (responseCode == HttpURLConnection.HTTP_OK);
+        } catch (IOException e) {
+            return false;
+        }
+    }
 
 
 }
