@@ -60,7 +60,7 @@ public class Controller {
 
     /**
      * Metodo chiamato di default all'avvio dell'applicazione.
-     * Inizializza la pane e gestisce gli input da tastiera e da moouse sui blocchi.
+     * Inizializza la pane e gestisce gli input da tastiera e da mouse sui blocchi.
      */
     //primo metodo chiamato di default
     public void initialize() {
@@ -84,8 +84,6 @@ public class Controller {
             game.setCounter(0);
 
         } else { // Nel log c'è più di una configurazione
-            // System.out.println(log.size());
-            // System.out.println(log.peek());
             _configuration = game.getInitConfiguration(log);
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             UtilityJackson.serializeConfiguration(log.peek());
@@ -99,7 +97,7 @@ public class Controller {
         Piece[] blocks = _configuration.getBlocks();
 
 
-        // Da non occare
+        // Da non toccare
         blockPane.setMaxWidth(400);
         blockPane.setMaxHeight(500);
         //con questo ciclo for inizializzo la pane
@@ -170,7 +168,7 @@ public class Controller {
 
 
     /**
-     * Metodo che si occupa del cambio di configurazione una volta clickato il bottone apposito.
+     * Metodo che si occupa del cambio di configurazione una volta cliccato il bottone apposito.
      *
      * @param event classe FXML che codifica un evento.
      */
@@ -201,7 +199,7 @@ public class Controller {
      * Il risultato della NBM prodotto dallo script viene utilizzato per spostare un nodo nell'interfaccia utente.
      * In caso di errore durante il caricamento (Worker.State.FAILED), viene stampato un messaggio di errore.
      *
-     * @throws IOException Eccezione per apertura/chiusra file "solver.html"
+     * @throws IOException Eccezione per apertura/chiusura file "solver.html"
      */
     @FXML
     void nextBestMove() throws IOException {
@@ -284,7 +282,7 @@ public class Controller {
         }
     }
     /**
-     * Metodo che gestisce l'undo.
+     * Metodo che gestisce undo.
      */
     @FXML
     void undo() {
