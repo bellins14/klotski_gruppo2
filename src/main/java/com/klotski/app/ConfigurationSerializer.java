@@ -49,6 +49,19 @@ public class ConfigurationSerializer extends JsonSerializer<Configuration> {
         }
         jsonGenerator.writeEndArray();
 
+        // Campi comuni
+        jsonGenerator.writeFieldName("boardSize");
+        jsonGenerator.writeStartArray();
+        jsonGenerator.writeNumber(5);
+        jsonGenerator.writeNumber(4);
+        jsonGenerator.writeEndArray();
+
+        jsonGenerator.writeFieldName("escapePoint");
+        jsonGenerator.writeStartArray();
+        jsonGenerator.writeNumber(3);
+        jsonGenerator.writeNumber(1);
+        jsonGenerator.writeEndArray();
+
         jsonGenerator.writeEndObject(); // Chiudi l'oggetto JSON
     }
     // Siccome le informazioni le stampiamo, perdiamo per forza di cose il riferimento agli oggetti.

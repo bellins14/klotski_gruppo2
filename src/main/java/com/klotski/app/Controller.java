@@ -1,5 +1,6 @@
 package com.klotski.app;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
 import javafx.collections.ObservableList;
@@ -400,6 +401,7 @@ public class Controller {
      * @throws IOException
      */
     void updateHTMLFile() throws IOException {
+        ObjectMapper om = new ObjectMapper();
         String game = "<html>\n" +
                 "<head>\n" +
                 "  <title>Klotski Game</title>\n" +
@@ -408,13 +410,8 @@ public class Controller {
                 "<body>\n" +
                 "<script>\n" +
                 "      var klotski = new Klotski();\n" +
-                "      var game = {\n" +
-                "        blocks: [\n" +
-                "          " + _configuration.toString() +
-                "],\n" +
-                "  boardSize: [5, 4],\n" +
-                "  escapePoint: [3, 1],\n" +
-                "};\n" +
+                "      var game = " +
+                "          " + om.writeValueAsString(_configuration) +
                 "\n" +
                 "var result = klotski.solve(game);" +
                 "</script>" +
