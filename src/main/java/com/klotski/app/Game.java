@@ -3,7 +3,12 @@ package com.klotski.app;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Stack;
 
 public class Game {
@@ -14,8 +19,7 @@ public class Game {
         this.counter = counter;
     }
 
-    public int getCounter () { return  this.counter;
-    }
+    public int getCounter () {return  this.counter;}
 
 
     /**
@@ -36,6 +40,7 @@ public class Game {
         boolean blockMoved = false;
         double moveAmount = 100;
         switch (dirIdx) {
+            //vedere tasto 0
             //DOWN
             case 19,0 -> {
                 if (block.getLayoutY() + moveAmount + block.getHeight() <= 500
@@ -97,5 +102,9 @@ public class Game {
         }
         return UtilityJackson.deserializeConfiguration();
     }
+
+
+
+
 
 }

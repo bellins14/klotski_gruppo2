@@ -2,7 +2,11 @@ package com.klotski.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
@@ -54,7 +58,11 @@ public class HelperFunctions {
             return false;
         }
     }
-
+    /**
+     * Metodo che serve per riscrivere il file per la richiesta della NBM.
+     *
+     * @throws IOException Eccezione per scrittura file "solver.html"
+     */
     static void updateHTMLFile(Configuration _configuration) throws IOException {
         ObjectMapper om = new ObjectMapper();
         String game = "<html>\n" +
@@ -76,6 +84,22 @@ public class HelperFunctions {
         file.write(game);
         file.close();
     }
+
+
+
+    public static int extractIntValue(String jsonString, String key) {
+        int valueStart = jsonString.indexOf("\"" + key + "\":") + (key.length() + 3);
+        int valueEnd = jsonString.indexOf(",", valueStart);
+
+        if (valueEnd == -1) {
+            valueEnd = jsonString.indexOf("}", valueStart);
+        }
+
+        String valueString = jsonString.substring(valueStart, valueEnd).trim();
+
+        return Integer.parseInt(valueString);
+    }
+
 
 
 

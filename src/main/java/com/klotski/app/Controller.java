@@ -1,6 +1,5 @@
 package com.klotski.app;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
 import javafx.application.Platform;
@@ -31,7 +30,7 @@ public class Controller {
     private Pane blockPane;
     @FXML
     private JFXButton undo;
-    private WebEngine webEngine;
+    private WebEngine webEngine = new WebEngine();
     //Testo per il numero di mosse
     @FXML
     private Text textCounter;
@@ -39,9 +38,6 @@ public class Controller {
     private JFXButton reset;
     @FXML
     private JFXButton NBM;
-    //counter per le mosse
-    private int counter;
-
     private final Game game;
     protected Configuration _configuration;
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
@@ -96,11 +92,6 @@ public class Controller {
             _configuration = UtilityJackson.deserializeConfiguration();
             game.setCounter(log.size() - 1);
             textCounter.setText("Moves : " + game.getCounter());
-
-            // Debug
-            //System.out.println("Più Configurazioni Salvate");
-            // System.out.println(log.peek());
-            // System.out.println(log.size());
         }
 
         // Inizializzo _configuration e gli passo come parametro la configurazione iniziale
@@ -135,11 +126,6 @@ public class Controller {
                 selectedBlock = block;
                 // aumenta lo spessore del bordo
                 block.setStrokeWidth(5);
-
-                // #### DEBUG ####
-                //System.out.println(selectedBlock);
-
-                // #### DEBUG ####
             });
         }
 
@@ -151,7 +137,6 @@ public class Controller {
         blockPane.setOnKeyPressed(event -> {
             if (selectedBlock != null) {
                 //di quanto si deve spostare il mio bottone selezionato
-                double moveAmount = 100;
                 //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
                 //getCode mi traduce il comando da tastiera in un codice
                 int keyCode = event.getCode().ordinal();
@@ -236,18 +221,8 @@ public class Controller {
                     if (result instanceof String jsonString) {
                         jsonString = jsonString.substring(1, 35);
                         //System.out.println(jsonString);
-
-                        int blockIdxStart = jsonString.indexOf("\"blockIdx\":") + "\"blockIdx\":".length();
-                        int blockIdxEnd = jsonString.indexOf(",", blockIdxStart);
-                        String blockIdxStr = jsonString.substring(blockIdxStart, blockIdxEnd).trim();
-
-                        int dirIdxStart = jsonString.indexOf("\"dirIdx\":") + "\"dirIdx\":".length();
-                        int dirIdxEnd = jsonString.indexOf("}", dirIdxStart);
-                        String dirIdxStr = jsonString.substring(dirIdxStart, dirIdxEnd).trim();
-
-                        int blockIdx = Integer.parseInt(blockIdxStr);
-                        int dirIdx = Integer.parseInt(dirIdxStr);
-
+                        int blockIdx = HelperFunctions.extractIntValue(jsonString,"blockIdx");
+                        int dirIdx =  HelperFunctions.extractIntValue(jsonString,"dirIdx");
                         Node node = blockPane.getChildren().get(blockIdx);
 
                         // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
@@ -285,7 +260,8 @@ public class Controller {
     /**
      * Metodo che serve per caricare il file per il risolvimento della NBM.
      */
-    private void loadHTMLFile() {
+
+    public  void loadHTMLFile() {
         File prova = new File("src/main/resources/com/klotski/app/solver.html");
         if (prova.exists()) {
             try {
@@ -307,17 +283,6 @@ public class Controller {
             System.out.println("Il file HTML non esiste.");
         }
     }
-
-
-    /**
-     * Metodo che serve per riscrivere il file per la richiesta della NBM.
-     *
-     * @throws IOException Eccezione per scrittura file "solver.html"
-     */
-
-
-
-
     /**
      * Metodo che gestisce l'undo.
      */
