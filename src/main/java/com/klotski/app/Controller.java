@@ -4,33 +4,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 import java.io.*;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URL;
-import java.util.Enumeration;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import java.net.HttpURLConnection;
 
 /**
  * Classe che gestisce tutta la logica dell'applicazione.
@@ -41,7 +31,6 @@ public class Controller {
     private Pane blockPane;
     @FXML
     private JFXButton undo;
-    private WebView webView;
     private WebEngine webEngine;
     //Testo per il numero di mosse
     @FXML
@@ -58,6 +47,8 @@ public class Controller {
     //configurazione selezionata
     private int selectedConf;
     private Stack<Configuration> log;
+
+    private Game game;
 
 
     /**
@@ -76,24 +67,23 @@ public class Controller {
      */
     //primo metodo chiamato di default
     public void initialize() {
-        textCounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-
-        log = UtilityJackson.deserializeConfigurationLog(); // Leggiamo il log
-        if (log.size() == 0) { // Il log è vuoto
+        // Leggiamo il log
+        log = UtilityJackson.deserializeConfigurationLog();
+        if (log.size() == HelperFunctions.EMPTY_LOG_SIZE) { // Il log è vuoto
             _configuration = new Configuration(selectedConf);
             // ser(conf) -> des(conf) -> log.push(des(conf)) -> ser(stack);
             UtilityJackson.serializeConfiguration(_configuration);
             log.push(UtilityJackson.deserializeConfiguration());
             UtilityJackson.serializeConfigurationLog(log);
             // Debug
-            System.out.println("Nessuna Configurazione Salvata");
+            //System.out.println("Nessuna Configurazione Salvata");
             counter = 0;
 
-        } else if (log.size() == 1) { // Nel log c'è solo una configurazione, quella iniziale.
+        } else if (log.size() == HelperFunctions.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
             _configuration = UtilityJackson.deserializeConfiguration();
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             // Debug
-            System.out.println("Una Configurazione Salvata");
+            //System.out.println("Una Configurazione Salvata");
             counter = 0;
 
         } else { // Nel log c'è più di una configurazione
@@ -107,7 +97,7 @@ public class Controller {
             textCounter.setText("Moves : " + counter);
 
             // Debug
-            System.out.println("Più Configurazioni Salvate");
+            //System.out.println("Più Configurazioni Salvate");
             // System.out.println(log.peek());
             // System.out.println(log.size());
         }
@@ -120,7 +110,6 @@ public class Controller {
         // Da non occare
         blockPane.setMaxWidth(400);
         blockPane.setMaxHeight(500);
-
         //con questo ciclo for inizializzo la pane
         for (Piece block : blocks) {
             blockPane.getChildren().add(block);
@@ -144,7 +133,7 @@ public class Controller {
                 strokeTransition.play();
                 selectedBlock = block;
                 // aumenta lo spessore del bordo
-                block.setStrokeWidth(6);
+                block.setStrokeWidth(5);
 
                 // #### DEBUG ####
                 //System.out.println(selectedBlock);
@@ -166,59 +155,40 @@ public class Controller {
                 //getCode mi traduce il comando da tastiera in un codice
                 switch (event.getCode()) {
                     case UP -> {
-                        if (selectedBlock.getLayoutY() - moveAmount >= 0 && isNotOverlapping(selectedBlock, 0, -moveAmount)) {
+                        if (selectedBlock.getLayoutY() - moveAmount >= 0 && selectedBlock.isNotOverlapping(blockPane, 0, -moveAmount)) {
                             selectedBlock.setLayoutY(selectedBlock.getLayoutY() - moveAmount);
                             counter++;
-                            /* Aggiorna e stampa stato corrente nel ConfigurationLog. Lo facciamo qui per ogni case perché
-                            vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
-                            uguali, che sarebbe inutile.*/
-                            UtilityJackson.serializeConfiguration(_configuration);
-                            log.push(UtilityJackson.deserializeConfiguration());
-                            UtilityJackson.serializeConfigurationLog(log);
-                            // Debug
-                            System.out.println(log.peek());
                         }
                     }
                     case DOWN -> {
                         if (selectedBlock.getLayoutY() + moveAmount + selectedBlock.getHeight() <= 500
-                                && isNotOverlapping(selectedBlock, 0, moveAmount)) {
+                                && selectedBlock.isNotOverlapping(blockPane, 0, moveAmount)) {
                             selectedBlock.setLayoutY(selectedBlock.getLayoutY() + moveAmount);
                             counter++;
-                            // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            UtilityJackson.serializeConfiguration(_configuration);
-                            log.push(UtilityJackson.deserializeConfiguration());
-                            UtilityJackson.serializeConfigurationLog(log);
-                            // Debug
-                            System.out.println(log.peek());
                         }
                     }
                     case LEFT -> {
-                        if (selectedBlock.getLayoutX() - moveAmount >= 0 && isNotOverlapping(selectedBlock, -moveAmount, 0)) {
+                        if (selectedBlock.getLayoutX() - moveAmount >= 0 && selectedBlock.isNotOverlapping(blockPane, -moveAmount, 0)) {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() - moveAmount);
                             counter++;
-                            // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            UtilityJackson.serializeConfiguration(_configuration);
-                            log.push(UtilityJackson.deserializeConfiguration());
-                            UtilityJackson.serializeConfigurationLog(log);
-                            // Debug
-                            System.out.println(log.peek());
                         }
                     }
                     case RIGHT -> {
                         if (selectedBlock.getLayoutX() + moveAmount + selectedBlock.getWidth() <= 400
-                                && isNotOverlapping(selectedBlock, moveAmount, 0)) {
+                                && selectedBlock.isNotOverlapping(blockPane, moveAmount, 0)) {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() + moveAmount);
                             counter++;
-                            // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            UtilityJackson.serializeConfiguration(_configuration);
-                            log.push(UtilityJackson.deserializeConfiguration());
-                            UtilityJackson.serializeConfigurationLog(log);
-                            // Debug
-                            System.out.println(log.peek());
                         }
                     }
+
                 }
 
+                /* Aggiorna e stampa stato corrente nel ConfigurationLog. Lo facciamo qui per ogni case perché
+                vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
+                 uguali, che sarebbe inutile.*/
+                UtilityJackson.serializeConfiguration(_configuration);
+                log.push(UtilityJackson.deserializeConfiguration());
+                UtilityJackson.serializeConfigurationLog(log);
                 textCounter.setText("Moves : " + counter);
 
             }
@@ -226,38 +196,6 @@ public class Controller {
         });
         // Per consentire il focus della tastiera sul pannello
         blockPane.setFocusTraversable(true);
-    }
-
-
-    /**
-     * Metodo che contolla che non ci sia overlapping tra blocchi durante il loro spostamento.
-     *
-     * @param block  blocco che si vuove.
-     * @param deltaX quantità di cui si muove il blocco orizzontalmente.
-     * @param deltaY quantità di cui si muove il blocco verticalmente.
-     * @return false se si overlappa, true se è tutto a posto.
-     */
-    private boolean isNotOverlapping(Piece block, double deltaX, double deltaY) {
-        // Calcola la nuova posizione del bottone
-        double newX = block.getLayoutX() + deltaX;
-        double newY = block.getLayoutY() + deltaY;
-
-        // Itera su tutti gli elementi figli della Pane
-        ObservableList<Node> children = blockPane.getChildren();
-        for (Node child : children) {
-            // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
-            if (child instanceof Piece otherBlock && child != block) {
-                // Verifica se il nuovo bottone si sovrappone all'altro bottone
-                if (newX + block.getWidth() > otherBlock.getLayoutX() &&
-                        newX < otherBlock.getLayoutX() + otherBlock.getWidth() &&
-                        newY + block.getHeight() > otherBlock.getLayoutY() &&
-                        newY < otherBlock.getLayoutY() + otherBlock.getHeight()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
 
@@ -311,11 +249,11 @@ public class Controller {
      * Il risultato della NBM prodotto dallo script viene utilizzato per spostare un nodo nell'interfaccia utente.
      * In caso di errore durante il caricamento (Worker.State.FAILED), viene stampato un messaggio di errore.
      *
-     * @throws IOException
+     * @throws IOException Eccezione per apertura/chiusra file "solver.html"
      */
     @FXML
     void nextBestMove() throws IOException {
-        if(isInternetConnected()) {
+        if (HelperFunctions.isInternetConnected()) {
             NBM.setDisable(true);
             //NBM.setDisable(true);
             //aggiorno il file html con la nuova configurazione
@@ -377,11 +315,7 @@ public class Controller {
                     UtilityJackson.serializeConfigurationLog(log);
                 }
                 if (newValue == Worker.State.FAILED) {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("ERRORE");
-                    alert.setHeaderText(null);
-                    alert.setContentText("ERRORE NEL CARICAMENTO DELLO SCRIPT");
-                    alert.showAndWait();
+                    HelperFunctions.setAlert(Alert.AlertType.ERROR, "ERRORE", "ERRORE NEL CARICAMENTO DELLO SCRIPT");
                 }
             });
 
@@ -396,13 +330,8 @@ public class Controller {
             };
 
             timer.schedule(enableButtonNBM, 500);
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERRORE");
-            alert.setHeaderText(null);
-            alert.setContentText("NBM NON DISPONBILE, CONNETTITI AD INTERNET");
-            alert.showAndWait();
+        } else {
+            HelperFunctions.setAlert(Alert.AlertType.ERROR, "ERRORE", "NBM NON DISPONBILE, CONNETTITI AD INTERNET");
         }
     }
 
@@ -422,7 +351,7 @@ public class Controller {
                 }
                 reader.close();
                 String htmlContent = contentBuilder.toString();
-                webView = new WebView();
+                WebView webView = new WebView();
                 webEngine = webView.getEngine();
                 webEngine.loadContent(htmlContent); // Carica il contenuto HTML nella WebView
             } catch (IOException e) {
@@ -437,7 +366,7 @@ public class Controller {
     /**
      * Metodo che serve per riscrivere il file per la richiesta della NBM.
      *
-     * @throws IOException
+     * @throws IOException Eccezione per scrittura file "solver.html"
      */
     void updateHTMLFile() throws IOException {
         ObjectMapper om = new ObjectMapper();
@@ -468,11 +397,7 @@ public class Controller {
     public void checkWin() {
         Node node = blockPane.getChildren().get(0);
         if (node.getLayoutX() == 100 && node.getLayoutY() == 300) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("VITTORIA");
-            alert.setHeaderText(null);
-            alert.setContentText("HAI VINTO !");
-            alert.showAndWait();
+            HelperFunctions.setAlert(Alert.AlertType.INFORMATION, "VITTORIA", "HAI VINTO");
             reset();
         }
     }
@@ -491,6 +416,8 @@ public class Controller {
             UtilityJackson.serializeConfigurationLog(log);
             UtilityJackson.serializeConfiguration(log.peek());
             initialize();
+        } else {
+            HelperFunctions.setAlert(Alert.AlertType.WARNING, "UNDO", "NON HAI SPOSTATO NESSUN BLOCCO!");
         }
     }
 
@@ -515,17 +442,27 @@ public class Controller {
         return UtilityJackson.deserializeConfiguration();
     }
 
-
-    public static boolean isInternetConnected() {
-        try {
-            URL url = new URL("https://www.google.com"); // Sostituisci con l'URL di un server noto
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("HEAD");
-
-            int responseCode = connection.getResponseCode();
-            return (responseCode == HttpURLConnection.HTTP_OK);
-        } catch (IOException e) {
-            return false;
+    private void spostaBlocco(Node node, int dirIdx) {
+        switch (dirIdx) {
+            //DOWN
+            case 0 -> {
+                node.setLayoutY(node.getLayoutY() + 100);
+                counter++;
+            }
+            //RIGHT
+            case 1 -> {
+                node.setLayoutX(node.getLayoutX() + 100);
+                counter++;
+            }
+            //UP
+            case 2 -> {
+                node.setLayoutY(node.getLayoutY() - 100);
+                counter++;
+            }
+            case 3 -> {
+                node.setLayoutX(node.getLayoutX() - 100);
+                counter++;
+            }
         }
     }
 

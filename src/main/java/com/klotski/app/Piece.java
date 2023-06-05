@@ -1,6 +1,9 @@
 package com.klotski.app;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -10,10 +13,9 @@ import java.util.Objects;
 /**
  * Classe che rappresenta un pezzo del Klotski.
  */
-public class Piece extends Rectangle implements Cloneable{
+public class Piece extends Rectangle {
 
     //colore del Piece
-    //private final Color _color;
     private String _image = "img/";
 
 
@@ -165,6 +167,36 @@ public class Piece extends Rectangle implements Cloneable{
         return po;
     }
 
+    /**
+     * Metodo che contolla che non ci sia overlapping tra blocchi durante il loro spostamento.
+     *
+     * @param pane  blocco che si vuove.
+     * @param deltaX quantità di cui si muove il blocco orizzontalmente.
+     * @param deltaY quantità di cui si muove il blocco verticalmente.
+     * @return false se si overlappa, true se è tutto a posto.
+     */
+    public boolean isNotOverlapping(Pane pane, double deltaX, double deltaY) {
+        // Calcola la nuova posizione del bottone
+        double newX = this.getLayoutX() + deltaX;
+        double newY = this.getLayoutY() + deltaY;
+
+        // Itera su tutti gli elementi figli della Pane
+        ObservableList<Node> children = pane.getChildren();
+        for (Node child : children) {
+            // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
+            if (child instanceof Piece otherBlock && child != this) {
+                // Verifica se il nuovo bottone si sovrappone all'altro bottone
+                if (newX + this.getWidth() > otherBlock.getLayoutX() &&
+                        newX < otherBlock.getLayoutX() + otherBlock.getWidth() &&
+                        newY + this.getHeight() > otherBlock.getLayoutY() &&
+                        newY < otherBlock.getLayoutY() + otherBlock.getHeight()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 
     /**
      * Metodo che ritorna una string che rappresenta un piece in un formato utile per la
@@ -180,5 +212,6 @@ public class Piece extends Rectangle implements Cloneable{
                 (int) (this.getLayoutY() / 100) + ", " +
                 (int) (this.getLayoutX() / 100) + "] },\n";
     }
+
 
 }

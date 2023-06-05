@@ -176,7 +176,7 @@ public class Configuration {
             initConf = new Configuration(i);
             // Controlliamo se la configurazione è uguale alla configurazione iniziale iterata.
             if((conf.toString()).equals(initConf.toString())){
-                System.out.println(i);
+                //System.out.println(i);
                 return i;
             }
         }
