@@ -15,6 +15,65 @@ import java.util.Stack;
 public class UtilityJackson {
 
     /**
+     * Metodo che serializza una configurazione in un file JSON.
+     * Utile per la deep copy.
+     * @param conf configurazione da serializzare.
+     */
+    public static void serializeConfiguration(Configuration conf){
+        File f;
+        FileWriter fw = null;
+        try {
+            ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
+            // File usato come appoggio per la deep copy
+            f = new File("src/main/resources/com/klotski/app/json/ConfigurationDC.json");
+            fw = new FileWriter(f); // Classe per la scrittura su file
+            om.writeValue(fw, conf);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fw != null) {
+                try {
+                    fw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } // Fine if
+        } // Fine try-catch-finally
+    }
+
+
+    /**
+     * Metodo che deserializza di un file JSON in una configurazione.
+     * Utile per la deep copy.
+     * @return
+     */
+    public static Configuration deserializeConfiguration(){
+        Configuration c = null;
+        File f;
+        FileReader fr = null;
+
+        try {
+            ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
+            f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
+            fr = new FileReader(f); // Classe per la scrittura su file
+            c = om.readValue(fr, Configuration.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fr != null) {
+                try {
+                    fr.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return c;
+    }
+
+
+    /**
      * Metodo che serve per scrivere lo stack con il log delle configurazioni
      * su file JSON.
      * @param l stack di configuration.
