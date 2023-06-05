@@ -133,7 +133,13 @@ public class Piece extends Rectangle implements Cloneable{
     }
 
 
-    //public String getImageName(){ return this._image;}
+    /**
+     * Metodo per ritornare l'immagine, non so a cosa serva.
+     * @return _image;
+     */
+    public String getImageName(){
+        return this._image;
+    }
 
 
     /**
@@ -160,8 +166,11 @@ public class Piece extends Rectangle implements Cloneable{
     }
 
 
-    //Eseguo l'override del metodo toString, stampo per ogni piece una configurazione che mi servirà per
-    //la NBM.
+    /**
+     * Metodo che ritorna una string che rappresenta un piece in un formato utile per la
+     * NBM.
+     * @return stringa formattata.
+     */
     @Override
     public String toString(){
 
