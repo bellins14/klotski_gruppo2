@@ -20,14 +20,15 @@ import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 import java.io.*;
-import java.util.Stack;
 
 
 public class Controller {
 
+
     //Pannello "Pane" dove andrò a inserire i vari Piece
     @FXML
     private Pane blockPane;
+
     @FXML
     private JFXButton undo;
     private WebView webView;
@@ -35,58 +36,37 @@ public class Controller {
     //Testo per il numero di mosse
     @FXML
     private Text textCounter;
+
     @FXML
     private JFXButton reset;
+
     @FXML
     private JFXButton NBM;
+
     //counter per le mosse
     private int counter = 0;
+
+
     protected Configuration _configuration;
+
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
+
     //configurazione selezionata
-    private int selectedConf;
-    private Stack<Configuration> log;
+    private int selectedConf = 1;
 
 
     public Controller() {
-        log = new Stack<>();
     }
 
 
     //primo metodo chiamato di default
     public void initialize() {
         textCounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
-        Piece[] blocks;
 
-        // Controlliamo se il JSON è già inizializzato.
-        // Ci devono essere almeno 2 configurazioni inserite
-        log = UtilityJackson.deserializeConfigurationLog();
-        System.out.println("Stampo log da controller" + log);
-
-        if (log.size() == 0){ // Il log è vuoto
-            _configuration = new Configuration(1);
-            selectedConf = 1;
-            log.push(new Configuration(_configuration.getBlocks()));
-            UtilityJackson.serializeConfigurationLog(log);
-            blocks = _configuration.getBlocks();
-            // Debug
-            System.out.println("JSON vuoto");
-            System.out.println("Configurazione Iniziale" + _configuration);
-
-        } else if(log.size() == 1){ // C'è solo una configurazione(che sarebbe iniziale - è stato fatto un reset o partita salvata con 1 conf);
-            _configuration = log.peek();
-            blocks = _configuration.getBlocks();
-            // Debug
-            System.out.println("JSON 1 oggetto");
-
-        } else {
-            // Ci sono delle configurazioni salvate da una partita precedente.
-            _configuration = log.peek();
-            blocks = _configuration.getBlocks();
-            // Debug
-            System.out.println("Più configurazioni");
-        }
+        //inizializzo _configuration e gli passo come parametro la configurazione iniziale
+        _configuration = new Configuration(selectedConf);
+        Piece[] blocks = _configuration.getBlocks();
 
         blockPane.setMaxWidth(400);
         blockPane.setMaxHeight(500);
@@ -142,9 +122,6 @@ public class Controller {
                             /* Aggiorna e stampa stato corrente nel ConfigurationLog. Lo facciamo qui per ogni case perché
                             vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
                             uguali, che sarebbe inutile.*/
-                            // log.push(_configuration);
-                            System.out.println(log);
-                            UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
                     case DOWN -> {
@@ -153,9 +130,6 @@ public class Controller {
                             selectedBlock.setLayoutY(selectedBlock.getLayoutY() + moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            // log.push(_configuration);
-                            System.out.println(log);
-                            UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
                     case LEFT -> {
@@ -163,9 +137,6 @@ public class Controller {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() - moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            // log.push(_configuration);
-                            System.out.println(log);
-                            UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
                     case RIGHT -> {
@@ -174,10 +145,6 @@ public class Controller {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() + moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
-                            log.push(new Configuration(_configuration.getBlocks()));
-                            // System.out.println("Configurazione cambiata" + _configuration);
-                            System.out.println(log);
-                            UtilityJackson.serializeConfigurationLog(log);
                         }
                     }
                 }
@@ -190,7 +157,6 @@ public class Controller {
         // Per consentire il focus della tastiera sul pannello
         blockPane.setFocusTraversable(true);
     }
-
 
     //controllo che non ci sia overlapping
     private boolean isNotOverlapping(Piece block, double deltaX, double deltaY) {
@@ -216,22 +182,14 @@ public class Controller {
         return true;
     }
 
-
     //reset della configurazione attuale
     @FXML
     void reset() {
         counter = 0;
         textCounter.setText("Moves : " + counter);
         blockPane.getChildren().clear();
-        // Resetto il log, e la parte di inizializzazione della pane dovrebbe funzionare in automatico.
-        for(int i=0; i < log.size()-1; i++){
-            log.pop();
-        }
-        System.out.println(log);
-        UtilityJackson.serializeConfigurationLog(log);
         initialize();
     }
-
 
     // cambio configurazione e azzeramento, pulsanti di configurazione 1, 2, 3, 4
     @FXML
@@ -244,14 +202,10 @@ public class Controller {
             //conf = configurationIndex;
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();
-            // Resetto il log, e la parte di inizializzazione della pane dovrebbe funzionare in automatico, essendo
-            // già stata settata la selectedConf
-            log.clear();
-            log.push(new Configuration(selectedConf));
-            UtilityJackson.serializeConfigurationLog(log);
             initialize();
         }
     }
+
 
 
     // Abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
@@ -323,6 +277,8 @@ public class Controller {
     }
 
 
+
+
     private void loadHTMLFile() {
         File prova = new File("src/main/resources/com/klotski/app/solver.html");
         if (prova.exists()) {
@@ -345,7 +301,6 @@ public class Controller {
             System.out.println("Il file HTML non esiste.");
         }
     }
-
 
     void updateHTMLFile() throws IOException {
         String game = "<html>\n" +
@@ -385,13 +340,12 @@ public class Controller {
         }
     }
 
-
-    /**
-     * Metodo che si occupa di gestire la logica dietro all'undo.
-     */
     @FXML
-    public void undo() {
+    void undo() {
 
     }
+
+
+
 
 }

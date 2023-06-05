@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Classe che rappresenta un pezzo del Klotski.
  */
-public class Piece extends Rectangle {
+public class Piece extends Rectangle implements Cloneable{
 
     //colore del Piece
     //private final Color _color;
@@ -75,6 +75,7 @@ public class Piece extends Rectangle {
         this.setStroke(Color.BLACK);
         this.setStrokeWidth(3);
     }
+
 
 
     /**

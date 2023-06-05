@@ -45,7 +45,7 @@ public class Configuration {
 
 
     /**
-     * Costruttore con array di Piece come parametro.
+     * Costruttore con array di Piece come parametro. Attenzione che non fa la deep copy dell'array passato.
      * @param b array di Piece.
      */
     public Configuration(Piece[] b) {
@@ -63,10 +63,12 @@ public class Configuration {
     }
 
 
+
     /**
      * Metodo che ritorna una deep copy(si spera) dell'array di blocks.
      * @return blks copia profonda dell'array blocks.
      */
+    /*
     public Piece[] getCopyBlocks(){
         Piece[] blks = new Piece[blocks.length];
         for(int i = 0; i < blocks.length; i++){
@@ -75,8 +77,7 @@ public class Configuration {
             blks[i] = new Piece((int)blocks[i].getHeight(), (int)blocks[i].getWidth());
         }
         return blks;
-    }
-
+    }*/
 
 
     /**
