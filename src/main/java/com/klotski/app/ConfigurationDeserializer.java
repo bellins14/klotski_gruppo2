@@ -77,6 +77,7 @@ public class ConfigurationDeserializer extends JsonDeserializer<Configuration> {
         return new Configuration(blocks);
     }
 }
+// Ovviamente creiamo una nuova configurazione da 0, quindi non dovrebbero esserci problemi di riferimenti.
 
 /*
     JsonToken.START_OBJECT: Indica l'inizio di un oggetto JSON (parentesi graffa {).

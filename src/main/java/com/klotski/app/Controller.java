@@ -56,6 +56,7 @@ public class Controller {
     public Controller() {
         selectedConf = 1;
         log = new Stack<>();
+        _configuration = new Configuration(selectedConf);
     }
 
 
@@ -67,8 +68,38 @@ public class Controller {
     public void initialize() {
         textCounter.setFont(Font.font("Arial", FontWeight.BOLD, 16));
 
-        //inizializzo _configuration e gli passo come parametro la configurazione iniziale
-        _configuration = new Configuration(selectedConf);
+        log = UtilityJackson.deserializeConfigurationLog(); // Leggiamo il log
+        if(log.size() == 0){ // Il log è vuoto
+            _configuration = new Configuration(selectedConf);
+            // ser(conf) -> des(conf) -> log.push(des(conf)) -> ser(stack);
+            UtilityJackson.serializeConfiguration(_configuration);
+            log.push(UtilityJackson.deserializeConfiguration());
+            UtilityJackson.serializeConfigurationLog(log);
+            // Debug
+            System.out.println("Nessuna Configurazione Salvata");
+
+        } else if (log.size() == 1){ // Nel log c'è solo una configurazione, quella iniziale.
+            _configuration = UtilityJackson.deserializeConfiguration();
+            selectedConf = Configuration.isInitialConfiguration(_configuration);
+            // Debug
+            System.out.println("Una Configurazione Salvata");
+
+        } else { // Nel log c'è più di una configurazione
+            // System.out.println(log.size());
+            // System.out.println(log.peek());
+            _configuration = getInitConfiguration(log);
+            selectedConf = Configuration.isInitialConfiguration(_configuration);
+            UtilityJackson.serializeConfiguration(log.peek());
+            _configuration = UtilityJackson.deserializeConfiguration();
+
+            // Debug
+            System.out.println("Più Configurazioni Salvate");
+            // System.out.println(log.peek());
+            // System.out.println(log.size());
+        }
+
+        // Inizializzo _configuration e gli passo come parametro la configurazione iniziale
+        // _configuration = new Configuration(selectedConf);
         Piece[] blocks = _configuration.getBlocks();
 
 
@@ -127,6 +158,11 @@ public class Controller {
                             /* Aggiorna e stampa stato corrente nel ConfigurationLog. Lo facciamo qui per ogni case perché
                             vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
                             uguali, che sarebbe inutile.*/
+                            UtilityJackson.serializeConfiguration(_configuration);
+                            log.push(UtilityJackson.deserializeConfiguration());
+                            UtilityJackson.serializeConfigurationLog(log);
+                            // Debug
+                            System.out.println(log.peek());
                         }
                     }
                     case DOWN -> {
@@ -135,6 +171,11 @@ public class Controller {
                             selectedBlock.setLayoutY(selectedBlock.getLayoutY() + moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
+                            UtilityJackson.serializeConfiguration(_configuration);
+                            log.push(UtilityJackson.deserializeConfiguration());
+                            UtilityJackson.serializeConfigurationLog(log);
+                            // Debug
+                            System.out.println(log.peek());
                         }
                     }
                     case LEFT -> {
@@ -142,6 +183,11 @@ public class Controller {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() - moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
+                            UtilityJackson.serializeConfiguration(_configuration);
+                            log.push(UtilityJackson.deserializeConfiguration());
+                            UtilityJackson.serializeConfigurationLog(log);
+                            // Debug
+                            System.out.println(log.peek());
                         }
                     }
                     case RIGHT -> {
@@ -150,6 +196,11 @@ public class Controller {
                             selectedBlock.setLayoutX(selectedBlock.getLayoutX() + moveAmount);
                             counter++;
                             // Aggiorna e stampa stato corrente nel ConfigurationLog
+                            UtilityJackson.serializeConfiguration(_configuration);
+                            log.push(UtilityJackson.deserializeConfiguration());
+                            UtilityJackson.serializeConfigurationLog(log);
+                            // Debug
+                            System.out.println(log.peek());
                         }
                     }
                 }
@@ -203,6 +254,12 @@ public class Controller {
         counter = 0;
         textCounter.setText("Moves : " + counter);
         blockPane.getChildren().clear();
+        int ls = log.size();
+        for(int i = 1; i < ls; i++){
+            log.pop();
+        }
+        UtilityJackson.serializeConfigurationLog(log); // Aggiorno lo storico
+        UtilityJackson.serializeConfiguration(log.peek()); // Aggiorno la serializzazione
         initialize();
     }
 
@@ -370,12 +427,33 @@ public class Controller {
         }
     }
 
-
+    /**
+     * Metodo che gestisce l'undo.
+     */
     @FXML
     void undo() {
 
     }
 
+
+    /**
+     * Metodo che estrapola la configurazione iniziale dal log.
+     * @param log da cui estrapolare la configurazione iniziale.
+     * @return initConf configurazione iniziale estrapolata.
+     */
+    public Configuration getInitConfiguration(Stack<Configuration> log){
+        Stack<Configuration> utility = new Stack<>();
+        int s = log.size();
+        for(int i = 1; i < s; i++){
+            utility.push(log.pop());
+        }
+        UtilityJackson.serializeConfiguration(log.peek());
+        s = utility.size();
+        for(int i = 0; i < s; i++){
+            log.push(utility.pop());
+        }
+        return UtilityJackson.deserializeConfiguration();
+    }
 
 
 

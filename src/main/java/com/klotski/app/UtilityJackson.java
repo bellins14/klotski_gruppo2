@@ -131,8 +131,6 @@ public class UtilityJackson {
                 log.push(c);
             }
 
-            System.out.println(log);
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
