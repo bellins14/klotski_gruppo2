@@ -1,4 +1,4 @@
-package com.project.klotski;
+package com.klotski.app;
 
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.Disabled;

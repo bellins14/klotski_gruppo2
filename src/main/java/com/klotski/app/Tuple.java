@@ -1,4 +1,4 @@
-package com.project.klotski;
+package com.klotski.app;
 
 public class Tuple {
     //coordinata X del Piece

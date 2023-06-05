@@ -1,8 +1,5 @@
-package com.project.klotski;
+package com.klotski.app;
 
-import javafx.scene.paint.Color;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

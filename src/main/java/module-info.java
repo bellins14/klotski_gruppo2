@@ -4,6 +4,6 @@ module com.project.klotski {
     requires com.jfoenix;
 
 
-    opens com.project.klotski to javafx.fxml;
-    exports com.project.klotski;
+    opens com.klotski.app to javafx.fxml;
+    exports com.klotski.app;
 }
