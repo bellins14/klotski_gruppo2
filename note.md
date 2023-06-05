@@ -18,6 +18,7 @@
 - [ ] Distanziare i bottoni NBM, Reset, Undo
 - [ ] Mettere un caricamento per l'nbm (se possibile)
 - [ ] Design Patterns (verificare quali abbiamo utilizzato)
+- [X] Undo
 - [X] DB
 - [ ] JUNIT
 - [ ] Test (con documentazione)
