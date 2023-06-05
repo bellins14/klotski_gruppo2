@@ -8,6 +8,30 @@
 * [Diritti Mojang](https://www.minecraft.net/it-it/terms#commercial)
 * [Link repo github per API klotski solver](https://github.com/jeantimex/Klotski)
 
+---
+
+# TODO list
+
+- [X] Aggiungere condizione di vittoria
+- [X] Fare in modo che la partita riparta (resettata) dopo la vittoria
+- [X] Aggiungere messaggio assenza possibilità NBM
+- [X] Distanziare i bottoni NBM, Reset, Undo
+- [X] Mettere un caricamento per l'nbm (se possibile)
+- [ ] Design Patterns (verificare quali abbiamo utilizzato)
+- [X] Undo
+- [X] DB
+- [ ] JUNIT
+- [ ] Test (con documentazione)
+- [ ] Aggiungere eccezioni
+- [ ] Sito
+- [ ] Rivedere design class model (aggiustare quello di Damiano con quello di INTELLIJ)
+- [ ] Decidere se separare i Sequence diagrams
+- [X] Cambiare nome a file `prova.html`
+- [ ] "Pulire" file da codice commentato inutile
+- [ ] JavaDoc
+- [ ] Scrivere le Licenze e il codice altrui utilizzato
+- [ ] System Test (degli use cases a mano + report)
+- [ ] Manuale
 
 # Step da fare:
 * Documento di specifiche (4-5 pagine)
@@ -73,18 +97,3 @@ solito corrispondono 1-1 alle classi software significative.
   mossa) 
 # Note sul codice
 L'oggetto configuration viene creato nuovo ogni volta che viene cambiata una configurazione
-
-# TODO list
-
-- [ ] Design Patterns (verificare quali abbiamo utilizzato)
-- [ ] DB
-- [ ] JUNIT
-- [ ] Test (con documentazione)
-- [ ] Aggiungere eccezioni
-- [ ] Sito
-- [ ] Rivedere design class model (aggiustare quello di Damiano con quello di INTELLIJ)
-- [ ] Decidere se separare i Sequence diagrams
-- [ ] JavaDoc
-- [ ] Scrivere le Licenze e il codice altrui utilizzato
-- [ ] System Test (degli use cases a mano + report)
-- [ ] Manuale
