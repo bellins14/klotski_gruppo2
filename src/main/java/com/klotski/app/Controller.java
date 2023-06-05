@@ -278,6 +278,12 @@ public class Controller {
             //conf = configurationIndex;
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();
+            log.clear();
+            _configuration = new Configuration(selectedConf);
+            // ser(conf) -> des(conf) -> log.push(des(conf)) -> ser(stack);
+            UtilityJackson.serializeConfiguration(_configuration);
+            log.push(UtilityJackson.deserializeConfiguration());
+            UtilityJackson.serializeConfigurationLog(log);
             initialize();
         }
     }
