@@ -349,10 +349,13 @@ public class Controller {
                             node.setLayoutX(node.getLayoutX() - 100);
                             counter++;
                         }
-                    }
+                    } // Fine switch
                     textCounter.setText("Moves : " + counter);
                     checkWin();
-                }
+                } // Fine if
+                UtilityJackson.serializeConfiguration(_configuration);
+                log.push(UtilityJackson.deserializeConfiguration());
+                UtilityJackson.serializeConfigurationLog(log);
             }
             if (newValue == Worker.State.FAILED) {
                 System.out.println("Errore");
@@ -432,6 +435,7 @@ public class Controller {
             alert.showAndWait();
         }
     }
+
 
     /**
      * Metodo che gestisce l'undo.
