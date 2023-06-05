@@ -41,7 +41,7 @@ public class Controller {
     @FXML
     private JFXButton NBM;
     //counter per le mosse
-    private int counter = 0;
+    private int counter;
     protected Configuration _configuration;
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
@@ -77,12 +77,14 @@ public class Controller {
             UtilityJackson.serializeConfigurationLog(log);
             // Debug
             System.out.println("Nessuna Configurazione Salvata");
+            counter = 0;
 
         } else if (log.size() == 1){ // Nel log c'è solo una configurazione, quella iniziale.
             _configuration = UtilityJackson.deserializeConfiguration();
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             // Debug
             System.out.println("Una Configurazione Salvata");
+            counter = 0;
 
         } else { // Nel log c'è più di una configurazione
             // System.out.println(log.size());
@@ -91,6 +93,8 @@ public class Controller {
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             UtilityJackson.serializeConfiguration(log.peek());
             _configuration = UtilityJackson.deserializeConfiguration();
+            counter = log.size() - 1;
+            textCounter.setText("Moves : " + counter);
 
             // Debug
             System.out.println("Più Configurazioni Salvate");
@@ -442,13 +446,15 @@ public class Controller {
      */
     @FXML
     void undo() {
-        counter--;
-        textCounter.setText("Moves : " + counter);
-        blockPane.getChildren().clear();
-        log.pop();
-        UtilityJackson.serializeConfigurationLog(log);
-        UtilityJackson.serializeConfiguration(log.peek());
-        initialize();
+        if(counter != 0) {
+            counter--;
+            textCounter.setText("Moves : " + counter);
+            blockPane.getChildren().clear();
+            log.pop();
+            UtilityJackson.serializeConfigurationLog(log);
+            UtilityJackson.serializeConfiguration(log.peek());
+            initialize();
+        }
     }
 
 
