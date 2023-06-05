@@ -14,7 +14,7 @@
 
 - [X] Aggiungere condizione di vittoria
 - [X] Fare in modo che la partita riparta (resettata) dopo la vittoria
-- [ ] Aggiungere messaggio assenza possibilità NBM
+- [X] Aggiungere messaggio assenza possibilità NBM
 - [ ] Distanziare i bottoni NBM, Reset, Undo
 - [X] Mettere un caricamento per l'nbm (se possibile)
 - [ ] Design Patterns (verificare quali abbiamo utilizzato)
