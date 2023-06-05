@@ -90,22 +90,30 @@ public class Piece extends Rectangle {
             case 0 -> {
                 this.setHeight(100);
                 this.setWidth(100);
-                this.setId("a");
+                this.setArcHeight(10);
+                this.setArcWidth(10);
+                this.setId("0");
             }
             case 1 -> {
                 this.setHeight(200);
                 this.setWidth(100);
-                this.setId("b");
+                this.setArcHeight(10);
+                this.setArcWidth(10);
+                this.setId("1");
             }
             case 2 -> {
                 this.setHeight(100);
                 this.setWidth(200);
-                this.setId("c");
+                this.setArcHeight(10);
+                this.setArcWidth(10);
+                this.setId("2");
             }
             case 3 -> {
                 this.setHeight(200);
                 this.setWidth(200);
-                this.setId("d");
+                this.setArcHeight(10);
+                this.setArcWidth(10);
+                this.setId("3");
             }
         }
     }
@@ -212,6 +220,8 @@ public class Piece extends Rectangle {
                 (int) (this.getLayoutY() / 100) + ", " +
                 (int) (this.getLayoutX() / 100) + "] },\n";
     }
+
+
 
 
 }

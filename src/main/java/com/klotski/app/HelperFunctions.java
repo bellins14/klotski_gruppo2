@@ -1,7 +1,9 @@
 package com.klotski.app;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
 
@@ -52,6 +54,29 @@ public class HelperFunctions {
             return false;
         }
     }
+
+    static void updateHTMLFile(Configuration _configuration) throws IOException {
+        ObjectMapper om = new ObjectMapper();
+        String game = "<html>\n" +
+                "<head>\n" +
+                "  <title>Klotski Game</title>\n" +
+                "    <script src=\"https://unpkg.co/klotski/dist/klotski.min.js\"></script>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<script>\n" +
+                "      var klotski = new Klotski();\n" +
+                "      var game = " +
+                "          " + om.writeValueAsString(_configuration) +
+                "\n" +
+                "var result = klotski.solve(game);" +
+                "</script>" +
+                "</body>\n" +
+                "</html>";
+        FileWriter file = new FileWriter("src/main/resources/com/klotski/app/solver.html");
+        file.write(game);
+        file.close();
+    }
+
 
 
 }

@@ -41,14 +41,14 @@ public class Controller {
     private JFXButton NBM;
     //counter per le mosse
     private int counter;
+
+    private final Game game;
     protected Configuration _configuration;
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
     //configurazione selezionata
     private int selectedConf;
     private Stack<Configuration> log;
-
-    private Game game;
 
 
     /**
@@ -58,6 +58,7 @@ public class Controller {
         selectedConf = 1;
         log = new Stack<>();
         _configuration = new Configuration(selectedConf);
+        game = new Game();
     }
 
 
@@ -77,24 +78,24 @@ public class Controller {
             UtilityJackson.serializeConfigurationLog(log);
             // Debug
             //System.out.println("Nessuna Configurazione Salvata");
-            counter = 0;
+            game.setCounter(0);
 
         } else if (log.size() == HelperFunctions.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
             _configuration = UtilityJackson.deserializeConfiguration();
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             // Debug
             //System.out.println("Una Configurazione Salvata");
-            counter = 0;
+            game.setCounter(0);
 
         } else { // Nel log c'è più di una configurazione
             // System.out.println(log.size());
             // System.out.println(log.peek());
-            _configuration = getInitConfiguration(log);
+            _configuration = game.getInitConfiguration(log);
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             UtilityJackson.serializeConfiguration(log.peek());
             _configuration = UtilityJackson.deserializeConfiguration();
-            counter = log.size() - 1;
-            textCounter.setText("Moves : " + counter);
+            game.setCounter(log.size() - 1);
+            textCounter.setText("Moves : " + game.getCounter());
 
             // Debug
             //System.out.println("Più Configurazioni Salvate");
@@ -153,43 +154,9 @@ public class Controller {
                 double moveAmount = 100;
                 //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
                 //getCode mi traduce il comando da tastiera in un codice
-                switch (event.getCode()) {
-                    case UP -> {
-                        if (selectedBlock.getLayoutY() - moveAmount >= 0 && selectedBlock.isNotOverlapping(blockPane, 0, -moveAmount)) {
-                            selectedBlock.setLayoutY(selectedBlock.getLayoutY() - moveAmount);
-                            counter++;
-                        }
-                    }
-                    case DOWN -> {
-                        if (selectedBlock.getLayoutY() + moveAmount + selectedBlock.getHeight() <= 500
-                                && selectedBlock.isNotOverlapping(blockPane, 0, moveAmount)) {
-                            selectedBlock.setLayoutY(selectedBlock.getLayoutY() + moveAmount);
-                            counter++;
-                        }
-                    }
-                    case LEFT -> {
-                        if (selectedBlock.getLayoutX() - moveAmount >= 0 && selectedBlock.isNotOverlapping(blockPane, -moveAmount, 0)) {
-                            selectedBlock.setLayoutX(selectedBlock.getLayoutX() - moveAmount);
-                            counter++;
-                        }
-                    }
-                    case RIGHT -> {
-                        if (selectedBlock.getLayoutX() + moveAmount + selectedBlock.getWidth() <= 400
-                                && selectedBlock.isNotOverlapping(blockPane, moveAmount, 0)) {
-                            selectedBlock.setLayoutX(selectedBlock.getLayoutX() + moveAmount);
-                            counter++;
-                        }
-                    }
-
-                }
-
-                /* Aggiorna e stampa stato corrente nel ConfigurationLog. Lo facciamo qui per ogni case perché
-                vengono passati tutti i controlli, soprattutto il notOverlapping. Così non salviamo stati
-                 uguali, che sarebbe inutile.*/
-                UtilityJackson.serializeConfiguration(_configuration);
-                log.push(UtilityJackson.deserializeConfiguration());
-                UtilityJackson.serializeConfigurationLog(log);
-                textCounter.setText("Moves : " + counter);
+                int keyCode = event.getCode().ordinal();
+                game.moveBlock(selectedBlock,blockPane,keyCode,_configuration,log);
+                textCounter.setText("Moves : " + game.getCounter());
 
             }
 
@@ -204,8 +171,8 @@ public class Controller {
      */
     @FXML
     void reset() {
-        counter = 0;
-        textCounter.setText("Moves : " + counter);
+        game.setCounter(0);
+        textCounter.setText("Moves : " + game.getCounter());
         blockPane.getChildren().clear();
         int ls = log.size();
         for (int i = 1; i < ls; i++) {
@@ -227,8 +194,8 @@ public class Controller {
         Button clickedButton = (Button) event.getSource();
         int configurationIndex = Integer.parseInt(clickedButton.getUserData().toString());
         if (selectedConf != configurationIndex) {
-            counter = 0;
-            textCounter.setText("Moves : " + counter);
+            game.setCounter(0);
+            textCounter.setText("Moves : " + game.getCounter());
             //conf = configurationIndex;
             selectedConf = configurationIndex;
             blockPane.getChildren().clear();
@@ -257,7 +224,7 @@ public class Controller {
             NBM.setDisable(true);
             //NBM.setDisable(true);
             //aggiorno il file html con la nuova configurazione
-            updateHTMLFile();
+            HelperFunctions.updateHTMLFile(_configuration);
             //carico il file html
             loadHTMLFile();
             //abilito JavaScript
@@ -286,33 +253,12 @@ public class Controller {
                         // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
                         // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
                         // quando viene eseguito `initialize()`
-                        switch (dirIdx) {
-                            //DOWN
-                            case 0 -> {
-                                node.setLayoutY(node.getLayoutY() + 100);
-                                counter++;
-                            }
-                            //RIGHT
-                            case 1 -> {
-                                node.setLayoutX(node.getLayoutX() + 100);
-                                counter++;
-                            }
-                            //UP
-                            case 2 -> {
-                                node.setLayoutY(node.getLayoutY() - 100);
-                                counter++;
-                            }
-                            case 3 -> {
-                                node.setLayoutX(node.getLayoutX() - 100);
-                                counter++;
-                            }
-                        } // Fine switch
-                        textCounter.setText("Moves : " + counter);
-                        checkWin();
+                        game.moveBlock((Piece) node,blockPane,dirIdx,_configuration,log);
+                        textCounter.setText("Moves : " + game.getCounter());
+                        if(game.checkWin(blockPane)){
+                            reset();
+                        }
                     } // Fine if
-                    UtilityJackson.serializeConfiguration(_configuration);
-                    log.push(UtilityJackson.deserializeConfiguration());
-                    UtilityJackson.serializeConfigurationLog(log);
                 }
                 if (newValue == Worker.State.FAILED) {
                     HelperFunctions.setAlert(Alert.AlertType.ERROR, "ERRORE", "ERRORE NEL CARICAMENTO DELLO SCRIPT");
@@ -368,39 +314,8 @@ public class Controller {
      *
      * @throws IOException Eccezione per scrittura file "solver.html"
      */
-    void updateHTMLFile() throws IOException {
-        ObjectMapper om = new ObjectMapper();
-        String game = "<html>\n" +
-                "<head>\n" +
-                "  <title>Klotski Game</title>\n" +
-                "    <script src=\"https://unpkg.co/klotski/dist/klotski.min.js\"></script>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<script>\n" +
-                "      var klotski = new Klotski();\n" +
-                "      var game = " +
-                "          " + om.writeValueAsString(_configuration) +
-                "\n" +
-                "var result = klotski.solve(game);" +
-                "</script>" +
-                "</body>\n" +
-                "</html>";
-        FileWriter file = new FileWriter("src/main/resources/com/klotski/app/solver.html");
-        file.write(game);
-        file.close();
-    }
 
 
-    /**
-     * Metodo che gestisce la vittoria.
-     */
-    public void checkWin() {
-        Node node = blockPane.getChildren().get(0);
-        if (node.getLayoutX() == 100 && node.getLayoutY() == 300) {
-            HelperFunctions.setAlert(Alert.AlertType.INFORMATION, "VITTORIA", "HAI VINTO");
-            reset();
-        }
-    }
 
 
     /**
@@ -408,9 +323,9 @@ public class Controller {
      */
     @FXML
     void undo() {
-        if (counter != 0) {
-            counter--;
-            textCounter.setText("Moves : " + counter);
+        if (game.getCounter() != 0) {
+            game.setCounter(game.getCounter()- 1);
+            textCounter.setText("Moves : " + game.getCounter());
             blockPane.getChildren().clear();
             log.pop();
             UtilityJackson.serializeConfigurationLog(log);
@@ -420,51 +335,4 @@ public class Controller {
             HelperFunctions.setAlert(Alert.AlertType.WARNING, "UNDO", "NON HAI SPOSTATO NESSUN BLOCCO!");
         }
     }
-
-
-    /**
-     * Metodo che estrapola la configurazione iniziale dal log.
-     *
-     * @param log da cui estrapolare la configurazione iniziale.
-     * @return initConf configurazione iniziale estrapolata.
-     */
-    public Configuration getInitConfiguration(Stack<Configuration> log) {
-        Stack<Configuration> utility = new Stack<>();
-        int s = log.size();
-        for (int i = 1; i < s; i++) {
-            utility.push(log.pop());
-        }
-        UtilityJackson.serializeConfiguration(log.peek());
-        s = utility.size();
-        for (int i = 0; i < s; i++) {
-            log.push(utility.pop());
-        }
-        return UtilityJackson.deserializeConfiguration();
-    }
-
-    private void spostaBlocco(Node node, int dirIdx) {
-        switch (dirIdx) {
-            //DOWN
-            case 0 -> {
-                node.setLayoutY(node.getLayoutY() + 100);
-                counter++;
-            }
-            //RIGHT
-            case 1 -> {
-                node.setLayoutX(node.getLayoutX() + 100);
-                counter++;
-            }
-            //UP
-            case 2 -> {
-                node.setLayoutY(node.getLayoutY() - 100);
-                counter++;
-            }
-            case 3 -> {
-                node.setLayoutX(node.getLayoutX() - 100);
-                counter++;
-            }
-        }
-    }
-
-
 }
