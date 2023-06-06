@@ -5,101 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/allclasses-index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/allpackages-index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Api.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/EUTrustServicesApplication.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/GraphicNation.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/GraphicResult.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/IllegalParameters.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/ImagesNations.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/LabelType.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Main.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/MainController.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Nations.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/NoElementException.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Node.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/ResearchMethods.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Results.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/TypeofService.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/package-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/package-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/module-summary.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/constant-values.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/deprecated-list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/element-list" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/help-doc.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-10.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-11.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-12.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-13.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-14.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-5.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-6.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-7.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-8.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-9.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/jquery-ui.overrides.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/member-search-index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/module-search-index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/overview-tree.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/package-search-index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/resources/glass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/resources/x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_55_fbf9ee_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_65_dadada_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_75_dadada_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_75_e6e6e6_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_95_fef1ec_1x400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_222222_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_2e83ff_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_454545_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_888888_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_cd0a0a_256x240.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/jquery-3.5.1.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/jquery-ui.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/jquery-ui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script-dir/jquery-ui.structure.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/search.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/serialized-form.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/stylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/tag-search-index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/type-search-index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/DesignModel.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/DomainModel.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/InteractionsDiagram(ricerca).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/InteractionsDiagram(richiesta_lista_stati).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/JavaDoc.jfif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/SystemTest.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Test Results - Test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/TestResult.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/UseCases.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures/Use_Case_corretto.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pictures_style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scribbler-doc.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scribbler-global.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scribbler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/humans.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Class_Diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Class_Diagram.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Domain_Model.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Domain_Model.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Sequence_Diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Sequence_Diagram.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Use_Cases.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Use_Cases.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/ClassDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/imgs/ClassDiagram.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/DomainModel(nuovo).png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/imgs/DomainModel(nuovo).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/DomainModel.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/imgs/DomainModel.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/InternalSequenceDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/imgs/InternalSequenceDiagram.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/SystemSequenceDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/imgs/SystemSequenceDiagram.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/imgs/UseCasesDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/imgs/UseCasesDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,29 +59,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;docs&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Program Files/Java/jfoenix&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "docs",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Program Files/Java/jfoenix",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -272,7 +183,7 @@
       <workItem from="1685000742504" duration="82000" />
       <workItem from="1685084520076" duration="786000" />
       <workItem from="1685087249382" duration="339000" />
-      <workItem from="1686048224496" duration="730000" />
+      <workItem from="1686048224496" duration="2874000" />
     </task>
     <task id="LOCAL-00001" summary="@Override metodo Tuple.toString()">
       <created>1683212016180</created>
@@ -372,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685000791668</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update">
+      <created>1686049205385</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1686049205385</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

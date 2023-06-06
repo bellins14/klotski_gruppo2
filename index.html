@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trust-Service Doc</title>
+  <title>Klotski Game - Doc</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="scribbler-global.css">
@@ -17,10 +17,10 @@
 <body>
   <div class="doc__bg"></div>
   <nav class="header">
-    <h1 class="logo">EU Trust-Service <span class="logo__thin">Documentation</span></h1>
+    <h1 class="logo">Klotski Game <span class="logo__thin">Documentation</span></h1>
     <ul class="menu" title="torna a repository">
       <div class="menu__item toggle"><span></span></div>
-      <li class="menu__item"><a href="https://github.com/MatteoTonello/EUTrustServicesApp.git" 
+      <li class="menu__item"><a href="https://github.com/bellins14/klotski_gruppo2.git"
         class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
     </ul>
   </nav>
@@ -45,13 +45,13 @@
         <h1 style="font-size: 33px;">Manuale</h1>
         <h3 class="section__title">Come installare e lanciare il software</h3>
         <p>
-          Scaricare il programma in formato .jar dal seguente 
+          Scaricare il programma in formato .jar dal seguente
           <a href="https://github.com/MatteoTonello/EUTrustServicesApp/blob/main/out/artifacts/EUTrustServicesApplication_jar/EUTrustServicesApplication.jar" target="_blank" style="color: blue;">link</a>
              cliccando sul tasto Download. Una volta ottenuto il file, avviarlo con un doppio click per fruire dell'applicazione.
         </p>
         <p><i>
-          NB: Per mancanza di supporti alternativi, l'avvio del programma è stato testato solo su SO Windows. 
-          In caso di mancato funzionamento seguendo le indicazioni fornite sopra, si suggerisce di clonare la repository 
+          NB: Per mancanza di supporti alternativi, l'avvio del programma è stato testato solo su SO Windows.
+          In caso di mancato funzionamento seguendo le indicazioni fornite sopra, si suggerisce di clonare la repository
           fornita su GitHub ed eseguire su di un IDE (eg. IntelliJ).
         </i></p>
 
@@ -59,14 +59,14 @@
           <br>
         </p>
 
-        <h3 class="section__title">Panoramica su come sono state realizzate le funzionalità richieste <br> e fuzioni
+        <h3 class="section__title">Panoramica su come sono state realizzate le funzionalità richieste <br> e funzioni
           riutilizzate da librerie esistenti</h3>
         <p>
           Inizialmente abbiamo letto la documentazione dell’API presente al seguente
           <a href="https://esignature.ec.europa.eu/efda/swagger-ui.html" target="_blank" style="color: blue">link</a>.
           <br>
           Abbiamo creato la classe Api per creare il collegamento all’API e raccogliere i dati all’interno di vettori di
-          strighe sui quali poi l’utente avrebbe effettuato la ricerca. Abbiamo poi creato la classe ResearchMethods per
+          stringhe sui quali poi l’utente avrebbe effettuato la ricerca. Abbiamo poi creato la classe ResearchMethods per
           effettuare le ricerche all’interno di tali vettori. <br>
         </p>
         <p>
@@ -77,7 +77,7 @@
           La ricerca viene effettuata tramite 4 metodi (ognuno per ogni elemento legato al servizio), eseguiti
           sequenzialmente.
           Dopo ogni metodo il vettore di nodi contiene solo gli elementi che effettivamente hanno le caratteristiche
-          richieste come parametro, arrivando quindi ad una situazione finale in cui contiene 
+          richieste come parametro, arrivando quindi ad una situazione finale in cui contiene
           solo i servizi cercati.
         </p>
 
@@ -175,13 +175,13 @@
       <section class="js-section">
         <h1 class="section__title" style="font-size: 33px;">Domain Model</h1>
         <p>
-          L’applicazione riceve i dati dall’ EU-Trust Service API. L’utente può scegliere se 
-          visualizzare la lista delle nazioni, la lista dei tipi di servizio oppure eseguire 
+          L’applicazione riceve i dati dall’ EU-Trust Service API. L’utente può scegliere se
+          visualizzare la lista delle nazioni, la lista dei tipi di servizio oppure eseguire
           una ricerca. In caso eseguisse una ricerca, dopo aver selezionato i parametri desiderati
            l’applicazione restituisce come risultato un elenco di servizi con i relativi attributi.
         </p>
         <!--IMMAGINE -->
-        <img src="pictures/DomainModel.svg" alt="Domain model" title="Domain model" width="100%" height="100%">
+        <img src="docs_gruppo2/imgs/DomainModel.png" alt="Domain model" title="Domain model" width="100%" height="100%">
         <hr />
       </section>
 
@@ -203,22 +203,22 @@
       <section class="js-section">
         <h1 class="section__title" style="font-size: 33px;">Design Model</h1>
         <p>L’applicazione inizia la sua esecuzione dalla classe <code>EUTrustServicesApplication</code>. <br>
-          La <b>parte grafica</b> è affidata alla classe <code> MainController</code>, che ottiene i dati 
-          tramite la classe <code>Api</code>, la quale si occupa anche di definire i metodi per filtrare 
+          La <b>parte grafica</b> è affidata alla classe <code> MainController</code>, che ottiene i dati
+          tramite la classe <code>Api</code>, la quale si occupa anche di definire i metodi per filtrare
           i dati selezionati dall’utente e di salvare i servizi in entità della classe Node.<br>
           Per <b>eseguire la ricerca</b> si utilizzano i metodi definiti nella classe <code>ResearchMethods</code>
           mentre, in caso di mancata selezione di un parametro da parte dell’utente, viene lanciata l’eccezione
           <code>NoElementException</code>.
-          La classe <code>ImagesNations</code> fornisce una mappa che associa nome e bandiera delle nazioni alle classi 
-          <code>GraphicResult</code> e <code>GraphicNation</code>. La prima fornisce l’oggetto grafico per rappresentare 
-          il singolo risultato alla classe <code>Results</code>, la quale si occupa della creazione della grafica per 
-          rappresentare i risultati finali. La seconda invece fornisce l’oggetto grafico per rappresentare la singola nazione 
-          alla classe <code>Nations</code>, la quale si occupa di creare la grafica per rappresentare le nazioni e gestisce 
-          la loro selezione. La classe <code>LabelType</code> fornisce l’oggetto grafico per rappresentare il singolo tipo di 
+          La classe <code>ImagesNations</code> fornisce una mappa che associa nome e bandiera delle nazioni alle classi
+          <code>GraphicResult</code> e <code>GraphicNation</code>. La prima fornisce l’oggetto grafico per rappresentare
+          il singolo risultato alla classe <code>Results</code>, la quale si occupa della creazione della grafica per
+          rappresentare i risultati finali. La seconda invece fornisce l’oggetto grafico per rappresentare la singola nazione
+          alla classe <code>Nations</code>, la quale si occupa di creare la grafica per rappresentare le nazioni e gestisce
+          la loro selezione. La classe <code>LabelType</code> fornisce l’oggetto grafico per rappresentare il singolo tipo di
           servizio alla classe <code>TypeofService</code>, la quale si occupa della gestione del caricamento degli elementi
           grafici degli oggetti di tipo servizio.<br>
           Infine, in caso alcuni parametri passati a una funzione siano errati viene lanciata l’eccezione <code>IllegalParameters</code>.</p>
-        <!-- Image Zoom HTML -->   
+        <!-- Image Zoom HTML -->
         <img id="myImg" src="pictures/DesignModel.svg" alt="Design Model" title="zoom picture" width="100%" height="100%">
         <div id="myModal" class="modal">
           <img class="modal-content" id="img01">
@@ -227,48 +227,48 @@
         <p><br><br><br></p>
         <h3 class="section__title">INTERACTIONS DIAGRAM (richiesta_lista_tipi_di_servizio)</h3>
         <p>
-          Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente richiede 
+          Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente richiede
           la lista dei tipi di servizio offerti dal sito. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento
-          della classe Api che si occuperà di ottenere i dati, successivamente inizializza le classi <code>ImageNations</code>, <code>Nations</code> e <code>TypeService</code>. 
-          L’esecuzione prosegue poi con la richiesta da parte dell’utente di visualizzare la lista completa dei tipi di servizio, effettuata 
-          attraverso l’apposito pulsante. A questo punto la classe <code>TypeofService</code> ha il compito di fornire l’oggetto grafico per rappresentare 
+          della classe Api che si occuperà di ottenere i dati, successivamente inizializza le classi <code>ImageNations</code>, <code>Nations</code> e <code>TypeService</code>.
+          L’esecuzione prosegue poi con la richiesta da parte dell’utente di visualizzare la lista completa dei tipi di servizio, effettuata
+          attraverso l’apposito pulsante. A questo punto la classe <code>TypeofService</code> ha il compito di fornire l’oggetto grafico per rappresentare
           ogni tipo di servizio mentre <code>MainController</code> si occuperà della visualizzazione completa della lista nei confronti dell’utente.
         </p>
-        <img src="pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" alt="Interaction Diagram(richiesta_lista_tipi_servizio)" title="Interaction Diagram(richiesta_lista_tipi_servizio)" height="100%" width="100%" 
-        style="display:block; margin-left:auto; margin-right:auto"> 
+        <img src="pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" alt="Interaction Diagram(richiesta_lista_tipi_servizio)" title="Interaction Diagram(richiesta_lista_tipi_servizio)" height="100%" width="100%"
+        style="display:block; margin-left:auto; margin-right:auto">
 
         <p><br><br><br></p>
         <h3 class="section__title">INTERACTIONS DIAGRAM (richiesta_lista_nazioni)</h3>
         <p>
           Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente
-          richiede la lista dei paesi. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento della 
-          classe Api che si occuperà di ottenere i dati, successivamente inizializza le classi <code>ImageNations</code>, 
-          <code>Nations</code> e <code>TypeService</code>. L’esecuzione prosegue poi con la richiesta da parte dell’utente di visualizzare 
-          la lista dei paesi effettuata attraverso l’apposito pulsante. A questo punto la classe <code>Nations</code> ha il compito 
-          di fornire l’oggetto grafico per rappresentare ogni paese mentre <code>MainController</code> si occuperà della visualizzazione 
+          richiede la lista dei paesi. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento della
+          classe Api che si occuperà di ottenere i dati, successivamente inizializza le classi <code>ImageNations</code>,
+          <code>Nations</code> e <code>TypeService</code>. L’esecuzione prosegue poi con la richiesta da parte dell’utente di visualizzare
+          la lista dei paesi effettuata attraverso l’apposito pulsante. A questo punto la classe <code>Nations</code> ha il compito
+          di fornire l’oggetto grafico per rappresentare ogni paese mentre <code>MainController</code> si occuperà della visualizzazione
           completa della lista nei confronti dell’utente.
         </p>
-        <img src="pictures/InteractionsDiagram(richiesta_lista_stati).svg" alt="Interaction Diagram(richiesta_lista_stati)" title="Interaction Diagram(richiesta_lista_stati)" height="100%" width="100%" 
+        <img src="pictures/InteractionsDiagram(richiesta_lista_stati).svg" alt="Interaction Diagram(richiesta_lista_stati)" title="Interaction Diagram(richiesta_lista_stati)" height="100%" width="100%"
         style="display:block; margin-left:auto; margin-right:auto">
 
         <p><br><br><br></p>
         <h3 class="section__title">INTERACTIONS DIAGRAM (ricerca)</h3>
         <p>
           Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente esegue una ricerca
-          completa. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento della classe <code>Api</code> che si occuperà di ottenere 
-          i dati, successivamente inizializza le classi <code>ImageNations</code>, <code>Nations</code> e <code>TypeService</code>. L’esecuzione prosegue poi con la richiesta 
-          da parte dell’utente di eseguire una ricerca, effettuata attraverso l’apposito pulsante. A questo punto la classe <code>Nations</code> ha 
-          il compito di fornire l’oggetto grafico per rappresentare ogni nazione a  <code>MainController</code> che si occuperà della visualizzazione 
-          completa della lista e della gestione delle selezioni da parte dell’utente. Una volta che egli avrà selezionato le opzioni desiderate 
-          e premuto il tasto <i>‘Avanti’</i>, la classe <code>MainController</code> richiederà la lista dei servizi filtrata attraverso i parametri alla classe 
-          <code>ResearchMethods</code>. Una volta ottenuta tale lista <code>MainController</code> presenterà all’utente la lista dei providers disponibili nei paesi selezionati 
-          attendendo che egli li scelga e prema il tasto <i>‘Avanti’</i>. A questo punto verrà effettuata un nuovo filtraggio da parte di ResearchMethods che 
-          fornirà una nuova lista di servizi. L’utente in seguito dovrà scegliere, con le stesse modalità, prima i tipi e poi gli stati del servizio 
+          completa. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento della classe <code>Api</code> che si occuperà di ottenere
+          i dati, successivamente inizializza le classi <code>ImageNations</code>, <code>Nations</code> e <code>TypeService</code>. L’esecuzione prosegue poi con la richiesta
+          da parte dell’utente di eseguire una ricerca, effettuata attraverso l’apposito pulsante. A questo punto la classe <code>Nations</code> ha
+          il compito di fornire l’oggetto grafico per rappresentare ogni nazione a  <code>MainController</code> che si occuperà della visualizzazione
+          completa della lista e della gestione delle selezioni da parte dell’utente. Una volta che egli avrà selezionato le opzioni desiderate
+          e premuto il tasto <i>‘Avanti’</i>, la classe <code>MainController</code> richiederà la lista dei servizi filtrata attraverso i parametri alla classe
+          <code>ResearchMethods</code>. Una volta ottenuta tale lista <code>MainController</code> presenterà all’utente la lista dei providers disponibili nei paesi selezionati
+          attendendo che egli li scelga e prema il tasto <i>‘Avanti’</i>. A questo punto verrà effettuata un nuovo filtraggio da parte di ResearchMethods che
+          fornirà una nuova lista di servizi. L’utente in seguito dovrà scegliere, con le stesse modalità, prima i tipi e poi gli stati del servizio
           che gli interessano e <code>ResearchMethods</code> si occuperà degli ultimi due filtraggi. <br>
           Ora si entra nella parte finale della procedura di ricerca, <code>MainController</code> inizializza la classe <code>Results</code> che gli fornirà la grafica per la rappresentazione
           dei risultati finali all’utente il quale potrà scegliere di tornare, tramite il tasto <i>‘Home’</i>, al menu iniziale per effettuare una nuova ricerca.
         </p>
-        <img src="pictures/InteractionsDiagram(ricerca).svg" alt="Interaction Diagram(ricerca)" title="Interaction Diagram(ricerca)" height="117%" width="122%" 
+        <img src="pictures/InteractionsDiagram(ricerca).svg" alt="Interaction Diagram(ricerca)" title="Interaction Diagram(ricerca)" height="117%" width="122%"
         style="display:block; margin-left:auto; margin-right:auto">
 
         <hr />
@@ -293,13 +293,14 @@
 
 
         <ul>
-          <li><a href="#UC1" style="color: red">Use Case 1: Fornire dati al programma</a></li>
-          <li><a href="#UC2" style="color: red">Use Case 2: Vedere i tipi di servizio</a></li>
-          <li><a href="#UC3" style="color: red">Use Case 3: Vedere i servizi</a></li>
-          <li><a href="#UC4" style="color: red">Use Case 4: Selezionare le nazioni</a></li>
-          <li><a href="#UC5" style="color: red">Use Case 5: Selezionare lista di tipi/provider/stati</a></li>
-          <li><a href="#UC6" style="color: red">Use Case 6: Ricercare con barra di ricerca</a></li>
-          <li><a href="#UC7" style="color: red">Use Case 7: Visualizzare i risultati</a></li>
+          <li><a href="#UC1" style="color: red">Use Case 1: Scegliere configurazione iniziale</a></li>
+          <li><a href="#UC2" style="color: red">Use Case 2: Muovere i blocchi nelle posizioni consentite</a></li>
+          <li><a href="#UC3" style="color: red">Use Case 3: Utilizzare funzione di reset</a></li>
+          <li><a href="#UC4" style="color: red">Use Case 4: Utilizzare funzione di undo</a></li>
+          <li><a href="#UC5" style="color: red">Use Case 5: Richiedere "next best move"</a></li>
+          <li><a href="#UC6" style="color: red">Use Case 6: Visualizzare counter delle mosse effettuate</a></li>
+          <li><a href="#UC7" style="color: red">Use Case 7: Salvare lo stato corrente</a></li>
+          <li><a href="#UC7" style="color: red">Use Case 8: Ripristinare partita salvata</a></li>
         </ul>
         <p></p>
 
@@ -307,40 +308,37 @@
         <table>
           <tr>
             <th><b id="UC1">Use Case 1</b></th>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Scegliere configurazione iniziale</td>
           </tr>
           <tr>
-            <td>Nome dello Use Case
-            <td>Fornire dati al programma</td>
+            <td><b>Attori</b></td>
+            <td>Giocatore</td>
           </tr>
           <tr>
-            <td>Attori</td>
-            <td>EU-Trust Service API</td>
+            <td><b>Descrizione</b></td>
+            <td>Il giocatore può selezionare una tra quattro configurazioni iniziali da cui partire con il gioco</td>
           </tr>
           <tr>
-            <td>Descrizione</td>
-            <td>Vengono ricevuti i dati riguardo ai servizi disponibili, tra i quali il 
-              sistema effettua poi la ricerca (o li visualizza come lista)</td>
+            <td><b>Precondizioni</b></td>
+            <td>Nessuna mossa deve essere stata effettuata, oppure deve essere stato appena indotto un reset della partita</td>
           </tr>
           <tr>
-            <td>Precondizioni</td>
-            <td>L’API deve essere attiva, il computer dell’utente deve 
-              essere connesso a internet</td>
+            <td><b>Scenario Principale</b></td>
+            <td>Viene impostata dal programma la disposizione iniziale dei blocchi scelta dal giocatore</td>
           </tr>
           <tr>
-            <td>Scenario Principale</td>
-            <td> Con una richiesta tramite protocollo HTTP viene fatta una richiesta all’API, che 
-              fornisce l’elenco delle nazioni che offrono i servizi e l’elenco di tutti i 
-              possibili servizi offerti</td>
+            <td><b>Scenario Alternativo</b></td>
+            <td>La partita può iniziare con la configurazione fornita dal programma</td>
           </tr>
           <tr>
-            <td>Scenario Alternativo</td>
-            <td>Non avviene collegamento con API, quindi non si possono scaricare i dati necessari.
-               Viene stampato a schermo l’impossibilità a connettersi.</td>
+            <td><b>Post-Condizioni</b></td>
+            <td>Resettare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
           </tr>
           <tr>
-            <td>Post-Condizioni</td>
-            <td>Vengono ricevuti i dati necessari al programma per vedere la lista di 
-              nazioni/servizi oppure per effettuare una ricerca</td>
+            <td><b>Note</b></td>
+            <td>Valutare se è sempre possibile determinare il "next best move" dalla condizione iniziale</td>
           </tr>
         </table>
       </section>
@@ -350,34 +348,36 @@
       <table>
         <tr>
           <th><b id="UC2">Use Case 2</b></th>
+        <tr>
+          <td><b>Nome dello Use Case</b>
+          <td>Muovere i blocchi nelle posizioni consentite</td>
         </tr>
         <tr>
-          <td>Nome dello Use Case
-          <td>Vedere i tipi di servizio</td>
+          <td><b>Attori</b></td>
+          <td>Giocatore</td>
         </tr>
         <tr>
-          <td>Attori</td>
-          <td> User</td>
+          <td><b>Descrizione</b></td>
+          <td>Il giocatore può muovere i blocchi in uno degli spazi liberi sufficientemente grandi</td>
         </tr>
         <tr>
-          <td>Descrizione</td>
-          <td>Vengono mostrati tutti i tipi di servizio offerti dall’Unione Europea</td>
+          <td><b>Precondizioni</b></td>
+          <td>Deve esistere una posizione consentita, ossia uno spazio libero</td>
         </tr>
         <tr>
-          <td>Precondizioni</td>
-          <td>-</td>
+          <td><b>Scenario Principale</b></td>
+          <td>Il blocco selezionato viene spostato di una posizione nella direzione scelta dal giocatore</td>
         </tr>
         <tr>
-          <td>Scenario Principale</td>
-          <td>L’utente vede a schermo l’elenco dei tipi di servizio 
-            offerti dall’Unione Europea</td>
+          <td><b>Scenario Alternativo</b></td>
+          <td>Il blocco selezionato non si muove</td>
         </tr>
         <tr>
-          <td>Scenario Alternativo</td>
-          <td>-</td>
+          <td><b>Post-Condizioni</b></td>
+          <td>Incrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
         </tr>
         <tr>
-          <td>Post-Condizioni</td>
+          <td><b>Note</b></td>
           <td>-</td>
         </tr>
       </table>
@@ -390,36 +390,40 @@
           <th><b id="UC3">Use Case 3</b></th>
         </tr>
         <tr>
-          <td>Nome dello Use Case
-          <td>Vedere le nazioni</td>
+          <td><b>Nome dello Use Case</b>
+          <td>Utilizzare funzione di reset</td>
         </tr>
         <tr>
-          <td>Attori</td>
-          <td>User</td>
+          <td><b>Attori</b></td>
+          <td>Giocatore</td>
         </tr>
         <tr>
-          <td>Descrizione</td>
-          <td>Vengono mostrati tutti i servizi offerti dall’Unione Europea</td>
+          <td><b>Descrizione</b></td>
+          <td>Il giocatore può resettare la partita attraverso un tasto dedicato. </td>
         </tr>
         <tr>
-          <td>Precondizioni</td>
+          <td><b>Precondizioni</b></td>
           <td>-</td>
         </tr>
         <tr>
-          <td>Scenario Principale</td>
-          <td>L’utente vede a schermo l’elenco dei servizi offerti dall’Unione Europea</td>
+          <td><b>Scenario Principale</b></td>
+          <td>In qualsiasi momento l giocatore può decidere di resettare la partita premendo il tasto "reset". I blocchi devono essere sistemati nella configurazione iniziale</td>
         </tr>
         <tr>
-          <td>Scenario Alternativo</td>
-          <td>-</td>
+          <td><b>Scenario Alternativo</b></td>
+          <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
         </tr>
         <tr>
-          <td>Post-Condizioni</td>
+          <td><b>Post-Condizioni</b></td>
+          <td>Resettare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+        </tr>
+        <tr>
+          <td><b>Note</b></td>
           <td>-</td>
         </tr>
       </table>
 
-      
+
       <p><br></p>
       <!--TABELLA UC4-->
       <table>
@@ -427,38 +431,36 @@
           <th><b id="UC4">Use Case 4</b></th>
         </tr>
         <tr>
-          <td>Nome dello Use Case
-          <td>Selezionare le nazioni</td>
+          <td><b>Nome dello Use Case</b>
+          <td>Utilizzare funzione di undo</td>
         </tr>
         <tr>
-          <td>Attori</td>
-          <td>User</td>
+          <td><b>Attori</b></td>
+          <td>Giocatore</td>
         </tr>
         <tr>
-          <td>Descrizione</td>
-          <td>L’utente si trova in una schermata con un elenco di nazioni</td>
+          <td><b>Descrizione</b></td>
+          <td>Il giocatore può scegliere di annullare una o più mosse, in ordine cronologico dalla più recente alla meno recente, fino alla situazione di partenza</td>
         </tr>
         <tr>
-          <td>Precondizioni</td>
+          <td><b>Precondizioni</b></td>
+          <td>Deve essere stata eseguita almeno una mossa</td>
+        </tr>
+        <tr>
+          <td><b>Scenario Principale</b></td>
+          <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
+        </tr>
+        <tr>
+          <td><b>Scenario Alternativo</b></td>
+          <td>Non viene applicata alcuna modifica allo stato di gioco</td>
+        </tr>
+        <tr>
+          <td><b>Post-Condizioni</b></td>
+          <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+        </tr>
+        <tr>
+          <td><b>Note</b></td>
           <td>-</td>
-        </tr>
-        <tr>
-          <td>Scenario Principale</td>
-          <td>Il cliente seleziona, tramite click, 
-            le nazioni che forniscono i servizi ai quali è interessato</td>
-        </tr>
-        <tr>
-          <td>Scenario Alternativo</td>
-          <td><ul>
-              <li>Viene premuto il pulsante “avanti” senza aver effettuato nessuna selezione, 
-              viene stampato a schermo un messaggio che avverte del problema e non avanza la ricerca</li>
-              <li>Vine premuto il pulsante home, il programma torna al menù iniziale 
-                (senza eseguire ricerca)</li>
-            </ul></td>
-        </tr>
-        <tr>
-          <td>Post-Condizioni</td>
-          <td>Si ottengono i i servizi relativi agli elementi selezionati</td>
         </tr>
       </table>
 
@@ -470,40 +472,36 @@
           <th><b id="UC5">Use Case 5</b></th>
         </tr>
         <tr>
-          <td>Nome dello Use Case
-          <td>selezionare lista di tipi/provider/stati </td>
+          <td><b>Nome dello Use Case</b>
+          <td>Next Best Move</td>
         </tr>
         <tr>
-          <td>Attori</td>
-          <td>User</td>
+          <td><b>Attori</b></td>
+          <td>Giocatore(?)</td>
         </tr>
         <tr>
-          <td>Descrizione</td>
-          <td>L’utente si trova in una schermata con 
-              una lista di checkbox da selezionare, per avanzare con la ricerca</td>
+          <td><b>Descrizione</b></td>
+          <td>Viene fornita la mossa migliore per quella configurazione</td>
         </tr>
         <tr>
-          <td>Precondizioni</td>
-          <td>Devono essere stati selezionati gli elementi precedenti</td>
+          <td><b>Precondizioni</b></td>
+          <td>La partita non deve essere finita</td>
         </tr>
         <tr>
-          <td>Scenario Principale</td>
-          <td> Il cliente seleziona, tramite click, prima provider, poi tipo di servizio, 
-              infine statodei servizi che forniscono i servizi ai quali è interessato</td>
+          <td><b>Scenario Principale</b></td>
+          <td>ogni volta che si clicca su questo bottone un blocco alla volta verrà spostato in modo da ottenere la vittoria nel minor numero di mosse necessarie.</td>
         </tr>
         <tr>
-          <td>Scenario Alternativo</td>
-          <td><ul>
-            <li> Viene premuto il pulsante “avanti” senza aver effettuato nessuna selezione, viene 
-                stampato a schermo un messaggio che avverte del problema e non avanza la ricerca</li>
-                <li>Vine premuto il pulsante home, il programma torna al menù iniziale 
-                  (azzerando i risultati delle ricerche preedentemente eseguite)</li>
-          </ul></td>
+          <td><b>Scenario Alternativo</b></td>
+          <td>Viene visualizzato il messaggio "Mossa non disponibile"</td>
         </tr>
         <tr>
-          <td>Post-Condizioni</td>
-          <td>Si ottengono i i servizi relativi agli elementi selezionati dopo ogni 
-              ricerca</td>
+          <td><b>Post-Condizioni</b></td>
+          <td>Incrementare il counter delle mosse, salvare lo stato corrente, calcolare la next best move</td>
+        </tr>
+        <tr>
+          <td><b>Note</b></td>
+          <td>-</td>
         </tr>
       </table>
 
@@ -515,35 +513,38 @@
           <th><b id="UC6">Use Case 6</b></th>
         </tr>
         <tr>
-          <td>Nome dello Use Case
-          <td>Ricercare con barra di ricerca</td>
+          <td><b>Nome dello Use Case</b>
+          <td>Visualizzare counter delle mosse effettuate</td>
         </tr>
         <tr>
-          <td>Attori</td>
-          <td>User</td>
+          <td><b>Attori</b></td>
+          <td>Giocatore</td>
         </tr>
         <tr>
-          <td>Descrizione</td>
-          <td>La ricerca degli elementi da selezionare viene effettuata cercando l’elemento che 
-            si vuole selezionare con il nome corrispondente su di una barra di ricerca</td>
+          <td><b>Descrizione</b></td>
+          <td>Il giocatore deve ruscire a visualizzare il counter delle mosse</td>
         </tr>
         <tr>
-          <td>Precondizioni</td>
+          <td><b>Precondizioni</b></td>
+          <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte fino a quel
+            momento
+          </td>
+        </tr>
+        <tr>
+          <td><b>Scenario Principale</b></td>
+          <td>Ogni volta che il giocatore fa una mossa, il counter viene aumentato</td>
+        </tr>
+        <tr>
+          <td><b>Scenario Alternativo</b></td>
           <td>-</td>
         </tr>
         <tr>
-          <td>Scenario Principale</td>
-          <td>L’utente preme sulla barra di ricerca e scrive il nome dell’elemento che vuole selezionare, 
-            se questo esiste gli viene mostrato a schermo e può essere selezionato (la ricerca 
-            non è case-sensitive e funziona anche cercando solo una parte della parola)</td>
-        </tr>
-        <tr>
-          <td>Scenario Alternativo</td>
+          <td><b>Post-Condizioni</b></td>
           <td>-</td>
         </tr>
         <tr>
-          <td>Post-Condizioni</td>
-          <td>aSi ottengono gli elementi ricercati, che poi possono essere selezionati</td>
+          <td><b>Note</b></td>
+          <td>-</td>
         </tr>
       </table>
 
@@ -555,36 +556,75 @@
           <th><b id="UC7">Use Case 7</b></th>
         </tr>
         <tr>
-          <td>Nome dello Use Case
-          <td>Visualizzare i risultati</td>
+          <td><b>Nome dello Use Case</b>
+          <td>Salvare lo stato corrente</td>
         </tr>
         <tr>
-          <td>Attori</td>
-          <td>Visualizzare i risultati</td>
+          <td><b>Attori</b></td>
+          <td>Gioco</td>
         </tr>
         <tr>
-          <td>Descrizione</td>
-          <td>Vengono mostrati i risultati delle ricerche</td>
+          <td><b>Descrizione</b></td>
+          <td>Il gioco deve sempre salvare lo stato corrente </td>
         </tr>
         <tr>
-          <td>Precondizioni</td>
-          <td>Devono essere stati selezionati gli elementi precedenti </td>
-        </tr>
-        <tr>
-          <td>Scenario Principale</td>
-          <td>L’utente vede a schermo tutti i servizi (con relativi nazione, provider,
-             tipo di servizio e stato del servizio) che ha tutte le caratteristiche 
-             cercate nelle schermate precedenti</td>
-        </tr>
-        <tr>
-          <td>Scenario Alternativo</td>
+          <td><b>Precondizioni</b></td>
           <td>-</td>
         </tr>
         <tr>
-          <td>Post-Condizioni</td>
+          <td><b>Scenario Principale</b></td>
+          <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), il gioco deve salvare automaticamente lo stato della partita, in modo che, se il programma dovesse essere chiuso, all'avvio successivo lo stato della partita possa essere ripristinato</td>
+        </tr>
+        <tr>
+          <td><b>Scenario Alternativo</b></td>
+          <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
+        </tr>
+        <tr>
+          <td><b>Post-Condizioni</b></td>
           <td>-</td>
+        </tr>
+        <tr>
+          <td><b>Note</b></td>
+          <td>Lo stato corrente deve comprendere la configurazione dei blocchi, le configurazioni iniziali, il counter delle mosse, lo storico delle mosse</td>
         </tr>
       </table>
+
+
+      <p><br></p>
+      <!--TABELLA UC8-->
+      <table>
+        <tr>
+          <td><b>Nome dello Use Case</b>
+          <td>Ripristinare partita salvata</td>
+        </tr>
+        <tr>
+          <td><b>Attori</b></td>
+          <td>Gioco</td>
+        </tr>
+        <tr>
+          <td><b>Descrizione</b></td>
+          <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultimo stato salvato</td>
+        </tr>
+        <tr>
+          <td><b>Precondizioni</b></td>
+          <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa</td>
+        </tr>
+        <tr>
+          <td><b>Scenario Principale</b></td>
+          <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
+        </tr>
+        <tr>
+          <td><b>Scenario Alternativo</b></td>
+          <td>Non viene applicata alcuna modifica allo stato di gioco</td>
+        </tr>
+        <tr>
+          <td><b>Post-Condizioni</b></td>
+          <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+        </tr>
+        <tr>
+          <td><b>Note</b></td>
+          <td>-</td>
+        </tr>
       </section>
 
 
@@ -606,7 +646,7 @@
           <h3 class="section__title" style="text-align: center;">Unit Tests Results</h3>
           <figure>
             <a href="http://danielefrancescato.altervista.org/EUTrustServiceApplication/TestResults.html" target="_blank">
-            <img src="pictures/TestResult.jpg" width="20%" height="20%" title="Unit Tests Results" 
+            <img src="pictures/TestResult.jpg" width="20%" height="20%" title="Unit Tests Results"
               style="display:block; margin-left:auto; margin-right:auto" ></a>
             <figcaption>
               <p style="text-align: center;">Clicca per vedere i risultati degli unit tests</p>
