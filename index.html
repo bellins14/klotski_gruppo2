@@ -1,0 +1,665 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trust-Service Doc</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="scribbler-global.css">
+  <link rel="stylesheet" href="scribbler-doc.css">
+  <link rel="author" href="humans.txt">
+  <link rel="stylesheet" href="pictures_style.css">
+</head>
+
+<body>
+  <div class="doc__bg"></div>
+  <nav class="header">
+    <h1 class="logo">EU Trust-Service <span class="logo__thin">Documentation</span></h1>
+    <ul class="menu" title="torna a repository">
+      <div class="menu__item toggle"><span></span></div>
+      <li class="menu__item"><a href="https://github.com/MatteoTonello/EUTrustServicesApp.git" 
+        class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+    </ul>
+  </nav>
+  <div class="wrapper">
+    <aside class="doc__nav">
+      <ul>
+        <li class="js-btn selected">Manuale</li>
+        <li class="js-btn">Domain Model</li>
+        <li class="js-btn">Design Model</li>
+        <li class="js-btn">Use Cases</li>
+        <li class="js-btn">Test</li>
+        <li class="js-btn">JavaDoc</li>
+      </ul>
+    </aside>
+
+
+
+
+
+    <article class="doc__content">
+      <section class="js-section">
+        <h1 style="font-size: 33px;">Manuale</h1>
+        <h3 class="section__title">Come installare e lanciare il software</h3>
+        <p>
+          Scaricare il programma in formato .jar dal seguente 
+          <a href="https://github.com/MatteoTonello/EUTrustServicesApp/blob/main/out/artifacts/EUTrustServicesApplication_jar/EUTrustServicesApplication.jar" target="_blank" style="color: blue;">link</a>
+             cliccando sul tasto Download. Una volta ottenuto il file, avviarlo con un doppio click per fruire dell'applicazione.
+        </p>
+        <p><i>
+          NB: Per mancanza di supporti alternativi, l'avvio del programma è stato testato solo su SO Windows. 
+          In caso di mancato funzionamento seguendo le indicazioni fornite sopra, si suggerisce di clonare la repository 
+          fornita su GitHub ed eseguire su di un IDE (eg. IntelliJ).
+        </i></p>
+
+        <p>
+          <br>
+        </p>
+
+        <h3 class="section__title">Panoramica su come sono state realizzate le funzionalità richieste <br> e fuzioni
+          riutilizzate da librerie esistenti</h3>
+        <p>
+          Inizialmente abbiamo letto la documentazione dell’API presente al seguente
+          <a href="https://esignature.ec.europa.eu/efda/swagger-ui.html" target="_blank" style="color: blue">link</a>.
+          <br>
+          Abbiamo creato la classe Api per creare il collegamento all’API e raccogliere i dati all’interno di vettori di
+          strighe sui quali poi l’utente avrebbe effettuato la ricerca. Abbiamo poi creato la classe ResearchMethods per
+          effettuare le ricerche all’interno di tali vettori. <br>
+        </p>
+        <p>
+          <u><i>Come viene effettuata la ricerca</i> <br></u>
+          L’elemento all’interno del quale effettuare la ricerca è un vettore di oggetti,
+          da noi chiamati “nodi”, che contiene tutti i possibili servizi con le relative
+          caratteristiche (nazione, provider, tipo di servizio e stato).
+          La ricerca viene effettuata tramite 4 metodi (ognuno per ogni elemento legato al servizio), eseguiti
+          sequenzialmente.
+          Dopo ogni metodo il vettore di nodi contiene solo gli elementi che effettivamente hanno le caratteristiche
+          richieste come parametro, arrivando quindi ad una situazione finale in cui contiene 
+          solo i servizi cercati.
+        </p>
+
+        <p>
+          <u><i>Parte Grafica</i></u><br>
+          Successivamente abbiamo iniziato a definire la parte grafica grazie
+          alla libreria esterna <code>JavaFX</code> e al supporto di SceneBuilder, un software che
+          facilita la creazione di applicazioni GUI tramite un’ interfaccia, restituendo
+          un file in formato FXML da inserire all’interno del progetto.
+        </p>
+        <p>
+          Grazie ad esso abbiamo definito l’ossatura grafica, assegnando poi
+          il comportamento dei vari componenti attraverso le classi
+          e i metodi delle libreria <code>JavaFX</code>. Abbiamo implementato due tipologie di
+          visualizzazione diversa: una per le nazioni (che possono essere associate
+          facilmente all’immagine di una bandiera, rendendo la ricerca più facile
+          e intuitiva) e quello delle altre caratteristiche del servizio, quindi
+          provider, tipo di servizio e stato (solitamente elenchi più numerosi e
+          non associabili a immagini, quindi preferendo un semplice
+          elenco con checkbox).
+        </p>
+        <p>
+          Come ultima cosa, abbiamo sfruttato la funzione di <code>JavaFX</code> che permette di
+          ridefinire la grafica del software utilizzando degli script in linguaggio
+          CSS. Questo è servito per creare un’interfaccia che rendesse più gradevole
+          e fruibile l’utilizzo dell’applicazione all’utente finale.
+        </p>
+        <p>
+            <u><i>Design Pattern</i></u><br>
+            Abbiamo modellato il codice utilizzando i seguenti Design Pattern<br>
+            <p><i>GoF Pattern</i></p>
+            <p>  •<u>Singleton:</u> Abbiamo utilizzato questo design pattern per la classe Api.
+                Infatti una peculiarità della nostra applicazione è quella di eseguire una sola richiesta
+                alla libreria, una scelta che ci ha permesso di rendere più veloce e performante il
+                programma. Inoltre ad assicurare una maggiore sicurezza, dal momento che ne rende
+                possibile l’utilizzo anche nel caso in cui la connessione internet dell’utente venisse
+                a mancare nei momenti successivi all’unica creazione dell’istanza di API.
+            </p>
+            <p>
+                •<u>State:</u> Abbiamo deciso di adottare questo design pattern nella creazione della
+                classe Graphic Nation, ovvero la classe che definisce la struttura grafica di ogni nazione.
+                Questa può assumere due stati: selezionata o deselezionata e, il controllo di questo stato,
+                è determinato semplicemente nella classe stessa, grazie all’uso di una variabile booleana.
+                In base a questo parametro cambia il comportamento dell'oggetto.<br>
+                Anche la classe MainController contiene una variabile che ne definisce lo stato.
+                In questo caso la variabile è un intero perchè l'oggetto si può trovare in 3 stati
+                diversi, riferiti alla ricerca(ricerca per nazione, per provider/tipo servizio/stato
+                servizio, risultato).
+            </p>
+          <p><i>Grasp Pattern</i></p>
+            <p>
+            <u>•Controller:</u> La classe MainController è un Controller, ossia un oggetto che è
+              responsabile della comunicazione tra interfacce e sistema, per mettere in relazione GUI
+              e l'applicazione. Infatti la suddetta classe è incaricata di recepire gli input forniti
+              dall'interfaccia grafica sviluppata sui file FXML ed elaborare i risultati delegando i
+              compiti secondari ad altre classi, per poi ricevere l'output da reintegrare nella schermata
+              visualizzata in base all'azione eseguita.</p>
+            <p><u>•Creator:</u>Abbiamo progettato le classi Nation, TypeOfService e Results secondo
+              le indicazioni del Grasp Pattern Creator. Nel programma le istanze di GraphicNation,
+              LabelType e GraphicResult vengono create unicamente attraverso le rispettive classi
+              Creator.
+            </p>
+        </p>
+
+        <p><br></p>
+        <table id="Librerie">
+            <tr>
+              <th><b>Librerie Esterne utilizzate</b></th>
+              <th><b>Funzioni</b></th>
+            </tr>
+            <tr>
+              <td>org.json</td>
+              <td>per lavorare con i file in formato Json, formato utilizzato dall’API
+                per inviare la risposta.</td>
+            </tr>
+          <tr>
+            <td><code>javafx</code></td>
+            <td>Per definire l’interfaccia grafica del programma</td>
+
+          </tr>
+        </table>
+
+      </section>
+
+
+
+      <p>
+        <br>
+        <br>
+      </p>
+
+
+
+
+      <section class="js-section">
+        <h1 class="section__title" style="font-size: 33px;">Domain Model</h1>
+        <p>
+          L’applicazione riceve i dati dall’ EU-Trust Service API. L’utente può scegliere se 
+          visualizzare la lista delle nazioni, la lista dei tipi di servizio oppure eseguire 
+          una ricerca. In caso eseguisse una ricerca, dopo aver selezionato i parametri desiderati
+           l’applicazione restituisce come risultato un elenco di servizi con i relativi attributi.
+        </p>
+        <!--IMMAGINE -->
+        <img src="pictures/DomainModel.svg" alt="Domain model" title="Domain model" width="100%" height="100%">
+        <hr />
+      </section>
+
+
+
+
+      <p>
+        <br>
+        <br>
+      </p>
+
+
+
+
+
+
+
+
+      <section class="js-section">
+        <h1 class="section__title" style="font-size: 33px;">Design Model</h1>
+        <p>L’applicazione inizia la sua esecuzione dalla classe <code>EUTrustServicesApplication</code>. <br>
+          La <b>parte grafica</b> è affidata alla classe <code> MainController</code>, che ottiene i dati 
+          tramite la classe <code>Api</code>, la quale si occupa anche di definire i metodi per filtrare 
+          i dati selezionati dall’utente e di salvare i servizi in entità della classe Node.<br>
+          Per <b>eseguire la ricerca</b> si utilizzano i metodi definiti nella classe <code>ResearchMethods</code>
+          mentre, in caso di mancata selezione di un parametro da parte dell’utente, viene lanciata l’eccezione
+          <code>NoElementException</code>.
+          La classe <code>ImagesNations</code> fornisce una mappa che associa nome e bandiera delle nazioni alle classi 
+          <code>GraphicResult</code> e <code>GraphicNation</code>. La prima fornisce l’oggetto grafico per rappresentare 
+          il singolo risultato alla classe <code>Results</code>, la quale si occupa della creazione della grafica per 
+          rappresentare i risultati finali. La seconda invece fornisce l’oggetto grafico per rappresentare la singola nazione 
+          alla classe <code>Nations</code>, la quale si occupa di creare la grafica per rappresentare le nazioni e gestisce 
+          la loro selezione. La classe <code>LabelType</code> fornisce l’oggetto grafico per rappresentare il singolo tipo di 
+          servizio alla classe <code>TypeofService</code>, la quale si occupa della gestione del caricamento degli elementi
+          grafici degli oggetti di tipo servizio.<br>
+          Infine, in caso alcuni parametri passati a una funzione siano errati viene lanciata l’eccezione <code>IllegalParameters</code>.</p>
+        <!-- Image Zoom HTML -->   
+        <img id="myImg" src="pictures/DesignModel.svg" alt="Design Model" title="zoom picture" width="100%" height="100%">
+        <div id="myModal" class="modal">
+          <img class="modal-content" id="img01">
+        <div id="caption"></div>
+        </div>
+        <p><br><br><br></p>
+        <h3 class="section__title">INTERACTIONS DIAGRAM (richiesta_lista_tipi_di_servizio)</h3>
+        <p>
+          Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente richiede 
+          la lista dei tipi di servizio offerti dal sito. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento
+          della classe Api che si occuperà di ottenere i dati, successivamente inizializza le classi <code>ImageNations</code>, <code>Nations</code> e <code>TypeService</code>. 
+          L’esecuzione prosegue poi con la richiesta da parte dell’utente di visualizzare la lista completa dei tipi di servizio, effettuata 
+          attraverso l’apposito pulsante. A questo punto la classe <code>TypeofService</code> ha il compito di fornire l’oggetto grafico per rappresentare 
+          ogni tipo di servizio mentre <code>MainController</code> si occuperà della visualizzazione completa della lista nei confronti dell’utente.
+        </p>
+        <img src="pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" alt="Interaction Diagram(richiesta_lista_tipi_servizio)" title="Interaction Diagram(richiesta_lista_tipi_servizio)" height="100%" width="100%" 
+        style="display:block; margin-left:auto; margin-right:auto"> 
+
+        <p><br><br><br></p>
+        <h3 class="section__title">INTERACTIONS DIAGRAM (richiesta_lista_nazioni)</h3>
+        <p>
+          Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente
+          richiede la lista dei paesi. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento della 
+          classe Api che si occuperà di ottenere i dati, successivamente inizializza le classi <code>ImageNations</code>, 
+          <code>Nations</code> e <code>TypeService</code>. L’esecuzione prosegue poi con la richiesta da parte dell’utente di visualizzare 
+          la lista dei paesi effettuata attraverso l’apposito pulsante. A questo punto la classe <code>Nations</code> ha il compito 
+          di fornire l’oggetto grafico per rappresentare ogni paese mentre <code>MainController</code> si occuperà della visualizzazione 
+          completa della lista nei confronti dell’utente.
+        </p>
+        <img src="pictures/InteractionsDiagram(richiesta_lista_stati).svg" alt="Interaction Diagram(richiesta_lista_stati)" title="Interaction Diagram(richiesta_lista_stati)" height="100%" width="100%" 
+        style="display:block; margin-left:auto; margin-right:auto">
+
+        <p><br><br><br></p>
+        <h3 class="section__title">INTERACTIONS DIAGRAM (ricerca)</h3>
+        <p>
+          Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente esegue una ricerca
+          completa. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento della classe <code>Api</code> che si occuperà di ottenere 
+          i dati, successivamente inizializza le classi <code>ImageNations</code>, <code>Nations</code> e <code>TypeService</code>. L’esecuzione prosegue poi con la richiesta 
+          da parte dell’utente di eseguire una ricerca, effettuata attraverso l’apposito pulsante. A questo punto la classe <code>Nations</code> ha 
+          il compito di fornire l’oggetto grafico per rappresentare ogni nazione a  <code>MainController</code> che si occuperà della visualizzazione 
+          completa della lista e della gestione delle selezioni da parte dell’utente. Una volta che egli avrà selezionato le opzioni desiderate 
+          e premuto il tasto <i>‘Avanti’</i>, la classe <code>MainController</code> richiederà la lista dei servizi filtrata attraverso i parametri alla classe 
+          <code>ResearchMethods</code>. Una volta ottenuta tale lista <code>MainController</code> presenterà all’utente la lista dei providers disponibili nei paesi selezionati 
+          attendendo che egli li scelga e prema il tasto <i>‘Avanti’</i>. A questo punto verrà effettuata un nuovo filtraggio da parte di ResearchMethods che 
+          fornirà una nuova lista di servizi. L’utente in seguito dovrà scegliere, con le stesse modalità, prima i tipi e poi gli stati del servizio 
+          che gli interessano e <code>ResearchMethods</code> si occuperà degli ultimi due filtraggi. <br>
+          Ora si entra nella parte finale della procedura di ricerca, <code>MainController</code> inizializza la classe <code>Results</code> che gli fornirà la grafica per la rappresentazione
+          dei risultati finali all’utente il quale potrà scegliere di tornare, tramite il tasto <i>‘Home’</i>, al menu iniziale per effettuare una nuova ricerca.
+        </p>
+        <img src="pictures/InteractionsDiagram(ricerca).svg" alt="Interaction Diagram(ricerca)" title="Interaction Diagram(ricerca)" height="117%" width="122%" 
+        style="display:block; margin-left:auto; margin-right:auto">
+
+        <hr />
+      </section>
+
+
+
+      <p>
+        <br>
+        <br>
+        <br>
+        <br>
+      </p>
+
+
+
+      <section class="js-section">
+        <h1 class="section__title" style="font-size: 33px;">Use Cases</h1>
+
+        <!--IMMAGINE USE CASES-->
+        <img src="pictures/Use_Case_corretto.svg" alt="Use Cases" title="use cases" width="120%" height="120%">
+
+
+        <ul>
+          <li><a href="#UC1" style="color: red">Use Case 1: Fornire dati al programma</a></li>
+          <li><a href="#UC2" style="color: red">Use Case 2: Vedere i tipi di servizio</a></li>
+          <li><a href="#UC3" style="color: red">Use Case 3: Vedere i servizi</a></li>
+          <li><a href="#UC4" style="color: red">Use Case 4: Selezionare le nazioni</a></li>
+          <li><a href="#UC5" style="color: red">Use Case 5: Selezionare lista di tipi/provider/stati</a></li>
+          <li><a href="#UC6" style="color: red">Use Case 6: Ricercare con barra di ricerca</a></li>
+          <li><a href="#UC7" style="color: red">Use Case 7: Visualizzare i risultati</a></li>
+        </ul>
+        <p></p>
+
+        <!--TABELLA UC 1-->
+        <table>
+          <tr>
+            <th><b id="UC1">Use Case 1</b></th>
+          </tr>
+          <tr>
+            <td>Nome dello Use Case
+            <td>Fornire dati al programma</td>
+          </tr>
+          <tr>
+            <td>Attori</td>
+            <td>EU-Trust Service API</td>
+          </tr>
+          <tr>
+            <td>Descrizione</td>
+            <td>Vengono ricevuti i dati riguardo ai servizi disponibili, tra i quali il 
+              sistema effettua poi la ricerca (o li visualizza come lista)</td>
+          </tr>
+          <tr>
+            <td>Precondizioni</td>
+            <td>L’API deve essere attiva, il computer dell’utente deve 
+              essere connesso a internet</td>
+          </tr>
+          <tr>
+            <td>Scenario Principale</td>
+            <td> Con una richiesta tramite protocollo HTTP viene fatta una richiesta all’API, che 
+              fornisce l’elenco delle nazioni che offrono i servizi e l’elenco di tutti i 
+              possibili servizi offerti</td>
+          </tr>
+          <tr>
+            <td>Scenario Alternativo</td>
+            <td>Non avviene collegamento con API, quindi non si possono scaricare i dati necessari.
+               Viene stampato a schermo l’impossibilità a connettersi.</td>
+          </tr>
+          <tr>
+            <td>Post-Condizioni</td>
+            <td>Vengono ricevuti i dati necessari al programma per vedere la lista di 
+              nazioni/servizi oppure per effettuare una ricerca</td>
+          </tr>
+        </table>
+      </section>
+
+      <p><br></p>
+      <!--TABELLA UC2-->
+      <table>
+        <tr>
+          <th><b id="UC2">Use Case 2</b></th>
+        </tr>
+        <tr>
+          <td>Nome dello Use Case
+          <td>Vedere i tipi di servizio</td>
+        </tr>
+        <tr>
+          <td>Attori</td>
+          <td> User</td>
+        </tr>
+        <tr>
+          <td>Descrizione</td>
+          <td>Vengono mostrati tutti i tipi di servizio offerti dall’Unione Europea</td>
+        </tr>
+        <tr>
+          <td>Precondizioni</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Scenario Principale</td>
+          <td>L’utente vede a schermo l’elenco dei tipi di servizio 
+            offerti dall’Unione Europea</td>
+        </tr>
+        <tr>
+          <td>Scenario Alternativo</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Post-Condizioni</td>
+          <td>-</td>
+        </tr>
+      </table>
+
+
+      <p><br></p>
+      <!--TABELLA UC3-->
+      <table>
+        <tr>
+          <th><b id="UC3">Use Case 3</b></th>
+        </tr>
+        <tr>
+          <td>Nome dello Use Case
+          <td>Vedere le nazioni</td>
+        </tr>
+        <tr>
+          <td>Attori</td>
+          <td>User</td>
+        </tr>
+        <tr>
+          <td>Descrizione</td>
+          <td>Vengono mostrati tutti i servizi offerti dall’Unione Europea</td>
+        </tr>
+        <tr>
+          <td>Precondizioni</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Scenario Principale</td>
+          <td>L’utente vede a schermo l’elenco dei servizi offerti dall’Unione Europea</td>
+        </tr>
+        <tr>
+          <td>Scenario Alternativo</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Post-Condizioni</td>
+          <td>-</td>
+        </tr>
+      </table>
+
+      
+      <p><br></p>
+      <!--TABELLA UC4-->
+      <table>
+        <tr>
+          <th><b id="UC4">Use Case 4</b></th>
+        </tr>
+        <tr>
+          <td>Nome dello Use Case
+          <td>Selezionare le nazioni</td>
+        </tr>
+        <tr>
+          <td>Attori</td>
+          <td>User</td>
+        </tr>
+        <tr>
+          <td>Descrizione</td>
+          <td>L’utente si trova in una schermata con un elenco di nazioni</td>
+        </tr>
+        <tr>
+          <td>Precondizioni</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Scenario Principale</td>
+          <td>Il cliente seleziona, tramite click, 
+            le nazioni che forniscono i servizi ai quali è interessato</td>
+        </tr>
+        <tr>
+          <td>Scenario Alternativo</td>
+          <td><ul>
+              <li>Viene premuto il pulsante “avanti” senza aver effettuato nessuna selezione, 
+              viene stampato a schermo un messaggio che avverte del problema e non avanza la ricerca</li>
+              <li>Vine premuto il pulsante home, il programma torna al menù iniziale 
+                (senza eseguire ricerca)</li>
+            </ul></td>
+        </tr>
+        <tr>
+          <td>Post-Condizioni</td>
+          <td>Si ottengono i i servizi relativi agli elementi selezionati</td>
+        </tr>
+      </table>
+
+
+      <p><br></p>
+      <!--TABELLA UC5-->
+      <table>
+        <tr>
+          <th><b id="UC5">Use Case 5</b></th>
+        </tr>
+        <tr>
+          <td>Nome dello Use Case
+          <td>selezionare lista di tipi/provider/stati </td>
+        </tr>
+        <tr>
+          <td>Attori</td>
+          <td>User</td>
+        </tr>
+        <tr>
+          <td>Descrizione</td>
+          <td>L’utente si trova in una schermata con 
+              una lista di checkbox da selezionare, per avanzare con la ricerca</td>
+        </tr>
+        <tr>
+          <td>Precondizioni</td>
+          <td>Devono essere stati selezionati gli elementi precedenti</td>
+        </tr>
+        <tr>
+          <td>Scenario Principale</td>
+          <td> Il cliente seleziona, tramite click, prima provider, poi tipo di servizio, 
+              infine statodei servizi che forniscono i servizi ai quali è interessato</td>
+        </tr>
+        <tr>
+          <td>Scenario Alternativo</td>
+          <td><ul>
+            <li> Viene premuto il pulsante “avanti” senza aver effettuato nessuna selezione, viene 
+                stampato a schermo un messaggio che avverte del problema e non avanza la ricerca</li>
+                <li>Vine premuto il pulsante home, il programma torna al menù iniziale 
+                  (azzerando i risultati delle ricerche preedentemente eseguite)</li>
+          </ul></td>
+        </tr>
+        <tr>
+          <td>Post-Condizioni</td>
+          <td>Si ottengono i i servizi relativi agli elementi selezionati dopo ogni 
+              ricerca</td>
+        </tr>
+      </table>
+
+
+      <p><br></p>
+      <!--TABELLA UC6-->
+      <table>
+        <tr>
+          <th><b id="UC6">Use Case 6</b></th>
+        </tr>
+        <tr>
+          <td>Nome dello Use Case
+          <td>Ricercare con barra di ricerca</td>
+        </tr>
+        <tr>
+          <td>Attori</td>
+          <td>User</td>
+        </tr>
+        <tr>
+          <td>Descrizione</td>
+          <td>La ricerca degli elementi da selezionare viene effettuata cercando l’elemento che 
+            si vuole selezionare con il nome corrispondente su di una barra di ricerca</td>
+        </tr>
+        <tr>
+          <td>Precondizioni</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Scenario Principale</td>
+          <td>L’utente preme sulla barra di ricerca e scrive il nome dell’elemento che vuole selezionare, 
+            se questo esiste gli viene mostrato a schermo e può essere selezionato (la ricerca 
+            non è case-sensitive e funziona anche cercando solo una parte della parola)</td>
+        </tr>
+        <tr>
+          <td>Scenario Alternativo</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Post-Condizioni</td>
+          <td>aSi ottengono gli elementi ricercati, che poi possono essere selezionati</td>
+        </tr>
+      </table>
+
+
+      <p><br></p>
+      <!--TABELLA UC7-->
+      <table>
+        <tr>
+          <th><b id="UC7">Use Case 7</b></th>
+        </tr>
+        <tr>
+          <td>Nome dello Use Case
+          <td>Visualizzare i risultati</td>
+        </tr>
+        <tr>
+          <td>Attori</td>
+          <td>Visualizzare i risultati</td>
+        </tr>
+        <tr>
+          <td>Descrizione</td>
+          <td>Vengono mostrati i risultati delle ricerche</td>
+        </tr>
+        <tr>
+          <td>Precondizioni</td>
+          <td>Devono essere stati selezionati gli elementi precedenti </td>
+        </tr>
+        <tr>
+          <td>Scenario Principale</td>
+          <td>L’utente vede a schermo tutti i servizi (con relativi nazione, provider,
+             tipo di servizio e stato del servizio) che ha tutte le caratteristiche 
+             cercate nelle schermate precedenti</td>
+        </tr>
+        <tr>
+          <td>Scenario Alternativo</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td>Post-Condizioni</td>
+          <td>-</td>
+        </tr>
+      </table>
+      </section>
+
+
+
+      <p>
+        <br>
+        <br>
+        <br>
+        <br>
+      </p>
+
+
+
+      <section class="js-section">
+        <h2 class="section__title" style="font-size: 33px;">Test</h2>
+
+        <div id="contenitore">
+          <div class="contenuto">
+          <h3 class="section__title" style="text-align: center;">Unit Tests Results</h3>
+          <figure>
+            <a href="http://danielefrancescato.altervista.org/EUTrustServiceApplication/TestResults.html" target="_blank">
+            <img src="pictures/TestResult.jpg" width="20%" height="20%" title="Unit Tests Results" 
+              style="display:block; margin-left:auto; margin-right:auto" ></a>
+            <figcaption>
+              <p style="text-align: center;">Clicca per vedere i risultati degli unit tests</p>
+            </figcaption>
+          </figure>
+          <div>
+          <p><br><br></p>
+          <h3 class="section__title" style="text-align: center;">System Tests</h3>
+          <figure>
+            <a href="http://danielefrancescato.altervista.org/EUTrustServiceApplication/System_test.pdf" target="_blank">
+            <img src="pictures/SystemTest.png" width="20%" height="20%" title="System Tests"
+            style="display:block; margin-left:auto; margin-right:auto" ></a>
+            <figcaption>
+              <p style="text-align: center;">Clicca per vedere i System Test</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+
+        <hr />
+      </section>
+
+
+
+
+      <section class="js-section">
+        <h1 style="font-size: 33px;">JavaDoc</h1>
+        <figure>
+          <a href="http://danielefrancescato.altervista.org/EUTrustServiceApplication/javadoc/code.eutrustservicesapplication/module-summary.html" target="_blank">
+          <img src="pictures/JavaDoc.jfif" width="20%" height="20%" title="Java Doc"
+          style="display:block; margin-left:auto; margin-right:auto" ></a>
+          <figcaption>
+            <p style="text-align: center;">Clicca per vedere file JavaDoc</p>
+          </figcaption>
+        </figure>
+
+
+    </article>
+  </div>
+
+
+
+
+
+
+
+
+  <footer class="footer">Gruppo Progetto: Tommaso Terrin, Matteo Tonello,
+    Daniele Francescato, Filippo Franceschini</footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script src="scribbler.js"></script>
+</body>
+
+</html>
