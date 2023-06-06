@@ -2,11 +2,6 @@ package com.klotski.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.control.Alert;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-
-import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
@@ -65,7 +60,7 @@ public class HelperFunctions {
      */
     static void updateHTMLFile(Configuration _configuration) throws IOException {
         ObjectMapper om = new ObjectMapper();
-        String game = "<html>\n" +
+        String game = "<html lang=\"en\">\n" +
                 "<head>\n" +
                 "  <title>Klotski Game</title>\n" +
                 "    <script src=\"https://unpkg.co/klotski/dist/klotski.min.js\"></script>\n" +

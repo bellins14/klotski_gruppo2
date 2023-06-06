@@ -42,9 +42,13 @@ public class Game {
         boolean blockMoved = false;
         double moveAmount = 100;
         switch (dirIdx) {
-            //vedere tasto 0
+            //WASD
+            //58 su
+            //36 sx
+            //54 giu
+            //39 dx
             //DOWN
-            case 19,0 -> {
+            case 19,54 -> {
                 if (block.getLayoutY() + moveAmount + block.getHeight() <= 500
                         && block.isNotOverlapping(blockPane, 0, moveAmount)) {
                     block.setLayoutY(block.getLayoutY() + moveAmount);
@@ -53,7 +57,7 @@ public class Game {
                 }
             }
             //RIGHT
-            case 18,1 -> {
+            case 18,39 -> {
                 if (block.getLayoutX() + moveAmount + block.getWidth() <= 400
                         && block.isNotOverlapping(blockPane, moveAmount, 0)) {
                     block.setLayoutX(block.getLayoutX() + moveAmount);
@@ -62,7 +66,7 @@ public class Game {
                 }
             }
             //UP
-            case 17,2 -> {
+            case 17,58 -> {
                 if (block.getLayoutY() - moveAmount >= 0 && block.isNotOverlapping(blockPane, 0, -moveAmount)) {
                     block.setLayoutY(block.getLayoutY() - moveAmount);
                     this.counter++;
@@ -70,7 +74,7 @@ public class Game {
                 }
             }
             //LEFT
-            case 16,3 -> {
+            case 16,36 -> {
                 if (block.getLayoutX() - moveAmount >= 0 && block.isNotOverlapping(blockPane, -moveAmount, 0)) {
                     block.setLayoutX(block.getLayoutX() - moveAmount);
                     this.counter++;
@@ -107,8 +111,8 @@ public class Game {
     public void nextBestMove(Pane blockPane, Configuration _configuration, Stack<Configuration>log, Text texcounter) throws IOException {
         HelperFunctions.updateHTMLFile(_configuration);
         loadHTMLFile();
-        webEngine.setJavaScriptEnabled(true);
-        webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+        this.webEngine.setJavaScriptEnabled(true);
+        this.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.SUCCEEDED) {
                 // Esegui lo script JavaScript nella pagina caricata nella WebView
                 Object result = webEngine.executeScript("JSON.stringify(window.klotski.solve(window.game))");
@@ -117,6 +121,8 @@ public class Game {
                     //System.out.println(jsonString);
                     int blockIdx = HelperFunctions.extractIntValue(jsonString,"blockIdx");
                     int dirIdx =  HelperFunctions.extractIntValue(jsonString,"dirIdx");
+                    //converto le mosse NBM in valori interi che corrispondo alle frecce della tastiera
+                    dirIdx = (dirIdx == 0) ? 19 : ((dirIdx == 1) ? 18 : ((dirIdx == 2) ? 17 : ((dirIdx == 3) ? 16 : -1)));
                     Node node = blockPane.getChildren().get(blockIdx);
 
                     // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
@@ -149,8 +155,8 @@ public class Game {
                 reader.close();
                 String htmlContent = contentBuilder.toString();
                 WebView webView = new WebView();
-                webEngine = webView.getEngine();
-                webEngine.loadContent(htmlContent); // Carica il contenuto HTML nella WebView
+                this.webEngine = webView.getEngine();
+                this.webEngine.loadContent(htmlContent); // Carica il contenuto HTML nella WebView
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -164,6 +170,7 @@ public class Game {
         log.push(UtilityJackson.deserializeConfiguration());
         UtilityJackson.serializeConfigurationLog(log);
     }
+
 
 
 }

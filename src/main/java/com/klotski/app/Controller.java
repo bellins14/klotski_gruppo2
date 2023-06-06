@@ -11,6 +11,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
 import java.io.*;
 import java.util.Stack;
 import java.util.Timer;
@@ -62,7 +63,7 @@ public class Controller {
         log = UtilityJackson.deserializeConfigurationLog();
         if (log.size() == HelperFunctions.EMPTY_LOG_SIZE) { // Il log è vuoto
             _configuration = new Configuration(selectedConf);
-            game.jacksonSerialize(_configuration,log);
+            game.jacksonSerialize(_configuration, log);
             game.setCounter(0);
 
         } else if (log.size() == HelperFunctions.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
@@ -123,8 +124,8 @@ public class Controller {
                 //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
                 //getCode mi traduce il comando da tastiera in un codice
                 int keyCode = event.getCode().ordinal();
-                game.moveBlock(selectedBlock,blockPane,keyCode,_configuration,log);
-                if(game.checkWin(blockPane)){
+                game.moveBlock(selectedBlock, blockPane, keyCode, _configuration, log);
+                if (game.checkWin(blockPane)) {
                     reset();
                 }
                 textCounter.setText("Moves : " + game.getCounter());
@@ -171,7 +172,7 @@ public class Controller {
             blockPane.getChildren().clear();
             log.clear();
             _configuration = new Configuration(selectedConf);
-            game.jacksonSerialize(_configuration,log);
+            game.jacksonSerialize(_configuration, log);
             initialize();
         }
     }
@@ -189,8 +190,8 @@ public class Controller {
     void nextBestMove() throws IOException {
         if (HelperFunctions.isInternetConnected()) {
             NBM.setDisable(true);
-            game.nextBestMove(blockPane, _configuration, log,textCounter);
-            if(game.checkWin(blockPane)){
+            game.nextBestMove(blockPane, _configuration, log, textCounter);
+            if (game.checkWin(blockPane)) {
                 reset();
             }
             Timer timer = new Timer();
@@ -206,13 +207,14 @@ public class Controller {
             HelperFunctions.setAlert(Alert.AlertType.ERROR, "ERRORE", "NBM NON DISPONBILE, CONNETTITI AD INTERNET");
         }
     }
+
     /**
      * Metodo che gestisce undo.
      */
     @FXML
     void undo() {
         if (game.getCounter() != 0) {
-            game.setCounter(game.getCounter()- 1);
+            game.setCounter(game.getCounter() - 1);
             textCounter.setText("Moves : " + game.getCounter());
             blockPane.getChildren().clear();
             log.pop();
