@@ -295,11 +295,15 @@ table td:first-child {
   width: 70%;
 }
 
+.header {
+  background-color: var(--code-bg-color);
+}
+
 .footer {
   text-align: center;
-  background-color: var(--primary-color-light);
+  background-color: var(--code-bg-color);
   padding: 2rem;
-  color: white;
+  color: var(--primary-color);
 }
 
 @keyframes fadeUp {
