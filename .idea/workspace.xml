@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="sostituzione titolo, use cases e domain model">
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="styled">
+      <change afterPath="$PROJECT_DIR$/docs_gruppo2/imgs/icons/piece3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Class_Diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Class_Diagram.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scribbler-global.css" beforeDir="false" afterPath="$PROJECT_DIR$/scribbler-global.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +88,7 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Documenti\Progetti\klotski_gruppo2\docs_gruppo2\imgs\icons" />
       <recent name="G:\Documenti\Progetti\klotski_gruppo2\docs" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
@@ -181,7 +184,7 @@
       <workItem from="1685000742504" duration="82000" />
       <workItem from="1685084520076" duration="786000" />
       <workItem from="1685087249382" duration="339000" />
-      <workItem from="1686048224496" duration="3869000" />
+      <workItem from="1686048224496" duration="9573000" />
     </task>
     <task id="LOCAL-00001" summary="@Override metodo Tuple.toString()">
       <created>1683212016180</created>
@@ -295,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686051186070</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="modifiche">
+      <created>1686052282169</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1686052282169</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,7 +334,9 @@
     <MESSAGE value="jfoenix library deleted" />
     <MESSAGE value="update" />
     <MESSAGE value="sostituzione titolo, use cases e domain model" />
-    <option name="LAST_COMMIT_MESSAGE" value="sostituzione titolo, use cases e domain model" />
+    <MESSAGE value="modifiche" />
+    <MESSAGE value="styled" />
+    <option name="LAST_COMMIT_MESSAGE" value="styled" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
