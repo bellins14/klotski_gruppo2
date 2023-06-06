@@ -16,22 +16,38 @@ import java.util.Objects;
 public class Piece extends Rectangle {
 
     //colore del Piece
-    private String _image = "img/";
+    private String _imageName;
+    private int _type;
 
 
     /**
-     * Costruttore di default, che inizializza un blocco 100x100.
+     * Costruttore di default, che inizializza un blocco di tipo 0 di dimensioni 100x100.
      */
     public Piece(){
         //richiamo il costruttore del rettangolo
         super();
 
         this.setType(0);
-        this.setImageFill("piece0.png");
+
+        //this.setImageFill("piece0.png");
         //assegno un bordo nero di spessore 3
         this.setStroke(Color.BLACK);
         this.setStrokeWidth(3);
     }
+
+
+    public Piece(int pieceType) {
+        //richiamo il costruttore del rettangolo
+        super();
+
+        this.setType(pieceType);
+
+        //this.setImageFill(imageName);
+        //assegno un bordo nero di spessore 3
+        this.setStroke(Color.BLACK);
+        this.setStrokeWidth(3);
+    }
+
 
 
     /*  Ricordarsi che 100x100 è 100 di larghezza per 100 di altezza, mentre le coordinate del JSON sono
@@ -47,7 +63,7 @@ public class Piece extends Rectangle {
         super();
 
         this.setType(pieceType);
-        this.setImageFill(imageName);
+        //this.setImageFill(imageName);
         //assegno un bordo nero di spessore 3
         this.setStroke(Color.BLACK);
         this.setStrokeWidth(3);
@@ -63,16 +79,16 @@ public class Piece extends Rectangle {
         super();
         if (h == 100 && w == 100) {
             this.setType(0);
-            this.setImageFill("piece0.png");
+            //this.setImageFill("piece0.png");
         } else if (h == 200 && w == 100) {
             this.setType(1);
-            this.setImageFill("piece1.png");
+            //this.setImageFill("piece1.png");
         } else if (h == 100 && w == 200) {
             this.setType(2);
-            this.setImageFill("piece2.png");
+            //this.setImageFill("piece2.png");
         } else if (h == 200 && w == 200) {
             this.setType(3);
-            this.setImageFill("piece3.png");
+            //this.setImageFill("piece3.png");
         }
         this.setStroke(Color.BLACK);
         this.setStrokeWidth(3);
@@ -84,7 +100,12 @@ public class Piece extends Rectangle {
      * Metodo che setta le dimensioni del blocco (e l'id) in base al suo tipo.
      * @param pieceType tipo del blocco.
      */
+
     public void setType(int pieceType){
+
+        this._type = pieceType;
+        this._imageName = "img/piece"+ pieceType +".png";
+
         //in base all'argomento passato capisco quale blocco creare
         switch (pieceType) {
             case 0 -> {
@@ -118,17 +139,22 @@ public class Piece extends Rectangle {
         }
     }
 
+    public int getType(){ return this._type;}
+
 
     /**
      * Metodo per l'impostazione della skin del blocco.
      * @param imageName nome dell'immagine che fa da skin.
      */
+
+        /*
     public void setImageFill(String imageName) {
         setImageName(imageName);
         Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(_image)).toString());
         ImagePattern piecePattern = new ImagePattern(pieceImage);
         this.setFill(piecePattern);
     }
+    */
 
 
     //public Color getColor() {return  this._color;}
@@ -138,17 +164,18 @@ public class Piece extends Rectangle {
      * Metodo per la composizione del path dell'immagine.
      * @param imageName nome dell'immagine.
      */
+    /*
     public void setImageName(String imageName) {
-        this._image += imageName;
+        this._imageName += imageName;
     }
-
+    */
 
     /**
      * Metodo per ritornare l'immagine, non so a cosa serva.
      * @return _image;
      */
     public String getImageName(){
-        return this._image;
+        return this._imageName;
     }
 
 

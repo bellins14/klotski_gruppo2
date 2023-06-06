@@ -69,26 +69,26 @@ class PieceTest {
                     assertEquals("img/piece0.png", piece.getImageName()); //imageName
                     assertEquals(100, piece.getHeight()); //height
                     assertEquals(100, piece.getWidth()); //width
-                    assertEquals("a", piece.getId()); //id
+                    assertEquals("0", piece.getId()); //id
 
                 }
                 case 1 -> {
                     assertEquals("img/piece1.png", piece.getImageName()); //imageName
                     assertEquals(200, piece.getHeight()); //height
                     assertEquals(100, piece.getWidth()); //width
-                    assertEquals("b", piece.getId()); //id
+                    assertEquals("1", piece.getId()); //id
                 }
                 case 2 -> {
                     assertEquals("img/piece2.png", piece.getImageName()); //imageName
                     assertEquals(100, piece.getHeight()); //height
                     assertEquals(200, piece.getWidth()); //width
-                    assertEquals("c", piece.getId()); //id
+                    assertEquals("2", piece.getId()); //id
                 }
                 case 3 -> {
                     assertEquals("img/piece3.png", piece.getImageName()); //imageName
                     assertEquals(200, piece.getHeight()); //height
                     assertEquals(200, piece.getWidth()); //width
-                    assertEquals("d", piece.getId()); //id
+                    assertEquals("3", piece.getId()); //id
                 }
             }
         }

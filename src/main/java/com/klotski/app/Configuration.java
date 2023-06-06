@@ -53,6 +53,9 @@ public class Configuration {
         System.arraycopy(b, 0, blocks, 0, b.length);
     }
 
+    public int getConfiguration() {
+        return _configuration;
+    }
 
     /**
      * Metodo che ritorna l'array di blocchi.
@@ -91,7 +94,7 @@ public class Configuration {
 
         for (int j = 0; j < blocks.length; j++) {
             int pieceType = blockTypes[j];
-            blocks[j] = new Piece(pieceType, "piece"+pieceType+".png");
+            blocks[j] = new Piece(pieceType); //Cambiato, basta mettere il tipo qui e mette il nome giusto all'immagine
             blocks[j].setLayoutX(positions[j].getX());
             blocks[j].setLayoutY(positions[j].getY());
 
@@ -102,7 +105,7 @@ public class Configuration {
 
 
     /**
-     * Metodo che ritorna i tipi dei blocchi che compondono la configurazione designata.
+     * Metodo che ritorna i tipi dei blocchi che compongono la configurazione designata.
      * @param c configurazione designata.
      * @return types array con il tipo di ciascun blocco.
      */
