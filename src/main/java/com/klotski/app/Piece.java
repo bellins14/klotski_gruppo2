@@ -36,6 +36,16 @@ public class Piece extends Rectangle {
     }
 
 
+
+
+    /*  Ricordarsi che 100x100 è 100 di larghezza per 100 di altezza, mentre le coordinate del JSON sono
+        invertite.
+     */
+    /**
+     * Costruttore che inizializza un blocco a partire dal tipo.
+     * @param pieceType tipo del pezzo: 0 = 100x100; 1 = 100x200; 2 = 200x100; 3 = 300x300.
+     */
+
     public Piece(int pieceType) {
         //richiamo il costruttore del rettangolo
         super();
@@ -48,26 +58,6 @@ public class Piece extends Rectangle {
         this.setStrokeWidth(3);
     }
 
-
-
-    /*  Ricordarsi che 100x100 è 100 di larghezza per 100 di altezza, mentre le coordinate del JSON sono
-        invertite.
-     */
-    /**
-     * Costruttore che inizializza un blocco a partire dal tipo e dalla sua skin.
-     * @param pieceType tipo del pezzo: 0 = 100x100; 1 = 100x200; 2 = 200x100; 3 = 300x300.
-     * @param imageName nome dell'immagine che fa da skin al blocco.
-     */
-    public Piece(int pieceType, String imageName) {
-        //richiamo il costruttore del rettangolo
-        super();
-
-        this.setType(pieceType);
-        //this.setImageFill(imageName);
-        //assegno un bordo nero di spessore 3
-        this.setStroke(Color.BLACK);
-        this.setStrokeWidth(3);
-    }
 
 
     /**
@@ -97,7 +87,7 @@ public class Piece extends Rectangle {
 
 
     /**
-     * Metodo che setta le dimensioni del blocco (e l'id) in base al suo tipo.
+     * Metodo che setta tipo, nomeImmagine, dimensioni, e id  in base al tipo.
      * @param pieceType tipo del blocco.
      */
 
@@ -139,6 +129,10 @@ public class Piece extends Rectangle {
         }
     }
 
+    /**
+     * Metodo per ritornare il tipo del blocco
+     * @return _type;
+     */
     public int getType(){ return this._type;}
 
 
