@@ -129,7 +129,7 @@ public class Game {
                     // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
                     // quando viene eseguito `initialize()`
                     moveBlock((Piece) node,blockPane,dirIdx,_configuration,log);
-                    texcounter.setText("Moves "+this.counter);
+                    texcounter.setText("Moves : "+this.counter);
 
                 } // Fine if
             }
