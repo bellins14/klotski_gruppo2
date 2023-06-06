@@ -90,7 +90,7 @@ ActionEvent -up-> Controller : Descrizione del che cosa fa
 ```
 
 # Versione Potenzialmente Successiva
-![](https://github.com/bellins14/klotski_gruppo2/blob/main/docs/imgs/DomainModel(nuovo).png)
+![](imgs/DomainModel(nuovo).png)
 ```plantuml
 @startuml
 skinparam classAttributeIconSize 0
