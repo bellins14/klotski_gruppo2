@@ -3,8 +3,6 @@ package com.klotski.app;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.klotski.app.Configuration;
-import com.klotski.app.Piece;
 
 import java.io.IOException;
 
@@ -23,7 +21,7 @@ public class ConfigurationSerializer extends JsonSerializer<Configuration> {
     @Override
     public void serialize(Configuration config, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         // Estrapoliamo i blocchi da config in modo da poterli serializzare - Per riferimento
-        Piece[] blocks = config.getBlocks();
+        Piece[] blocks = config.get_pieces();
 
         // Inizia l'oggetto JSON Configurazione
         jsonGenerator.writeStartObject();

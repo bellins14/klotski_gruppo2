@@ -60,8 +60,8 @@ public class Piece extends Rectangle {
 
     /**
      * Costruttore con altezza e larghezza.
-     * @param h altezza del blocco.
-     * @param w larghezza del blocco.
+     * @param h altezza del pezzo.
+     * @param w larghezza del pezzo.
      * @throws IllegalArgumentException se le dimensioni non sono valide
      */
     public Piece(int h, int w){
@@ -87,7 +87,7 @@ public class Piece extends Rectangle {
 
     /**
      * Metodo che setta tipo, nomeImmagine, dimensioni, e id del pezzo
-     * @param pieceType tipo del blocco.
+     * @param pieceType tipo del pezzo.
      * @throws IllegalArgumentException se pieceType non è valido (minore di 0 o maggiore di 3)
      */
 
@@ -97,14 +97,14 @@ public class Piece extends Rectangle {
         this._type = pieceType;
         this._imageName = "img/piece"+ pieceType +".png";
 
-        //In base a pieceType decidi quale blocco creare
+        //In base a pieceType decidi quale pezzo creare
         switch (pieceType) {
             case 0 -> {
                 this.setHeight(100);
                 this.setWidth(100);
                 this.setArcHeight(10); //Aggiunge curvatura agli spigoli
                 this.setArcWidth(10); //Aggiunge curvatura agli spigoli
-                this.setId("0"); //Setta l'id del blocco in base al tipo passato
+                this.setId("0"); //Setta l'id del pezzo in base al tipo passato
 
             }
             case 1 -> {
@@ -139,7 +139,7 @@ public class Piece extends Rectangle {
 
 
     /**
-     * Metodo per ritornare il tipo del blocco
+     * Metodo per ritornare il tipo del pezzo
      * @return _type;
      */
     public int getType(){ return this._type;}
@@ -155,8 +155,8 @@ public class Piece extends Rectangle {
 
 
     /**
-     * Metodo che ritorna le dimensioni del blocco in px/100.
-     * @return co array con le dimensioni del blocco [altezza, larghezza].
+     * Metodo che ritorna le dimensioni del pezzo in px/100.
+     * @return co array con le dimensioni del pezzo [altezza, larghezza].
      */
     public int[] getDimensions(){
         int[] co = new int[2];
@@ -167,8 +167,8 @@ public class Piece extends Rectangle {
 
 
     /**
-     * Metodo che ritorna la posizione del blocco in px/100.
-     * @return po array con la posizione del blocco [X, Y].
+     * Metodo che ritorna la posizione del pezzo in px/100.
+     * @return po array con la posizione del pezzo [X, Y].
      */
     public int[] getPosition(){
         int[] po = new int[2];
@@ -178,11 +178,11 @@ public class Piece extends Rectangle {
     }
 
     /**
-     * Metodo che contolla che non ci sia overlapping tra blocchi durante il loro spostamento.
+     * Metodo che contolla che non ci sia overlapping tra pezzi durante il loro spostamento.
      *
-     * @param pane  blocco che si vuole.
-     * @param deltaX quantità di cui si muove il blocco orizzontalmente.
-     * @param deltaY quantità di cui si muove il blocco verticalmente.
+     * @param pane  pezzo che si vuole.
+     * @param deltaX quantità di cui si muove il pezzo orizzontalmente.
+     * @param deltaY quantità di cui si muove il pezzo verticalmente.
      * @return false se si overlappa, true se è tutto a posto.
      */
     public boolean isNotOverlapping(Pane pane, double deltaX, double deltaY) {
@@ -194,12 +194,12 @@ public class Piece extends Rectangle {
         ObservableList<Node> children = pane.getChildren();
         for (Node child : children) {
             // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
-            if (child instanceof Piece otherBlock && child != this) {
+            if (child instanceof Piece otherPiece && child != this) {
                 // Verifica se il nuovo bottone si sovrappone all'altro bottone
-                if (newX + this.getWidth() > otherBlock.getLayoutX() &&
-                        newX < otherBlock.getLayoutX() + otherBlock.getWidth() &&
-                        newY + this.getHeight() > otherBlock.getLayoutY() &&
-                        newY < otherBlock.getLayoutY() + otherBlock.getHeight()) {
+                if (newX + this.getWidth() > otherPiece.getLayoutX() &&
+                        newX < otherPiece.getLayoutX() + otherPiece.getWidth() &&
+                        newY + this.getHeight() > otherPiece.getLayoutY() &&
+                        newY < otherPiece.getLayoutY() + otherPiece.getHeight()) {
                     return false;
                 }
             }
