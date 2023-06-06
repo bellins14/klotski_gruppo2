@@ -31,7 +31,7 @@ public class Game {
     public boolean checkWin(Pane blockPane) {
         Node node = blockPane.getChildren().get(0);
         if (node.getLayoutX() == 100 && node.getLayoutY() == 300) {
-            HelperFunctions.setAlert(Alert.AlertType.INFORMATION, "VITTORIA", "HAI VINTO");
+            Utility.setAlert(Alert.AlertType.INFORMATION, "VITTORIA", "HAI VINTO");
            return  true;
         }
         return  false;
@@ -109,7 +109,7 @@ public class Game {
     }
 
     public void nextBestMove(Pane blockPane, Configuration _configuration, Stack<Configuration>log, Text texcounter) throws IOException {
-        HelperFunctions.updateHTMLFile(_configuration);
+        Utility.updateHTMLFile(_configuration);
         loadHTMLFile();
         this.webEngine.setJavaScriptEnabled(true);
         this.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
@@ -119,8 +119,8 @@ public class Game {
                 if (result instanceof String jsonString) {
                     jsonString = jsonString.substring(1, 35);
                     //System.out.println(jsonString);
-                    int blockIdx = HelperFunctions.extractIntValue(jsonString,"blockIdx");
-                    int dirIdx =  HelperFunctions.extractIntValue(jsonString,"dirIdx");
+                    int blockIdx = Utility.extractIntValue(jsonString,"blockIdx");
+                    int dirIdx =  Utility.extractIntValue(jsonString,"dirIdx");
                     //converto le mosse NBM in valori interi che corrispondo alle frecce della tastiera
                     dirIdx = (dirIdx == 0) ? 19 : ((dirIdx == 1) ? 18 : ((dirIdx == 2) ? 17 : ((dirIdx == 3) ? 16 : -1)));
                     Node node = blockPane.getChildren().get(blockIdx);
@@ -134,7 +134,7 @@ public class Game {
                 } // Fine if
             }
             if (newValue == Worker.State.FAILED) {
-                HelperFunctions.setAlert(Alert.AlertType.ERROR, "ERRORE", "ERRORE NEL CARICAMENTO DELLO SCRIPT");
+                Utility.setAlert(Alert.AlertType.ERROR, "ERRORE", "ERRORE NEL CARICAMENTO DELLO SCRIPT");
             }
         });
     }

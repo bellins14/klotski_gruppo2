@@ -3,8 +3,10 @@ package com.klotski.app;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import java.util.HashMap;
-import java.util.Map;
+// Dichiara a Jackson che questa classe ha un Serializer
+@JsonSerialize(using = ConfigurationSerializer.class)
+// Dichiara a Jackson che questa classe ha un Deserializer
+@JsonDeserialize(using = ConfigurationDeserializer.class)
 
 
 /**
@@ -12,12 +14,10 @@ import java.util.Map;
  * Una configurazione è intesa come l'insieme dei blocchi e relative posizioni che formano
  * il layout di gioco prima di una mossa.
  */
-@JsonSerialize(using = ConfigurationSerializer.class) // Dichiariamo a Jackson che questa classe ha un Serializer
-@JsonDeserialize(using = ConfigurationDeserializer.class) // Dichiariamo a Jackson che questa classe ha un Deserializer
 public class Configuration {
 
-    //configurazione scelta, sarebbe da togliere
-    private final int _configuration;
+    //Numero della configurazione, da 1 a 4 (tra le 4 disponibili)
+    private final int _configurationNumber;
 
     /* Array di piece che rappresenta la configurazione
        Saranno ordinati dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
@@ -29,8 +29,8 @@ public class Configuration {
      * Costruttore di default, che costruisce la prima configurazione.
      */
     public Configuration(){
-        this._configuration = 1;
-        setBlocks(_configuration);
+        this._configurationNumber = 1;
+        setBlocks(_configurationNumber);
     }
 
 
@@ -39,8 +39,8 @@ public class Configuration {
      * @param configuration configurazione designata.
      */
     public Configuration(int configuration){
-        this._configuration = configuration;
-        setBlocks(_configuration);
+        this._configurationNumber = configuration;
+        setBlocks(_configurationNumber);
     }
 
 
@@ -49,12 +49,12 @@ public class Configuration {
      * @param b array di Piece.
      */
     public Configuration(Piece[] b) {
-        _configuration = 0;
+        _configurationNumber = 0;
         System.arraycopy(b, 0, blocks, 0, b.length);
     }
 
     public int getConfiguration() {
-        return _configuration;
+        return _configurationNumber;
     }
 
     /**

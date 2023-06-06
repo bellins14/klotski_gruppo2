@@ -64,12 +64,12 @@ public class Controller {
     public void initialize() {
         // Leggiamo il log
         log = UtilityJackson.deserializeConfigurationLog();
-        if (log.size() == HelperFunctions.EMPTY_LOG_SIZE) { // Il log è vuoto
+        if (log.size() == Utility.EMPTY_LOG_SIZE) { // Il log è vuoto
             _configuration = new Configuration(selectedConf);
             game.jacksonSerialize(_configuration, log);
             game.setCounter(0);
 
-        } else if (log.size() == HelperFunctions.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
+        } else if (log.size() == Utility.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
             _configuration = UtilityJackson.deserializeConfiguration();
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             game.setCounter(0);
@@ -196,7 +196,7 @@ public class Controller {
      */
     @FXML
     void nextBestMove() throws IOException {
-        if (HelperFunctions.isInternetConnected()) {
+        if (Utility.isInternetConnected()) {
             NBM.setDisable(true);
             game.nextBestMove(blockPane, _configuration, log, textCounter);
             if (game.checkWin(blockPane)) {
@@ -212,7 +212,7 @@ public class Controller {
 
             timer.schedule(enableButtonNBM, 500);
         } else {
-            HelperFunctions.setAlert(Alert.AlertType.ERROR, "ERRORE", "NBM NON DISPONBILE, CONNETTITI AD INTERNET");
+            Utility.setAlert(Alert.AlertType.ERROR, "ERRORE", "NBM NON DISPONBILE, CONNETTITI AD INTERNET");
         }
     }
 
@@ -230,7 +230,7 @@ public class Controller {
             UtilityJackson.serializeConfiguration(log.peek());
             initialize();
         } else {
-            HelperFunctions.setAlert(Alert.AlertType.WARNING, "UNDO", "NON HAI SPOSTATO NESSUN BLOCCO!");
+            Utility.setAlert(Alert.AlertType.WARNING, "UNDO", "NON HAI SPOSTATO NESSUN BLOCCO!");
         }
     }
 }

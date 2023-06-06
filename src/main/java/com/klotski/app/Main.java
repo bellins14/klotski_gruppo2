@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.io.*;
 import java.util.Objects;
 
 /**
@@ -37,7 +36,7 @@ public class Main extends Application {
             stage.show();
         }
         catch (Exception e) {
-            HelperFunctions.setAlert(Alert.AlertType.ERROR,"ERRORE NEL CARICAMENTO DELL'APPLICAZIONE",e.toString());
+            Utility.setAlert(Alert.AlertType.ERROR,"ERRORE NEL CARICAMENTO DELL'APPLICAZIONE",e.toString());
         }
 
 

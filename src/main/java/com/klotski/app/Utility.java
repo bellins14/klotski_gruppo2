@@ -9,7 +9,12 @@ import java.net.*;
 /**
  * Classe utilizzata per metodi / varibili ausiliari
  */
-public class HelperFunctions {
+public class Utility {
+
+    private Utility() {
+        // Costruttore privato per evitare l'istanziazione della classe
+    }
+
     static  int EMPTY_LOG_SIZE = 0;
     static int SINGLE_LOG_SIZE = 1;
 
