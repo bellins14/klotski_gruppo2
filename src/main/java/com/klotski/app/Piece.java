@@ -2,58 +2,56 @@ package com.klotski.app;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-import java.util.Objects;
 
 /**
  * Classe che rappresenta un pezzo del Klotski.
  */
 public class Piece extends Rectangle {
 
-    //colore del Piece
+    //Nome dell'immagine associata al pezzo
     private String _imageName;
+
+    //Tipo del pezzo (può variare da 0 a 3)
     private int _type;
 
 
     /**
-     * Costruttore di default, che inizializza un blocco di tipo 0 di dimensioni 100x100.
+     * Costruttore di default, che inizializza un pezzo di tipo 0 di dimensioni 100x100.
      */
     public Piece(){
-        //richiamo il costruttore del rettangolo
+        //Richiama il costruttore di Rectangle
         super();
 
+        //Setta il tipo del pezzo
         this.setType(0);
 
-        //this.setImageFill("piece0.png");
-        //assegno un bordo nero di spessore 3
+        //Setta un bordo nero di spessore 3
         this.setStroke(Color.BLACK);
         this.setStrokeWidth(3);
     }
-
-
 
 
     /*  Ricordarsi che 100x100 è 100 di larghezza per 100 di altezza, mentre le coordinate del JSON sono
         invertite.
      */
     /**
-     * Costruttore che inizializza un blocco a partire dal tipo.
+     * Costruttore che inizializza un pezzo a partire dal tipo.
      * @param pieceType tipo del pezzo: 0 = 100x100; 1 = 100x200; 2 = 200x100; 3 = 300x300.
+     * @throws IllegalArgumentException se pieceType non è valido (minore di 0 o maggiore di 3)
      */
 
-    public Piece(int pieceType) {
-        //richiamo il costruttore del rettangolo
+    public Piece(int pieceType) throws IllegalArgumentException{
+        //Richiama il costruttore di Rectangle
         super();
 
-        this.setType(pieceType);
+        //Setta il tipo del pezzo
+        this.setType(pieceType); //Lancia IllegalArgumentException se pieceType minore di 0 o maggiore di 3
 
-        //this.setImageFill(imageName);
-        //assegno un bordo nero di spessore 3
+        //Setta un bordo nero di spessore 3
         this.setStroke(Color.BLACK);
         this.setStrokeWidth(3);
     }
@@ -64,22 +62,23 @@ public class Piece extends Rectangle {
      * Costruttore con altezza e larghezza.
      * @param h altezza del blocco.
      * @param w larghezza del blocco.
+     * @throws IllegalArgumentException se le dimensioni non sono valide
      */
     public Piece(int h, int w){
         super();
         if (h == 100 && w == 100) {
             this.setType(0);
-            //this.setImageFill("piece0.png");
         } else if (h == 200 && w == 100) {
             this.setType(1);
-            //this.setImageFill("piece1.png");
         } else if (h == 100 && w == 200) {
             this.setType(2);
-            //this.setImageFill("piece2.png");
         } else if (h == 200 && w == 200) {
             this.setType(3);
-            //this.setImageFill("piece3.png");
+        } else { //Se le dimensioni non corrispondono ad un pezzo adeguato lancia eccezioni
+            throw new IllegalArgumentException("Dimensioni non valide");
         }
+
+        //Setta un bordo nero di spessore 3
         this.setStroke(Color.BLACK);
         this.setStrokeWidth(3);
     }
@@ -87,23 +86,26 @@ public class Piece extends Rectangle {
 
 
     /**
-     * Metodo che setta tipo, nomeImmagine, dimensioni, e id  in base al tipo.
+     * Metodo che setta tipo, nomeImmagine, dimensioni, e id del pezzo
      * @param pieceType tipo del blocco.
+     * @throws IllegalArgumentException se pieceType non è valido (minore di 0 o maggiore di 3)
      */
 
     public void setType(int pieceType){
 
+        //Inizializza tipo e nome immagine del pezzo
         this._type = pieceType;
         this._imageName = "img/piece"+ pieceType +".png";
 
-        //in base all'argomento passato capisco quale blocco creare
+        //In base a pieceType decidi quale blocco creare
         switch (pieceType) {
             case 0 -> {
                 this.setHeight(100);
                 this.setWidth(100);
-                this.setArcHeight(10);
-                this.setArcWidth(10);
-                this.setId("0");
+                this.setArcHeight(10); //Aggiunge curvatura agli spigoli
+                this.setArcWidth(10); //Aggiunge curvatura agli spigoli
+                this.setId("0"); //Setta l'id del blocco in base al tipo passato
+
             }
             case 1 -> {
                 this.setHeight(200);
@@ -111,6 +113,7 @@ public class Piece extends Rectangle {
                 this.setArcHeight(10);
                 this.setArcWidth(10);
                 this.setId("1");
+
             }
             case 2 -> {
                 this.setHeight(100);
@@ -118,6 +121,7 @@ public class Piece extends Rectangle {
                 this.setArcHeight(10);
                 this.setArcWidth(10);
                 this.setId("2");
+
             }
             case 3 -> {
                 this.setHeight(200);
@@ -125,9 +129,14 @@ public class Piece extends Rectangle {
                 this.setArcHeight(10);
                 this.setArcWidth(10);
                 this.setId("3");
+
             }
+
+            default -> throw new IllegalArgumentException("pieceType non compreso tra 0 e 3");
+
         }
     }
+
 
     /**
      * Metodo per ritornare il tipo del blocco
@@ -137,36 +146,8 @@ public class Piece extends Rectangle {
 
 
     /**
-     * Metodo per l'impostazione della skin del blocco.
-     * @param imageName nome dell'immagine che fa da skin.
-     */
-
-        /*
-    public void setImageFill(String imageName) {
-        setImageName(imageName);
-        Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(_image)).toString());
-        ImagePattern piecePattern = new ImagePattern(pieceImage);
-        this.setFill(piecePattern);
-    }
-    */
-
-
-    //public Color getColor() {return  this._color;}
-
-
-    /**
-     * Metodo per la composizione del path dell'immagine.
-     * @param imageName nome dell'immagine.
-     */
-    /*
-    public void setImageName(String imageName) {
-        this._imageName += imageName;
-    }
-    */
-
-    /**
-     * Metodo per ritornare l'immagine, non so a cosa serva.
-     * @return _image;
+     * Metodo per ritornare il nome dell'immagine
+     * @return _imageName;
      */
     public String getImageName(){
         return this._imageName;
@@ -199,7 +180,7 @@ public class Piece extends Rectangle {
     /**
      * Metodo che contolla che non ci sia overlapping tra blocchi durante il loro spostamento.
      *
-     * @param pane  blocco che si vuove.
+     * @param pane  blocco che si vuole.
      * @param deltaX quantità di cui si muove il blocco orizzontalmente.
      * @param deltaY quantità di cui si muove il blocco verticalmente.
      * @return false se si overlappa, true se è tutto a posto.
@@ -241,8 +222,5 @@ public class Piece extends Rectangle {
                 (int) (this.getLayoutY() / 100) + ", " +
                 (int) (this.getLayoutX() / 100) + "] },\n";
     }
-
-
-
 
 }
