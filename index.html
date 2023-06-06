@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Klotski Game - Doc</title>
-  <link rel="shortcut icon" type="x-icon" href="docs_gruppo2/imgs/icons/piece3.png">
+  <link rel="shortcut icon" type="x-icon" href="docs_gruppo2/img/icons/piece3.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
   <link rel="stylesheet" href="scribbler-global.css">
@@ -75,7 +75,7 @@
           L’elemento all’interno del quale effettuare la ricerca è un vettore di oggetti,
           da noi chiamati “nodi”, che contiene tutti i possibili servizi con le relative
           caratteristiche (nazione, provider, tipo di servizio e stato).
-          La ricerca viene effettuata tramite 4 metodi (ognuno per ogni elemento legato al servizio), eseguiti
+          La ricerca viene effettuata tramite quattro metodi (ognuno per ogni elemento legato al servizio), eseguiti
           sequenzialmente.
           Dopo ogni metodo il vettore di nodi contiene solo gli elementi che effettivamente hanno le caratteristiche
           richieste come parametro, arrivando quindi ad una situazione finale in cui contiene
@@ -124,7 +124,7 @@
                 è determinato semplicemente nella classe stessa, grazie all’uso di una variabile booleana.
                 In base a questo parametro cambia il comportamento dell'oggetto.<br>
                 Anche la classe MainController contiene una variabile che ne definisce lo stato.
-                In questo caso la variabile è un intero perchè l'oggetto si può trovare in 3 stati
+                In questo caso la variabile è un intero perché l'oggetto si può trovare in tre stati
                 diversi, riferiti alla ricerca(ricerca per nazione, per provider/tipo servizio/stato
                 servizio, risultato).
             </p>
@@ -181,7 +181,7 @@
            l’applicazione restituisce come risultato un elenco di servizi con i relativi attributi.
         </p>
         <!--IMMAGINE -->
-        <img src="docs_gruppo2/imgs/DomainModel.png" alt="Domain model" title="Domain model" width="70%" height="70%">
+        <img src="docs_gruppo2/img/DomainModel.png" alt="Domain model" title="Domain model" width="70%" height="70%">
         <hr />
       </section>
 
@@ -292,18 +292,18 @@
         <h1 class="section__title" style="font-size: 33px;">Use Cases</h1>
 
         <!--IMMAGINE USE CASES-->
-        <img src="docs_gruppo2/imgs/UseCasesDiagram.png" alt="Use Cases" title="use cases" width="527" height="711">
+        <img src="docs_gruppo2/img/UseCasesDiagram.png" alt="Use Cases" title="use cases" width="527" height="711">
 
 
         <ul>
-          <li><a href="#UC1" style="color: red">Use Case 1: Scegliere configurazione iniziale</a></li>
-          <li><a href="#UC2" style="color: red">Use Case 2: Muovere i blocchi nelle posizioni consentite</a></li>
-          <li><a href="#UC3" style="color: red">Use Case 3: Utilizzare funzione di reset</a></li>
-          <li><a href="#UC4" style="color: red">Use Case 4: Utilizzare funzione di undo</a></li>
-          <li><a href="#UC5" style="color: red">Use Case 5: Richiedere "next best move"</a></li>
-          <li><a href="#UC6" style="color: red">Use Case 6: Visualizzare counter delle mosse effettuate</a></li>
-          <li><a href="#UC7" style="color: red">Use Case 7: Salvare lo stato corrente</a></li>
-          <li><a href="#UC7" style="color: red">Use Case 8: Ripristinare partita salvata</a></li>
+          <li><a href="#UC1" style="color: var(--accent-color)">Use Case 1: Scegliere configurazione iniziale</a></li>
+          <li><a href="#UC2" style="color: var(--accent-color)">Use Case 2: Muovere i blocchi nelle posizioni consentite</a></li>
+          <li><a href="#UC3" style="color: var(--accent-color)">Use Case 3: Utilizzare funzione di reset</a></li>
+          <li><a href="#UC4" style="color: var(--accent-color)">Use Case 4: Utilizzare funzione di undo</a></li>
+          <li><a href="#UC5" style="color: var(--accent-color)">Use Case 5: Richiedere "next best move"</a></li>
+          <li><a href="#UC6" style="color: var(--accent-color)">Use Case 6: Visualizzare counter delle mosse effettuate</a></li>
+          <li><a href="#UC7" style="color: var(--accent-color)">Use Case 7: Salvare lo stato corrente</a></li>
+          <li><a href="#UC8" style="color: var(--accent-color)">Use Case 8: Ripristinare partita salvata</a></li>
         </ul>
         <p></p>
 
@@ -525,7 +525,7 @@
         </tr>
         <tr>
           <td><b>Descrizione</b></td>
-          <td>Il giocatore deve ruscire a visualizzare il counter delle mosse</td>
+          <td>Il giocatore deve riuscire a visualizzare il counter delle mosse</td>
         </tr>
         <tr>
           <td><b>Precondizioni</b></td>
@@ -702,7 +702,7 @@
 
 
 
-  <footer class="footer">Authors: Bellinato Tommaso, Bordin Luca, Caon Damiano, Menegale Mattia</footer>
+  <footer class="footer">Authors: Bellinato Tommaso, Brodin Luca, Caon Damiano, Menegale Mattia</footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
   <script src="scribbler.js"></script>

@@ -300,7 +300,7 @@
 
 # Grafo Use Cases
 
-![UseCasesDiagram.png](/docs_gruppo2/imgs/UseCasesDiagram.png)
+![UseCasesDiagram.png](/docs_gruppo2/img/UseCasesDiagram.png)
 
 ```plantuml
 # PlantUML Editor

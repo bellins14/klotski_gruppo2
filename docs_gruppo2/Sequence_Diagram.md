@@ -1,6 +1,6 @@
 # System Sequence Diagram
 
-![SystemSequenceDiagram.png](/docs_gruppo2/imgs/SystemSequenceDiagram.png)
+![SystemSequenceDiagram.png](/docs_gruppo2/img/SystemSequenceDiagram.png)
 
 ```plantuml
 @startuml
@@ -57,7 +57,7 @@ end
 
 # Internal Sequence Diagram
 
-![InternalSequenceDiagram.png](/docs_gruppo2/imgs/InternalSequenceDiagram.png)
+![InternalSequenceDiagram.png](/docs_gruppo2/img/InternalSequenceDiagram.png)
 
 ```plantuml
 @startuml

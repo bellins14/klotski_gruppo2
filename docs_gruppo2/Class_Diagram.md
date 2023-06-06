@@ -1,5 +1,5 @@
 # Class Diagram
-![Class Diagram](imgs/ClassDiagram.png)
+![Class Diagram](img/ClassDiagram.png)
 
 ```plantuml
 @startuml
@@ -90,7 +90,7 @@ ActionEvent -up-> Controller : Descrizione del che cosa fa
 ```
 
 # Versione Potenzialmente Successiva
-![](imgs/DomainModel(nuovo).png)
+![](img/DomainModel(nuovo).png)
 ```plantuml
 @startuml
 skinparam classAttributeIconSize 0
