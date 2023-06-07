@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static com.klotski.app.Constants.*;
-import static com.klotski.app.Constants.PIECE_3_WIDTH;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PieceTest {
@@ -210,12 +209,17 @@ class PieceTest {
             //Crea dei pezzi da testare
             ArrayList<Piece> testingPieces = new ArrayList<>();
 
+            //Crea le rispettive stringhe attese
+            ArrayList<String> expectedStrings = new ArrayList<>();
+
+
             //Pezzo di utilizzo usuale
             Piece usualPiece = new Piece(pieceType);
             usualPiece.setLayoutX(500);
             usualPiece.setLayoutY(600);
 
             testingPieces.add(usualPiece);
+            expectedStrings.add("      {\"shape\": ["+ (int) usualPiece.getHeight()/100 + ", "+ (int) usualPiece.getWidth()/100 +"], " + "\"position\": [6, 5] },\n");
 
             //Pezzo con coordinate alte
             Piece highPiece = new Piece(pieceType);
@@ -223,13 +227,14 @@ class PieceTest {
             highPiece.setLayoutY(10000000);
 
             testingPieces.add(highPiece);
-
+            expectedStrings.add("      {\"shape\": ["+ (int) highPiece.getHeight()/100 + ", "+ (int)highPiece.getWidth()/100 +"], " + "\"position\": [100000, 100000] },\n");
             //Pezzo con coordinate basse
             Piece lowPiece = new Piece(pieceType);
             lowPiece.setLayoutX(-10000000);
             lowPiece.setLayoutY(-10000000);
 
             testingPieces.add(lowPiece);
+            expectedStrings.add("      {\"shape\": ["+ (int) lowPiece.getHeight()/100 + ", "+ (int) lowPiece.getWidth()/100 +"], " + "\"position\": [-100000, -100000] },\n");
 
             //Pezzo di con coordinate miste
             Piece mixPiece = new Piece(pieceType);
@@ -237,14 +242,16 @@ class PieceTest {
             mixPiece.setLayoutY(-600);
 
             testingPieces.add(mixPiece);
-
+            expectedStrings.add("      {\"shape\": ["+ (int) mixPiece.getHeight()/100 + ", "+ (int) mixPiece.getWidth()/100 +"], " + "\"position\": [-6, 4] },\n");
 
             //Pezzo di con coordinate miste invertite di segno
             Piece invertedMixPiece = new Piece(pieceType);
             invertedMixPiece.setLayoutX(-400);
             invertedMixPiece.setLayoutY(+600);
 
+
             testingPieces.add(invertedMixPiece);
+            expectedStrings.add("      {\"shape\": ["+ (int) invertedMixPiece.getHeight()/100 + ", "+ (int) invertedMixPiece.getWidth()/100 +"], " + "\"position\": [6, -4] },\n");
 
             //Pezzo di con coordinate miste elevate
             Piece elevateMixPiece = new Piece(pieceType);
@@ -252,6 +259,8 @@ class PieceTest {
             elevateMixPiece.setLayoutY(-10000000);
 
             testingPieces.add(elevateMixPiece);
+            expectedStrings.add("      {\"shape\": ["+ (int) elevateMixPiece.getHeight()/100 + ", "+ (int) elevateMixPiece.getWidth()/100 +"], " + "\"position\": [-100000, 100000] },\n");
+
 
             //Pezzo di con coordinate miste elevate invertite di segno
             Piece invertedElevateMixPiece = new Piece(pieceType);
@@ -259,6 +268,7 @@ class PieceTest {
             invertedElevateMixPiece.setLayoutY(+10000000);
 
             testingPieces.add(invertedElevateMixPiece);
+            expectedStrings.add("      {\"shape\": ["+ (int) invertedElevateMixPiece.getHeight()/100 + ", "+ (int) invertedElevateMixPiece.getWidth()/100 +"], " + "\"position\": [100000, -100000] },\n");
 
             //Pezzo di con coordinate nulle
             Piece zeroPiece = new Piece(pieceType);
@@ -266,18 +276,15 @@ class PieceTest {
             zeroPiece.setLayoutY(0);
 
             testingPieces.add(zeroPiece);
+            expectedStrings.add("      {\"shape\": ["+ (int) zeroPiece.getHeight()/100 + ", "+ (int) zeroPiece.getWidth()/100 +"], " + "\"position\": [0, 0] },\n");
 
             //Per ogni pezzo dell'array di testing
-            for (Piece testingPiece : testingPieces) {
+            for (int i=0; i<testingPieces.size(); i++) {
+
+                Piece testingPiece = testingPieces.get(i);
+                String expectedString = expectedStrings.get(i);
 
                 //Controlla che toString ritorni la stringa corretta
-
-                String expectedString = "      {\"shape\": [" + (int) (testingPiece.getHeight() / 100) + ", " +
-                        (int) (testingPiece.getWidth() / 100) + "], " +
-                        "\"position\": [" +
-                        (int) (testingPiece.getLayoutY() / 100) + ", " +
-                        (int) (testingPiece.getLayoutX() / 100) + "] },\n";
-
                 assertEquals(expectedString, testingPiece.toString());
 
             }

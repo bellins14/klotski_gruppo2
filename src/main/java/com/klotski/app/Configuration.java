@@ -46,7 +46,8 @@ public class Configuration {
 
 
     /**
-     * Costruttore con array di Piece come parametro. Attenzione che non fa la deep copy dell'array passato.
+     * Costruttore con array di Piece come parametro.
+     * Permette (potenzialmente) di creare una configurazione diversa dalle 4 iniziali previste.
      * @param p array di Piece.
      * @throws IllegalArgumentException se p non contiene esattamente 10 pezzi
      */
@@ -60,13 +61,6 @@ public class Configuration {
     }
 
 
-    /*
-    public int getConfiguration() {
-        return _configurationNumber;
-    }
-    */
-
-
     /**
      * Metodo che ritorna l'array di Piece.
      * @return pieces campo di esemplare.
@@ -74,23 +68,6 @@ public class Configuration {
     public Piece[] getPieces() {
         return _pieces;
     }
-
-
-
-    /**
-     * Metodo che ritorna una deep copy(si spera) dell'array di pieces.
-     * @return blks copia profonda dell'array pieces.
-     */
-    /*
-    public Piece[] getCopyBlocks(){
-        Piece[] blks = new Piece[blocks.length];
-        for(int i = 0; i < blocks.length; i++){
-            // Usiamo il costruttore di blocks(h, w) per fare una copia degli oggietti. In questo modo riusciamo ad aggiungere
-            // oggetti diversi nello stack.
-            blks[i] = new Piece((int)blocks[i].getHeight(), (int)blocks[i].getWidth());
-        }
-        return blks;
-    }*/
 
 
     /**
@@ -107,7 +84,6 @@ public class Configuration {
             _pieces[j] = new Piece(pieceType);
             _pieces[j].setLayoutX(positions[j].getX());
             _pieces[j].setLayoutY(positions[j].getY());
-
         }
     }
 
@@ -118,7 +94,7 @@ public class Configuration {
      * @return types array con il tipo di ciascun pezzo.
      * @throws IllegalArgumentException se configurationNumber non è valido (minore di 1 o maggiore di 4)
      */
-    public int[] getPiecesType(int configurationNumber) {
+    public static int[] getPiecesType(int configurationNumber) {
         int[] types;
 
         //Inserisce in un array il tipo dei pezzi in base al numero della confiugurazione iniziale
@@ -140,7 +116,7 @@ public class Configuration {
      * @return positions array di tuple.
      * @throws IllegalArgumentException se configurationNumber non è valido (minore di 1 o maggiore di 4)
      */
-    public Tuple[] getPositions(int configurationNumber) {
+    public static Tuple[] getPositions(int configurationNumber) {
         int[] positionX;
         int[] positionY;
 
@@ -178,9 +154,9 @@ public class Configuration {
 
 
     /**
-     * Metodo che verifica se la configurazione passata è uguale ad una delle configurazioni.
+     * Metodo che verifica se la configurazione passata è uguale ad una delle 4 configurazioni iniziali.
      * @param conf configurazione da verificare.
-     * @return numero della configurazione corrispondente, altrimenti ritorna 0. //TODO: lanciare eccezione, non 0
+     * @return numero della configurazione corrispondente, altrimenti ritorna 0.
      */
     public static int isInitialConfiguration(Configuration conf){
         Configuration initConf;

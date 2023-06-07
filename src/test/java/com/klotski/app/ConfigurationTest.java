@@ -3,6 +3,10 @@ package com.klotski.app;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
+import static com.klotski.app.Constants.*;
+import static com.klotski.app.Constants.config4PieceY;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConfigurationTest {
@@ -11,7 +15,7 @@ class ConfigurationTest {
 
     //Test del costruttore di default
     @Test
-    public void testDefaultConstructor(){
+    public void testDefaultConstructor() {
         System.out.println("test defaultConstructor");
 
         configuration = new Configuration();
@@ -27,9 +31,9 @@ class ConfigurationTest {
     public void testConfigurationNumberParamConstructor() {
         System.out.println("test configurationNumberParamConstructor");
 
-        //Testa tutte e 4 le possibili configurazioni
-        for (int i = 1; i <= 4; i++) {
-            configuration = new Configuration(i);
+        //Testa tutte e 4 le possibili configurazioni iniziali
+        for (int confNumber = 1; confNumber <= 4; confNumber++) {
+            configuration = new Configuration(confNumber);
 
             //Il test degli attributi inizializzati viene fatto su setPieces
 
@@ -40,26 +44,54 @@ class ConfigurationTest {
 
     //Test input illegali del costruttore con parametro configurationNumber
     @Test
-    public void testConfigurationNumberParamConstructorIllegal(){
+    public void testConfigurationNumberParamConstructorIllegal() {
         System.out.println("test configurationNumberParamConstructorIllegal");
 
-        assertThrows(IllegalArgumentException.class, ()->{configuration = new Configuration(5);});
-        assertThrows(IllegalArgumentException.class, ()->{configuration = new Configuration(0);});
+        assertThrows(IllegalArgumentException.class, () -> {
+            configuration = new Configuration(5);
+        });
+        assertThrows(IllegalArgumentException.class, () -> {
+            configuration = new Configuration(0);
+        });
 
     }
 
     //Test del costruttore con parametro p
+    //TODO: Test con configurazione diversa
     @Test
     public void testPParamConstructor() {
         System.out.println("test pParamConstructor");
 
-        //Testa tutte e 4 le attuali configurazioni iniziali
-        for (int i = 1; i <= 4; i++) {
+        //Testa la creazione di una configurazione dall'array di pezzi di tutte
+        // e 4 le possibili configurazioni iniziali
+        for (int confNumber = 1; confNumber <= 4; confNumber++) {
 
-            Piece [] configPieces = new Piece[10];
-            configuration = new Configuration(i);
+            //Crea un array dei rispettivi pezzi da testare
+            Piece[] testingPieces = new Piece[10];
 
-            //Il test degli attributi inizializzati viene fatto su setPieces
+            int[] piecesType = Configuration.getPiecesType(confNumber);
+            Tuple[] positions = Configuration.getPositions(confNumber);
+
+            for (int j = 0; j < testingPieces.length; j++) {
+                int pieceType = piecesType[j];
+                testingPieces[j] = new Piece(pieceType);
+                testingPieces[j].setLayoutX(positions[j].getX());
+                testingPieces[j].setLayoutY(positions[j].getY());
+            }
+
+            //Crea una configurazione dall'array di pezzi
+            configuration = new Configuration(testingPieces);
+
+            //Salva su una nuova variabile l'array di pezzi della configurazione creata
+            Piece[] createdConfPieces = configuration.getPieces();
+
+            //Per ogni pezzo della configurazione creata
+            for (int i = 0; i < createdConfPieces.length; i++) {
+
+                //Controlla che sia uguale al corrispettivo pezzo dell'array di pezzi da testare
+                assertEquals(testingPieces[i], createdConfPieces[i]);
+
+            }
 
             //Controlla che non ritorni null
             assertNotNull(configuration);
@@ -68,229 +100,93 @@ class ConfigurationTest {
 
     //Test input illegali del costruttore con parametro p
     @Test
-    public void testPParamConstructorIllegal(){
+    public void testPParamConstructorIllegal() {
         System.out.println("test pParamConstructorIllegal");
 
-        assertThrows(IllegalArgumentException.class, ()->{configuration = new Configuration(5);});
-        assertThrows(IllegalArgumentException.class, ()->{configuration = new Configuration(0);});
+        //Crea un array di 11 pezzi
+        Piece[] testingPieces11 = new Piece[11];
+        assertThrows(IllegalArgumentException.class, () -> {
+            configuration = new Configuration(testingPieces11);
+        });
+
+        //Crea un array di 9 pezzi
+        Piece[] testingPieces9 = new Piece[9];
+        assertThrows(IllegalArgumentException.class, () -> {
+            configuration = new Configuration(testingPieces9);
+        });
 
     }
 
-    //Test del metodo getConfiguration
+    //Test del metodo getPieces
     @Test
-    void getConfiguration(){
-        System.out.println("test getConfiguration");
+    void getPieces() {
+        System.out.println("test getPieces");
 
-        //Testa tutte e 4 le possibili configurazioni
+        //Testa tutte e 4 le possibili configurazioni iniziali
         for (int i = 1; i <= 4; i++) {
             configuration = new Configuration(i);
-            assertEquals(i, configuration.getConfiguration());
-        }
-    }
+            Piece[] pieces = configuration.getPieces();
 
-
-    //Test del metodo getBlocksType
-    @Test
-    void getBlocksType() {
-        System.out.println("test getBlocksType");
-
-        configuration = new Configuration();
-
-        //Testa tutte e 4 le possibili configurazioni
-        for (int i = 1; i <= 4; i++) {
-
-            //Prendi i tipi di blocchi della configurazione i
-            int[] blocksType = configuration.getPiecesType(i);
-
-            //In base alla configurazione testa i blocchi di quella configurazione
+            //In base alla configurazione testa i pezzi di quella configurazione
             switch (i) {
                 case 1 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocksType.length; j++) {
+                    //Per ogni pezzo della configurazione
+                    for (int j = 0; j < pieces.length; j++) {
 
                         //Controlla che il tipo sia corretto
-                        assertEquals(config1BlockTypes[j], blocksType[j]);
+                        assertEquals(config1PieceTypes[j], pieces[j].getType());
+
+                        //Controlla che la posizione sia corretta
+                        assertEquals(config1PieceX[j], pieces[j].getLayoutX());
+                        assertEquals(config1PieceY[j], pieces[j].getLayoutY());
                     }
                 }
                 case 2 -> {
                     //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocksType.length; j++) {
+                    for (int j = 0; j < pieces.length; j++) {
 
                         //Controlla che il tipo sia corretto
-                        assertEquals(config2BlockTypes[j], blocksType[j]);
+                        assertEquals(config2PieceTypes[j], pieces[j].getType());
+
+                        //Controlla che la posizione sia corretta
+                        assertEquals(config2PieceX[j], pieces[j].getLayoutX());
+                        assertEquals(config2PieceY[j], pieces[j].getLayoutY());
                     }
                 }
                 case 3 -> {
                     //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocksType.length; j++) {
+                    for (int j = 0; j < pieces.length; j++) {
 
                         //Controlla che il tipo sia corretto
-                        assertEquals(config3BlockTypes[j], blocksType[j]);
+                        assertEquals(config3PieceTypes[j], pieces[j].getType());
+
+                        //Controlla che la posizione sia corretta
+                        assertEquals(config3PieceX[j], pieces[j].getLayoutX());
+                        assertEquals(config3PieceY[j], pieces[j].getLayoutY());
                     }
                 }
                 case 4 -> {
                     //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocksType.length; j++) {
+                    for (int j = 0; j < pieces.length; j++) {
 
                         //Controlla che il tipo sia corretto
-                        assertEquals(config4BlockTypes[j], blocksType[j]);
+                        assertEquals(config4PieceTypes[j], pieces[j].getType());
+
+                        //Controlla che la posizione sia corretta
+                        assertEquals(config4PieceX[j], pieces[j].getLayoutX());
+                        assertEquals(config4PieceY[j], pieces[j].getLayoutY());
                     }
                 }
             }
         }
     }
 
-    //Test input illegali di getBlocksType
+    //Test del metodo setPieces
     @Test
-    @Disabled //NumberFormatException da aggiungere in Configuration
-    public void testGetBlocksTypeIllegal(){
-        System.out.println("test getBlocksTypeIllegal");
+    void setPieces() {
+        System.out.println("test setPieces");
 
-        configuration = new Configuration();
-        assertThrows(NumberFormatException.class, ()->{configuration.getPiecesType(5);});
-
-        configuration = new Configuration(3);
-        assertThrows(NumberFormatException.class, ()->{configuration.getPiecesType(0);});
-    }
-
-    //Test del metodo getPositions
-    @Test
-    void getPositions() {
-        System.out.println("test getPositions");
-
-        configuration = new Configuration();
-
-        //Testa tutte e 4 le possibili configurazioni
-        for (int i = 1; i <= 4; i++) {
-
-            //Prendi le posizioni dei blocchi della configurazione i
-            Tuple[] blocksPositions = configuration.getPositions(i);
-
-            //In base alla configurazione testa i blocchi di quella configurazione
-            switch (i) {
-                case 1 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocksPositions.length; j++) {
-
-                        //Controlla che la posizione sia corretta
-                        assertEquals(config1BlockX[j], blocksPositions[j].getX());
-                        assertEquals(config1BlockY[j], blocksPositions[j].getY());
-                    }
-                }
-                case 2 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocksPositions.length; j++) {
-
-                        //Controlla che la posizione sia corretta
-                        assertEquals(config2BlockX[j], blocksPositions[j].getX());
-                        assertEquals(config2BlockY[j], blocksPositions[j].getY());
-                    }
-                }
-                case 3 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocksPositions.length; j++) {
-
-                        //Controlla che la posizione sia corretta
-                        assertEquals(config3BlockX[j], blocksPositions[j].getX());
-                        assertEquals(config3BlockY[j], blocksPositions[j].getY());
-                    }
-                }
-                case 4 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocksPositions.length; j++) {
-
-                        //Controlla che la posizione sia corretta
-                        assertEquals(config4BlockX[j], blocksPositions[j].getX());
-                        assertEquals(config4BlockY[j], blocksPositions[j].getY());
-                    }
-                }
-            }
-        }
-    }
-
-    //Test input illegali di getPotisions
-    @Test
-    @Disabled //NumberFormatException da aggiungere in Configuration
-    public void testGetPositionsIllegal(){
-        System.out.println("test getPositionsIllegal");
-
-        configuration = new Configuration();
-        assertThrows(NumberFormatException.class, ()->{configuration.getPositions(5);});
-
-        configuration = new Configuration(2);
-        assertThrows(NumberFormatException.class, ()->{configuration.getPositions(0);});
-    }
-
-    //Test del metodo getBlocks
-    @Test
-    void getBlocks() {
-        System.out.println("test getBlocks");
-
-        //Testa tutte e 4 le possibili configurazioni
-        for (int i = 1; i <= 4; i++) {
-            configuration = new Configuration(i);
-            Piece[] blocks = configuration.getPieces();
-
-            //In base alla configurazione testa i blocchi di quella configurazione
-            switch (i) {
-                case 1 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocks.length; j++) {
-
-                        //Controlla che il tipo sia corretto
-                        assertEquals(config1BlockTypes[j], blocks[j].getType());
-
-                        //Controlla che la posizione sia corretta
-                        assertEquals(config1BlockX[j], blocks[j].getLayoutX());
-                        assertEquals(config1BlockY[j], blocks[j].getLayoutY());
-                    }
-                }
-                case 2 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocks.length; j++) {
-
-                        //Controlla che il tipo sia corretto
-                        assertEquals(config2BlockTypes[j], blocks[j].getType());
-
-                        //Controlla che la posizione sia corretta
-                        assertEquals(config2BlockX[j], blocks[j].getLayoutX());
-                        assertEquals(config2BlockY[j], blocks[j].getLayoutY());
-                    }
-                }
-                case 3 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocks.length; j++) {
-
-                        //Controlla che il tipo sia corretto
-                        assertEquals(config3BlockTypes[j], blocks[j].getType());
-
-                        //Controlla che la posizione sia corretta
-                        assertEquals(config3BlockX[j], blocks[j].getLayoutX());
-                        assertEquals(config3BlockY[j], blocks[j].getLayoutY());
-                    }
-                }
-                case 4 -> {
-                    //Per ogni blocco della configurazione
-                    for (int j = 0; j < blocks.length; j++) {
-
-                        //Controlla che il tipo sia corretto
-                        assertEquals(config4BlockTypes[j], blocks[j].getType());
-
-                        //Controlla che la posizione sia corretta
-                        assertEquals(config4BlockX[j], blocks[j].getLayoutX());
-                        assertEquals(config4BlockY[j], blocks[j].getLayoutY());
-                    }
-                }
-            }
-        }
-    }
-
-    //Test del metodo setBlocks con configurazioni previste
-    @Test
-    void setBlocks() {
-        System.out.println("test setBlocks");
-
-        //Effettua 4 test con configurazioni standard:
+        //Test con le 4 configurazioni iniziali:
 
         //Test configuration1.setBlocks(configuration2)
 
@@ -305,11 +201,11 @@ class ConfigurationTest {
         for (int i = 0; i < configuration.getPieces().length; i++) {
 
             //Controlla che il tipo sia corretto
-            assertEquals(config2BlockTypes[i], configuration.getPieces()[i].getType());
+            assertEquals(config2PieceTypes[i], configuration.getPieces()[i].getType());
 
             //Controlla che la posizione sia corretta
-            assertEquals(config2BlockX[i], configuration.getPieces()[i].getLayoutX());
-            assertEquals(config2BlockY[i], configuration.getPieces()[i].getLayoutY());
+            assertEquals(config2PieceX[i], configuration.getPieces()[i].getLayoutX());
+            assertEquals(config2PieceY[i], configuration.getPieces()[i].getLayoutY());
         }
 
 
@@ -326,11 +222,11 @@ class ConfigurationTest {
         for (int i = 0; i < configuration.getPieces().length; i++) {
 
             //Controlla che il tipo sia corretto
-            assertEquals(config3BlockTypes[i], configuration.getPieces()[i].getType());
+            assertEquals(config3PieceTypes[i], configuration.getPieces()[i].getType());
 
             //Controlla che la posizione sia corretta
-            assertEquals(config3BlockX[i], configuration.getPieces()[i].getLayoutX());
-            assertEquals(config3BlockY[i], configuration.getPieces()[i].getLayoutY());
+            assertEquals(config3PieceX[i], configuration.getPieces()[i].getLayoutX());
+            assertEquals(config3PieceY[i], configuration.getPieces()[i].getLayoutY());
         }
 
 
@@ -347,11 +243,11 @@ class ConfigurationTest {
         for (int i = 0; i < configuration.getPieces().length; i++) {
 
             //Controlla che il tipo sia corretto
-            assertEquals(config4BlockTypes[i], configuration.getPieces()[i].getType());
+            assertEquals(config4PieceTypes[i], configuration.getPieces()[i].getType());
 
             //Controlla che la posizione sia corretta
-            assertEquals(config4BlockX[i], configuration.getPieces()[i].getLayoutX());
-            assertEquals(config4BlockY[i], configuration.getPieces()[i].getLayoutY());
+            assertEquals(config4PieceX[i], configuration.getPieces()[i].getLayoutX());
+            assertEquals(config4PieceY[i], configuration.getPieces()[i].getLayoutY());
         }
 
 
@@ -368,11 +264,11 @@ class ConfigurationTest {
         for (int i = 0; i < configuration.getPieces().length; i++) {
 
             //Controlla che il tipo sia corretto
-            assertEquals(config1BlockTypes[i], configuration.getPieces()[i].getType());
+            assertEquals(config1PieceTypes[i], configuration.getPieces()[i].getType());
 
             //Controlla che la posizione sia corretta
-            assertEquals(config1BlockX[i], configuration.getPieces()[i].getLayoutX());
-            assertEquals(config1BlockY[i], configuration.getPieces()[i].getLayoutY());
+            assertEquals(config1PieceX[i], configuration.getPieces()[i].getLayoutX());
+            assertEquals(config1PieceY[i], configuration.getPieces()[i].getLayoutY());
         }
 
         //Test configuration3.setBlocks(configuration2)
@@ -388,28 +284,262 @@ class ConfigurationTest {
         for (int i = 0; i < configuration.getPieces().length; i++) {
 
             //Controlla che il tipo sia corretto
-            assertEquals(config2BlockTypes[i], configuration.getPieces()[i].getType());
+            assertEquals(config2PieceTypes[i], configuration.getPieces()[i].getType());
 
             //Controlla che la posizione sia corretta
-            assertEquals(config2BlockX[i], configuration.getPieces()[i].getLayoutX());
-            assertEquals(config2BlockY[i], configuration.getPieces()[i].getLayoutY());
+            assertEquals(config2PieceX[i], configuration.getPieces()[i].getLayoutX());
+            assertEquals(config2PieceY[i], configuration.getPieces()[i].getLayoutY());
         }
     }
 
-    //Test input illegali di setBlocks
+    //Test input illegali di setPieces
     @Test
-    @Disabled //NumberFormatException da aggiungere in Configuration
-    public void testSetBlocksIllegal(){
-        System.out.println("test setBlocksIllegal");
+    public void testSetPiecesIllegal() {
+        System.out.println("test setPiecesIllegal");
 
         configuration = new Configuration();
-        assertThrows(NumberFormatException.class, ()->{configuration.setPieces(5);});
+        assertThrows(IllegalArgumentException.class, () -> {
+            configuration.setPieces(5);
+        });
 
         configuration = new Configuration(4);
-        assertThrows(NumberFormatException.class, ()->{configuration.setPieces(0);});
+        assertThrows(IllegalArgumentException.class, () -> {
+            configuration.setPieces(0);
+        });
 
     }
+
+    //Test del metodo getPiecesType
+    @Test
+    void getPiecesType() {
+        System.out.println("test getPiecesType");
+
+        //Testa tutte e 4 le possibili configurazioni
+        for (int i = 1; i <= 4; i++) {
+
+            //Prendi i tipi di pezzi della configurazione i
+            int[] piecesType = Configuration.getPiecesType(i);
+
+            //In base alla configurazione testa i blocchi di quella configurazione
+            switch (i) {
+                case 1 -> {
+                    //Per ogni blocco della configurazione
+                    for (int j = 0; j < piecesType.length; j++) {
+
+                        //Controlla che il tipo sia corretto
+                        assertEquals(config1PieceTypes[j], piecesType[j]);
+                    }
+                }
+                case 2 -> {
+                    //Per ogni blocco della configurazione
+                    for (int j = 0; j < piecesType.length; j++) {
+
+                        //Controlla che il tipo sia corretto
+                        assertEquals(config2PieceTypes[j], piecesType[j]);
+                    }
+                }
+                case 3 -> {
+                    //Per ogni blocco della configurazione
+                    for (int j = 0; j < piecesType.length; j++) {
+
+                        //Controlla che il tipo sia corretto
+                        assertEquals(config3PieceTypes[j], piecesType[j]);
+                    }
+                }
+                case 4 -> {
+                    //Per ogni blocco della configurazione
+                    for (int j = 0; j < piecesType.length; j++) {
+
+                        //Controlla che il tipo sia corretto
+                        assertEquals(config4PieceTypes[j], piecesType[j]);
+                    }
+                }
+            }
+        }
+    }
+
+    //Test input illegali di getPiecesType
+    @Test
+    public void testGetPiecesTypeIllegal() {
+        System.out.println("test getPiecesTypeIllegal");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Configuration.getPiecesType(5);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Configuration.getPiecesType(0);
+        });
+    }
+
+    //Test del metodo getPositions
+    @Test
+    void getPositions() {
+        System.out.println("test getPositions");
+
+        //Testa tutte e 4 le possibili configurazioni iniziali
+        for (int i = 1; i <= 4; i++) {
+
+            //Prendi le posizioni dei pezzi della configurazione i
+            Tuple[] piecesPositions = Configuration.getPositions(i);
+
+            //In base alla configurazione testa i blocchi di quella configurazione
+            switch (i) {
+                case 1 -> {
+                    //Per ogni blocco della configurazione
+                    for (int j = 0; j < piecesPositions.length; j++) {
+
+                        //Controlla che la posizione sia corretta
+                        assertEquals(config1PieceX[j], piecesPositions[j].getX());
+                        assertEquals(config1PieceY[j], piecesPositions[j].getY());
+                    }
+                }
+                case 2 -> {
+                    //Per ogni blocco della configurazione
+                    for (int j = 0; j < piecesPositions.length; j++) {
+
+                        //Controlla che la posizione sia corretta
+                        assertEquals(config2PieceX[j], piecesPositions[j].getX());
+                        assertEquals(config2PieceY[j], piecesPositions[j].getY());
+                    }
+                }
+                case 3 -> {
+                    //Per ogni blocco della configurazione
+                    for (int j = 0; j < piecesPositions.length; j++) {
+
+                        //Controlla che la posizione sia corretta
+                        assertEquals(config3PieceX[j], piecesPositions[j].getX());
+                        assertEquals(config3PieceY[j], piecesPositions[j].getY());
+                    }
+                }
+                case 4 -> {
+                    //Per ogni blocco della configurazione
+                    for (int j = 0; j < piecesPositions.length; j++) {
+
+                        //Controlla che la posizione sia corretta
+                        assertEquals(config4PieceX[j], piecesPositions[j].getX());
+                        assertEquals(config4PieceY[j], piecesPositions[j].getY());
+                    }
+                }
+            }
+        }
+    }
+
+    //Test input illegali di getPositions
+    @Test
+    public void testGetPositionsIllegal() {
+        System.out.println("test getPositionsIllegal");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Configuration.getPositions(5);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Configuration.getPositions(0);
+        });
+    }
+
+    //Test del metodo isInitialConfiguration
+    @Test
+    void isInitialConfiguration() {
+        System.out.println("test isInitialConfiguration");
+
+        //Test con le 4 configurazioni iniziali (per ognuna deve restituire il corrispettivo numero)
+        for(int i=1; i<=4; i++) {
+            configuration = new Configuration(i);
+            assertEquals(i, Configuration.isInitialConfiguration(configuration));
+        }
+
+        //TODO: Test con configurazione diversa
+        //Test con configurazione diversa da quelle iniziali (per ognuna deve restituire il corrispettivo numero)
+           // configuration = new Configuration();
+           // assertEquals(0, Configuration.isInitialConfiguration(configuration));
+    }
+
+    //Test del metodo toString()
+    @Test
+    void testToString() {
+        System.out.println("test toString");
+
+        //Testa coordinate specifiche (dei pezzi), con ogni tipo di pezzo
+        for (int pieceType = 0; pieceType <= 3; pieceType++) {
+
+            //Crea dei pezzi da testare
+            ArrayList<Piece> testingPieces = new ArrayList<>();
+
+            //Pezzo di utilizzo usuale
+            Piece usualPiece = new Piece(pieceType);
+            usualPiece.setLayoutX(500);
+            usualPiece.setLayoutY(600);
+
+            testingPieces.add(usualPiece);
+
+            //Pezzo con coordinate alte
+            Piece highPiece = new Piece(pieceType);
+            highPiece.setLayoutX(10000000);
+            highPiece.setLayoutY(10000000);
+
+            testingPieces.add(highPiece);
+
+            //Pezzo con coordinate basse
+            Piece lowPiece = new Piece(pieceType);
+            lowPiece.setLayoutX(-10000000);
+            lowPiece.setLayoutY(-10000000);
+
+            testingPieces.add(lowPiece);
+
+            //Pezzo di con coordinate miste
+            Piece mixPiece = new Piece(pieceType);
+            mixPiece.setLayoutX(+400);
+            mixPiece.setLayoutY(-600);
+
+            testingPieces.add(mixPiece);
+
+
+            //Pezzo di con coordinate miste invertite di segno
+            Piece invertedMixPiece = new Piece(pieceType);
+            invertedMixPiece.setLayoutX(-400);
+            invertedMixPiece.setLayoutY(+600);
+
+            testingPieces.add(invertedMixPiece);
+
+            //Pezzo di con coordinate miste elevate
+            Piece elevateMixPiece = new Piece(pieceType);
+            elevateMixPiece.setLayoutX(+10000000);
+            elevateMixPiece.setLayoutY(-10000000);
+
+            testingPieces.add(elevateMixPiece);
+
+            //Pezzo di con coordinate miste elevate invertite di segno
+            Piece invertedElevateMixPiece = new Piece(pieceType);
+            invertedElevateMixPiece.setLayoutX(-10000000);
+            invertedElevateMixPiece.setLayoutY(+10000000);
+
+            testingPieces.add(invertedElevateMixPiece);
+
+            //Pezzo di con coordinate nulle
+            Piece zeroPiece = new Piece(pieceType);
+            zeroPiece.setLayoutX(0);
+            zeroPiece.setLayoutY(0);
+
+            testingPieces.add(zeroPiece);
+
+            //Per ogni pezzo dell'array di testing
+            for (Piece testingPiece : testingPieces) {
+
+                //Controlla che toString ritorni la stringa corretta
+
+                String expectedString = "      {\"shape\": [" + (int) (testingPiece.getHeight() / 100) + ", " +
+                        (int) (testingPiece.getWidth() / 100) + "], " +
+                        "\"position\": [" +
+                        (int) (testingPiece.getLayoutY() / 100) + ", " +
+                        (int) (testingPiece.getLayoutX() / 100) + "] },\n";
+
+                assertEquals(expectedString, testingPiece.toString());
+
+            }
+        }
+    }
+
 }
-
-
 
