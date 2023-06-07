@@ -21,7 +21,7 @@ public class ConfigurationSerializer extends JsonSerializer<Configuration> {
     @Override
     public void serialize(Configuration config, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         // Estrapoliamo i blocchi da config in modo da poterli serializzare - Per riferimento
-        Piece[] blocks = config.get_pieces();
+        Piece[] blocks = config.getPieces();
 
         // Inizia l'oggetto JSON Configurazione
         jsonGenerator.writeStartObject();

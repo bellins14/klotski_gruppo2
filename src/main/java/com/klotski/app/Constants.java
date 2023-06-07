@@ -13,18 +13,23 @@ public class Constants {
     //Piece 0
     public static final int PIECE_0_HEIGHT = 100;
     public static final int PIECE_0_WIDTH = 100;
+    public static final String PIECE_0_IMAGE_NAME = "img/piece0.png";
+
 
     //Piece 1
     public static final int PIECE_1_HEIGHT = 200;
     public static final int PIECE_1_WIDTH = 100;
+    public static final String PIECE_1_IMAGE_NAME = "img/piece1.png";
 
     //Piece 2
     public static final int PIECE_2_HEIGHT = 100;
     public static final int PIECE_2_WIDTH = 200;
+    public static final String PIECE_2_IMAGE_NAME = "img/piece2.png";
 
     //Piece 3
     public static final int PIECE_3_HEIGHT = 200;
     public static final int PIECE_3_WIDTH = 200;
+    public static final String PIECE_3_IMAGE_NAME = "img/piece3.png";
 
 
 

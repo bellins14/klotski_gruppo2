@@ -29,7 +29,7 @@ public class Configuration {
     public Configuration(){
 
         //Posiziona i pezzi come nella configurazione numero 1
-        set_pieces(1);
+        setPieces(1);
     }
 
 
@@ -41,7 +41,7 @@ public class Configuration {
     public Configuration(int configurationNumber) throws IllegalArgumentException{
 
         //Posiziona i pezzi come nella configurazione numero configurationNumber
-        set_pieces(configurationNumber);
+        setPieces(configurationNumber);
     }
 
 
@@ -71,7 +71,7 @@ public class Configuration {
      * Metodo che ritorna l'array di Piece.
      * @return pieces campo di esemplare.
      */
-    public Piece[] get_pieces() {
+    public Piece[] getPieces() {
         return _pieces;
     }
 
@@ -98,7 +98,7 @@ public class Configuration {
      * @param confNumber configurazione designata per i pezzi.
      * @throws IllegalArgumentException se confNumber non è valido (minore di 1 o maggiore di 4)
      */
-    public void set_pieces(int confNumber) throws IllegalArgumentException{
+    public void setPieces(int confNumber) throws IllegalArgumentException{
         int[] piecesType = getPiecesType(confNumber);
         Tuple[] positions = getPositions(confNumber);
 

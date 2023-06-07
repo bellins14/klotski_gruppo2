@@ -83,7 +83,7 @@ public class Controller {
             textCounter.setText("Moves : " + game.getCounter());
         }
 
-        Piece[] blocks = _configuration.get_pieces();
+        Piece[] blocks = _configuration.getPieces();
 
 
         // Da non toccare

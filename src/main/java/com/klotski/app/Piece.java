@@ -87,31 +87,35 @@ public class Piece extends Rectangle {
 
     public void setType(int pieceType){
 
-        //Inizializza tipo e nome immagine del pezzo
+        //Inizializza il tipo del pezzo
         this._type = pieceType;
-        this._imageName = "img/piece"+ pieceType +".png";
 
         //In base a pieceType decidi quale pezzo creare
         switch (pieceType) {
             case 0 -> {
-                this.setHeight(PIECE_0_HEIGHT); //Setta l'altezza del pezzo in base al tipo passato
-                this.setWidth(PIECE_0_WIDTH); //Setta la larghezza del pezzo in base al tipo passato
-                this.setId("0"); //Setta l'id del pezzo in base al tipo passato
+                this._imageName = PIECE_0_IMAGE_NAME; //Inizializza il nome dell'immagine in base al tipo passato
+                this.setHeight(PIECE_0_HEIGHT); //Inizializza l'altezza del pezzo in base al tipo passato
+                this.setWidth(PIECE_0_WIDTH); //Inizializza la larghezza del pezzo in base al tipo passato
+                this.setId("0"); //Inizializza l'id del pezzo in base al tipo passato
+
 
             }
             case 1 -> {
+                this._imageName = PIECE_1_IMAGE_NAME;
                 this.setHeight(PIECE_1_HEIGHT);
                 this.setWidth(PIECE_1_WIDTH);
                 this.setId("1");
 
             }
             case 2 -> {
+                this._imageName = PIECE_2_IMAGE_NAME;
                 this.setHeight(PIECE_2_HEIGHT);
                 this.setWidth(PIECE_2_WIDTH);
                 this.setId("2");
 
             }
             case 3 -> {
+                this._imageName = PIECE_3_IMAGE_NAME;
                 this.setHeight(PIECE_3_HEIGHT);
                 this.setWidth(PIECE_3_WIDTH);
                 this.setId("3");
@@ -147,28 +151,6 @@ public class Piece extends Rectangle {
     }
 
 
-    /**
-     * Metodo che ritorna le dimensioni del pezzo in px/100.
-     * @return co array con le dimensioni del pezzo [altezza, larghezza].
-     */
-    public int[] getDimensions(){
-        int[] co = new int[2];
-        co[0] = (int)this.getHeight()/100;
-        co[1] = (int)this.getWidth()/100;
-        return co;
-    }
-
-
-    /**
-     * Metodo che ritorna la posizione del pezzo in px/100.
-     * @return po array con la posizione del pezzo [X, Y].
-     */
-    public int[] getPosition(){
-        int[] po = new int[2];
-        po[0] = (int)this.getLayoutX()/100;
-        po[1] = (int)this.getLayoutY()/100;
-        return po;
-    }
 
     /**
      * Metodo che contolla che non ci sia overlapping tra pezzi durante il loro spostamento.

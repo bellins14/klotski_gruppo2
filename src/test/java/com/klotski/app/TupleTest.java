@@ -1,13 +1,12 @@
 package com.klotski.app;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TupleTest {
     private Tuple tuple;
 
-    // Array di coppie di interi casuali
+    // Array di coppie di posizioni
     int[][] low_pairs = new int[][]{{1, 3}, {-2, -1}, {-10, 3}, {2, -1}, {0, -1}, {-1,0}};
     int[][] high_pairs = new int[][]{{100000000, 300000000}, {-200000000, -100000000}, {-100000000, 300000000}, {200000000, -100000000}, {0, -100000000}, {-100000000,0}};
     int[][] generic_pairs = new int[][]{{1, 2140}, {-685, -504}, {-3, 44}, {546, -21}, {0, -29409}, {-6758,0}};
@@ -20,7 +19,6 @@ class TupleTest {
         for (int[] pair : generic_pairs) {
             //Crea un'istanza di Tuple
             tuple = new Tuple(pair[0], pair[1]);
-            System.out.println("tuple.x=" + tuple.getX() + ", tuple.y=" + tuple.getY()); //debug
 
             // Chiamata del metodo da testare
             int result = tuple.getX();
@@ -38,7 +36,6 @@ class TupleTest {
         for (int[] pair : generic_pairs) {
             //Crea un'istanza di Tuple
             tuple = new Tuple(pair[0], pair[1]);
-            System.out.println("tuple.x=" + tuple.getX() + ", tuple.y=" + tuple.getY()); //debug
 
             // Chiamata del metodo da testare
             int result = tuple.getY();
@@ -56,7 +53,6 @@ class TupleTest {
         for (int[] pair : low_pairs) {
             //Crea un'istanza di Tuple
             tuple = new Tuple(pair[0], pair[1]);
-            System.out.println("tuple.x=" + tuple.getX() + ", tuple.y=" + tuple.getY()); //debug
 
             // Chiamata del metodo da testare
             int result = tuple.getX();
@@ -74,7 +70,6 @@ class TupleTest {
         for (int[] pair : low_pairs) {
             //Crea un'istanza di Tuple
             tuple = new Tuple(pair[0], pair[1]);
-            System.out.println("tuple.x=" + tuple.getX() + ", tuple.y=" + tuple.getY()); //debug
 
             // Chiamata del metodo da testare
             int result = tuple.getY();
@@ -92,7 +87,6 @@ class TupleTest {
         for (int[] pair : high_pairs) {
             //Crea un'istanza di Tuple
             tuple = new Tuple(pair[0], pair[1]);
-            System.out.println("tuple.x=" + tuple.getX() + ", tuple.y=" + tuple.getY()); //debug
 
             // Chiamata del metodo da testare
             int result = tuple.getX();
@@ -110,7 +104,6 @@ class TupleTest {
         for (int[] pair : high_pairs) {
             //Crea un'istanza di Tuple
             tuple = new Tuple(pair[0], pair[1]);
-            System.out.println("tuple.x=" + tuple.getX() + ", tuple.y=" + tuple.getY()); //debug
 
             // Chiamata del metodo da testare
             int result = tuple.getY();
