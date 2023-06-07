@@ -134,24 +134,27 @@ window.addEventListener('load', function(){
 //SCRIPT PER CLICK SULLE IMAGINI
 // Get the modal
 var modal = document.getElementById('myModal');
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById('myImg');
+// Get all the images with the class "myImg"
+var images = document.querySelectorAll('.myImg');
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
-img.onclick = function(){
+
+// Loop through each image and attach the click event
+images.forEach(function(img) {
+  img.onclick = function() {
     modal.style.display = "block";
     modalImg.src = this.src;
     modalImg.alt = this.alt;
     captionText.innerHTML = this.alt;
-}
- 
+  }
+});
+
 // When the user clicks on <span> (x), close the modal
 modal.onclick = function() {
-    img01.className += " out";
-    setTimeout(function() {
-       modal.style.display = "none";
-       img01.className = "modal-content";
-     }, 400);
-    
- }  
+  img01.className += " out";
+  setTimeout(function() {
+    modal.style.display = "none";
+    img01.className = "modal-content";
+  }, 400);
+}
    

@@ -30,7 +30,7 @@
       <ul>
         <li class="js-btn selected">Manuale</li>
         <li class="js-btn">Domain Model</li>
-        <li class="js-btn">Design Model</li>
+        <li class="js-btn">Design Class Model</li>
         <li class="js-btn">Use Cases</li>
         <li class="js-btn">Test</li>
         <li class="js-btn">JavaDoc</li>
@@ -50,11 +50,11 @@
           <a href="https://github.com/MatteoTonello/EUTrustServicesApp/blob/main/out/artifacts/EUTrustServicesApplication_jar/EUTrustServicesApplication.jar" target="_blank" style="color: blue;">link</a>
              cliccando sul tasto Download. Una volta ottenuto il file, avviarlo con un doppio click per fruire dell'applicazione.
         </p>
-        <p><i>
+        <!-- <p><i>
           NB: Per mancanza di supporti alternativi, l'avvio del programma è stato testato solo su SO Windows.
           In caso di mancato funzionamento seguendo le indicazioni fornite sopra, si suggerisce di clonare la repository
           fornita su GitHub ed eseguire su di un IDE (eg. IntelliJ).
-        </i></p>
+        </i></p> -->
 
         <p>
           <br>
@@ -181,7 +181,7 @@
            l’applicazione restituisce come risultato un elenco di servizi con i relativi attributi.
         </p>
         <!--IMMAGINE -->
-        <img src="docs_gruppo2/img/DomainModel.png" alt="Domain model" title="Domain model" width="70%" height="70%">
+        <img class="myImg" src="docs_gruppo2/img/DomainModel.png" alt="Domain model" title="Domain model" width="70%" height="70%">
         <hr />
       </section>
 
@@ -202,7 +202,7 @@
 
 
       <section class="js-section">
-        <h1 class="section__title" style="font-size: 33px;">Design Model</h1>
+        <h1 class="section__title" style="font-size: 33px;">Design Class Model</h1>
         <p>L’applicazione inizia la sua esecuzione dalla classe <code>EUTrustServicesApplication</code>. <br>
           La <b>parte grafica</b> è affidata alla classe <code>MainController</code>, che ottiene i dati
           tramite la classe <code>Api</code>, la quale si occupa anche di definire i metodi per filtrare
@@ -219,14 +219,13 @@
           servizio alla classe <code>TypeofService</code>, la quale si occupa della gestione del caricamento degli elementi
           grafici degli oggetti di tipo servizio.<br>
           Infine, in caso alcuni parametri passati a una funzione siano errati viene lanciata l’eccezione <code>IllegalParameters</code>.</p>
+        <img class="myImg" src="docs_gruppo2/img/ClassDiagram(nuovo).png" alt="Design Class Model" title="zoom picture" width="100%" height="100%">
         <!-- Image Zoom HTML -->
-        <img id="myImg" src="pictures/DesignModel.svg" alt="Design Model" title="zoom picture" width="100%" height="100%">
-        <!--
         <div id="myModal" class="modal">
-          <img class="modal-content" id="img01">
+          <img class="modal-content" id="img01" alt="img01">
         <div id="caption"></div>
         </div>
-        -->
+
         <p><br><br><br></p>
         <h3 class="section__title">INTERACTIONS DIAGRAM (richiesta_lista_tipi_di_servizio)</h3>
         <p>
@@ -237,7 +236,7 @@
           attraverso l’apposito pulsante. A questo punto la classe <code>TypeofService</code> ha il compito di fornire l’oggetto grafico per rappresentare
           ogni tipo di servizio mentre <code>MainController</code> si occuperà della visualizzazione completa della lista nei confronti dell’utente.
         </p>
-        <img src="pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" alt="Interaction Diagram(richiesta_lista_tipi_servizio)" title="Interaction Diagram(richiesta_lista_tipi_servizio)" height="100%" width="100%"
+        <img class="myImg" src="pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" alt="Interaction Diagram(richiesta_lista_tipi_servizio)" title="Interaction Diagram(richiesta_lista_tipi_servizio)" height="100%" width="100%"
         style="display:block; margin-left:auto; margin-right:auto">
 
         <p><br><br><br></p>
@@ -251,10 +250,15 @@
           di fornire l’oggetto grafico per rappresentare ogni paese mentre <code>MainController</code> si occuperà della visualizzazione
           completa della lista nei confronti dell’utente.
         </p>
-        <img src="pictures/InteractionsDiagram(richiesta_lista_stati).svg" alt="Interaction Diagram(richiesta_lista_stati)" title="Interaction Diagram(richiesta_lista_stati)" height="90%" width="90%"
+        <img class="myImg" src="pictures/InteractionsDiagram(richiesta_lista_stati).svg" alt="Interaction Diagram(richiesta_lista_stati)" title="Interaction Diagram(richiesta_lista_stati)" height="90%" width="90%"
         style="display:block; margin-left:auto; margin-right:auto">
 
-        <p><br><br><br></p>
+        <p>
+          <br>
+          <br>
+          <br>
+        </p>
+
         <h3 class="section__title">INTERACTIONS DIAGRAM (ricerca)</h3>
         <p>
           Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente esegue una ricerca
@@ -271,7 +275,7 @@
           Ora si entra nella parte finale della procedura di ricerca, <code>MainController</code> inizializza la classe <code>Results</code> che gli fornirà la grafica per la rappresentazione
           dei risultati finali all’utente il quale potrà scegliere di tornare, tramite il tasto <i>‘Home’</i>, al menu iniziale per effettuare una nuova ricerca.
         </p>
-        <img src="pictures/InteractionsDiagram(ricerca).svg" alt="Interaction Diagram(ricerca)" title="Interaction Diagram(ricerca)" height="100%" width="100%"
+        <img class="myImg" src="pictures/InteractionsDiagram(ricerca).svg" alt="Interaction Diagram(ricerca)" title="Interaction Diagram(ricerca)" height="100%" width="100%"
         style="display:block; margin-left:auto; margin-right:auto">
 
         <hr />
@@ -292,7 +296,7 @@
         <h1 class="section__title" style="font-size: 33px;">Use Cases</h1>
 
         <!--IMMAGINE USE CASES-->
-        <img src="docs_gruppo2/img/UseCasesDiagram.png" alt="Use Cases" title="use cases" width="527" height="711">
+        <img class="myImg" src="docs_gruppo2/img/UseCasesDiagram.png" alt="Use Cases" title="use cases" width="527" height="711">
 
 
         <ul>
