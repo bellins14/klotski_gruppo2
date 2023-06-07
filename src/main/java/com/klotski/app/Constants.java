@@ -55,9 +55,4 @@ public class Constants {
     public static int[] config4PieceX = {100, 100, 300, 0, 300, 0, 300, 200, 100, 0};
     public static int[] config4PieceY = {0, 200, 200, 200, 0, 0, 400, 300, 300, 400};
 
-
-
-    public static final String DEFAULT_NAME = "John Doe";
-
-
 }

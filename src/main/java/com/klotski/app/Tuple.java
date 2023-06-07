@@ -7,10 +7,10 @@ package com.klotski.app;
  */
 public class Tuple {
 
-    //Coordinata X del Piece
+    //Coordinata X
     public final int _x;
 
-    //Coordinata Y del Piece
+    //Coordinata Y
     public final int _y;
 
 
