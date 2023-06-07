@@ -3,6 +3,8 @@ package com.klotski.app;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import static com.klotski.app.Constants.*;
+
 //Dichiara a Jackson che questa classe ha un Serializer
 @JsonSerialize(using = ConfigurationSerializer.class)
 //Dichiara a Jackson che questa classe ha un Deserializer
@@ -16,10 +18,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 public class Configuration {
 
-    /* Array di Pieces che rappresenta la configurazione
-       Saranno ordinati dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
-     */
-    protected Piece[] _pieces = new Piece[10];
+    //Array di Pieces che rappresenta la configurazione
+    //Sarà ordinato dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
+    protected Piece[] _pieces = new Piece[CONF_PIECES_NUM];
 
 
     /**
@@ -39,7 +40,7 @@ public class Configuration {
      */
     public Configuration(int configurationNumber) throws IllegalArgumentException{
 
-        //Posiziona i pezzi come nella configurazione numero @configurationNumber
+        //Posiziona i pezzi come nella configurazione numero configurationNumber
         set_pieces(configurationNumber);
     }
 
@@ -51,8 +52,8 @@ public class Configuration {
      */
     public Configuration(Piece[] p) {
         //Se l'array di pezzi non contiene esattamente 10 pezzi lancia eccezione
-        if(p.length != 10){
-            throw new IllegalArgumentException("Una configurazione deve avere sempre 10 pezzi");
+        if(p.length != CONF_PIECES_NUM){
+            throw new IllegalArgumentException("Una configurazione deve avere sempre" + CONF_PIECES_NUM +"pezzi");
         }
 
         System.arraycopy(p, 0, _pieces, 0, p.length);
@@ -103,12 +104,10 @@ public class Configuration {
 
         for (int j = 0; j < _pieces.length; j++) {
             int pieceType = piecesType[j];
-            _pieces[j] = new Piece(pieceType); //Cambiato, basta mettere il tipo qui e mette il nome giusto all'immagine
+            _pieces[j] = new Piece(pieceType);
             _pieces[j].setLayoutX(positions[j].getX());
             _pieces[j].setLayoutY(positions[j].getY());
 
-            // #### DEBUG ####
-            //System.out.println("Setted piece "+pieces[j]);
         }
     }
 
@@ -122,11 +121,13 @@ public class Configuration {
     public int[] getPiecesType(int configurationNumber) {
         int[] types;
 
-        // assegna ordine rettangoli per sezione (ordine decrescente)
+        //Inserisce in un array il tipo dei pezzi in base al numero della confiugurazione iniziale
         switch (configurationNumber) {
-            case 1, 4 -> types = new int[]{3, 2, 1, 1, 1, 1, 0, 0, 0, 0};
-            case 2, 3 -> types = new int[]{3, 2, 2, 1, 1, 1, 0, 0, 0, 0};
-            default -> throw new IllegalArgumentException("configurationNumber non compreso tra 0 e 3");
+            case 1 -> types = config1PieceTypes;
+            case 2 -> types = config2PieceTypes;
+            case 3 -> types = config3PieceTypes;
+            case 4 -> types = config4PieceTypes;
+            default -> throw new IllegalArgumentException("configurationNumber non compreso tra 1 e 4");
         }
 
         return types;
@@ -145,24 +146,26 @@ public class Configuration {
 
         // Le misure si riferiscono al pixel in angolo in alto a sinistra, dei pezzi rispettivi
         // scritti in getPieces
+        //Inserisce in un array le coordinate dei pezzi in base al numero della confiugurazione iniziale
         switch (configurationNumber) {
+
             case 1 -> {
-                positionX = new int[]{100, 100, 300, 0, 300, 0, 200, 100, 200, 100};
-                positionY = new int[]{0, 400, 200, 200, 0, 0, 300, 300, 200, 200};
+                positionX = config1PieceX;
+                positionY = config1PieceY;
             }
             case 2 -> {
-                positionX = new int[]{100, 200, 0, 300, 100, 0, 300, 0, 300, 0};
-                positionY = new int[]{0, 400, 400, 100, 200, 100, 300, 300, 0, 0};
+                positionX = config2PieceX;
+                positionY = config2PieceY;
             }
             case 3 -> {
-                positionX = new int[]{200, 200, 100, 0, 100, 0, 300, 300, 200, 100};
-                positionY = new int[]{100, 400, 300, 200, 100, 0, 300, 0, 0, 0};
+                positionX = config3PieceX;
+                positionY = config3PieceY;
             }
             case 4 -> {
-                positionX = new int[]{100, 100, 300, 0, 300, 0, 300, 200, 100, 0};
-                positionY = new int[]{0, 200, 200, 200, 0, 0, 400, 300, 300, 400};
+                positionX = config4PieceX;
+                positionY = config4PieceY;
             }
-            default -> throw new IllegalArgumentException("configurationNumber non compreso tra 0 e 3");
+            default -> throw new IllegalArgumentException("configurationNumber non compreso tra 1 e 4");
         }
 
         Tuple[] positions = new Tuple[positionX.length];

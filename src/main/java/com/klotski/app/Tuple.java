@@ -6,30 +6,28 @@ package com.klotski.app;
  * le coordinate dei Piece
  */
 public class Tuple {
-    //coordinata X del Piece
+
+    //Coordinata X del Piece
     public final int _x;
 
-    //coordinata Y del Piece
+    //Coordinata Y del Piece
     public final int _y;
 
-    //==============
-    // CONSTRUCTOR
-    //==============
 
     /**
-     * Costruttore con parametri che inzializza coordinata "X" e coordinata "Y" del piece
+     * Costruttore con parametri che inzializza coordinata "X" e coordinata "Y"
      */
     public Tuple(int x, int y) {
         this._x = x;
         this._y = y;
     }
     /**
-     * Metodo che ritorna la posizione "X" del piece
+     * Metodo che ritorna la posizione "X"
      */
     public int getX() {return  this._x;}
 
     /**
-     * Metodo che ritorna la posizone "Y" del piece
+     * Metodo che ritorna la posizone "Y"
      */
     public int getY() {return this._y;}
 }

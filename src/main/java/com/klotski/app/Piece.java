@@ -3,9 +3,9 @@ package com.klotski.app;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import static com.klotski.app.Constants.*;
 
 /**
  * Classe che rappresenta un pezzo del Klotski.
@@ -26,12 +26,9 @@ public class Piece extends Rectangle {
         //Richiama il costruttore di Rectangle
         super();
 
-        //Setta il tipo del pezzo
+        //Setta il tipo e, in base a questo, gli attributi del pezzo
         this.setType(0);
 
-        //Setta un bordo nero di spessore 3
-        this.setStroke(Color.BLACK);
-        this.setStrokeWidth(3);
     }
 
 
@@ -48,12 +45,9 @@ public class Piece extends Rectangle {
         //Richiama il costruttore di Rectangle
         super();
 
-        //Setta il tipo del pezzo
+        //Setta il tipo e, in base a questo, gli attributi del pezzo
         this.setType(pieceType); //Lancia IllegalArgumentException se pieceType minore di 0 o maggiore di 3
 
-        //Setta un bordo nero di spessore 3
-        this.setStroke(Color.BLACK);
-        this.setStrokeWidth(3);
     }
 
 
@@ -66,21 +60,21 @@ public class Piece extends Rectangle {
      */
     public Piece(int h, int w){
         super();
-        if (h == 100 && w == 100) {
+        if (h == PIECE_0_HEIGHT && w == PIECE_0_WIDTH) {
             this.setType(0);
-        } else if (h == 200 && w == 100) {
+        } else if (h == PIECE_1_HEIGHT && w == PIECE_1_WIDTH) {
             this.setType(1);
-        } else if (h == 100 && w == 200) {
+        } else if (h == PIECE_2_HEIGHT && w == PIECE_2_WIDTH) {
             this.setType(2);
-        } else if (h == 200 && w == 200) {
+        } else if (h == PIECE_3_HEIGHT && w == PIECE_3_WIDTH) {
             this.setType(3);
-        } else { //Se le dimensioni non corrispondono ad un pezzo adeguato lancia eccezioni
+        } else { //Se le dimensioni non corrispondono ad un pezzo adeguato lancia eccezione
             throw new IllegalArgumentException("Dimensioni non valide");
         }
 
         //Setta un bordo nero di spessore 3
-        this.setStroke(Color.BLACK);
-        this.setStrokeWidth(3);
+        this.setStroke(PIECE_STROKE_COLOR);
+        this.setStrokeWidth(PIECE_STROKE_WIDTH);
     }
 
 
@@ -100,41 +94,40 @@ public class Piece extends Rectangle {
         //In base a pieceType decidi quale pezzo creare
         switch (pieceType) {
             case 0 -> {
-                this.setHeight(100);
-                this.setWidth(100);
-                this.setArcHeight(10); //Aggiunge curvatura agli spigoli
-                this.setArcWidth(10); //Aggiunge curvatura agli spigoli
+                this.setHeight(PIECE_0_HEIGHT); //Setta l'altezza del pezzo in base al tipo passato
+                this.setWidth(PIECE_0_WIDTH); //Setta la larghezza del pezzo in base al tipo passato
                 this.setId("0"); //Setta l'id del pezzo in base al tipo passato
 
             }
             case 1 -> {
-                this.setHeight(200);
-                this.setWidth(100);
-                this.setArcHeight(10);
-                this.setArcWidth(10);
+                this.setHeight(PIECE_1_HEIGHT);
+                this.setWidth(PIECE_1_WIDTH);
                 this.setId("1");
 
             }
             case 2 -> {
-                this.setHeight(100);
-                this.setWidth(200);
-                this.setArcHeight(10);
-                this.setArcWidth(10);
+                this.setHeight(PIECE_2_HEIGHT);
+                this.setWidth(PIECE_2_WIDTH);
                 this.setId("2");
 
             }
             case 3 -> {
-                this.setHeight(200);
-                this.setWidth(200);
-                this.setArcHeight(10);
-                this.setArcWidth(10);
+                this.setHeight(PIECE_3_HEIGHT);
+                this.setWidth(PIECE_3_WIDTH);
                 this.setId("3");
 
             }
 
             default -> throw new IllegalArgumentException("pieceType non compreso tra 0 e 3");
-
         }
+
+        //Setta un bordo con spessore
+        this.setStroke(PIECE_STROKE_COLOR);
+        this.setStrokeWidth(PIECE_STROKE_WIDTH);
+
+        //Setta una curvatura degli angoli
+        this.setArcHeight(PIECE_ARC_DIM);
+        this.setArcWidth(PIECE_ARC_DIM);
     }
 
 

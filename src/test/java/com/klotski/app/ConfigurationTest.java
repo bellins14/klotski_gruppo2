@@ -8,25 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConfigurationTest {
     private Configuration configuration;
 
-    //Configuration1
-    final int[] config1BlockTypes = {3, 2, 1, 1, 1, 1, 0, 0, 0, 0};
-    final int[] config1BlockX = {100, 100, 300, 0, 300, 0, 200, 100, 200, 100};
-    final int[] config1BlockY = {0, 400, 200, 200, 0, 0, 300, 300, 200, 200};
 
-    //Configuration2
-    final int[] config2BlockTypes = {3, 2, 2, 1, 1, 1, 0, 0, 0, 0};
-    final int[] config2BlockX = {100, 200, 0, 300, 100, 0, 300, 0, 300, 0};
-    final int[] config2BlockY = {0, 400, 400, 100, 200, 100, 300, 300, 0, 0};
-
-    //Configuration3
-    final int[] config3BlockTypes = {3, 2, 2, 1, 1, 1, 0, 0, 0, 0};
-    final int[] config3BlockX = {200, 200, 100, 0, 100, 0, 300, 300, 200, 100};
-    final int[] config3BlockY = {100, 400, 300, 200, 100, 0, 300, 0, 0, 0};
-
-    //Configuration4
-    int[] config4BlockTypes = {3, 2, 1, 1, 1, 1, 0, 0, 0, 0};
-    int[] config4BlockX = {100, 100, 300, 0, 300, 0, 300, 200, 100, 0};
-    int[] config4BlockY = {0, 200, 200, 200, 0, 0, 400, 300, 300, 400};
 
     //Test del costruttore di default
     @Test
