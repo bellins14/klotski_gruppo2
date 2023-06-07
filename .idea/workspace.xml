@@ -138,6 +138,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="JUnit.ConfigurationTest" />
+      <item itemvalue="JUnit.ControllerTest" />
+      <item itemvalue="JUnit.PieceTest" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.PieceTest" />
