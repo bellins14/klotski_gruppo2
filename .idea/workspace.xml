@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="styled">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -343,7 +340,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686065062051</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary=".">
+      <created>1686168270932</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1686168270932</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +378,8 @@
     <MESSAGE value="sostituzione titolo, use cases e domain model" />
     <MESSAGE value="modifiche" />
     <MESSAGE value="styled" />
-    <option name="LAST_COMMIT_MESSAGE" value="styled" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
