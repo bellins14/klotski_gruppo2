@@ -20,27 +20,27 @@ public class ConfigurationSerializer extends JsonSerializer<Configuration> {
      */
     @Override
     public void serialize(Configuration config, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        // Estrapoliamo i blocchi da config in modo da poterli serializzare - Per riferimento
-        Piece[] blocks = config.getPieces();
+        // Estrapoliamo i pezzi da config in modo da poterli serializzare - Per riferimento
+        Piece[] pieces = config.getPieces();
 
         // Inizia l'oggetto JSON Configurazione
         jsonGenerator.writeStartObject();
         jsonGenerator.writeFieldName("blocks");
         jsonGenerator.writeStartArray();
-        for(int i=0; i<blocks.length; i++){
+        for(int i=0; i<pieces.length; i++){
             // Inizia l'oggetto JSON Block
             jsonGenerator.writeStartObject();
             // Campo shape dell'oggetto Block
             jsonGenerator.writeFieldName("shape");
             jsonGenerator.writeStartArray();
-            jsonGenerator.writeNumber((int)blocks[i].getHeight()/100);
-            jsonGenerator.writeNumber((int)blocks[i].getWidth()/100);
+            jsonGenerator.writeNumber((int)pieces[i].getHeight()/100);
+            jsonGenerator.writeNumber((int)pieces[i].getWidth()/100);
             jsonGenerator.writeEndArray();
             // Campo position dell'oggetto Block
             jsonGenerator.writeFieldName("position");
             jsonGenerator.writeStartArray();
-            jsonGenerator.writeNumber((int)blocks[i].getLayoutY()/100);
-            jsonGenerator.writeNumber((int)blocks[i].getLayoutX()/100);
+            jsonGenerator.writeNumber((int)pieces[i].getLayoutY()/100);
+            jsonGenerator.writeNumber((int)pieces[i].getLayoutX()/100);
             jsonGenerator.writeEndArray();
             jsonGenerator.writeEndObject();
             // Chiudi l'oggetto JSON Block
