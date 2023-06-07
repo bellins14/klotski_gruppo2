@@ -461,81 +461,125 @@ class ConfigurationTest {
     void testToString() {
         System.out.println("test toString");
 
-        //Testa coordinate specifiche (dei pezzi), con ogni tipo di pezzo
-        for (int pieceType = 0; pieceType <= 3; pieceType++) {
+        //Test delle 4 configurazioni iniziali
+        for (int confNumber = 1; confNumber <= 3; confNumber++) {
 
-            //Crea dei pezzi da testare
-            ArrayList<Piece> testingPieces = new ArrayList<>();
+            //Crea configurazioni da testare
+            ArrayList<Configuration> testingConfigurations = new ArrayList<>();
 
-            //Pezzo di utilizzo usuale
-            Piece usualPiece = new Piece(pieceType);
-            usualPiece.setLayoutX(500);
-            usualPiece.setLayoutY(600);
+            //Crea le rispettive stringhe attese
+            ArrayList<String> expectedStrings = new ArrayList<>();
 
-            testingPieces.add(usualPiece);
+            //Conf1
+            Configuration conf1 = new Configuration(1);
 
-            //Pezzo con coordinate alte
-            Piece highPiece = new Piece(pieceType);
-            highPiece.setLayoutX(10000000);
-            highPiece.setLayoutY(10000000);
+            testingConfigurations.add(conf1);
+            expectedStrings.add("      {\"shape\": [2, 2], \"position\": [0, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 2], \"position\": [4, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [2, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [2, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [0, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [0, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [3, 2] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [3, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [2, 2] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [2, 1] },\n" +
+                    "\n");
 
-            testingPieces.add(highPiece);
+            //Conf2
+            Configuration conf2 = new Configuration(2);
 
-            //Pezzo con coordinate basse
-            Piece lowPiece = new Piece(pieceType);
-            lowPiece.setLayoutX(-10000000);
-            lowPiece.setLayoutY(-10000000);
+            testingConfigurations.add(conf2);
+            expectedStrings.add("      {\"shape\": [2, 2], \"position\": [0, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 2], \"position\": [4, 2] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 2], \"position\": [4, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [1, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [2, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [1, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [3, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [3, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [0, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [0, 0] },\n" +
+                    "\n");
 
-            testingPieces.add(lowPiece);
+            //Conf3
+            Configuration conf3 = new Configuration(3);
 
-            //Pezzo di con coordinate miste
-            Piece mixPiece = new Piece(pieceType);
-            mixPiece.setLayoutX(+400);
-            mixPiece.setLayoutY(-600);
+            testingConfigurations.add(conf3);
+            expectedStrings.add("      {\"shape\": [2, 2], \"position\": [1, 2] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 2], \"position\": [4, 2] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 2], \"position\": [3, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [2, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [1, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [0, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [3, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [0, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [0, 2] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [0, 1] },\n" +
+                    "\n");
 
-            testingPieces.add(mixPiece);
+            //Conf4
+            Configuration conf4 = new Configuration(4);
 
+            testingConfigurations.add(conf4);
+            expectedStrings.add("      {\"shape\": [2, 2], \"position\": [0, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 2], \"position\": [2, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [2, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [2, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [0, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [2, 1], \"position\": [0, 0] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [4, 3] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [3, 2] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [3, 1] },\n" +
+                    "\n" +
+                    "      {\"shape\": [1, 1], \"position\": [4, 0] },\n" +
+                    "\n");
 
-            //Pezzo di con coordinate miste invertite di segno
-            Piece invertedMixPiece = new Piece(pieceType);
-            invertedMixPiece.setLayoutX(-400);
-            invertedMixPiece.setLayoutY(+600);
+            //TODO: inserire configurazione di testing alternativa
 
-            testingPieces.add(invertedMixPiece);
+            //Per ogni configurazione dell'array di testing
+            for (int i=0; i<testingConfigurations.size(); i++) {
 
-            //Pezzo di con coordinate miste elevate
-            Piece elevateMixPiece = new Piece(pieceType);
-            elevateMixPiece.setLayoutX(+10000000);
-            elevateMixPiece.setLayoutY(-10000000);
-
-            testingPieces.add(elevateMixPiece);
-
-            //Pezzo di con coordinate miste elevate invertite di segno
-            Piece invertedElevateMixPiece = new Piece(pieceType);
-            invertedElevateMixPiece.setLayoutX(-10000000);
-            invertedElevateMixPiece.setLayoutY(+10000000);
-
-            testingPieces.add(invertedElevateMixPiece);
-
-            //Pezzo di con coordinate nulle
-            Piece zeroPiece = new Piece(pieceType);
-            zeroPiece.setLayoutX(0);
-            zeroPiece.setLayoutY(0);
-
-            testingPieces.add(zeroPiece);
-
-            //Per ogni pezzo dell'array di testing
-            for (Piece testingPiece : testingPieces) {
+                Configuration testingConfiguration = testingConfigurations.get(i);
+                String expectedString = expectedStrings.get(i);
 
                 //Controlla che toString ritorni la stringa corretta
-
-                String expectedString = "      {\"shape\": [" + (int) (testingPiece.getHeight() / 100) + ", " +
-                        (int) (testingPiece.getWidth() / 100) + "], " +
-                        "\"position\": [" +
-                        (int) (testingPiece.getLayoutY() / 100) + ", " +
-                        (int) (testingPiece.getLayoutX() / 100) + "] },\n";
-
-                assertEquals(expectedString, testingPiece.toString());
+                assertEquals(expectedString, testingConfiguration.toString());
 
             }
         }
