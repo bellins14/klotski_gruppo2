@@ -1,4 +1,4 @@
-package com.klotski.app;
+package com.klotski.jacksonSupport;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;

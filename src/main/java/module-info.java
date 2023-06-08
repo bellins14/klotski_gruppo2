@@ -9,4 +9,6 @@ module com.klotski.app {
 
     opens com.klotski.app to javafx.fxml;
     exports com.klotski.app;
+    exports com.klotski.jacksonSupport;
+    opens com.klotski.jacksonSupport to javafx.fxml;
 }

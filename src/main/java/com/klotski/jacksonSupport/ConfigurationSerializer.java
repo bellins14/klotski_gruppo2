@@ -1,8 +1,10 @@
-package com.klotski.app;
+package com.klotski.jacksonSupport;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.klotski.app.Configuration;
+import com.klotski.app.Piece;
 
 import java.io.IOException;
 

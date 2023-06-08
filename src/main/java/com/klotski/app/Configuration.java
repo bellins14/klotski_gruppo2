@@ -2,6 +2,8 @@ package com.klotski.app;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.klotski.jacksonSupport.ConfigurationDeserializer;
+import com.klotski.jacksonSupport.ConfigurationSerializer;
 
 import static com.klotski.app.Constants.*;
 
