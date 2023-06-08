@@ -141,22 +141,16 @@ public class Controller {
      */
     @FXML
     void reset() {
-        game.setCounter(0);
+
+        //Cambia la configurazione attuale di game con la configurazione iniziale
+        game.setConfigurationWithInitialConf(game.getInitialSelectedConf());
+
+        //Aggiorna il testo con il counter delle mosse
         textCounter.setText("Moves : " + game.getCounter());
         blockPane.getChildren().clear();
-
-        int ls = game.getLog().size();
-
-        for (int i = 1; i < ls; i++) {
-            game.popLog();
-        }
-
-
-        //TODO: sposta in game
-        //Ora gameLog ha solo 1 elemento: la configurazione iniziale
-        UtilityJackson.serializeConfigurationLog(game.getLog(), LOG_FILE); // Aggiorno lo storico
-        UtilityJackson.serializeConfiguration(game.getLog().peek(), DC_FILE); // Aggiorno la serializzazione
+        //Fai ripartire l'inizializzazione
         initialize();
+
     }
 
 
