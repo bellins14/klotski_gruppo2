@@ -39,23 +39,18 @@ public class Controller {
     private JFXButton reset;
     @FXML
     private JFXButton NBM;
-    private final Game game;
-    protected Configuration _configuration;
+    private Game game;
+
     //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
     private Piece selectedBlock;
-    //configurazione selezionata
-    private int selectedConf;
-    private Stack<Configuration> log;
+
+
 
 
     /**
      * Costruttore di default
      */
     public Controller() {
-        selectedConf = 1;
-        log = new Stack<>();
-        _configuration = new Configuration(selectedConf);
-        game = new Game();
     }
 
 
@@ -65,34 +60,21 @@ public class Controller {
      */
     //primo metodo chiamato di default
     public void initialize() {
-        // Leggiamo il log
-        log = UtilityJackson.deserializeConfigurationLog(LOG_FILE);
-        if (log.size() == Utility.EMPTY_LOG_SIZE) { // Il log è vuoto
-            _configuration = new Configuration(selectedConf);
-            game.jacksonSerialize(_configuration, log);
-            game.setCounter(0);
 
-        } else if (log.size() == Utility.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
-            _configuration = UtilityJackson.deserializeConfiguration(DC_FILE);
-            selectedConf = Configuration.isInitialConfiguration(_configuration);
-            game.setCounter(0);
+        //Crea un nuovo gioco
+        game = new Game();
 
-        } else { // Nel log c'è più di una configurazione
-            _configuration = game.getInitConfiguration(log);
-            selectedConf = Configuration.isInitialConfiguration(_configuration);
-            UtilityJackson.serializeConfiguration(log.peek(), DC_FILE);
-            _configuration = UtilityJackson.deserializeConfiguration(DC_FILE);
-            game.setCounter(log.size() - 1);
-            textCounter.setText("Moves : " + game.getCounter());
-        }
+        //Setta il counter con le mosse
+        textCounter.setText("Moves : " + game.getCounter());
 
-        Piece[] blocks = _configuration.getPieces();
-
-
-        // Da non toccare
+        //Setta la dimensione del pane
         blockPane.setMaxWidth(400);
         blockPane.setMaxHeight(500);
-        //con questo ciclo for inizializzo la pane
+
+        //Prende i blocchi della configurazione attuale
+        Piece[] blocks = game.getConfiguration().getPieces();
+
+        //Inizializza il pane con i blocchi della configurazione attuale
         for (Piece block : blocks) {
 
             // renderizza l'immagine per ogni blocco (parte che era in Piece)
@@ -135,7 +117,7 @@ public class Controller {
                 //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
                 //getCode mi traduce il comando da tastiera in un codice
                 int keyCode = event.getCode().ordinal();
-                game.moveBlock(selectedBlock, blockPane, keyCode, _configuration, log);
+                game.moveBlock(selectedBlock, blockPane, keyCode, game.getConfiguration(), game.getLog());
                 if (game.checkWin(blockPane)) {
                     reset();
                 }
@@ -157,12 +139,16 @@ public class Controller {
         game.setCounter(0);
         textCounter.setText("Moves : " + game.getCounter());
         blockPane.getChildren().clear();
-        int ls = log.size();
+
+        int ls = game.getLog().size();
+
         for (int i = 1; i < ls; i++) {
-            log.pop();
+            game.popLog();
         }
-        UtilityJackson.serializeConfigurationLog(log, LOG_FILE); // Aggiorno lo storico
-        UtilityJackson.serializeConfiguration(log.peek(), DC_FILE); // Aggiorno la serializzazione
+
+        //Ora gameLog ha solo 1 elemento, la configurazione iniziale
+        UtilityJackson.serializeConfigurationLog(game.getLog(), LOG_FILE); // Aggiorno lo storico
+        UtilityJackson.serializeConfiguration(game.getLog().peek(), DC_FILE); // Aggiorno la serializzazione
         initialize();
     }
 
@@ -176,14 +162,14 @@ public class Controller {
     void configurationClicked(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         int configurationIndex = Integer.parseInt(clickedButton.getUserData().toString());
-        if (selectedConf != configurationIndex) {
+        if (game.getSelectedConf() != configurationIndex) {
             game.setCounter(0);
             textCounter.setText("Moves : " + game.getCounter());
-            selectedConf = configurationIndex;
+            game.setSelectedConf(configurationIndex);
             blockPane.getChildren().clear();
-            log.clear();
-            _configuration = new Configuration(selectedConf);
-            game.jacksonSerialize(_configuration, log);
+            game.clearLog();
+            game.setConfiguration(new Configuration(game.getSelectedConf()));
+            game.jacksonSerialize();
             initialize();
         }
     }
@@ -201,7 +187,7 @@ public class Controller {
     void nextBestMove() throws IOException {
         if (Utility.isInternetConnected()) {
             NBM.setDisable(true);
-            game.nextBestMove(blockPane, _configuration, log, textCounter);
+            game.nextBestMove(blockPane, textCounter);
             if (game.checkWin(blockPane)) {
                 reset();
             }
@@ -228,9 +214,10 @@ public class Controller {
             game.setCounter(game.getCounter() - 1);
             textCounter.setText("Moves : " + game.getCounter());
             blockPane.getChildren().clear();
-            log.pop();
-            UtilityJackson.serializeConfigurationLog(log, LOG_FILE);
-            UtilityJackson.serializeConfiguration(log.peek(), DC_FILE);
+
+            game.popLog();
+            UtilityJackson.serializeConfigurationLog(game.getLog(), LOG_FILE);
+            UtilityJackson.serializeConfiguration(game.getLog().peek(), DC_FILE);
             initialize();
         } else {
             Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun blocco!");
