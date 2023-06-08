@@ -3,11 +3,12 @@
 ![SystemSequenceDiagram.png](/docs_gruppo2/img/diagrams/SystemSequenceDiagram.png)
 
 ```plantuml
-@startuml
 !theme materia-outline
 
-actor Giocatore 
-participant Sistema 
+skinparam ArrowColor #00B4D8
+
+actor Giocatore
+participant Sistema
 
 Giocatore -> Sistema: inizia_partita()
 Sistema --> Giocatore: mostra(configurazione_corrente,\ncounter)
@@ -17,10 +18,10 @@ par
     
     critical 
       alt vittoria
-      Sistema --> Giocatore: messaggio("hai vinto")
+        Sistema --> Giocatore: messaggio("hai vinto")
 
       else altrimenti
-      Sistema --> Giocatore: mostra(configurazione_aggiornata,\ncounter++)
+        Sistema --> Giocatore: mostra(configurazione_aggiornata,\ncounter++)
       end
     end
     
@@ -35,7 +36,12 @@ else
     Giocatore -> Sistema: undo()
     
     critical 
-      Sistema --> Giocatore: mostra(configurazione_aggiornata,\ncounter--)
+      alt counter > 0 
+        Sistema --> Giocatore: mostra(configurazione_aggiornata,\ncounter--)
+        
+      else counter == 0
+        Sistema --> Giocatore: messaggio("Impossibile tornare indietro")
+      end
     end
     
 else 
@@ -49,7 +55,11 @@ else
     Giocatore -> Sistema: richiedi_NBM()
     
     critical 
-      Sistema --> Giocatore: mostra(NBM)
+      alt connessione ad internet
+        Sistema --> Giocatore: mostra(NBM)
+        
+      else altrimenti
+        Sistema --> Giocatore: messaggio("Next Best Move non disponibile")
     end
 end
 @enduml
