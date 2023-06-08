@@ -1,6 +1,5 @@
 package com.klotski.app;
 
-
 /**
  * Classe che rappresenta una Tupla (struttura dati) per gestire meglio
  * le coordinate dei Piece

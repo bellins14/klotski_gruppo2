@@ -2,11 +2,14 @@ package com.klotski.app;
 
 import java.util.Stack;
 
-import static com.klotski.app.Constants.*;
-
 
 /**
- * Classe che rappresenta il gioco di Klotski
+ * Classe che rappresenta il gioco di Klotski. Dispone:
+ * - del numero della configurazione di partenza (tra le 4 iniziali),
+ * - della configurazione attuale dei pezzi,
+ * - di un contatore delle mosse (a partire dalla configurazione iniziale)
+ * - del path del file di log (o storico o database) dove è salvata la partita (sottoforma di configurazioni)
+ * - del path del file di supporto per la serializzazione/deserializzazione in json della configurazione attuale
  */
 public class Game {
 
@@ -16,11 +19,12 @@ public class Game {
     //Configurazione attuale del gioco
     private Configuration _configuration;
 
+    //Contatore delle mosse
+    private int _moveCounter;
     //Stack di configurazioni
     // funge da log (un simil database) per il gioco
     // ed e' sincronizzato con il file di Log ConfigurationLog
     private Stack<Configuration> _stackLog;
-    private int _moveCounter;
 
     //Path del file di log dove con cui sincronizzare _stackLog
     // e che funge da storico delle mosse
@@ -30,10 +34,14 @@ public class Game {
     private final String _supportFilePathName;
 
 
-    //Costruttore di default
-    //Crea un gioco a partire dal file di log, e da un file di supporto per la serializzazione delle configurazioni
-    //- se c'è una partita precedente la riprende
-    //- altrimenti crea il gioco dalla configurazione iniziale di default (la numero 1)
+    /**
+     * Costruttore di default
+     * Crea un gioco a partire dal file di log, e da un file di supporto per la serializzazione delle configurazioni
+     * - se c'è una partita precedente la riprende
+     * - altrimenti crea il gioco dalla configurazione iniziale di default (la numero 1)
+     * @param logFilePathName file di log (json) (se non esiste già viene creato)
+     * @param supportFilePathName file di supporto (json) (se non esiste già viene creato)
+     */
     public Game(String logFilePathName, String supportFilePathName){
 
         //Inizializza i path dei file
@@ -94,48 +102,43 @@ public class Game {
     }
 
     /**
-     * @return
+     * Metodo per ritornare il numero della configurazione iniziale associata alla configurazione attuale
+     * @return _initialSelectedConf
      */
     public int getInitialSelectedConf() {
         return _initialSelectedConf;
     }
 
     /**
-     * @param i
-     */
-    public void setInitialSelectedConf(int i){
-        if(i<1||i>4) {
-            throw new IllegalArgumentException("configurationNumber non compreso tra 1 e 4");
-        }
-
-        this._initialSelectedConf = i;
-    }
-
-    /**
-     * @return
+     * Metodo per ritornare la configurazione attuale
+     * @return _configuration
      */
     public Configuration getConfiguration() {
         return _configuration;
     }
 
     /**
-     * @param configuration
+     * Metodo per settare la configurazione attuale con la nuova configurazione passata
+     * @param newConfiguration nuova configurazione passata
      */
-    public void setConfiguration(Configuration configuration) {
-        this._configuration = configuration;
+    public void setConfiguration(Configuration newConfiguration) {
+        this._configuration = newConfiguration;
 
         //Inserisci la nuova configurazione nello Stack e nel file di log
         updateLogsWithCurrentConfiguration();
     }
 
     /**
-     * @return
+     * Metodo per ritornare il counter delle mosse
+     * @return _moveCounter
      */
     public int getMoveCounter() {return  this._moveCounter;}
 
     /**
-     * @param piece
-     * @param moveAmount
+     * Metodo per muovere un pezzo della configurazione attuale del gioco in basso
+     * @param piece pezzo da muovere
+     * @param moveAmount di quando muoverlo
+     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
     public void movePieceDown(Piece piece, double moveAmount) {
 
@@ -156,8 +159,10 @@ public class Game {
     }
 
     /**
-     * @param piece
-     * @param moveAmount
+     * Metodo per muovere un pezzo della configurazione attuale del gioco in alto
+     * @param piece pezzo da muovere
+     * @param moveAmount di quando muoverlo
+     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
     public void movePieceUp(Piece piece, double moveAmount) {
 
@@ -177,6 +182,12 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
+    /**
+     * Metodo per muovere un pezzo della configurazione attuale del gioco a sx
+     * @param piece pezzo da muovere
+     * @param moveAmount di quando muoverlo
+     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
+     */
     public void movePieceLeft(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
@@ -195,6 +206,12 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
+    /**
+     * Metodo per muovere un pezzo della configurazione attuale del gioco a dx
+     * @param piece pezzo da muovere
+     * @param moveAmount di quando muoverlo
+     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
+     */
     public void movePieceRight(Piece piece, double moveAmount) {
         //Verifica che il pezzo appartenga alla configurazione
         if(!_configuration.doesPieceBelong(piece)){
@@ -212,6 +229,12 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
+    /**
+     * Metodo che setta la configurazione corrente con una configurazione iniziale
+     * Utile per fare reset o cambiare configurazione inziale
+     * @param confNumber configurazione iniziale
+     * @throws IllegalArgumentException se confNumber non è compreso tra 1 e 4
+     */
     public void setConfigurationToInitialConf(int confNumber) throws IllegalArgumentException {
 
         //Crea la nuova configurazione iniziale
@@ -232,7 +255,11 @@ public class Game {
 
     }
 
-    public void setConfigurationToPreviousConf() throws IllegalArgumentException {
+    /** Metodo che setta la configurazione corrente con la configurazione precedente, che viene presa dal log
+     * Se non è disponibile nessuna configurazione precedente, termina silenziosamente
+     * Utile per fare undo
+     */
+    public void setConfigurationToPreviousConf() {
 
         //Togli temporaneamente la configurazione attuale dallo Stack di log
         Configuration currentConfiguration = this._stackLog.pop();
@@ -252,12 +279,20 @@ public class Game {
 
     }
 
+    /**
+     * Metodo che setta il numero della configurazione iniziale
+     * @throws IllegalArgumentException se configurationNumber non è compreso tra 1 e 4
+     */
+    private void setInitialSelectedConf(int i){
+        if(i<1||i>4) {
+            throw new IllegalArgumentException("configurationNumber non compreso tra 1 e 4");
+        }
 
-
+        this._initialSelectedConf = i;
+    }
 
     /**
      * Metodo che estrapola la configurazione iniziale, associata alla configurazione corrente, dal log.
-     *
      * @return initConf configurazione iniziale estrapolata.
      */
     private Configuration getInitConfiguration() {
@@ -274,7 +309,9 @@ public class Game {
         return UtilityJackson.deserializeConfiguration(_supportFilePathName);
     }
 
-    //Converte la configurazione attuale in json e la inserisce sia nello Stack log che nel file log
+    /**
+     * Metodo che converte la configurazione attuale in json e la inserisce sia nello Stack log che nel file log
+     */
     private void updateLogsWithCurrentConfiguration(){
         //Serializza la configurazione corrente nel file di supporto
         UtilityJackson.serializeConfiguration(_configuration, _supportFilePathName);

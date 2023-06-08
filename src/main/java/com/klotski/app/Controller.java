@@ -26,10 +26,13 @@ import static com.klotski.app.Constants.*;
 
 
 /**
- * Classe che gestisce tutta la logica dell'applicazione.
+ * Classe che gestisce l'interazione del gioco con la grafica (Java FX).
  */
 public class Controller {
-    //Pannello "Pane" dove andrò a inserire i vari Piece
+
+    //Elementi di FXML:
+
+    //Pannello "Pane" dove inserire i pezzi della configurazione attuale del gioco
     @FXML
     private Pane blockPane;
     //Bottone undo
@@ -44,6 +47,8 @@ public class Controller {
     //Bottone NBM
     @FXML
     private JFXButton NBM;
+
+
     //Gioco
     private Game game;
 
@@ -54,18 +59,11 @@ public class Controller {
     //Necessario per la connessione all'NBM
     private WebEngine webEngine;
 
-
-
-
-    /**
-     * Costruttore di default vuoto
-     */
-    public Controller() {}
-
+    //Costruttore non necessario
 
     /**
      * Metodo chiamato di default all'avvio dell'applicazione.
-     * Inizializza la pane e gestisce gli input da tastiera e da mouse sui pezzi.
+     * Inizializza la pane e gestisce gli input da mouse e da tastiera sui pezzi.
      */
     public void initialize() {
 
@@ -149,7 +147,8 @@ public class Controller {
 
 
     /**
-     * Metodo che si occupa del reset alla configurazione di partenza designata.
+     * Metodo chiamato quando viene premuto il tasto reset
+     * Si occupa del reset alla configurazione di partenza designata.
      */
     @FXML
     void reset() {
@@ -166,7 +165,8 @@ public class Controller {
 
 
     /**
-     * Metodo che si occupa del cambio di configurazione una volta cliccato il bottone apposito.
+     * Metodo chiamato quando viene premuto il tasto cambio di configurazione iniziale
+     * Si occupa di sostituire la configurazione attuale con la configurazione iniziale selezionata.
      *
      * @param event classe FXML che codifica un evento.
      */
@@ -198,7 +198,8 @@ public class Controller {
 
 
     /**
-     * Metodo che abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
+     * Metodo chiamato quando viene premuto il tasto NBM
+     * Abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
      * Quando il caricamento è completato con successo (Worker.State.SUCCEEDED), viene eseguito uno script JavaScript nella pagina caricata (NBM).
      * Il risultato della NBM prodotto dallo script viene utilizzato per spostare un nodo nell'interfaccia utente.
      * In caso di errore durante il caricamento (Worker.State.FAILED), viene stampato un messaggio di errore.
@@ -262,9 +263,9 @@ public class Controller {
 
 
     /**
-     * Metodo che serve per caricare il file per il risolvimento della NBM.
+     * Metodo che carica il file per la risoluzione della NBM.
      */
-    public  void loadHTMLFile() {
+    private void loadHTMLFile() {
         File prova = new File(NBM_SOLVER_HTML_FILE);
         if (prova.exists()) {
             try {
@@ -288,7 +289,9 @@ public class Controller {
     }
 
     /**
-     * Metodo che gestisce undo.
+     * Metodo chiamato quando viene premuto il tasto undo
+     * Sostituisce la configurazione attuale con quella precedente (se disponibile)
+     * Se non disponibile lancia un alert
      */
     @FXML
     void undo() {
@@ -312,9 +315,17 @@ public class Controller {
     }
 
 
-
+    /**
+     * Metodo chiamato alla pressione delle frecce o dei tasti ASDW con blocco selezionato
+     * Muove il pezzo selezionato nella direzione designata di 100px se possibile,
+     * altrimenti termina silenziosamente
+     * @param piece pezzo da muovere
+     * @param dirIdx direzione in cui muoverlo
+     */
     public void movePiece(Piece piece, int dirIdx) {
+        //Di quanti pixel muovere il pezzo
         double moveAmount = 100;
+        //In base alla direzione in cui si intende muover il pezzo
         switch (dirIdx) {
 
             //DOWN
@@ -349,13 +360,19 @@ public class Controller {
     }
 
     /**
-     * Metodo che gestisce la vittoria.
+     * Controlla (graficamente) se la configurazione attuale rappresenta una situazione di vittoria
+     * @return true se la configurazione attuale rappresenta una situazione di vittoria
+     * @return false altrimenti
      */
 
     private boolean checkWin() {
         //Prende il pezzo piu' grande (che e' sempre il primo)
-        Node node = blockPane.getChildren().get(0); //0<->
+        Node node = blockPane.getChildren().get(0);
+
+        //Se si trova nella posizione di vittoria
         if (node.getLayoutX() == WIN_X && node.getLayoutY() == WIN_Y) {
+
+            //Lancia alert di vittoria e ritorna true
             Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
             return  true;
         }

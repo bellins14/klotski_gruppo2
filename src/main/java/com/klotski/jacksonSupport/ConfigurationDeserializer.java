@@ -10,7 +10,8 @@ import com.klotski.app.Piece;
 import java.io.IOException;
 
 /**
- * Classe che implementa un deserializzatore da JSON a Configuration.
+ * Classe di SUPPORTO alla LIBRERIA JACKSON
+ * Implementa un deserializzatore da JSON a Configuration.
  */
 public class ConfigurationDeserializer extends JsonDeserializer<Configuration> {
 

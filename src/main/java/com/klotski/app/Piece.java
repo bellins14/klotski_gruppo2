@@ -29,9 +29,9 @@ public class Piece extends Rectangle {
     }
 
 
-    /*  Ricordarsi che 100x100 è 100 di larghezza per 100 di altezza, mentre le coordinate del JSON sono
-        invertite.
-     */
+    //Ricorda che 100x100 è 100 di larghezza per 100 di altezza, mentre le coordinate del JSON sono
+    // invertite.
+
     /**
      * Costruttore che inizializza un pezzo a partire dal tipo.
      * @param pieceType tipo del pezzo: 0 = 100x100; 1 = 100x200; 2 = 200x100; 3 = 300x300.
@@ -134,23 +134,22 @@ public class Piece extends Rectangle {
 
     /**
      * Metodo per ritornare il tipo del pezzo
-     * @return _type;
+     * @return _type
      */
     public int getType(){ return this._type;}
 
 
     /**
      * Metodo per ritornare il nome dell'immagine
-     * @return _imageName;
+     * @return _imageName
      */
     public String getImageName(){
         return this._imageName;
     }
 
 
-
     /**
-     * Metodo che ritorna una string che rappresenta un piece in un formato utile per la
+     * Metodo che ritorna una stringa che rappresenta un piece in formato json utile per la
      * NBM.
      * @return stringa formattata.
      */
