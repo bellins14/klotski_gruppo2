@@ -233,7 +233,7 @@ public class Game {
 
     /**
      * Metodo che setta la configurazione corrente con una configurazione iniziale
-     * Utile per fare reset o cambiare configurazione inziale
+     * Utile per fare reset o cambiare configurazione iniziale
      * @param confNumber configurazione iniziale
      * @throws IllegalArgumentException se confNumber non è compreso tra 1 e 4
      */
@@ -313,13 +313,23 @@ public class Game {
 
     /**
      * Metodo che converte la configurazione attuale in json e la inserisce sia nello Stack log che nel file log
+     *
      */
     private void updateLogsWithCurrentConfiguration(){
-        //Serializza la configurazione corrente nel file di supporto
-        UtilityJackson.serializeConfiguration(_configuration, _supportFilePathName);
-        //Deserializza la configurazione corrente dal file di supporto e inseriscila nello Stack log
-        _stackLog.push(UtilityJackson.deserializeConfiguration(_supportFilePathName));
-        //Scrivi tutto lo Stack di log sul file di log
-        UtilityJackson.serializeConfigurationLog(_stackLog, _logFilePathName);
+            //Serializza la configurazione corrente nel file di supporto
+            UtilityJackson.serializeConfiguration(_configuration, _supportFilePathName);
+            //Deserializza la configurazione corrente dal file di supporto e inseriscila nello Stack log
+            _stackLog.push(UtilityJackson.deserializeConfiguration(_supportFilePathName));
+            //Scrivi tutto lo Stack di log sul file di log
+            UtilityJackson.serializeConfigurationLog(_stackLog, _logFilePathName);
+
+    }
+
+    //debug
+    public String getPenultima(){
+        Configuration last = _stackLog.pop();
+        String out = _stackLog.pop().toString();
+        _stackLog.push(last);
+        return out;
     }
 }

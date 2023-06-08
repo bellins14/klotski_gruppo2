@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -43,6 +40,7 @@ public class UtilityJackson {
 
             // Scrittura sul file
             om.writeValue(fw, conf);
+
 
         } catch (IOException e) {
             e.printStackTrace();

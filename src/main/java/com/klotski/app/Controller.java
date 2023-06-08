@@ -70,6 +70,7 @@ public class Controller {
         //Crea un nuovo gioco
         game = new Game(LOG_FILE,DC_FILE);
 
+
         //Setta il counter con le mosse
         textCounter.setText("Moves : " + game.getMoveCounter());
 
