@@ -227,6 +227,41 @@ Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
 ```
 
 
+## reset()
+
+![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram5.png)
+
+```plantuml
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #00B4D8
+skinparam ActorBorderColor #03045E
+skinparam ActorFontColor #03045E
+skinparam ActorBackgroundColor #CAF0F8
+skinparam ParticipantFontColor #03045E
+skinparam ParticipantBorderColor #03045E
+skinparam ParticipantBackgroundColor #90E0EF
+skinparam DatabaseBorderColor #03045E
+skinparam DatabaseBackgroundColor #00B4D8
+skinparam DatabaseFontColor #03045E
+
+actor Giocatore 
+participant Partita
+database Log
+
+Giocatore -> Partita: reset()
+
+Partita -> Partita: aggiorna_configurazione_corrente(configurazione_iniziale)\nreset_counter()
+Partita -> Partita: reset_storico_configurazioni() \naggiorna_storico_configurazioni(configurazione_corrente)
+Partita -> Log: scrivi(storico_configurazioni)
+
+Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
+
+@enduml
+```
+
+
 ## Internal Sequence Diagram - Completo(da Eliminare)
 
 ![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram.png)
