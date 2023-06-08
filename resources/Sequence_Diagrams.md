@@ -3,6 +3,7 @@
 ![SystemSequenceDiagram.png](img/diagrams/SystemSequenceDiagram.png)
 
 ```plantuml
+@startuml
 !theme materia-outline
 
 skinparam ArrowColor #00B4D8
@@ -19,7 +20,7 @@ par
     
     critical 
       alt vittoria
-        Sistema --> Giocatore: messaggio("hai vinto")
+        Sistema --> Giocatore: messaggio("Hai vinto")
 
       else altrimenti
         Sistema --> Giocatore: mostra(configurazione_aggiornata,\ncounter++)
@@ -60,7 +61,7 @@ else
         Sistema --> Giocatore: mostra(NBM)
         
       else altrimenti
-        Sistema --> Giocatore: messaggio("Next Best Move non disponibile")
+        Sistema --> Giocatore: messaggio("Next best move non disponibile")
     end
 end
 @enduml
