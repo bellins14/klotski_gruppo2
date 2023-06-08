@@ -222,9 +222,13 @@ database Log
 
 Giocatore -> Partita: undo()
 
-Partita -> Partita: rimuovi_ultima_configurazione(storico_configurazioni)
-Partita -> Partita: aggiorna_configurazione_corrente(ultima_configurazione(storico_configurazioni)\ncounter--
-Partita -> Log: scrivi(storico_configurazioni)
+alt counter > 0
+  Partita -> Partita: rimuovi_ultima_configurazione(storico_configurazioni)
+  Partita -> Partita: aggiorna_configurazione_corrente(ultima_configurazione(storico_configurazioni)\ncounter--
+  Partita -> Log: scrivi(storico_configurazioni)
+else counter == 0
+  Partita --> Giocatore: messaggio("Impossibile tornare indietro")
+end
 
 Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
