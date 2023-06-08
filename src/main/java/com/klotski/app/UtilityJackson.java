@@ -23,13 +23,13 @@ public class UtilityJackson {
      * Utile per la deep copy.
      * @param conf configurazione da serializzare.
      */
-    public static void serializeConfiguration(Configuration conf, String dcPathName){
+    public static void serializeConfiguration(Configuration conf, String dcFilePathName){
         File f;
         FileWriter fw = null;
         try {
             ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
             // File usato come appoggio per la deep copy
-            f = new File(dcPathName);
+            f = new File(dcFilePathName);
             fw = new FileWriter(f); // Classe per la scrittura su file
             om.writeValue(fw, conf);
         } catch (IOException e) {

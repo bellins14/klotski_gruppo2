@@ -79,6 +79,7 @@ public class ConfigurationDeserializer extends JsonDeserializer<Configuration> {
 }
 // Ovviamente creiamo una nuova configurazione da 0, quindi non dovrebbero esserci problemi di riferimenti.
 
+// Descrizione del funzionamento dei token
 /*
     JsonToken.START_OBJECT: Indica l'inizio di un oggetto JSON (parentesi graffa {).
     JsonToken.END_OBJECT: Indica la fine di un oggetto JSON (parentesi graffa }).
@@ -91,50 +92,4 @@ public class ConfigurationDeserializer extends JsonDeserializer<Configuration> {
     JsonToken.VALUE_TRUE: Indica il valore booleano true.
     JsonToken.VALUE_FALSE: Indica il valore booleano false.
     JsonToken.VALUE_NULL: Indica un valore nullo.
- */
-
-/*
-token = jsonParser.currentToken();
-            // Controllo che il token corrisponda alla fine di un oggetto.
-            if (token == JsonToken.END_OBJECT) {
-                jsonParser.nextToken();
-                closed_objects++;
-            } else if(token == JsonToken.FIELD_NAME) { // Controllo se il token è un field name
-                // Gestisco shape e position separatamente
-
-                if(jsonParser.getCurrentName().equals("shape")){
-                    jsonParser.nextToken();
-                    jsonParser.nextToken();
-                    // Arrivo al token VALUE_NUMBER_INT
-                    h = jsonParser.getValueAsInt();
-                    jsonParser.nextToken();
-                    w = jsonParser.getValueAsInt();
-                    d_check = true;
-                } // Fine if SHAPE
-
-                if (jsonParser.getCurrentName().equals("position")){
-                    jsonParser.nextToken();
-                    jsonParser.nextToken();
-                    // Arrivo al token VALUE_NUMBER_INT
-                    x = jsonParser.getValueAsInt();
-                    jsonParser.nextToken();
-                    y = jsonParser.getValueAsInt();
-                    c_check = true;
-                } // Fine if POSITION
-            } else{
-                // Nessun token di interesse, andiamo avanti
-                jsonParser.nextToken();
-            }
-
-            // Creiamo il blocco una volta prelevati i dati
-            if (d_check && c_check){
-                p = new Piece(h*100, w*100);
-                p.setLayoutX(x*100);
-                p.setLayoutY(y*100);
-                blocks[i] = p;
-                d_check = false;
-                c_check = false;
-                i++;
-            }
-        }
  */
