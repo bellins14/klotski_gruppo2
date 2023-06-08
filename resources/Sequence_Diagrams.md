@@ -180,13 +180,13 @@ database Log
 
 Giocatore -> Partita: cambia_configurazione(configurazione_alternativa)
     
-critical
-  Partita -> Partita: aggiorna_configurazione_corrente(configurazione_alternativa)\nreset_counter()
-  Partita -> Partita: reset_storico_configurazioni() \naggiorna_storico_configurazioni(configurazione_corrente)
-  Partita -> Log: scrivi(storico_configurazioni)
-  
-  
-  Partita-->Giocatore: mostra(configurazione_corrente,\ncounter)
+
+Partita -> Partita: aggiorna_configurazione_corrente(configurazione_alternativa)\nreset_counter()
+Partita -> Partita: reset_storico_configurazioni() \naggiorna_storico_configurazioni(configurazione_corrente)
+Partita -> Log: scrivi(storico_configurazioni)
+
+
+Partita-->Giocatore: mostra(configurazione_corrente,\ncounter)
 end
 
 @enduml
