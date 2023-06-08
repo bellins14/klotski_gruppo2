@@ -14,8 +14,9 @@ public class Constants {
     //File fxml (per JavaFX)
     public static final String VIEW_FXML_FILENAME = "view.fxml";
 
-    ////File css (per lo stile di JavaFX)
+    //File css (per lo stile di JavaFX)
     public static final String STYLE_CSS_FILENAME = "style.css";
+
 
 
     //Serializzazione e scrittura su file:
@@ -25,6 +26,10 @@ public class Constants {
 
     //File di log (o storico o database) delle mosse (in forma di stringhe json di configurazioni)
     public static final String LOG_FILE = "src/main/resources/com/klotski/app/json/ConfigurationLog.json";
+
+
+    static  int EMPTY_LOG_SIZE = 0;
+    static int SINGLE_LOG_SIZE = 1;
 
 
     //JFX Scene:
@@ -63,6 +68,7 @@ public class Constants {
     public static final int NBM_BUTTON_TIMER_MILLIS = 500;
     //Path file HTML per poter risolvere l'NBM
     public static final String NBM_SOLVER_HTML_FILE = "src/main/resources/com/klotski/app/solver.html";
+
 
 
     //Direction Indexes:

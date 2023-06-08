@@ -10,8 +10,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
 
+import static com.klotski.app.Constants.*;
+
 /**
- * Classe utilizzata per metodi / varibili ausiliari
+ * Classe che fornisce dei metodi di utilità per le classi del Klotski.
  */
 public class Utility {
 
@@ -19,12 +21,9 @@ public class Utility {
         // Costruttore privato per evitare l'istanziazione della classe
     }
 
-    static  int EMPTY_LOG_SIZE = 0;
-    static int SINGLE_LOG_SIZE = 1;
-
 
     /**
-     * Metodo che si occupa del cambio di configurazione una volta clickato il bottone apposito.
+     * Metodo per mostrare una finestra di alert.
      *
      * @param alertType tipo di alert
      * @param title titolo dell'alert
@@ -84,13 +83,18 @@ public class Utility {
                 "</script>" +
                 "</body>\n" +
                 "</html>";
-        FileWriter file = new FileWriter("src/main/resources/com/klotski/app/solver.html");
+        FileWriter file = new FileWriter(NBM_SOLVER_HTML_FILE);
         file.write(game);
         file.close();
     }
 
 
-
+    /**
+     * Metodo per estrarre l'intero associato ad una key di una stringa in formato JSON
+     * @param jsonString stringa in formato json.
+     * @param key chiave.
+     * @return intero associato
+     */
     public static int extractIntValue(String jsonString, String key) {
         int valueStart = jsonString.indexOf("\"" + key + "\":") + (key.length() + 3);
         int valueEnd = jsonString.indexOf(",", valueStart);
@@ -135,7 +139,5 @@ public class Utility {
 
         return true;
     }
-
-
 
 }

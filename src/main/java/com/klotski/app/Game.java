@@ -2,6 +2,8 @@ package com.klotski.app;
 
 import java.util.Stack;
 
+import static com.klotski.app.Constants.*;
+
 
 /**
  * Classe che rappresenta il gioco di Klotski. Dispone:
@@ -54,7 +56,7 @@ public class Game {
         //Inizializza lo stack log con il file log
         _stackLog = UtilityJackson.deserializeConfigurationLog(_logFilePathName);
 
-        if (_stackLog.size() == Utility.EMPTY_LOG_SIZE) { // Se il log è vuoto
+        if (_stackLog.size() == EMPTY_LOG_SIZE) { // Se il log è vuoto
 
             //Inizializza il gioco con la configurazione default (la numero 1)
             _initialSelectedConf = 1;
@@ -66,7 +68,7 @@ public class Game {
             //Setta il counter delle mosse a 0
             _moveCounter = 0;
 
-        } else if (_stackLog.size() == Utility.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale
+        } else if (_stackLog.size() == SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale
                                                                  // => c'è una partita precedente allo stadio iniziale
 
             //Prende tale configurazione (in json) dal file di log, la converte in un oggetto Configuration
