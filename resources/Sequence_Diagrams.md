@@ -8,6 +8,13 @@
 
 skinparam ArrowColor #00B4D8
 skinparam BackgroundColor #FFFFFF
+skinparam ArrowColor #00B4D8
+skinparam ActorBorderColor #03045E
+skinparam ActorFontColor #03045E
+skinparam ActorBackgroundColor #CAF0F8
+skinparam ParticipantFontColor #03045E
+skinparam ParticipantBorderColor #03045E
+skinparam ParticipantBackgroundColor #90E0EF
 
 actor Giocatore
 participant Sistema
