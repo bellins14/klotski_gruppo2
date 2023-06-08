@@ -1,16 +1,5 @@
 package com.klotski.app;
 
-import javafx.concurrent.Worker;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Stack;
 
 import static com.klotski.app.Constants.*;
@@ -19,7 +8,7 @@ import static com.klotski.app.Constants.*;
 public class Game {
 
     //Configurazione selezionata tra le 4 iniziali
-    private int selectedConf;
+    private int _initialSelectedConf;
 
     //Configurazione attuale dei pezzi
     private Configuration _configuration;
@@ -41,8 +30,8 @@ public class Game {
         if (log.size() == Utility.EMPTY_LOG_SIZE) { // Se il log è vuoto
 
             //Inizializza il gioco con la configurazione default (1)
-            selectedConf = 1;
-            _configuration = new Configuration(selectedConf);
+            _initialSelectedConf = 1;
+            _configuration = new Configuration(_initialSelectedConf);
 
             //Converte la configurazione attuale in json e inseriscila sia nello stack log che nel file log
             jacksonSerialize();
@@ -58,7 +47,7 @@ public class Game {
 
             //TODO: gestire la situazione in cui la configurazione nel file di log non è una di quelle iniziali
             //Controlla che sia una delle 4 configurazioni iniziali, prendi il numero e setta selectedConf
-            selectedConf = Configuration.isInitialConfiguration(_configuration);
+            _initialSelectedConf = Configuration.isInitialConfiguration(_configuration);
 
             //Setta il counter delle mosse a 0
             setCounter(0);
@@ -69,7 +58,7 @@ public class Game {
             _configuration = getInitConfiguration();
 
             //Controlla a quale numero di configurazione iniziale corrisponde e setta selectedConf
-            selectedConf = Configuration.isInitialConfiguration(_configuration);
+            _initialSelectedConf = Configuration.isInitialConfiguration(_configuration);
 
             UtilityJackson.serializeConfiguration(log.peek(), DC_FILE);
             _configuration = UtilityJackson.deserializeConfiguration(DC_FILE);
@@ -77,12 +66,12 @@ public class Game {
         }
     }
 
-    public int getSelectedConf() {
-        return selectedConf;
+    public int getInitialSelectedConf() {
+        return _initialSelectedConf;
     }
 
-    public void setSelectedConf(int i){
-        this.selectedConf = i;
+    public void setInitialSelectedConf(int i){
+        this._initialSelectedConf = i;
         //TODO:aggiungere eccezioni
     }
 
@@ -96,10 +85,6 @@ public class Game {
 
     public Stack<Configuration> getLog() {
         return log;
-    }
-
-    public void setLog(Stack<Configuration> log) {
-        this.log = log;
     }
 
     public void clearLog(){
@@ -172,6 +157,21 @@ public class Game {
         jacksonSerialize();
     }
 
+    public void setConfigurationWithInitialConf(int confNumber) throws IllegalArgumentException {
+
+            //Aggiorna la configurazione attuale con la nuova configurazione iniziale
+            setConfiguration(new Configuration(confNumber)); //Lancia IllegalArgumentException se confNumber <1 o >4
+            //Resetta il counter delle mosse
+            setCounter(0);
+            //Aggiorna il numero della configurazione iniziale scelta
+            setInitialSelectedConf(confNumber);
+            //Pulisci lo Stack di log
+            clearLog();
+            //Pulisci il file di log e inserisci la nuova configurazione
+            jacksonSerialize();
+
+    }
+
 
 
     /**
@@ -195,10 +195,9 @@ public class Game {
 
 
     // Prende la configurazione attuale, la converte in json e la inserisce nello stack log e nel file di log
-    public void jacksonSerialize(){ //TODO: forse private
+    private void jacksonSerialize(){ //TODO: forse private
         UtilityJackson.serializeConfiguration(_configuration, DC_FILE);
         log.push(UtilityJackson.deserializeConfiguration(DC_FILE));
         UtilityJackson.serializeConfigurationLog(log, LOG_FILE);
     }
-
 }

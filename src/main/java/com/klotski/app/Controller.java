@@ -80,26 +80,29 @@ public class Controller {
         //Prende i blocchi della configurazione attuale
         Piece[] blocks = game.getConfiguration().getPieces();
 
-        //Inizializza il pane con i blocchi della configurazione attuale
+        //Per ogni blocco della configurazione attuale
         for (Piece block : blocks) {
 
-            // renderizza l'immagine per ogni blocco (parte che era in Piece)
+            //Renderizza l'immagine del blocco (parte esclusivamente grafica)
             Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(block.getImageName())).toString());
             ImagePattern piecePattern = new ImagePattern(pieceImage);
             block.setFill(piecePattern);
+
+            //Aggiunge il blocco al pane
             blockPane.getChildren().add(block);
 
             //forse va fuori
             blockPane.setStyle("-fx-border-color: black");
 
-            // Aggiunge un gestore eventi per la selezione di un bottone
+            //Aggiunge un gestore eventi per la selezione di un bottone
             block.setOnMouseClicked(event -> {
                 selectedBlock = (Piece) event.getSource();
                 for (Piece b : blocks) {
                     b.setEffect(null);
                     b.setStrokeWidth(3);
                 }
-                // Attiva l'illuminazione del pulsante selezionato
+
+                //Attiva l'illuminazione del pulsante selezionato
                 StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), block);
                 strokeTransition.setFromValue(Color.grayRgb(3));
                 strokeTransition.setToValue(Color.grayRgb(6));
@@ -111,10 +114,6 @@ public class Controller {
                 block.setStrokeWidth(5);
             });
         }
-
-        // Stampa stato all'interno del file ConfigurationLog.json
-        // Inserisco il primo record relativo alla configurazione iniziale
-
 
         // Aggiunge un gestore eventi per la pressione dei tasti freccia
         blockPane.setOnKeyPressed(event -> {
@@ -152,7 +151,9 @@ public class Controller {
             game.popLog();
         }
 
-        //Ora gameLog ha solo 1 elemento, la configurazione iniziale
+
+        //TODO: sposta in game
+        //Ora gameLog ha solo 1 elemento: la configurazione iniziale
         UtilityJackson.serializeConfigurationLog(game.getLog(), LOG_FILE); // Aggiorno lo storico
         UtilityJackson.serializeConfiguration(game.getLog().peek(), DC_FILE); // Aggiorno la serializzazione
         initialize();
@@ -167,15 +168,16 @@ public class Controller {
     @FXML
     void configurationClicked(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
-        int configurationIndex = Integer.parseInt(clickedButton.getUserData().toString());
-        if (game.getSelectedConf() != configurationIndex) {
-            game.setCounter(0);
+        int configurationNumber = Integer.parseInt(clickedButton.getUserData().toString());
+
+        //Se la configurazione iniziale selezionata è diversa da quella attuale
+        if (game.getInitialSelectedConf() != configurationNumber) {
+            //Cambia la configurazione attuale di game
+            game.setConfigurationWithInitialConf(configurationNumber);
+            //Aggiorna il testo con il counter delle mosse
             textCounter.setText("Moves : " + game.getCounter());
-            game.setSelectedConf(configurationIndex);
             blockPane.getChildren().clear();
-            game.clearLog();
-            game.setConfiguration(new Configuration(game.getSelectedConf()));
-            game.jacksonSerialize();
+            //Fai ripartire l'inizializzazione
             initialize();
         }
     }
