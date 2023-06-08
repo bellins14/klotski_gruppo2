@@ -65,7 +65,57 @@ end
 @enduml
 ```
 
-# Internal Sequence Diagram
+
+# Internal Sequence Diagrams
+
+## Internal Sequence Diagram: inizia_partita()
+
+![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram1.png)
+
+```plantuml
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #00B4D8
+skinparam ActorBorderColor #03045E
+skinparam ActorFontColor #03045E
+skinparam ActorBackgroundColor #CAF0F8
+skinparam ParticipantFontColor #03045E
+skinparam ParticipantBorderColor #03045E
+skinparam ParticipantBackgroundColor #90E0EF
+skinparam DatabaseBorderColor #03045E
+skinparam DatabaseBackgroundColor #00B4D8
+skinparam DatabaseFontColor #03045E
+
+actor Giocatore 
+participant Partita
+database Log
+
+Giocatore -> Partita: inizia_partita()
+
+Partita -> Log: richiedi_storico_stati()
+Log -> Log: controlla()
+
+
+alt storico disponibile
+    Log --> Partita: restituisci(storico_stati)
+    Partita -> Partita: preleva(ultima_configurazione, counter);
+
+else storico non disponibile o vuoto
+    Log --> Partita: messaggio(nessuno_storico)
+    Partita -> Partita: configurazione_iniziale(1)
+    Partita -> Partita: aggiungi_storico(configurazione_iniziale)
+    Partita -> Partita: counter = 0
+    Partita --> Log: scrivi(storico)
+end
+
+Partita --> Giocatore: mostra(configurazione,\ncounter)
+
+@enduml
+```
+
+
+## Internal Sequence Diagram - Completo(da Eliminare)
 
 ![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram.png)
 
