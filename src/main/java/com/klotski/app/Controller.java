@@ -34,20 +34,26 @@ public class Controller {
     //Pannello "Pane" dove andrò a inserire i vari Piece
     @FXML
     private Pane blockPane;
+    //Bottone undo
     @FXML
     private JFXButton undo;
     //Testo per il numero di mosse
     @FXML
     private Text textCounter;
+    //Bottone reset
     @FXML
     private JFXButton reset;
+    //Bottone NBM
     @FXML
     private JFXButton NBM;
+    //Gioco
     private Game game;
 
-    //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
-    private Piece selectedBlock;
+    //Pezzo selezionato: un pezzo puo' essere mosso solo con le frecce della tastiera
+    // solo dopo essere stato selezionato con il mouse
+    private Piece selectedPiece;
 
+    //Necessario per la connessione all'NBM
     private WebEngine webEngine;
 
 
@@ -64,69 +70,77 @@ public class Controller {
      * Metodo chiamato di default all'avvio dell'applicazione.
      * Inizializza la pane e gestisce gli input da tastiera e da mouse sui blocchi.
      */
-    //primo metodo chiamato di default
     public void initialize() {
 
         //Crea un nuovo gioco
         game = new Game();
 
         //Setta il counter con le mosse
-        textCounter.setText("Moves : " + game.getCounter());
+        textCounter.setText("Moves : " + game.getMoveCounter());
 
-        //Setta la dimensione del pane
-        blockPane.setMaxWidth(400);
-        blockPane.setMaxHeight(500);
+        //Setta le dimensioni massime del pane
+        blockPane.setMaxHeight(MAX_PANE_HEIGHT);
+        blockPane.setMaxWidth(MAX_PANE_WIDTH);
 
-        //Prende i blocchi della configurazione attuale
-        Piece[] blocks = game.getConfiguration().getPieces();
+        //Prende i pezzi della configurazione attuale
+        Piece[] currentPieces = game.getConfiguration().getPieces();
 
-        //Per ogni blocco della configurazione attuale
-        for (Piece block : blocks) {
+        //Per ogni pezzo della configurazione attuale
+        for (Piece piece : currentPieces) {
 
-            //Renderizza l'immagine del blocco (parte esclusivamente grafica)
-            Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(block.getImageName())).toString());
+            //Renderizza l'immagine del pezzo (parte esclusivamente grafica)
+            Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(piece.getImageName())).toString());
             ImagePattern piecePattern = new ImagePattern(pieceImage);
-            block.setFill(piecePattern);
+            piece.setFill(piecePattern);
 
-            //Aggiunge il blocco al pane
-            blockPane.getChildren().add(block);
+            //Aggiunge il pezzo al pane
+            blockPane.getChildren().add(piece);
 
-            //forse va fuori
-            blockPane.setStyle("-fx-border-color: black");
+            //TODO: sposta più su
+            //Setta il bordo della pane
+            blockPane.setStyle(PANE_BORDER_COLOR);
 
             //Aggiunge un gestore eventi per la selezione di un bottone
-            block.setOnMouseClicked(event -> {
-                selectedBlock = (Piece) event.getSource();
-                for (Piece b : blocks) {
-                    b.setEffect(null);
-                    b.setStrokeWidth(3);
+            piece.setOnMouseClicked(event -> {
+                selectedPiece = (Piece) event.getSource();
+                for (Piece p : currentPieces) {
+                    p.setEffect(null);
+                    p.setStrokeWidth(3);
                 }
 
                 //Attiva l'illuminazione del pulsante selezionato
-                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), block);
+                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), piece);
                 strokeTransition.setFromValue(Color.grayRgb(3));
                 strokeTransition.setToValue(Color.grayRgb(6));
                 strokeTransition.setCycleCount(2);
                 strokeTransition.setAutoReverse(true);
                 strokeTransition.play();
-                selectedBlock = block;
-                // aumenta lo spessore del bordo
-                block.setStrokeWidth(5);
+                selectedPiece = piece;
+
+                //Aumenta lo spessore del bordo
+                piece.setStrokeWidth(5);
             });
         }
 
         // Aggiunge un gestore eventi per la pressione dei tasti freccia
         blockPane.setOnKeyPressed(event -> {
-            if (selectedBlock != null) {
+            if (selectedPiece != null) {
                 //di quanto si deve spostare il mio bottone selezionato
                 //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
                 //getCode mi traduce il comando da tastiera in un codice
                 int keyCode = event.getCode().ordinal();
-                moveBlock(selectedBlock, keyCode);
+
+                //Sposta il blocco
+                moveBlock(selectedPiece, keyCode);
+
+                //Controlla se il giocatore ha vinto
                 if (checkWin(blockPane)) {
+                    //Resetta
                     reset();
                 }
-                textCounter.setText("Moves : " + game.getCounter());
+
+                //Aggiorna il testo con il counter delle mosse
+                textCounter.setText("Moves : " + game.getMoveCounter());
 
             }
 
@@ -143,14 +157,16 @@ public class Controller {
     void reset() {
 
         //Cambia la configurazione attuale di game con la configurazione iniziale
-        game.setConfigurationWithInitialConf(game.getInitialSelectedConf());
+        game.setConfigurationToInitialConf(game.getInitialSelectedConf());
 
         //Aggiorna il testo con il counter delle mosse
-        textCounter.setText("Moves : " + game.getCounter());
+        //textCounter.setText("Moves : " + 0);
+
+        //Pulisce il pane
         blockPane.getChildren().clear();
+
         //Fai ripartire l'inizializzazione
         initialize();
-
     }
 
 
@@ -161,16 +177,25 @@ public class Controller {
      */
     @FXML
     void configurationClicked(ActionEvent event) {
+
+        //Prendi il bottone cliccato
         Button clickedButton = (Button) event.getSource();
+
+        //Prendi il numero della configurazione selezionata
         int configurationNumber = Integer.parseInt(clickedButton.getUserData().toString());
 
         //Se la configurazione iniziale selezionata è diversa da quella attuale
         if (game.getInitialSelectedConf() != configurationNumber) {
+
             //Cambia la configurazione attuale di game
-            game.setConfigurationWithInitialConf(configurationNumber);
+            game.setConfigurationToInitialConf(configurationNumber);
+
             //Aggiorna il testo con il counter delle mosse
-            textCounter.setText("Moves : " + game.getCounter());
+            textCounter.setText("Moves : " + game.getMoveCounter());
+
+            //Pulisci il pane
             blockPane.getChildren().clear();
+
             //Fai ripartire l'inizializzazione
             initialize();
         }
@@ -210,7 +235,7 @@ public class Controller {
                         // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
                         // quando viene eseguito `initialize()`
                         moveBlock((Piece) node,dirIdx);
-                        textCounter.setText("Moves : " + game.getCounter());
+                        textCounter.setText("Moves : " + game.getMoveCounter());
 
                     } // Fine if
                 }
@@ -219,9 +244,13 @@ public class Controller {
                 }
             });
 
+            //Controlla se ha vinto
             if (checkWin(blockPane)) {
+                //Resetta
                 reset();
             }
+
+            //Imposta un timer per evitare che il bottone NBM possa essere premuto troppo velocemente
             Timer timer = new Timer();
             TimerTask enableButtonNBM = new TimerTask() {
                 @Override
@@ -268,24 +297,28 @@ public class Controller {
      */
     @FXML
     void undo() {
-        if (game.getCounter() != 0) {
-            game.setCounter(game.getCounter() - 1);
-            textCounter.setText("Moves : " + game.getCounter());
+        if (game.getMoveCounter() != 0) { //Se il counter è diverso da 0
+
+            //Setta la configurazioen attuale con quella precedente
+            game.setConfigurationToPreviousConf();
+
+            //Aggiorna il testo con il counter delle mosse
+            textCounter.setText("Moves : " + game.getMoveCounter());
+
+            //Pulisci il pane
             blockPane.getChildren().clear();
 
-            game.popLog();
-            UtilityJackson.serializeConfigurationLog(game.getLog(), LOG_FILE);
-            UtilityJackson.serializeConfiguration(game.getLog().peek(), DC_FILE);
+            //Fai ripartire l'inizializzazione con il nuovo file di log
             initialize();
+
         } else {
             Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun blocco!");
         }
     }
 
 
-//TODO:separare logica muovi blocco in game
+
     public void moveBlock(Piece block, int dirIdx) {
-        //boolean blockMoved = false;
         double moveAmount = 100;
         switch (dirIdx) {
             //WASD

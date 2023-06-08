@@ -9,6 +9,14 @@ public class Constants {
     public static final String DC_FILE = "src/main/resources/com/klotski/app/json/ConfigurationDC.json";
     public static final String LOG_FILE = "src/main/resources/com/klotski/app/json/ConfigurationLog.json";
 
+    //JFX Pane:
+
+    //Dimensioni massime
+    public static final int MAX_PANE_HEIGHT = 500;
+    public static final int MAX_PANE_WIDTH = 400;
+
+    //Colore del bordo
+    public static final String PANE_BORDER_COLOR = "-fx-border-color: black";
     //Pezzi
 
     //Bordo
