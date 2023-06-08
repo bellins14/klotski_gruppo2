@@ -36,7 +36,7 @@ public class Main extends Application {
             stage.show();
         }
         catch (Exception e) {
-            Utility.setAlert(Alert.AlertType.ERROR,"ERRORE NEL CARICAMENTO DELL'APPLICAZIONE",e.toString());
+            Utility.setAlert(Alert.AlertType.ERROR,"Errore nel caricamento dell'applicazione",e.toString());
         }
 
 
