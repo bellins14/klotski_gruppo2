@@ -17,11 +17,9 @@
 ## Corrente
 Grafo senza la classe concettuale Klotski
 
-![Domain Model](img/diagrams/DomainModel.png)
+![Domain Model](resources/img/diagrams/DomainModel.png)
 
 ```plantuml
-# PlantUML Editor
-
 @startuml
 
 left to right direction
@@ -60,7 +58,7 @@ Undo -- Partita : Modifica
 ## Deprecato(?)
 Grafico con la classe concettuale "Klotski"
 
-```uml
+```plantuml
 # PlantUML Editor
 
 @startuml

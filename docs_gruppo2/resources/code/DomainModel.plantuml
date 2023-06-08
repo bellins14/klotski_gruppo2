@@ -1,0 +1,33 @@
+@startuml
+
+left to right direction
+object Giocatore
+object Configurazione
+object Blocco{
+  colore
+  tipo
+}
+object Partita{
+  contatoreMosse
+}
+object Database
+object API
+object NBM
+object Reset
+object Undo
+
+Giocatore "1" -- "1"Partita : Gioca
+Giocatore "1" -- "1"Configurazione : Sceglie
+Giocatore "1" -- "1"Blocco : Muove
+Partita "1" *-down "4" Configurazione : Contiene
+Configurazione "1" *-down "10" Blocco : Contiene
+Database "1" -up-> "1" Partita : Contiene
+API -up-> NBM : Fornisce
+Partita "1" o-left "0..1" NBM : Ha
+Giocatore "1" -- "0.." Reset : Richiede
+Giocatore "1" -- "0.." Undo : Richiede
+Giocatore "1" -- "0.." NBM : Richiede
+Reset -- Partita : Modifica
+Undo -- Partita : Modifica
+
+@enduml

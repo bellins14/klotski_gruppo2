@@ -300,11 +300,9 @@
 
 # Grafo Use Cases
 
-![UseCasesDiagram.png](/docs_gruppo2/img/diagrams/UseCasesDiagram.png)
+![UseCasesDiagram.png](/docs_gruppo2/resources/img/diagrams/UseCasesDiagram.png)
 
 ```plantuml
-# PlantUML Editor
-
 @startuml
 
 left to right direction
