@@ -34,7 +34,7 @@ public class Game {
     public boolean checkWin(Pane blockPane) {
         Node node = blockPane.getChildren().get(0);
         if (node.getLayoutX() == 100 && node.getLayoutY() == 300) {
-            Utility.setAlert(Alert.AlertType.INFORMATION, "VITTORIA", "HAI VINTO");
+            Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
            return  true;
         }
         return  false;
@@ -137,7 +137,7 @@ public class Game {
                 } // Fine if
             }
             if (newValue == Worker.State.FAILED) {
-                Utility.setAlert(Alert.AlertType.ERROR, "ERRORE", "ERRORE NEL CARICAMENTO DELLO SCRIPT");
+                Utility.setAlert(Alert.AlertType.ERROR, "Errore", "Errore nel caricamento dello script");
             }
         });
     }

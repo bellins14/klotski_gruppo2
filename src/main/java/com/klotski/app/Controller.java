@@ -215,7 +215,7 @@ public class Controller {
 
             timer.schedule(enableButtonNBM, 500);
         } else {
-            Utility.setAlert(Alert.AlertType.ERROR, "ERRORE", "NBM NON DISPONBILE, CONNETTITI AD INTERNET");
+            Utility.setAlert(Alert.AlertType.ERROR, "Errore", "NBM non disponibile, connettiti a internet");
         }
     }
 
@@ -233,7 +233,7 @@ public class Controller {
             UtilityJackson.serializeConfiguration(log.peek(), DC_FILE);
             initialize();
         } else {
-            Utility.setAlert(Alert.AlertType.WARNING, "UNDO", "NON HAI SPOSTATO NESSUN BLOCCO!");
+            Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun blocco!");
         }
     }
 }
