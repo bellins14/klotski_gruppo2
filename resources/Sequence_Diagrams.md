@@ -229,7 +229,7 @@ Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
 ## reset()
 
-![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram5.png)
+![InternalSequenceDiagram5.png](img/diagrams/InternalSequenceDiagram5.png)
 
 ```plantuml
 @startuml
