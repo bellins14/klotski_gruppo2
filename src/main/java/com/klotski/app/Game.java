@@ -32,19 +32,19 @@ public class Game {
     //Costruttore di default
     public Game(){
 
-        //Creo lo stack log
+        //Crea lo stack log
         log = new Stack<>();
 
-        // Inizializzo lo stack log con il file log
+        // Inizializza lo stack log con il file log
         log = UtilityJackson.deserializeConfigurationLog(LOG_FILE);
 
         if (log.size() == Utility.EMPTY_LOG_SIZE) { // Se il log è vuoto
 
-            //Inizializzo il gioco con la configurazione default (1)
+            //Inizializza il gioco con la configurazione default (1)
             selectedConf = 1;
             _configuration = new Configuration(selectedConf);
 
-            //Converti la configurazione attuale in json e inseriscila sia nello stack log che nel file log
+            //Converte la configurazione attuale in json e inseriscila sia nello stack log che nel file log
             jacksonSerialize();
 
             //Setta il counter delle mosse a 0
@@ -52,7 +52,7 @@ public class Game {
 
         } else if (log.size() == Utility.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
 
-            //Prendi tale configurazione (in json) dal file di log, convertila in un oggetto Configuration
+            //Prende tale configurazione (in json) dal file di log, convertila in un oggetto Configuration
             // e inizializza _configuration
             _configuration = UtilityJackson.deserializeConfiguration(DC_FILE);
 
@@ -123,7 +123,7 @@ public class Game {
      *
      * @return initConf configurazione iniziale estrapolata.
      */
-    private Configuration getInitConfiguration() { //TODO: eventualmente togliere il parametro log
+    private Configuration getInitConfiguration() {
         Stack<Configuration> utility = new Stack<>();
         int s = log.size();
         for (int i = 1; i < s; i++) {
@@ -138,14 +138,11 @@ public class Game {
     }
 
 
-
     // Prende la configurazione attuale, la converte in json e la inserisce nello stack log e nel file di log
-    public void jacksonSerialize(){
+    public void jacksonSerialize(){ //TODO: forse private
         UtilityJackson.serializeConfiguration(_configuration, DC_FILE);
         log.push(UtilityJackson.deserializeConfiguration(DC_FILE));
         UtilityJackson.serializeConfigurationLog(log, LOG_FILE);
     }
-
-
 
 }

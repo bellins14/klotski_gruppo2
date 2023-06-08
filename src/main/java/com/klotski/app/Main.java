@@ -36,7 +36,7 @@ public class Main extends Application {
         //Creo una scena che contiene il contenuto dell'interfaccia utente (1000 x 700)
         Scene scene = null;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view.fxml")); //TODO: sposta in costants
             scene = new Scene(fxmlLoader.load(), 1000, 700);
             stage.setScene(scene);
             //aggiungo un file css alla scena
