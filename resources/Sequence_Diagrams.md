@@ -102,11 +102,11 @@ Log -> Log: controlla()
 
 alt storico disponibile
     Log --> Partita: restituisci(storico_configurazioni)
-    Partita -> Partita: preleva_ultima_configurazione(storico_configurazioni) \ncalcola_counter(storico_configurazioni)
+    Partita -> Partita: preleva_ultima_configurazione(storico_configurazioni) \ninizializza_configurazione_corrente(ultima_configurazione) \ncalcola_counter(storico_configurazioni)
 
 else storico non disponibile o vuoto
     Log --> Partita: eccezione(nessuno_storico)
-    Partita -> Partita: configurazione_iniziale(1) \ncounter = 0 \naggiungi_storico(configurazione_iniziale)
+    Partita -> Partita: ininizializza_configurazione_corrente(configurazione_iniziale) \n inizializza_counter(0) \naggiorna_storico_configurazioni(configurazione_iniziale)
     Partita -> Log: scrivi(storico_configurazioni)
 end
 
