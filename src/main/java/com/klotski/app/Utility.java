@@ -1,7 +1,11 @@
 package com.klotski.app;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
@@ -100,6 +104,37 @@ public class Utility {
         return Integer.parseInt(valueString);
     }
 
+
+    /**
+     * Metodo che controlla che non ci sia overlapping tra pezzi durante il loro spostamento.
+     *
+     * @param piece pezzo che si vuole.
+     * @param deltaX quantità di cui si muove il pezzo orizzontalmente.
+     * @param deltaY quantità di cui si muove il pezzo verticalmente.
+     * @return false se si overlappa, true se è tutto a posto.
+     */
+    public static boolean isNotOverlapping(Piece piece, Pane blockPane, double deltaX, double deltaY) {
+        // Calcola la nuova posizione del bottone
+        double newX = piece.getLayoutX() + deltaX;
+        double newY = piece.getLayoutY() + deltaY;
+
+        // Itera su tutti gli elementi figli della Pane
+        ObservableList<Node> children = blockPane.getChildren();
+        for (Node child : children) {
+            // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
+            if (child instanceof Piece otherPiece && child != piece) {
+                // Verifica se il nuovo bottone si sovrappone all'altro bottone
+                if (newX + piece.getWidth() > otherPiece.getLayoutX() &&
+                        newX < otherPiece.getLayoutX() + otherPiece.getWidth() &&
+                        newY + piece.getHeight() > otherPiece.getLayoutY() &&
+                        newY < otherPiece.getLayoutY() + otherPiece.getHeight()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
 
 
 

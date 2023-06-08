@@ -1,8 +1,5 @@
 package com.klotski.app;
 
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 import static com.klotski.app.Constants.*;
@@ -74,7 +71,7 @@ public class Piece extends Rectangle {
 
         //Setta un bordo nero di spessore 3
         this.setStroke(PIECE_STROKE_COLOR);
-        this.setStrokeWidth(PIECE_STROKE_WIDTH);
+        this.setStrokeWidth(UNSELECTED_PIECE_STROKE_WIDTH);
     }
 
 
@@ -127,7 +124,7 @@ public class Piece extends Rectangle {
 
         //Setta un bordo con spessore
         this.setStroke(PIECE_STROKE_COLOR);
-        this.setStrokeWidth(PIECE_STROKE_WIDTH);
+        this.setStrokeWidth(UNSELECTED_PIECE_STROKE_WIDTH);
 
         //Setta una curvatura degli angoli
         this.setArcHeight(PIECE_ARC_DIM);

@@ -3,7 +3,6 @@ package com.klotski.app;
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
@@ -68,7 +66,7 @@ public class Controller {
 
     /**
      * Metodo chiamato di default all'avvio dell'applicazione.
-     * Inizializza la pane e gestisce gli input da tastiera e da mouse sui blocchi.
+     * Inizializza la pane e gestisce gli input da tastiera e da mouse sui pezzi.
      */
     public void initialize() {
 
@@ -81,6 +79,9 @@ public class Controller {
         //Setta le dimensioni massime del pane
         blockPane.setMaxHeight(MAX_PANE_HEIGHT);
         blockPane.setMaxWidth(MAX_PANE_WIDTH);
+
+        //Setta il border color della pane
+        blockPane.setStyle(PANE_BORDER_COLOR);
 
         //Prende i pezzi della configurazione attuale
         Piece[] currentPieces = game.getConfiguration().getPieces();
@@ -96,45 +97,43 @@ public class Controller {
             //Aggiunge il pezzo al pane
             blockPane.getChildren().add(piece);
 
-            //TODO: sposta più su
-            //Setta il bordo della pane
-            blockPane.setStyle(PANE_BORDER_COLOR);
 
             //Aggiunge un gestore eventi per la selezione di un bottone
             piece.setOnMouseClicked(event -> {
                 selectedPiece = (Piece) event.getSource();
+
+                //Diminuisci lo spessore per tutti i pezzi
                 for (Piece p : currentPieces) {
                     p.setEffect(null);
-                    p.setStrokeWidth(3);
+                    p.setStrokeWidth(UNSELECTED_PIECE_STROKE_WIDTH);
                 }
 
                 //Attiva l'illuminazione del pulsante selezionato
-                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), piece);
-                strokeTransition.setFromValue(Color.grayRgb(3));
-                strokeTransition.setToValue(Color.grayRgb(6));
-                strokeTransition.setCycleCount(2);
-                strokeTransition.setAutoReverse(true);
+                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(STROKE_TRANSITION_MILLIS), piece);
+                strokeTransition.setFromValue(STROKE_START_COLOR);
+                strokeTransition.setToValue(STROKE_END_COLOR);
+                strokeTransition.setCycleCount(CYCLE_COUNT);
+                strokeTransition.setAutoReverse(TRANSITION_AUTOREVERSE);
                 strokeTransition.play();
                 selectedPiece = piece;
 
-                //Aumenta lo spessore del bordo
-                piece.setStrokeWidth(5);
+                //Aumenta lo spessore del per il pezzo selezionato
+                piece.setStrokeWidth(SELECTED_PIECE_STROKE_WIDTH);
             });
         }
 
-        // Aggiunge un gestore eventi per la pressione dei tasti freccia
+        //Aggiunge un gestore eventi per la pressione dei tasti freccia
         blockPane.setOnKeyPressed(event -> {
             if (selectedPiece != null) {
-                //di quanto si deve spostare il mio bottone selezionato
-                //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
-                //getCode mi traduce il comando da tastiera in un codice
+
+                //getCode traduce il comando da tastiera in un codice
                 int keyCode = event.getCode().ordinal();
 
-                //Sposta il blocco
-                moveBlock(selectedPiece, keyCode);
+                //Sposta il pezzo
+                movePiece(selectedPiece, keyCode);
 
                 //Controlla se il giocatore ha vinto
-                if (checkWin(blockPane)) {
+                if (checkWin()) {
                     //Resetta
                     reset();
                 }
@@ -158,9 +157,6 @@ public class Controller {
 
         //Cambia la configurazione attuale di game con la configurazione iniziale
         game.setConfigurationToInitialConf(game.getInitialSelectedConf());
-
-        //Aggiorna il testo con il counter delle mosse
-        //textCounter.setText("Moves : " + 0);
 
         //Pulisce il pane
         blockPane.getChildren().clear();
@@ -234,7 +230,7 @@ public class Controller {
                         // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
                         // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
                         // quando viene eseguito `initialize()`
-                        moveBlock((Piece) node,dirIdx);
+                        movePiece((Piece) node,dirIdx);
                         textCounter.setText("Moves : " + game.getMoveCounter());
 
                     } // Fine if
@@ -245,7 +241,7 @@ public class Controller {
             });
 
             //Controlla se ha vinto
-            if (checkWin(blockPane)) {
+            if (checkWin()) {
                 //Resetta
                 reset();
             }
@@ -259,7 +255,7 @@ public class Controller {
                 }
             };
 
-            timer.schedule(enableButtonNBM, 500);
+            timer.schedule(enableButtonNBM, NBM_BUTTON_TIMER_MILLIS);
         } else {
             Utility.setAlert(Alert.AlertType.ERROR, "Errore", "NBM non disponibile, connettiti a internet");
         }
@@ -270,7 +266,7 @@ public class Controller {
      * Metodo che serve per caricare il file per il risolvimento della NBM.
      */
     public  void loadHTMLFile() {
-        File prova = new File("src/main/resources/com/klotski/app/solver.html");
+        File prova = new File(NBM_SOLVER_HTML_FILE);
         if (prova.exists()) {
             try {
                 StringBuilder contentBuilder = new StringBuilder();
@@ -299,7 +295,7 @@ public class Controller {
     void undo() {
         if (game.getMoveCounter() != 0) { //Se il counter è diverso da 0
 
-            //Setta la configurazioen attuale con quella precedente
+            //Setta la configurazione attuale con quella precedente
             game.setConfigurationToPreviousConf();
 
             //Aggiorna il testo con il counter delle mosse
@@ -312,46 +308,42 @@ public class Controller {
             initialize();
 
         } else {
-            Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun blocco!");
+            Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun pezzo!");
         }
     }
 
 
 
-    public void moveBlock(Piece block, int dirIdx) {
+    public void movePiece(Piece piece, int dirIdx) {
         double moveAmount = 100;
         switch (dirIdx) {
-            //WASD
-            //58 su
-            //36 sx
-            //54 giu
-            //39 dx
+
             //DOWN
-            case 19,54 -> {
-                if (block.getLayoutY() + moveAmount + block.getHeight() <= 500
-                        && isNotOverlapping(block, 0, moveAmount)) {
-                    //Muove il blocco in giu di moveAmount
-                    game.moveBlockDown(block, moveAmount);
+            case S,ARROW_DOWN -> {
+                if (piece.getLayoutY() + moveAmount + piece.getHeight() <= MAX_PANE_HEIGHT
+                        && Utility.isNotOverlapping(piece, blockPane, 0, moveAmount)) {
+                    //Muove il pezzo in giu di moveAmount
+                    game.movePieceDown(piece, moveAmount);
                     //blockMoved = true;
                 }
             }
             //RIGHT
-            case 18,39 -> {
-                if (block.getLayoutX() + moveAmount + block.getWidth() <= 400
-                        && isNotOverlapping(block, moveAmount, 0)) {
-                    game.moveBlockRight(block, moveAmount);
+            case D,ARROW_RIGHT -> {
+                if (piece.getLayoutX() + moveAmount + piece.getWidth() <= MAX_PANE_WIDTH
+                        && Utility.isNotOverlapping(piece, blockPane, moveAmount, 0)) {
+                    game.movePieceRight(piece, moveAmount);
                 }
             }
             //UP
-            case 17,58 -> {
-                if (block.getLayoutY() - moveAmount >= 0 && isNotOverlapping(block, 0, -moveAmount)) {
-                    game.moveBlockUp(block, moveAmount);
+            case W,ARROW_UP -> {
+                if (piece.getLayoutY() - moveAmount >= 0 && Utility.isNotOverlapping(piece, blockPane, 0, -moveAmount)) {
+                    game.movePieceUp(piece, moveAmount);
                 }
             }
             //LEFT
-            case 16,36 -> {
-                if (block.getLayoutX() - moveAmount >= 0 && isNotOverlapping(block, -moveAmount, 0)) {
-                    game.moveBlockLeft(block, moveAmount);
+            case A,ARROW_LEFT -> {
+                if (piece.getLayoutX() - moveAmount >= 0 && Utility.isNotOverlapping(piece, blockPane, -moveAmount, 0)) {
+                    game.movePieceLeft(piece, moveAmount);
                 }
             }
         }
@@ -361,43 +353,14 @@ public class Controller {
      * Metodo che gestisce la vittoria.
      */
 
-    private boolean checkWin(Pane blockPane) {
-        Node node = blockPane.getChildren().get(0);
-        if (node.getLayoutX() == 100 && node.getLayoutY() == 300) {
+    private boolean checkWin() {
+        //Prende il pezzo piu' grande (che e' sempre il primo)
+        Node node = blockPane.getChildren().get(0); //0<->
+        if (node.getLayoutX() == WIN_X && node.getLayoutY() == WIN_Y) {
             Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
             return  true;
         }
         return  false;
     }
 
-    /**
-     * Metodo che controlla che non ci sia overlapping tra pezzi durante il loro spostamento.
-     *
-     * @param block pezzo che si vuole.
-     * @param deltaX quantità di cui si muove il pezzo orizzontalmente.
-     * @param deltaY quantità di cui si muove il pezzo verticalmente.
-     * @return false se si overlappa, true se è tutto a posto.
-     */
-    private boolean isNotOverlapping(Piece block, double deltaX, double deltaY) {
-        // Calcola la nuova posizione del bottone
-        double newX = block.getLayoutX() + deltaX;
-        double newY = block.getLayoutY() + deltaY;
-
-        // Itera su tutti gli elementi figli della Pane
-        ObservableList<Node> children = blockPane.getChildren();
-        for (Node child : children) {
-            // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
-            if (child instanceof Piece otherPiece && child != block) {
-                // Verifica se il nuovo bottone si sovrappone all'altro bottone
-                if (newX + block.getWidth() > otherPiece.getLayoutX() &&
-                        newX < otherPiece.getLayoutX() + otherPiece.getWidth() &&
-                        newY + block.getHeight() > otherPiece.getLayoutY() &&
-                        newY < otherPiece.getLayoutY() + otherPiece.getHeight()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
 }

@@ -5,6 +5,9 @@ import java.util.Stack;
 import static com.klotski.app.Constants.*;
 
 
+/**
+ *
+ */
 public class Game {
 
     //Configurazione selezionata tra le 4 iniziali
@@ -79,10 +82,16 @@ public class Game {
         }
     }
 
+    /**
+     * @return
+     */
     public int getInitialSelectedConf() {
         return _initialSelectedConf;
     }
 
+    /**
+     * @param i
+     */
     public void setInitialSelectedConf(int i){
         if(i<1||i>4) {
             throw new IllegalArgumentException("configurationNumber non compreso tra 1 e 4");
@@ -91,10 +100,16 @@ public class Game {
         this._initialSelectedConf = i;
     }
 
+    /**
+     * @return
+     */
     public Configuration getConfiguration() {
         return _configuration;
     }
 
+    /**
+     * @param configuration
+     */
     public void setConfiguration(Configuration configuration) {
         this._configuration = configuration;
 
@@ -102,16 +117,23 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
+    /**
+     * @return
+     */
     public int getMoveCounter() {return  this._moveCounter;}
 
-    public void moveBlockDown(Piece block, double moveAmount) {
+    /**
+     * @param piece
+     * @param moveAmount
+     */
+    public void movePieceDown(Piece piece, double moveAmount) {
 
-        //Verifica che il blocco appartenga alla configurazione
-        if(!_configuration.doesPieceBelong(block)){
+        //Verifica che il pezzo appartenga alla configurazione
+        if(!_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
-        //Muove in giù il blocco
-        block.setLayoutY(block.getLayoutY() + moveAmount);
+        //Muove in giù il pezzo
+        piece.setLayoutY(piece.getLayoutY() + moveAmount);
 
         //Incrementa il counter delle mosse
         this._moveCounter++;
@@ -122,14 +144,18 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
-    public void moveBlockUp(Piece block, double moveAmount) {
+    /**
+     * @param piece
+     * @param moveAmount
+     */
+    public void movePieceUp(Piece piece, double moveAmount) {
 
-        //Verifica che il blocco appartenga alla configurazione
-        if(!_configuration.doesPieceBelong(block)){
+        //Verifica che il pezzo appartenga alla configurazione
+        if(!_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
-        //Muove in su il blocco
-        block.setLayoutY(block.getLayoutY() - moveAmount);
+        //Muove in su il pezzo
+        piece.setLayoutY(piece.getLayoutY() - moveAmount);
 
         //Incrementa il counter delle mosse
         this._moveCounter++;
@@ -140,14 +166,14 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
-    public void moveBlockLeft(Piece block, double moveAmount) {
+    public void movePieceLeft(Piece piece, double moveAmount) {
 
-        //Verifica che il blocco appartenga alla configurazione
-        if(!_configuration.doesPieceBelong(block)){
+        //Verifica che il pezzo appartenga alla configurazione
+        if(!_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
-        //Muovi a sx il blocco
-        block.setLayoutX(block.getLayoutX() - moveAmount);
+        //Muovi a sx il pezzo
+        piece.setLayoutX(piece.getLayoutX() - moveAmount);
 
         //Incrementa il counter delle mosse
         this._moveCounter++;
@@ -158,13 +184,13 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
-    public void moveBlockRight(Piece block, double moveAmount) {
-        //Verifica che il blocco appartenga alla configurazione
-        if(!_configuration.doesPieceBelong(block)){
+    public void movePieceRight(Piece piece, double moveAmount) {
+        //Verifica che il pezzo appartenga alla configurazione
+        if(!_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
-        //Muovi a dx il blocco
-        block.setLayoutX(block.getLayoutX() + moveAmount);
+        //Muovi a dx il pezzo
+        piece.setLayoutX(piece.getLayoutX() + moveAmount);
 
         //Incrementa il counter delle mosse
         this._moveCounter++;

@@ -1,6 +1,8 @@
 package com.klotski.app;
 
+import javafx.animation.StrokeTransition;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class Constants {
 
@@ -17,11 +19,55 @@ public class Constants {
 
     //Colore del bordo
     public static final String PANE_BORDER_COLOR = "-fx-border-color: black";
+
+    //JFX Buttons:
+    public static final int STROKE_TRANSITION_MILLIS = 200; //Tempo transizione del bordo
+    public static final Color STROKE_START_COLOR = Color.grayRgb(3); //Colore di partenza
+    public static final Color STROKE_END_COLOR = Color.grayRgb(6); //Colore di destinazione
+    public static final int CYCLE_COUNT = 2;
+    public static final boolean TRANSITION_AUTOREVERSE = true;
+
+    //Win Coordinates:
+    public static final int WIN_X = 100;
+    public static final int WIN_Y = 300;
+
+
+
+    //NBM:
+    //Tempo per poter ri-cliccare il bottone NBM
+    public static final int NBM_BUTTON_TIMER_MILLIS = 500;
+    //Path file HTML per poter risolvere l'NBM
+    public static final String NBM_SOLVER_HTML_FILE = "src/main/resources/com/klotski/app/solver.html";
+
+    //Direction Indexes
+    //Arrows:
+    public static final int ARROW_DOWN = 54;
+    public static final int ARROW_RIGHT = 39;
+    public static final int ARROW_UP = 58;
+    public static final int ARROW_LEFT = 36;
+    //Keyboard buttons
+    public static final int S = 19;
+    public static final int D = 18;
+    public static final int W = 17;
+    public static final int A = 16;
+
+
+
+    //Traduzione numeri in comandi
+    //58 UP
+    //36 LEFT
+    //54 DOWN
+    //39 RIGHT
+
+
     //Pezzi
 
     //Bordo
     public static final Color PIECE_STROKE_COLOR = Color.BLACK; //Colore
-    public static final int PIECE_STROKE_WIDTH = 3; //Spessore
+    public static final int UNSELECTED_PIECE_STROKE_WIDTH = 3; //Spessore se non selezionato
+
+    public static final int SELECTED_PIECE_STROKE_WIDTH = 5; //Spessore se selezionato
+
     public static final int PIECE_ARC_DIM = 10; //Curvatura spigoli
 
     //Piece 0
