@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static com.klotski.app.Constants.*;
 
 /**
  * Classe che fornisce dei metodi di utility per la scrittura fu file JSON.
