@@ -34,8 +34,8 @@ a, a:hover {
 
 hr {
   padding: 1rem 0;
-  border: 0;
-  border-bottom: 1px solid var(--bg-color);
+  border: 0px;
+  border-bottom: 2px solid var(--code-bg-color);
 }
 
 * {
@@ -46,7 +46,16 @@ hr {
 
 /* typography */
 .section__title {
+  font-size: 33px;
   color: var(--primary-color);
+}
+
+h3 {
+  color: var(--primary-color);
+}
+
+ol {
+  color: var(--primary-color)
 }
 
 /* tabs */

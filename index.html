@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it-IT, en-US">
+<html lang="it-IT, en-US" xmlns="http://www.w3.org/1999/html">
 
 <head>
   <meta charset="utf-8">
@@ -31,6 +31,7 @@
         <li class="js-btn selected">Manuale</li>
         <li class="js-btn">Domain Model</li>
         <li class="js-btn">Design Class Model</li>
+        <li class="js-btn">Sequence Diagrams</li>
         <li class="js-btn">Use Cases</li>
         <li class="js-btn">Test</li>
         <li class="js-btn">JavaDoc</li>
@@ -44,117 +45,71 @@
     <article class="doc__content">
       <section class="js-section">
         <h1 class="section__title" style="font-size: 33px;">Manuale</h1>
-        <h3 class="section__title">Come installare e lanciare il software</h3>
+        <h3>Come installare e lanciare il software</h3>
         <p>
-          Scaricare il programma in formato .jar dal seguente
-          <a href="https://github.com/MatteoTonello/EUTrustServicesApp/blob/main/out/artifacts/EUTrustServicesApplication_jar/EUTrustServicesApplication.jar" target="_blank" style="color: blue;">link</a>
-             cliccando sul tasto Download. Una volta ottenuto il file, avviarlo con un doppio click per fruire dell'applicazione.
-        </p>
-        <!-- <p><i>
-          NB: Per mancanza di supporti alternativi, l'avvio del programma è stato testato solo su SO Windows.
-          In caso di mancato funzionamento seguendo le indicazioni fornite sopra, si suggerisce di clonare la repository
-          fornita su GitHub ed eseguire su di un IDE (eg. IntelliJ).
-        </i></p> -->
-
-        <p>
-          <br>
+          ######## COMING SOON ########
         </p>
 
-        <h3 class="section__title">Panoramica su come sono state realizzate le funzionalità richieste <br> e funzioni
+        <h3>Panoramica su come sono state realizzate le funzionalità richieste <br> e funzioni
           riutilizzate da librerie esistenti</h3>
+        <ul>
+          <li>Interfaccia che consente di muovere i blocchi nelle posizioni consentite</li>
+          <li>Possibilità di scegliere alcune diverse configurazioni di partenza</li>
+          <li>Funzione di reset</li>
+          <li>Funzione di undo – fino all’inizio</li>
+          <li>Funzione «next best move»</li>
+          <li>Counter delle mosse effettuate</li>
+          <li>Possibilità di salvare lo stato corrente e di ripristinarlo</li>
+        </ul>
+
+        <h4><u><i>Interfaccia che consente di muovere i blocchi nelle posizioni consentite</i></u></h4>
         <p>
-          Inizialmente abbiamo letto la documentazione dell’API presente al seguente
-          <a href="https://esignature.ec.europa.eu/efda/swagger-ui.html" target="_blank" style="color: blue">link</a>.
-          <br>
-          Abbiamo creato la classe Api per creare il collegamento all’API e raccogliere i dati all’interno di vettori di
-          stringhe sui quali poi l’utente avrebbe effettuato la ricerca. Abbiamo poi creato la classe ResearchMethods per
-          effettuare le ricerche all’interno di tali vettori. <br>
-        </p>
-        <p>
-          <u><i>Come viene effettuata la ricerca</i> <br></u>
-          L’elemento all’interno del quale effettuare la ricerca è un vettore di oggetti,
-          da noi chiamati “nodi”, che contiene tutti i possibili servizi con le relative
-          caratteristiche (nazione, provider, tipo di servizio e stato).
-          La ricerca viene effettuata tramite quattro metodi (ognuno per ogni elemento legato al servizio), eseguiti
-          sequenzialmente.
-          Dopo ogni metodo il vettore di nodi contiene solo gli elementi che effettivamente hanno le caratteristiche
-          richieste come parametro, arrivando quindi ad una situazione finale in cui contiene
-          solo i servizi cercati.
+          ######## COMING SOON ########
         </p>
 
+        <h4><u><i>Possibilità di scegliere alcune diverse configurazioni di partenza</i></u></h4>
         <p>
-          <u><i>Parte Grafica</i></u><br>
-          Successivamente abbiamo iniziato a definire la parte grafica grazie
-          alla libreria esterna <code>JavaFX</code> e al supporto di SceneBuilder, un software che
-          facilita la creazione di applicazioni GUI tramite un’ interfaccia, restituendo
-          un file in formato FXML da inserire all’interno del progetto.
+          ######## COMING SOON ########
         </p>
-        <p>
-          Grazie ad esso abbiamo definito l’ossatura grafica, assegnando poi
-          il comportamento dei vari componenti attraverso le classi
-          e i metodi delle libreria <code>JavaFX</code>. Abbiamo implementato due tipologie di
-          visualizzazione diversa: una per le nazioni (che possono essere associate
-          facilmente all’immagine di una bandiera, rendendo la ricerca più facile
-          e intuitiva) e quello delle altre caratteristiche del servizio, quindi
-          provider, tipo di servizio e stato (solitamente elenchi più numerosi e
-          non associabili a immagini, quindi preferendo un semplice
-          elenco con checkbox).
-        </p>
-        <p>
-          Come ultima cosa, abbiamo sfruttato la funzione di <code>JavaFX</code> che permette di
-          ridefinire la grafica del software utilizzando degli script in linguaggio
-          CSS. Questo è servito per creare un’interfaccia che rendesse più gradevole
-          e fruibile l’utilizzo dell’applicazione all’utente finale.
-        </p>
-        <p>
-            <u><i>Design Pattern</i></u><br>
-            Abbiamo modellato il codice utilizzando i seguenti Design Pattern<br>
-            <p><i>GoF Pattern</i></p>
-            <p>  •<u>Singleton:</u> Abbiamo utilizzato questo design pattern per la classe Api.
-                Infatti una peculiarità della nostra applicazione è quella di eseguire una sola richiesta
-                alla libreria, una scelta che ci ha permesso di rendere più veloce e performante il
-                programma. Inoltre ad assicurare una maggiore sicurezza, dal momento che ne rende
-                possibile l’utilizzo anche nel caso in cui la connessione internet dell’utente venisse
-                a mancare nei momenti successivi all’unica creazione dell’istanza di API.
-            </p>
-            <p>
-                •<u>State:</u> Abbiamo deciso di adottare questo design pattern nella creazione della
-                classe Graphic Nation, ovvero la classe che definisce la struttura grafica di ogni nazione.
-                Questa può assumere due stati: selezionata o deselezionata e, il controllo di questo stato,
-                è determinato semplicemente nella classe stessa, grazie all’uso di una variabile booleana.
-                In base a questo parametro cambia il comportamento dell'oggetto.<br>
-                Anche la classe MainController contiene una variabile che ne definisce lo stato.
-                In questo caso la variabile è un intero perché l'oggetto si può trovare in tre stati
-                diversi, riferiti alla ricerca(ricerca per nazione, per provider/tipo servizio/stato
-                servizio, risultato).
-            </p>
-          <p><i>Grasp Pattern</i></p>
-            <p>
-            <u>•Controller:</u> La classe MainController è un Controller, ossia un oggetto che è
-              responsabile della comunicazione tra interfacce e sistema, per mettere in relazione GUI
-              e l'applicazione. Infatti la suddetta classe è incaricata di recepire gli input forniti
-              dall'interfaccia grafica sviluppata sui file FXML ed elaborare i risultati delegando i
-              compiti secondari ad altre classi, per poi ricevere l'output da reintegrare nella schermata
-              visualizzata in base all'azione eseguita.</p>
-            <p><u>•Creator:</u>Abbiamo progettato le classi Nation, TypeOfService e Results secondo
-              le indicazioni del Grasp Pattern Creator. Nel programma le istanze di GraphicNation,
-              LabelType e GraphicResult vengono create unicamente attraverso le rispettive classi
-              Creator.
-            </p>
 
-        <p><br></p>
+        <h4><u><i>Funzione di reset</i></u></h4>
+        <p>
+          ######## COMING SOON ########
+        </p>
+
+        <h4><u><i>Funzione di undo – fino all’inizio</i></u></h4>
+        <p>
+          ######## COMING SOON ########
+        </p>
+
+        <h4><u><i>Funzione «next best move»</i></u></h4>
+        <p>
+          ######## COMING SOON ########
+        </p>
+
+        <h4><u><i>Counter delle mosse effettuate</i></u></h4>
+        <p>
+          ######## COMING SOON ########
+        </p>
+
+        <h4><u><i>Possibilità di salvare lo stato corrente e di ripristinarlo</i></u></h4>
+        <p>
+          ######## COMING SOON ########
+        </p>
+
+
         <table id="Librerie">
             <tr>
-              <th><b>Librerie Esterne utilizzate</b></th>
+              <th><b>Librerie esterne</b></th>
               <th><b>Funzioni</b></th>
             </tr>
             <tr>
-              <td>org.json</td>
+              <td align="center">org.json</td>
               <td>per lavorare con i file in formato Json, formato utilizzato dall’API
                 per inviare la risposta.</td>
             </tr>
           <tr>
-            <td>javafx</td>
+            <td align="center">javafx</td>
             <td>Per definire l’interfaccia grafica del programma</td>
 
           </tr>
@@ -163,153 +118,86 @@
       </section>
 
 
-
-      <p>
-        <br>
-        <br>
-      </p>
-
-
+      <hr />
 
 
       <section class="js-section">
-        <h1 class="section__title" style="font-size: 33px;">Domain Model</h1>
+        <h1 class="section__title">Domain Model</h1>
         <p>
-          L’applicazione riceve i dati dall’ EU-Trust Service API. L’utente può scegliere se
-          visualizzare la lista delle nazioni, la lista dei tipi di servizio oppure eseguire
-          una ricerca. In caso eseguisse una ricerca, dopo aver selezionato i parametri desiderati
-           l’applicazione restituisce come risultato un elenco di servizi con i relativi attributi.
+          ######## COMING SOON ########
         </p>
         <!--IMMAGINE -->
-        <img class="myImg" src="docs_gruppo2/img/DomainModel.png" alt="Domain model" title="Domain model" width="70%" height="70%">
-        <hr />
+        <img class="myImg" src="docs_gruppo2/img/diagrams/DomainModel.png" alt="Domain model" title="Domain model" width="70%" height="70%">
       </section>
 
 
-
-      <!--
-      <p>
-        <br>
-        <br>
-      </p>
-      -->
-
-
-
-
-
-
+      <hr />
 
 
       <section class="js-section">
-        <h1 class="section__title" style="font-size: 33px;">Design Class Model</h1>
-        <p>L’applicazione inizia la sua esecuzione dalla classe <code>EUTrustServicesApplication</code>. <br>
-          La <b>parte grafica</b> è affidata alla classe <code>MainController</code>, che ottiene i dati
-          tramite la classe <code>Api</code>, la quale si occupa anche di definire i metodi per filtrare
-          i dati selezionati dall’utente e di salvare i servizi in entità della classe Node.<br>
-          Per <b>eseguire la ricerca</b> si utilizzano i metodi definiti nella classe <code>ResearchMethods</code>
-          mentre, in caso di mancata selezione di un parametro da parte dell’utente, viene lanciata l’eccezione
-          <code>NoElementException</code>.
-          La classe <code>ImagesNations</code> fornisce una mappa che associa nome e bandiera delle nazioni alle classi
-          <code>GraphicResult</code> e <code>GraphicNation</code>. La prima fornisce l’oggetto grafico per rappresentare
-          il singolo risultato alla classe <code>Results</code>, la quale si occupa della creazione della grafica per
-          rappresentare i risultati finali. La seconda invece fornisce l’oggetto grafico per rappresentare la singola nazione
-          alla classe <code>Nations</code>, la quale si occupa di creare la grafica per rappresentare le nazioni e gestisce
-          la loro selezione. La classe <code>LabelType</code> fornisce l’oggetto grafico per rappresentare il singolo tipo di
-          servizio alla classe <code>TypeofService</code>, la quale si occupa della gestione del caricamento degli elementi
-          grafici degli oggetti di tipo servizio.<br>
-          Infine, in caso alcuni parametri passati a una funzione siano errati viene lanciata l’eccezione <code>IllegalParameters</code>.</p>
-        <img class="myImg" src="docs_gruppo2/img/ClassDiagram(nuovo).png" alt="Design Class Model" title="zoom picture" width="100%" height="100%">
+        <h1 class="section__title">Design Class Model</h1>
+        <p>
+          ######## COMING SOON ########
+        </p>
+        <!--IMMAGINE -->
+        <img class="myImg" src="docs_gruppo2/img/diagrams/ClassDiagram(nuovo).png" alt="Design Class Model" title="zoom picture" width="100%" height="100%">
         <!-- Image Zoom HTML -->
         <div id="myModal" class="modal">
           <img class="modal-content" id="img01" alt="img01">
         <div id="caption"></div>
         </div>
-
-        <p><br><br><br></p>
-        <h3 class="section__title">INTERACTIONS DIAGRAM (richiesta_lista_tipi_di_servizio)</h3>
-        <p>
-          Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente richiede
-          la lista dei tipi di servizio offerti dal sito. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento
-          della classe Api che si occuperà di ottenere i dati, successivamente inizializza le classi <code>ImageNations</code>, <code>Nations</code> e <code>TypeService</code>.
-          L’esecuzione prosegue poi con la richiesta da parte dell’utente di visualizzare la lista completa dei tipi di servizio, effettuata
-          attraverso l’apposito pulsante. A questo punto la classe <code>TypeofService</code> ha il compito di fornire l’oggetto grafico per rappresentare
-          ogni tipo di servizio mentre <code>MainController</code> si occuperà della visualizzazione completa della lista nei confronti dell’utente.
-        </p>
-        <img class="myImg" src="pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" alt="Interaction Diagram(richiesta_lista_tipi_servizio)" title="Interaction Diagram(richiesta_lista_tipi_servizio)" height="100%" width="100%"
-        style="display:block; margin-left:auto; margin-right:auto">
-
-        <p><br><br><br></p>
-        <h3 class="section__title">INTERACTIONS DIAGRAM (richiesta_lista_nazioni)</h3>
-        <p>
-          Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente
-          richiede la lista dei paesi. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento della
-          classe Api che si occuperà di ottenere i dati, successivamente inizializza le classi <code>ImageNations</code>,
-          <code>Nations</code> e <code>TypeService</code>. L’esecuzione prosegue poi con la richiesta da parte dell’utente di visualizzare
-          la lista dei paesi effettuata attraverso l’apposito pulsante. A questo punto la classe <code>Nations</code> ha il compito
-          di fornire l’oggetto grafico per rappresentare ogni paese mentre <code>MainController</code> si occuperà della visualizzazione
-          completa della lista nei confronti dell’utente.
-        </p>
-        <img class="myImg" src="pictures/InteractionsDiagram(richiesta_lista_stati).svg" alt="Interaction Diagram(richiesta_lista_stati)" title="Interaction Diagram(richiesta_lista_stati)" height="90%" width="90%"
-        style="display:block; margin-left:auto; margin-right:auto">
-
-        <p>
-          <br>
-          <br>
-          <br>
-        </p>
-
-        <h3 class="section__title">INTERACTIONS DIAGRAM (ricerca)</h3>
-        <p>
-          Questo diagramma descrive l’esecuzione di un’istanza dell’applicazione nella quale l’utente esegue una ricerca
-          completa. La classe <code>MainController</code> si occupa innanzitutto dell’avviamento della classe <code>Api</code> che si occuperà di ottenere
-          i dati, successivamente inizializza le classi <code>ImageNations</code>, <code>Nations</code> e <code>TypeService</code>. L’esecuzione prosegue poi con la richiesta
-          da parte dell’utente di eseguire una ricerca, effettuata attraverso l’apposito pulsante. A questo punto la classe <code>Nations</code> ha
-          il compito di fornire l’oggetto grafico per rappresentare ogni nazione a  <code>MainController</code> che si occuperà della visualizzazione
-          completa della lista e della gestione delle selezioni da parte dell’utente. Una volta che egli avrà selezionato le opzioni desiderate
-          e premuto il tasto <i>‘Avanti’</i>, la classe <code>MainController</code> richiederà la lista dei servizi filtrata attraverso i parametri alla classe
-          <code>ResearchMethods</code>. Una volta ottenuta tale lista <code>MainController</code> presenterà all’utente la lista dei providers disponibili nei paesi selezionati
-          attendendo che egli li scelga e prema il tasto <i>‘Avanti’</i>. A questo punto verrà effettuata un nuovo filtraggio da parte di ResearchMethods che
-          fornirà una nuova lista di servizi. L’utente in seguito dovrà scegliere, con le stesse modalità, prima i tipi e poi gli stati del servizio
-          che gli interessano e <code>ResearchMethods</code> si occuperà degli ultimi due filtraggi. <br>
-          Ora si entra nella parte finale della procedura di ricerca, <code>MainController</code> inizializza la classe <code>Results</code> che gli fornirà la grafica per la rappresentazione
-          dei risultati finali all’utente il quale potrà scegliere di tornare, tramite il tasto <i>‘Home’</i>, al menu iniziale per effettuare una nuova ricerca.
-        </p>
-        <img class="myImg" src="pictures/InteractionsDiagram(ricerca).svg" alt="Interaction Diagram(ricerca)" title="Interaction Diagram(ricerca)" height="100%" width="100%"
-        style="display:block; margin-left:auto; margin-right:auto">
-
-        <hr />
       </section>
 
 
+      <hr />
 
-      <p>
-        <br>
-        <br>
-        <br>
-        <br>
-      </p>
 
+      <section class="js-section">
+        <h1 class="section__title">Sequence Diagrams</h1>
+        <h3>INTERNAL1</h3>
+        <p>
+          ######## COMING SOON ########
+        </p>
+        <!--IMMAGINE -->
+        <img class="myImg" src="pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" alt="Interaction Diagram(richiesta_lista_tipi_servizio)" title="Interaction Diagram(richiesta_lista_tipi_servizio)" height="100%" width="100%"
+             style="display:block; margin-left:auto; margin-right:auto">
+
+        <h3>INTERNAL2</h3>
+        <p>
+          ######## COMING SOON ########
+        </p>
+        <!--IMMAGINE -->
+        <img class="myImg" src="pictures/InteractionsDiagram(richiesta_lista_stati).svg" alt="Interaction Diagram(richiesta_lista_stati)" title="Interaction Diagram(richiesta_lista_stati)" height="90%" width="90%"
+             style="display:block; margin-left:auto; margin-right:auto">
+
+        <h3>INTERNALn</h3>
+        <p>
+          ######## COMING SOON ########
+        </p>
+        <!--IMMAGINE -->
+        <img class="myImg" src="pictures/InteractionsDiagram(ricerca).svg" alt="Interaction Diagram(ricerca)" title="Interaction Diagram(ricerca)" height="100%" width="100%"
+             style="display:block; margin-left:auto; margin-right:auto">
+      </section>
+
+
+      <hr />
 
 
       <section class="js-section">
         <h1 class="section__title" style="font-size: 33px;">Use Cases</h1>
 
         <!--IMMAGINE USE CASES-->
-        <img class="myImg" src="docs_gruppo2/img/UseCasesDiagram.png" alt="Use Cases" title="use cases" width="527" height="711">
-
-
-        <ul>
-          <li><a href="#UC1" style="color: var(--accent-color)">Use Case 1: Scegliere configurazione iniziale</a></li>
-          <li><a href="#UC2" style="color: var(--accent-color)">Use Case 2: Muovere i blocchi nelle posizioni consentite</a></li>
-          <li><a href="#UC3" style="color: var(--accent-color)">Use Case 3: Utilizzare funzione di reset</a></li>
-          <li><a href="#UC4" style="color: var(--accent-color)">Use Case 4: Utilizzare funzione di undo</a></li>
-          <li><a href="#UC5" style="color: var(--accent-color)">Use Case 5: Richiedere "next best move"</a></li>
-          <li><a href="#UC6" style="color: var(--accent-color)">Use Case 6: Visualizzare counter delle mosse effettuate</a></li>
-          <li><a href="#UC7" style="color: var(--accent-color)">Use Case 7: Salvare lo stato corrente</a></li>
-          <li><a href="#UC8" style="color: var(--accent-color)">Use Case 8: Ripristinare partita salvata</a></li>
-        </ul>
-        <p></p>
+        <img class="myImg" src="docs_gruppo2/img/diagrams/UseCasesDiagram.png" alt="Use Cases" title="Use Cases" width="50%" height="50%">
+        <ol>
+          <li><a href="#UC1" style="color: var(--accent-color)">Scegliere configurazione iniziale</a></li>
+          <li><a href="#UC2" style="color: var(--accent-color)">Muovere i blocchi nelle posizioni consentite</a></li>
+          <li><a href="#UC3" style="color: var(--accent-color)">Utilizzare funzione di reset</a></li>
+          <li><a href="#UC4" style="color: var(--accent-color)">Utilizzare funzione di undo</a></li>
+          <li><a href="#UC5" style="color: var(--accent-color)">Richiedere "next best move"</a></li>
+          <li><a href="#UC6" style="color: var(--accent-color)">Visualizzare counter delle mosse effettuate</a></li>
+          <li><a href="#UC7" style="color: var(--accent-color)">Salvare lo stato corrente</a></li>
+          <li><a href="#UC8" style="color: var(--accent-color)">Ripristinare partita salvata</a></li>
+        </ol>
 
         <!--TABELLA UC 1-->
         <table>
@@ -348,305 +236,285 @@
             <td>Valutare se è sempre possibile determinare il "next best move" dalla condizione iniziale</td>
           </tr>
         </table>
+
+        <!--TABELLA UC2-->
+        <table>
+          <tr>
+            <th><b id="UC2">Use Case 2</b></th>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Muovere i blocchi nelle posizioni consentite</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Giocatore</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il giocatore può muovere i blocchi in uno degli spazi liberi sufficientemente grandi</td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>Deve esistere una posizione consentita, ossia uno spazio libero</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>Il blocco selezionato viene spostato di una posizione nella direzione scelta dal giocatore</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Il blocco selezionato non si muove</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>Incrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC3-->
+        <table>
+          <tr>
+            <th><b id="UC3">Use Case 3</b></th>
+          </tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Utilizzare funzione di reset</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Giocatore</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il giocatore può resettare la partita attraverso un tasto dedicato. </td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>In qualsiasi momento l giocatore può decidere di resettare la partita premendo il tasto "reset". I blocchi devono essere sistemati nella configurazione iniziale</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>Resettare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC4-->
+        <table>
+          <tr>
+            <th><b id="UC4">Use Case 4</b></th>
+          </tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Utilizzare funzione di undo</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Giocatore</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il giocatore può scegliere di annullare una o più mosse, in ordine cronologico dalla più recente alla meno recente, fino alla situazione di partenza</td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>Deve essere stata eseguita almeno una mossa</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Non viene applicata alcuna modifica allo stato di gioco</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC5-->
+        <table>
+          <tr>
+            <th><b id="UC5">Use Case 5</b></th>
+          </tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Next Best Move</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Giocatore(?)</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Viene fornita la mossa migliore per quella configurazione</td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>La partita non deve essere finita</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>ogni volta che si clicca su questo bottone un blocco alla volta verrà spostato in modo da ottenere la vittoria nel minor numero di mosse necessarie.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Viene visualizzato il messaggio "Mossa non disponibile"</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>Incrementare il counter delle mosse, salvare lo stato corrente, calcolare la next best move</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC6-->
+        <table>
+          <tr>
+            <th><b id="UC6">Use Case 6</b></th>
+          </tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Visualizzare counter delle mosse effettuate</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Giocatore</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il giocatore deve riuscire a visualizzare il counter delle mosse</td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte fino a quel
+              momento
+            </td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>Ogni volta che il giocatore fa una mossa, il counter viene aumentato</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC7-->
+        <table>
+          <tr>
+            <th><b id="UC7">Use Case 7</b></th>
+          </tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Salvare lo stato corrente</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Gioco</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il gioco deve sempre salvare lo stato corrente </td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), il gioco deve salvare automaticamente lo stato della partita, in modo che, se il programma dovesse essere chiuso, all'avvio successivo lo stato della partita possa essere ripristinato</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>Lo stato corrente deve comprendere la configurazione dei blocchi, le configurazioni iniziali, il counter delle mosse, lo storico delle mosse</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC8-->
+        <table>
+          <tr>
+            <th><b id="UC8">Use Case 8</b></th>
+          </tr>
+          <tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Ripristinare partita salvata</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Gioco</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultimo stato salvato</td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Non viene applicata alcuna modifica allo stato di gioco</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
       </section>
 
-      <p><br></p>
-      <!--TABELLA UC2-->
-      <table>
-        <tr>
-          <th><b id="UC2">Use Case 2</b></th>
-        <tr>
-          <td><b>Nome dello Use Case</b>
-          <td>Muovere i blocchi nelle posizioni consentite</td>
-        </tr>
-        <tr>
-          <td><b>Attori</b></td>
-          <td>Giocatore</td>
-        </tr>
-        <tr>
-          <td><b>Descrizione</b></td>
-          <td>Il giocatore può muovere i blocchi in uno degli spazi liberi sufficientemente grandi</td>
-        </tr>
-        <tr>
-          <td><b>Precondizioni</b></td>
-          <td>Deve esistere una posizione consentita, ossia uno spazio libero</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Principale</b></td>
-          <td>Il blocco selezionato viene spostato di una posizione nella direzione scelta dal giocatore</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Alternativo</b></td>
-          <td>Il blocco selezionato non si muove</td>
-        </tr>
-        <tr>
-          <td><b>Post-Condizioni</b></td>
-          <td>Incrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
-        </tr>
-        <tr>
-          <td><b>Note</b></td>
-          <td>-</td>
-        </tr>
-      </table>
 
-
-      <p><br></p>
-      <!--TABELLA UC3-->
-      <table>
-        <tr>
-          <th><b id="UC3">Use Case 3</b></th>
-        </tr>
-        <tr>
-          <td><b>Nome dello Use Case</b>
-          <td>Utilizzare funzione di reset</td>
-        </tr>
-        <tr>
-          <td><b>Attori</b></td>
-          <td>Giocatore</td>
-        </tr>
-        <tr>
-          <td><b>Descrizione</b></td>
-          <td>Il giocatore può resettare la partita attraverso un tasto dedicato. </td>
-        </tr>
-        <tr>
-          <td><b>Precondizioni</b></td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Principale</b></td>
-          <td>In qualsiasi momento l giocatore può decidere di resettare la partita premendo il tasto "reset". I blocchi devono essere sistemati nella configurazione iniziale</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Alternativo</b></td>
-          <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
-        </tr>
-        <tr>
-          <td><b>Post-Condizioni</b></td>
-          <td>Resettare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
-        </tr>
-        <tr>
-          <td><b>Note</b></td>
-          <td>-</td>
-        </tr>
-      </table>
-
-
-      <p><br></p>
-      <!--TABELLA UC4-->
-      <table>
-        <tr>
-          <th><b id="UC4">Use Case 4</b></th>
-        </tr>
-        <tr>
-          <td><b>Nome dello Use Case</b>
-          <td>Utilizzare funzione di undo</td>
-        </tr>
-        <tr>
-          <td><b>Attori</b></td>
-          <td>Giocatore</td>
-        </tr>
-        <tr>
-          <td><b>Descrizione</b></td>
-          <td>Il giocatore può scegliere di annullare una o più mosse, in ordine cronologico dalla più recente alla meno recente, fino alla situazione di partenza</td>
-        </tr>
-        <tr>
-          <td><b>Precondizioni</b></td>
-          <td>Deve essere stata eseguita almeno una mossa</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Principale</b></td>
-          <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Alternativo</b></td>
-          <td>Non viene applicata alcuna modifica allo stato di gioco</td>
-        </tr>
-        <tr>
-          <td><b>Post-Condizioni</b></td>
-          <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
-        </tr>
-        <tr>
-          <td><b>Note</b></td>
-          <td>-</td>
-        </tr>
-      </table>
-
-
-      <p><br></p>
-      <!--TABELLA UC5-->
-      <table>
-        <tr>
-          <th><b id="UC5">Use Case 5</b></th>
-        </tr>
-        <tr>
-          <td><b>Nome dello Use Case</b>
-          <td>Next Best Move</td>
-        </tr>
-        <tr>
-          <td><b>Attori</b></td>
-          <td>Giocatore(?)</td>
-        </tr>
-        <tr>
-          <td><b>Descrizione</b></td>
-          <td>Viene fornita la mossa migliore per quella configurazione</td>
-        </tr>
-        <tr>
-          <td><b>Precondizioni</b></td>
-          <td>La partita non deve essere finita</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Principale</b></td>
-          <td>ogni volta che si clicca su questo bottone un blocco alla volta verrà spostato in modo da ottenere la vittoria nel minor numero di mosse necessarie.</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Alternativo</b></td>
-          <td>Viene visualizzato il messaggio "Mossa non disponibile"</td>
-        </tr>
-        <tr>
-          <td><b>Post-Condizioni</b></td>
-          <td>Incrementare il counter delle mosse, salvare lo stato corrente, calcolare la next best move</td>
-        </tr>
-        <tr>
-          <td><b>Note</b></td>
-          <td>-</td>
-        </tr>
-      </table>
-
-
-      <p><br></p>
-      <!--TABELLA UC6-->
-      <table>
-        <tr>
-          <th><b id="UC6">Use Case 6</b></th>
-        </tr>
-        <tr>
-          <td><b>Nome dello Use Case</b>
-          <td>Visualizzare counter delle mosse effettuate</td>
-        </tr>
-        <tr>
-          <td><b>Attori</b></td>
-          <td>Giocatore</td>
-        </tr>
-        <tr>
-          <td><b>Descrizione</b></td>
-          <td>Il giocatore deve riuscire a visualizzare il counter delle mosse</td>
-        </tr>
-        <tr>
-          <td><b>Precondizioni</b></td>
-          <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte fino a quel
-            momento
-          </td>
-        </tr>
-        <tr>
-          <td><b>Scenario Principale</b></td>
-          <td>Ogni volta che il giocatore fa una mossa, il counter viene aumentato</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Alternativo</b></td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td><b>Post-Condizioni</b></td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td><b>Note</b></td>
-          <td>-</td>
-        </tr>
-      </table>
-
-
-      <p><br></p>
-      <!--TABELLA UC7-->
-      <table>
-        <tr>
-          <th><b id="UC7">Use Case 7</b></th>
-        </tr>
-        <tr>
-          <td><b>Nome dello Use Case</b>
-          <td>Salvare lo stato corrente</td>
-        </tr>
-        <tr>
-          <td><b>Attori</b></td>
-          <td>Gioco</td>
-        </tr>
-        <tr>
-          <td><b>Descrizione</b></td>
-          <td>Il gioco deve sempre salvare lo stato corrente </td>
-        </tr>
-        <tr>
-          <td><b>Precondizioni</b></td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Principale</b></td>
-          <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), il gioco deve salvare automaticamente lo stato della partita, in modo che, se il programma dovesse essere chiuso, all'avvio successivo lo stato della partita possa essere ripristinato</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Alternativo</b></td>
-          <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
-        </tr>
-        <tr>
-          <td><b>Post-Condizioni</b></td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td><b>Note</b></td>
-          <td>Lo stato corrente deve comprendere la configurazione dei blocchi, le configurazioni iniziali, il counter delle mosse, lo storico delle mosse</td>
-        </tr>
-      </table>
-
-
-      <p><br></p>
-      <!--TABELLA UC8-->
-      <table>
-        <tr>
-          <th><b id="UC8">Use Case 8</b></th>
-        </tr>
-        <tr>
-        <tr>
-          <td><b>Nome dello Use Case</b>
-          <td>Ripristinare partita salvata</td>
-        </tr>
-        <tr>
-          <td><b>Attori</b></td>
-          <td>Gioco</td>
-        </tr>
-        <tr>
-          <td><b>Descrizione</b></td>
-          <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultimo stato salvato</td>
-        </tr>
-        <tr>
-          <td><b>Precondizioni</b></td>
-          <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Principale</b></td>
-          <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
-        </tr>
-        <tr>
-          <td><b>Scenario Alternativo</b></td>
-          <td>Non viene applicata alcuna modifica allo stato di gioco</td>
-        </tr>
-        <tr>
-          <td><b>Post-Condizioni</b></td>
-          <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
-        </tr>
-        <tr>
-          <td><b>Note</b></td>
-          <td>-</td>
-        </tr>
-      </table>
-
-
-
-      <p>
-        <br>
-        <br>
-        <br>
-        <br>
-      </p>
-
+      <hr />
 
 
       <section class="js-section">
@@ -657,8 +525,8 @@
             <h3 class="section__title" style="text-align: center;">Unit Tests Results</h3>
             <figure>
               <a href="http://danielefrancescato.altervista.org/EUTrustServiceApplication/TestResults.html" target="_blank">
-              <img src="pictures/TestResult.jpg" width="20%" height="20%" title="Unit Tests Results" alt="Unit Tests Results"
-                style="display:block; margin-left:auto; margin-right:auto" ></a>
+              <img src="docs_gruppo2/img/icons/TestResult.jpg" width="20%" height="20%" title="Unit Tests Results" alt="Unit Tests Results"
+                   style="display:block; margin-left:auto; margin-right:auto" ></a>
               <figcaption>
                 <p style="text-align: center;">Clicca per vedere i risultati degli unit tests</p>
               </figcaption>
@@ -668,8 +536,8 @@
               <h3 class="section__title" style="text-align: center;">System Tests</h3>
               <figure>
                 <a href="http://danielefrancescato.altervista.org/EUTrustServiceApplication/System_test.pdf" target="_blank">
-                <img src="pictures/SystemTest.png" width="20%" height="20%" title="System Tests" alt="System Tests"
-                style="display:block; margin-left:auto; margin-right:auto" ></a>
+                <img src="docs_gruppo2/img/icons/SystemTest.png" width="20%" height="20%" title="System Tests" alt="System Tests"
+                     style="display:block; margin-left:auto; margin-right:auto" ></a>
                 <figcaption>
                   <p style="text-align: center;">Clicca per vedere i System Test</p>
                 </figcaption>
@@ -687,8 +555,8 @@
         <h1 class="section__title" style="font-size: 33px;">JavaDoc</h1>
         <figure>
           <a href="http://danielefrancescato.altervista.org/EUTrustServiceApplication/javadoc/code.eutrustservicesapplication/module-summary.html" target="_blank">
-          <img src="pictures/JavaDoc.jfif" width="20%" height="20%" title="Java Doc" alt="Java Doc"
-          style="display:block; margin-left:auto; margin-right:auto" ></a>
+          <img src="docs_gruppo2/img/icons/JavaDoc.jfif" width="20%" height="20%" title="Java Doc" alt="Java Doc"
+               style="display:block; margin-left:auto; margin-right:auto" ></a>
           <figcaption>
             <p style="text-align: center;">Clicca per vedere file JavaDoc</p>
           </figcaption>

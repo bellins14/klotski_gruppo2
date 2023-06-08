@@ -4,8 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="aggiunta animazione per tutte le .myImg">
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="styling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Class_Diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Class_Diagram.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Domain_Model.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Domain_Model.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Sequence_Diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Sequence_Diagram.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Use_Cases.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/Use_Cases.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/ClassDiagram(nuovo).png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/ClassDiagram(nuovo).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/ClassDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/ClassDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/DomainModel.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/DomainModel.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/InternalSequenceDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/InternalSequenceDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/SystemSequenceDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/SystemSequenceDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/UseCasesDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/UseCasesDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pictures/JavaDoc.jfif" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/icons/JavaDoc.jfif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pictures/SystemTest.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/icons/SystemTest.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pictures/TestResult.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/img/icons/TestResult.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scribbler-global.css" beforeDir="false" afterPath="$PROJECT_DIR$/scribbler-global.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -401,7 +416,8 @@
     <MESSAGE value="styled" />
     <MESSAGE value="." />
     <MESSAGE value="aggiunta animazione per tutte le .myImg" />
-    <option name="LAST_COMMIT_MESSAGE" value="aggiunta animazione per tutte le .myImg" />
+    <MESSAGE value="styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="styling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
