@@ -93,23 +93,21 @@ database Log
 
 Giocatore -> Partita: inizia_partita()
 
-Partita -> Log: richiedi_storico_stati()
+Partita -> Log: leggi_storico_configurazioni()
 Log -> Log: controlla()
 
 
 alt storico disponibile
-    Log --> Partita: restituisci(storico_stati)
-    Partita -> Partita: preleva(ultima_configurazione, counter);
+    Log --> Partita: restituisci(storico_configurazioni)
+    Partita -> Partita: preleva_ultima_configurazione(storico_configurazioni) \ncalcola_counter(storico_configurazioni)
 
 else storico non disponibile o vuoto
-    Log --> Partita: messaggio(nessuno_storico)
-    Partita -> Partita: configurazione_iniziale(1)
-    Partita -> Partita: aggiungi_storico(configurazione_iniziale)
-    Partita -> Partita: counter = 0
-    Partita --> Log: scrivi(storico)
+    Log --> Partita: eccezione(nessuno_storico)
+    Partita -> Partita: configurazione_iniziale(1) \ncounter = 0 \naggiungi_storico(configurazione_iniziale)
+    Partita -> Log: scrivi(storico_configurazioni)
 end
 
-Partita --> Giocatore: mostra(configurazione,\ncounter)
+Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
 @enduml
 ```
