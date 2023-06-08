@@ -1,6 +1,7 @@
 !theme materia-outline
 
 skinparam ArrowColor #00B4D8
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore
 participant Sistema

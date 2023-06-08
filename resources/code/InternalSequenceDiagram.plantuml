@@ -5,6 +5,7 @@ actor Giocatore
 participant Partita #ff00ff
 database Database #99FF99
 participant API #ff0000
+skinparam BackgroundColor #FFFFFF
 
 
 Giocatore -> Partita: inizia_partita()

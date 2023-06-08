@@ -9,8 +9,8 @@ skinparam ParticipantFontColor #03045E
 skinparam ParticipantBorderColor #03045E
 skinparam ParticipantBackgroundColor #90E0EF
 skinparam DatabaseBorderColor #03045E
-skinparam DatabaseBackgroundColor #00B4D8
-skinparam DatabaseFontColor #03045E
+skinparam DatabaseBackgroundColor #0
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore
 participant Partita

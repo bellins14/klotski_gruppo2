@@ -6,6 +6,7 @@
 !theme materia-outline
 
 skinparam ArrowColor #00B4D8
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore
 participant Sistema
@@ -87,6 +88,7 @@ skinparam ParticipantBackgroundColor #90E0EF
 skinparam DatabaseBorderColor #03045E
 skinparam DatabaseBackgroundColor #00B4D8
 skinparam DatabaseFontColor #03045E
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
 participant Partita
@@ -132,6 +134,7 @@ skinparam ParticipantBackgroundColor #90E0EF
 skinparam DatabaseBorderColor #03045E
 skinparam DatabaseBackgroundColor #00B4D8
 skinparam DatabaseFontColor #03045E
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
 participant Partita
@@ -173,6 +176,7 @@ skinparam ParticipantBackgroundColor #90E0EF
 skinparam DatabaseBorderColor #03045E
 skinparam DatabaseBackgroundColor #00B4D8
 skinparam DatabaseFontColor #03045E
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
 participant Partita
@@ -210,6 +214,7 @@ skinparam ParticipantBackgroundColor #90E0EF
 skinparam DatabaseBorderColor #03045E
 skinparam DatabaseBackgroundColor #00B4D8
 skinparam DatabaseFontColor #03045E
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
 participant Partita
@@ -245,6 +250,7 @@ skinparam ParticipantBackgroundColor #90E0EF
 skinparam DatabaseBorderColor #03045E
 skinparam DatabaseBackgroundColor #00B4D8
 skinparam DatabaseFontColor #03045E
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
 participant Partita
@@ -280,6 +286,7 @@ skinparam ParticipantBackgroundColor #90E0EF
 skinparam DatabaseBorderColor #03045E
 skinparam DatabaseBackgroundColor #00B4D8
 skinparam DatabaseFontColor #03045E
+skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
 participant Partita
@@ -314,6 +321,7 @@ actor Giocatore
 participant Partita #ff00ff
 database Database #99FF99
 participant API #ff0000
+skinparam BackgroundColor #FFFFFF
 
 
 Giocatore -> Partita: inizia_partita()
