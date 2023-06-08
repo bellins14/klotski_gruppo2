@@ -270,7 +270,7 @@ Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
 ## richiedi_NBM()
 
-![InternalSequenceDiagram4.png](img/diagrams/InternalSequenceDiagram6.png)
+![InternalSequenceDiagram6.png](img/diagrams/InternalSequenceDiagram6.png)
 
 ```plantuml
 @startuml
