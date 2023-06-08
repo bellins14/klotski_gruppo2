@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="WORK IN PROGRESS">
-      <change beforePath="$PROJECT_DIR$/resources/Sequence_Diagrams.md" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sequence_Diagrams.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(cambia_configurazione(configurazione_alternativa)).plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(cambia_configurazione(configurazione_alternativa)).plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(muovi(blocco)).plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(muovi(blocco)).plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(undo()).plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(undo()).plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram.plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram.plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/code/InternalSeuenceDiagram(reset()).plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/code/InternalSeuenceDiagram(reset()).plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/code/SystemSequenceDiagram.plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/code/SystemSequenceDiagram.plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/code/internalSequenceDiagram(inizia_partita()).plantuml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/code/internalSequenceDiagram(inizia_partita()).plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/diagrams/InternalSequenceDiagram1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/diagrams/InternalSequenceDiagram3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +65,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "docs",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "G:/Documenti/Progetti/klotski_gruppo2/resources/img/diagrams/InternalSequenceDiagram1.png",
+    "last_opened_file_path": "G:/Documenti/Progetti/klotski_gruppo2/resources/img/diagrams/InternalSequenceDiagram5.png",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -204,7 +195,7 @@
       <workItem from="1686080126219" duration="455000" />
       <workItem from="1686168471216" duration="4628000" />
       <workItem from="1686208483378" duration="692000" />
-      <workItem from="1686228254996" duration="2406000" />
+      <workItem from="1686228254996" duration="2717000" />
     </task>
     <task id="LOCAL-00001" summary="@Override metodo Tuple.toString()">
       <created>1683212016180</created>
@@ -437,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686230279896</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="WORK IN PROGRESS">
+      <created>1686230831103</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1686230831103</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
