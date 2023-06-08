@@ -23,7 +23,7 @@ html, body {
 }
 
 p {
-  font-weight: 300;
+  font-weight: 400;
   color: #4A4A4A;
 }
 
@@ -55,7 +55,13 @@ h2 {
 }
 
 h3 {
+  font-weight: 400 !important;
   color: var(--primary-color);
+}
+
+h4 {
+    font-weight: 400 !important;
+    font-style: italic;
 }
 
 ol {
