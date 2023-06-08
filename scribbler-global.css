@@ -58,6 +58,14 @@ ol {
   color: var(--primary-color)
 }
 
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
 /* tabs */
 .tab__container {
   position: relative;
