@@ -71,7 +71,7 @@ end
 
 ## inizia_partita()
 
-![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram1.png)
+![InternalSequenceDiagram1.png](img/diagrams/InternalSequenceDiagram1.png)
 
 ```plantuml
 @startuml
@@ -116,7 +116,7 @@ Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
 ## muovi(blocco)
 
-![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram2.png)
+![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram2.png)
 
 ```plantuml
 @startuml
@@ -157,7 +157,7 @@ end
 
 ## cambia_configurazione(configurazione_alternativa)
 
-![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram3.png)
+![InternalSequenceDiagram3.png](img/diagrams/InternalSequenceDiagram3.png)
 
 ```plantuml
 @startuml
@@ -187,7 +187,6 @@ Partita -> Log: scrivi(storico_configurazioni)
 
 
 Partita-->Giocatore: mostra(configurazione_corrente,\ncounter)
-end
 
 @enduml
 ```
@@ -195,7 +194,7 @@ end
 
 ## undo()
 
-![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram4.png)
+![InternalSequenceDiagram4.png](img/diagrams/InternalSequenceDiagram4.png)
 
 ```plantuml
 @startuml

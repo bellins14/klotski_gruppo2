@@ -1,0 +1,37 @@
+@startuml
+!theme materia-outline
+
+skinparam ArrowColor #00B4D8
+skinparam ActorBorderColor #03045E
+skinparam ActorFontColor #03045E
+skinparam ActorBackgroundColor #CAF0F8
+skinparam ParticipantFontColor #03045E
+skinparam ParticipantBorderColor #03045E
+skinparam ParticipantBackgroundColor #90E0EF
+skinparam DatabaseBorderColor #03045E
+skinparam DatabaseBackgroundColor #00B4D8
+skinparam DatabaseFontColor #03045E
+
+actor Giocatore
+participant Partita
+database Log
+
+Giocatore -> Partita: inizia_partita()
+
+Partita -> Log: leggi_storico_configurazioni()
+Log -> Log: controlla()
+
+
+alt storico disponibile
+    Log --> Partita: restituisci(storico_configurazioni)
+    Partita -> Partita: preleva_ultima_configurazione(storico_configurazioni) \ncalcola_counter(storico_configurazioni)
+
+else storico non disponibile o vuoto
+    Log --> Partita: eccezione(nessuno_storico)
+    Partita -> Partita: configurazione_iniziale(1) \ncounter = 0 \naggiungi_storico(configurazione_iniziale)
+    Partita -> Log: scrivi(storico_configurazioni)
+end
+
+Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
+
+@enduml

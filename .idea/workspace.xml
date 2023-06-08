@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="aggiunta icona e titolo app">
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="styling">
+      <change afterPath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(cambia_configurazione(configurazione_alternativa)).plantuml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(muovi(blocco)).plantuml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/code/InternalSequenceDiagram(undo()).plantuml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/code/internalSequenceDiagram(inizia_partita()).plantuml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scribbler-global.css" beforeDir="false" afterPath="$PROJECT_DIR$/scribbler-global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/Sequence_Diagrams.md" beforeDir="false" afterPath="$PROJECT_DIR$/resources/Sequence_Diagrams.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,6 +200,7 @@
       <workItem from="1686080126219" duration="455000" />
       <workItem from="1686168471216" duration="4628000" />
       <workItem from="1686208483378" duration="692000" />
+      <workItem from="1686228254996" duration="708000" />
     </task>
     <task id="LOCAL-00001" summary="@Override metodo Tuple.toString()">
       <created>1683212016180</created>
@@ -401,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686216667542</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="styling">
+      <created>1686221164331</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1686221164331</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -434,10 +445,10 @@
     <MESSAGE value="styled" />
     <MESSAGE value="." />
     <MESSAGE value="aggiunta animazione per tutte le .myImg" />
-    <MESSAGE value="styling" />
     <MESSAGE value="ridivisione risorse" />
     <MESSAGE value="spostamento risorse" />
-    <option name="LAST_COMMIT_MESSAGE" value="spostamento risorse" />
+    <MESSAGE value="styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="styling" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
