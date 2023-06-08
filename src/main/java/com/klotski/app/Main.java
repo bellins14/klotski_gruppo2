@@ -22,6 +22,7 @@ public class Main extends Application {
      * */
     @Override
     public void start(Stage stage) {
+
         // Carica l'icona dall'URL specificato
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/icons/icon.png")));
 

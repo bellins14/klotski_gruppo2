@@ -289,7 +289,7 @@ public class Controller {
 
 //TODO:separare logica muovi blocco in game
     public void moveBlock(Piece block, int dirIdx) {
-        boolean blockMoved = false;
+        //boolean blockMoved = false;
         double moveAmount = 100;
         switch (dirIdx) {
             //WASD
@@ -301,39 +301,30 @@ public class Controller {
             case 19,54 -> {
                 if (block.getLayoutY() + moveAmount + block.getHeight() <= 500
                         && isNotOverlapping(block, 0, moveAmount)) {
-                    block.setLayoutY(block.getLayoutY() + moveAmount);
-                    game.setCounter(game.getCounter()+1);
-                    blockMoved = true;
+                    //Muove il blocco in giu di moveAmount
+                    game.moveBlockDown(block, moveAmount);
+                    //blockMoved = true;
                 }
             }
             //RIGHT
             case 18,39 -> {
                 if (block.getLayoutX() + moveAmount + block.getWidth() <= 400
                         && isNotOverlapping(block, moveAmount, 0)) {
-                    block.setLayoutX(block.getLayoutX() + moveAmount);
-                    game.setCounter(game.getCounter()+1);
-                    blockMoved = true;
+                    game.moveBlockRight(block, moveAmount);
                 }
             }
             //UP
             case 17,58 -> {
                 if (block.getLayoutY() - moveAmount >= 0 && isNotOverlapping(block, 0, -moveAmount)) {
-                    block.setLayoutY(block.getLayoutY() - moveAmount);
-                    game.setCounter(game.getCounter()+1);
-                    blockMoved = true;
+                    game.moveBlockUp(block, moveAmount);
                 }
             }
             //LEFT
             case 16,36 -> {
                 if (block.getLayoutX() - moveAmount >= 0 && isNotOverlapping(block, -moveAmount, 0)) {
-                    block.setLayoutX(block.getLayoutX() - moveAmount);
-                    game.setCounter(game.getCounter()+1);
-                    blockMoved = true;
+                    game.moveBlockLeft(block, moveAmount);
                 }
             }
-        }
-        if(blockMoved){
-            game.jacksonSerialize();
         }
     }
 

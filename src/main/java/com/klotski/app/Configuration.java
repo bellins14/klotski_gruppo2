@@ -22,7 +22,7 @@ public class Configuration {
 
     //Array di Pieces che rappresenta la configurazione
     //Sarà ordinato dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
-    protected Piece[] _pieces = new Piece[CONF_PIECES_NUM];
+    private final Piece[] _pieces = new Piece[CONF_PIECES_NUM];
 
 
     /**
@@ -71,6 +71,15 @@ public class Configuration {
         return _pieces;
     }
 
+    public boolean doesPieceBelong(Piece piece) {
+        for (Piece testPiece : _pieces) {
+            if (piece == testPiece) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Metodo che setta i pezzi dell'array pieces.

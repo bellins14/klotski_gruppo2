@@ -116,6 +116,62 @@ public class Game {
 
     public int getCounter () {return  this.counter;}
 
+    public void moveBlockDown(Piece block, double moveAmount) {
+        //Verifica che il blocco appartenga alla configurazione
+        if(!_configuration.doesPieceBelong(block)){
+            throw new IllegalArgumentException();
+        }
+        //Muovi in giù il blocco
+        block.setLayoutY(block.getLayoutY() + moveAmount);
+        //Incrementa il counter delle mosse
+        this.counter++;
+        //_configuration si aggiorna automaticamente
+        //Aggiorna lo stack di log e il file di log
+        jacksonSerialize();
+    }
+
+    public void moveBlockUp(Piece block, double moveAmount) {
+        //Verifica che il blocco appartenga alla configurazione
+        if(!_configuration.doesPieceBelong(block)){
+            throw new IllegalArgumentException();
+        }
+        //Muovi in su il blocco
+        block.setLayoutY(block.getLayoutY() - moveAmount);
+        //Incrementa il counter delle mosse
+        this.counter++;
+        //_configuration si aggiorna automaticamente
+        //Aggiorna lo stack di log e il file di log
+        jacksonSerialize();
+    }
+
+    public void moveBlockLeft(Piece block, double moveAmount) {
+        //Verifica che il blocco appartenga alla configurazione
+        if(!_configuration.doesPieceBelong(block)){
+            throw new IllegalArgumentException();
+        }
+        //Muovi a sx il blocco
+        block.setLayoutX(block.getLayoutX() - moveAmount);
+        //Incrementa il counter delle mosse
+        this.counter++;
+        //_configuration si aggiorna automaticamente
+        //Aggiorna lo stack di log e il file di log
+        jacksonSerialize();
+    }
+
+    public void moveBlockRight(Piece block, double moveAmount) {
+        //Verifica che il blocco appartenga alla configurazione
+        if(!_configuration.doesPieceBelong(block)){
+            throw new IllegalArgumentException();
+        }
+        //Muovi a dx il blocco
+        block.setLayoutX(block.getLayoutX() + moveAmount);
+        //Incrementa il counter delle mosse
+        this.counter++;
+        //_configuration si aggiorna automaticamente
+        //Aggiorna lo stack di log e il file di log con la nuova configurazione
+        jacksonSerialize();
+    }
+
 
 
     /**
