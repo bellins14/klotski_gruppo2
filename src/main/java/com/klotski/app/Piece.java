@@ -153,37 +153,6 @@ public class Piece extends Rectangle {
 
 
     /**
-     * Metodo che contolla che non ci sia overlapping tra pezzi durante il loro spostamento.
-     *
-     * @param pane  pezzo che si vuole.
-     * @param deltaX quantità di cui si muove il pezzo orizzontalmente.
-     * @param deltaY quantità di cui si muove il pezzo verticalmente.
-     * @return false se si overlappa, true se è tutto a posto.
-     */
-    public boolean isNotOverlapping(Pane pane, double deltaX, double deltaY) {
-        // Calcola la nuova posizione del bottone
-        double newX = this.getLayoutX() + deltaX;
-        double newY = this.getLayoutY() + deltaY;
-
-        // Itera su tutti gli elementi figli della Pane
-        ObservableList<Node> children = pane.getChildren();
-        for (Node child : children) {
-            // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
-            if (child instanceof Piece otherPiece && child != this) {
-                // Verifica se il nuovo bottone si sovrappone all'altro bottone
-                if (newX + this.getWidth() > otherPiece.getLayoutX() &&
-                        newX < otherPiece.getLayoutX() + otherPiece.getWidth() &&
-                        newY + this.getHeight() > otherPiece.getLayoutY() &&
-                        newY < otherPiece.getLayoutY() + otherPiece.getHeight()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * Metodo che ritorna una string che rappresenta un piece in un formato utile per la
      * NBM.
      * @return stringa formattata.
