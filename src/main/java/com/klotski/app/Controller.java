@@ -58,10 +58,9 @@ public class Controller {
 
 
     /**
-     * Costruttore di default
+     * Costruttore di default vuoto
      */
-    public Controller() {
-    }
+    public Controller() {}
 
 
     /**
@@ -71,7 +70,7 @@ public class Controller {
     public void initialize() {
 
         //Crea un nuovo gioco
-        game = new Game();
+        game = new Game(LOG_FILE,DC_FILE);
 
         //Setta il counter con le mosse
         textCounter.setText("Moves : " + game.getMoveCounter());

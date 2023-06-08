@@ -6,11 +6,11 @@ import static com.klotski.app.Constants.*;
 
 
 /**
- *
+ * Classe che rappresenta il gioco di Klotski
  */
 public class Game {
 
-    //Configurazione selezionata tra le 4 iniziali
+    //Indica quale configurazione iniziale e' selezionata tra le 4 disponibili
     private int _initialSelectedConf;
 
     //Configurazione attuale del gioco
@@ -22,18 +22,29 @@ public class Game {
     private Stack<Configuration> _stackLog;
     private int _moveCounter;
 
+    //Path del file di log dove con cui sincronizzare _stackLog
+    // e che funge da storico delle mosse
+    private final String _logFilePathName;
+
+    //Path del file di supporto per le serializzazione in json delle Configurazioni
+    private final String _supportFilePathName;
+
 
     //Costruttore di default
-    //Crea un gioco a partire dal file di log
+    //Crea un gioco a partire dal file di log, e da un file di supporto per la serializzazione delle configurazioni
     //- se c'è una partita precedente la riprende
     //- altrimenti crea il gioco dalla configurazione iniziale di default (la numero 1)
-    public Game(){
+    public Game(String logFilePathName, String supportFilePathName){
+
+        //Inizializza i path dei file
+        _logFilePathName = logFilePathName;
+        _supportFilePathName = supportFilePathName;
 
         //Crea lo stack log
         _stackLog = new Stack<>();
 
         //Inizializza lo stack log con il file log
-        _stackLog = UtilityJackson.deserializeConfigurationLog(LOG_FILE);
+        _stackLog = UtilityJackson.deserializeConfigurationLog(_logFilePathName);
 
         if (_stackLog.size() == Utility.EMPTY_LOG_SIZE) { // Se il log è vuoto
 
@@ -52,7 +63,7 @@ public class Game {
 
             //Prende tale configurazione (in json) dal file di log, la converte in un oggetto Configuration
             // e inizializza _configuration
-            _configuration = UtilityJackson.deserializeConfiguration(DC_FILE);
+            _configuration = UtilityJackson.deserializeConfiguration(_supportFilePathName);
 
             //TODO: gestire la situazione in cui la configurazione nel file di log non è una di quelle iniziali
             //Controlla che sia una delle 4 configurazioni iniziali, prendi il numero e setta selectedConf
@@ -71,11 +82,11 @@ public class Game {
             _initialSelectedConf = Configuration.isInitialConfiguration(_configuration);
 
             //Prende l'ultima configurazione (in formato json) e la salva nel file di supporto (DC_FILE)
-            UtilityJackson.serializeConfiguration(_stackLog.peek(), DC_FILE);
+            UtilityJackson.serializeConfiguration(_stackLog.peek(), _supportFilePathName);
 
             //Prende la configurazione dal file di supporto (json), crea un (oggetto) configurazione e inizializzaù
             // la configurazione corrente
-            _configuration = UtilityJackson.deserializeConfiguration(DC_FILE);
+            _configuration = UtilityJackson.deserializeConfiguration(_supportFilePathName);
 
             //Ripristina il contatore delle mosse
             _moveCounter = _stackLog.size() - 1;
@@ -255,21 +266,21 @@ public class Game {
         for (int i = 1; i < s; i++) {
             utility.push(_stackLog.pop());
         }
-        UtilityJackson.serializeConfiguration(_stackLog.peek(), DC_FILE);
+        UtilityJackson.serializeConfiguration(_stackLog.peek(), _supportFilePathName);
         s = utility.size();
         for (int i = 0; i < s; i++) {
             _stackLog.push(utility.pop());
         }
-        return UtilityJackson.deserializeConfiguration(DC_FILE);
+        return UtilityJackson.deserializeConfiguration(_supportFilePathName);
     }
 
     //Converte la configurazione attuale in json e la inserisce sia nello Stack log che nel file log
     private void updateLogsWithCurrentConfiguration(){
         //Serializza la configurazione corrente nel file di supporto
-        UtilityJackson.serializeConfiguration(_configuration, DC_FILE);
+        UtilityJackson.serializeConfiguration(_configuration, _supportFilePathName);
         //Deserializza la configurazione corrente dal file di supporto e inseriscila nello Stack log
-        _stackLog.push(UtilityJackson.deserializeConfiguration(DC_FILE));
+        _stackLog.push(UtilityJackson.deserializeConfiguration(_supportFilePathName));
         //Scrivi tutto lo Stack di log sul file di log
-        UtilityJackson.serializeConfigurationLog(_stackLog, LOG_FILE);
+        UtilityJackson.serializeConfigurationLog(_stackLog, _logFilePathName);
     }
 }

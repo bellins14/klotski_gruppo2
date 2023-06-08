@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 
 import java.util.Objects;
 
+import static com.klotski.app.Constants.*;
+
 /**
  * Classe che rappresenta l'inizializzazione dell'interfaccia grafica
  */
@@ -24,24 +26,24 @@ public class Main extends Application {
     public void start(Stage stage) {
 
         // Carica l'icona dall'URL specificato
-        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("img/icons/icon.png")));
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream(ICON_PATH_NAME)));
 
         // Imposta l'icona dell'applicazione
         stage.getIcons().add(icon);
 
         // Imposta il titolo dell'applicazione
-        stage.setTitle("Klotski Game - Gruppo2");
+        stage.setTitle(APPLICATION_NAME);
 
-        // Carico il file "view.fxml", il quale corrisponde al file che viene utilizzato in Scene Builder per definire
+        // Carica il file "view.fxml", il quale corrisponde al file che viene utilizzato in Scene Builder per definire
         //l'interfaccia utente
-        //Creo una scena che contiene il contenuto dell'interfaccia utente (1000 x 700)
+        //Crea una scena che contiene il contenuto dell'interfaccia utente (1000 x 700)
         Scene scene = null;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view.fxml")); //TODO: sposta in costants
-            scene = new Scene(fxmlLoader.load(), 1000, 700);
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(VIEW_FXML_FILENAME));
+            scene = new Scene(fxmlLoader.load(), SCENE_V, SCENE_V1);
             stage.setScene(scene);
             //aggiungo un file css alla scena
-            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm());
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(STYLE_CSS_FILENAME)).toExternalForm());
             //impedisco all'utente di ridimensionare la finestra
             stage.setResizable(false);
             stage.show();
