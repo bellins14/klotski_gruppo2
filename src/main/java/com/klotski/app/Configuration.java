@@ -1,82 +1,158 @@
 package com.klotski.app;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.klotski.jacksonSupport.ConfigurationDeserializer;
+import com.klotski.jacksonSupport.ConfigurationSerializer;
 
+import static com.klotski.app.Constants.*;
+
+//Dichiara a Jackson che questa classe ha un Serializer
+@JsonSerialize(using = ConfigurationSerializer.class)
+//Dichiara a Jackson che questa classe ha un Deserializer
+@JsonDeserialize(using = ConfigurationDeserializer.class)
+
+
+/**
+ * Classe che rappresenta una configurazione del gioco del Klotski.
+ * Una configurazione è intesa come l'insieme dei pezzi e relative posizioni che formano
+ * il layout di gioco prima di una mossa.
+ */
 public class Configuration {
 
-    //configurazione scelta
-    private final int _configuration;
+    //Array di Pieces che rappresenta la configurazione
+    //Sarà ordinato dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
+    private final Piece[] _pieces = new Piece[CONF_PIECES_NUM];
 
-    public Configuration(int configuration){
-        this._configuration = configuration;
-    }
 
-    //di defautl ho scelto la prima
+    /**
+     * Costruttore di default, che costruisce la prima configurazione.
+     */
     public Configuration(){
-        this._configuration = 1;
+
+        //Posiziona i pezzi come nella configurazione numero 1
+        setPieces(1);
     }
 
 
-    //in base alla conf, mi ritornano i Piece con i rispettivi colori
-    public Piece[] getBlocks() {
-        Piece[] blocks = new Piece[10];
+    /**
+     * Costruttore che compone la configurazione iniziale designata.
+     * @param configurationNumber configurazione designata.
+     * @throws IllegalArgumentException se configurationNumber non è valido (minore di 1 o maggiore di 4)
+     */
+    public Configuration(int configurationNumber) throws IllegalArgumentException{
 
-        Map<Integer, String> imageMap = new HashMap<>();
-        /*imageMap.put(0, Color.LIGHTCORAL);
-        imageMap.put(1, Color.GREEN);
-        imageMap.put(2, Color.LIGHTBLUE);
-        imageMap.put(3, Color.BROWN);
-*/
-        imageMap.put(0, "piece0.png");
-        imageMap.put(1, "piece1.png");
-        imageMap.put(2, "piece2.png");
-        imageMap.put(3, "piece3.png");
-        int[] values;
-        switch (this._configuration) {
-            case 1 -> values = new int[]{1, 3, 1, 1, 0, 0, 0, 0, 1, 2};
-            case 2 -> values = new int[]{0, 3, 0, 1, 1, 1, 0, 0, 2, 2};
-            case 3 -> values = new int[]{1, 0, 0, 0, 1, 1, 3, 2, 0, 2};
-            case 4 -> values = new int[]{1, 3, 1, 1, 2, 0, 0, 1, 0, 0};
-            default -> {
-                return null;
+        //Posiziona i pezzi come nella configurazione numero configurationNumber
+        setPieces(configurationNumber);
+    }
+
+
+    /**
+     * Costruttore con array di Piece come parametro.
+     * Permette (potenzialmente) di creare una configurazione diversa dalle 4 iniziali previste.
+     * @param p array di Piece.
+     * @throws IllegalArgumentException se p non contiene esattamente 10 pezzi
+     */
+    public Configuration(Piece[] p) {
+        //Se l'array di pezzi non contiene esattamente 10 pezzi lancia eccezione
+        if(p.length != CONF_PIECES_NUM){
+            throw new IllegalArgumentException("Una configurazione deve avere sempre" + CONF_PIECES_NUM +"pezzi");
+        }
+
+        System.arraycopy(p, 0, _pieces, 0, p.length);
+    }
+
+
+    /**
+     * Metodo che ritorna l'array di Piece.
+     * @return pieces campo di esemplare.
+     */
+    public Piece[] getPieces() {
+        return _pieces;
+    }
+
+    public boolean doesPieceBelong(Piece piece) {
+        for (Piece testPiece : _pieces) {
+            if (piece == testPiece) {
+                return true;
             }
         }
 
-        for (int i = 0; i < blocks.length; i++) {
-            int value = values[i];
-            String image = imageMap.get(value);
-            blocks[i] = new Piece(value, image);
-        }
-
-        return blocks;
+        return false;
     }
 
-    //in base alla conf mi ritornano le posizioni su come mettere i vari blocchi
-    public Tuple[] getPositions() {
+    /**
+     * Metodo che setta i pezzi dell'array pieces.
+     * @param confNumber configurazione designata per i pezzi.
+     * @throws IllegalArgumentException se confNumber non è valido (minore di 1 o maggiore di 4)
+     */
+    public void setPieces(int confNumber) throws IllegalArgumentException{
+        int[] piecesType = getPiecesType(confNumber);
+        Tuple[] positions = getPositions(confNumber);
+
+        for (int j = 0; j < _pieces.length; j++) {
+            int pieceType = piecesType[j];
+            _pieces[j] = new Piece(pieceType);
+            _pieces[j].setLayoutX(positions[j].getX());
+            _pieces[j].setLayoutY(positions[j].getY());
+        }
+    }
+
+
+    /**
+     * Metodo che ritorna i tipi dei pezzi che compongono la configurazione designata.
+     * @param configurationNumber configurazione designata.
+     * @return types array con il tipo di ciascun pezzo.
+     * @throws IllegalArgumentException se configurationNumber non è valido (minore di 1 o maggiore di 4)
+     */
+    public static int[] getPiecesType(int configurationNumber) {
+        int[] types;
+
+        //Inserisce in un array il tipo dei pezzi in base al numero della confiugurazione iniziale
+        switch (configurationNumber) {
+            case 1 -> types = config1PieceTypes;
+            case 2 -> types = config2PieceTypes;
+            case 3 -> types = config3PieceTypes;
+            case 4 -> types = config4PieceTypes;
+            default -> throw new IllegalArgumentException("configurationNumber non compreso tra 1 e 4");
+        }
+
+        return types;
+    }
+
+
+    /**
+     * Metodo che ritorna un array di tuple che rappresentano le coordinate delle posizioni dei pezzi.
+     * @param configurationNumber configurazione designata.
+     * @return positions array di tuple.
+     * @throws IllegalArgumentException se configurationNumber non è valido (minore di 1 o maggiore di 4)
+     */
+    public static Tuple[] getPositions(int configurationNumber) {
         int[] positionX;
         int[] positionY;
 
-        switch (this._configuration) {
+        // Le misure si riferiscono al pixel in angolo in alto a sinistra, dei pezzi rispettivi
+        // scritti in getPieces
+        //Inserisce in un array le coordinate dei pezzi in base al numero della confiugurazione iniziale
+        switch (configurationNumber) {
+
             case 1 -> {
-                positionX = new int[]{0, 100, 300, 0, 100, 200, 100, 200, 300, 100};
-                positionY = new int[]{0, 0, 0, 200, 200, 200, 300, 300, 200, 400,};
+                positionX = config1PieceX;
+                positionY = config1PieceY;
             }
             case 2 -> {
-                positionX = new int[]{0, 100, 300, 0, 100, 300, 0, 300, 0, 200};
-                positionY = new int[]{0, 0, 0, 100, 200, 100, 300, 300, 400, 400};
+                positionX = config2PieceX;
+                positionY = config2PieceY;
             }
             case 3 -> {
-                positionX = new int[]{0, 100, 200, 300, 0, 100, 200, 100, 300, 200};
-                positionY = new int[]{0, 0, 0, 0, 200, 100, 100, 300, 300, 400};
+                positionX = config3PieceX;
+                positionY = config3PieceY;
             }
             case 4 -> {
-                positionX = new int[]{0, 100, 300, 0, 100, 100, 200, 300, 0, 300};
-                positionY = new int[]{0, 0, 0, 200, 200, 300, 300, 200, 400, 400};
+                positionX = config4PieceX;
+                positionY = config4PieceY;
             }
-            default -> {
-                return null;
-            }
+            default -> throw new IllegalArgumentException("configurationNumber non compreso tra 1 e 4");
         }
 
         Tuple[] positions = new Tuple[positionX.length];
@@ -88,4 +164,37 @@ public class Configuration {
     }
 
 
+    /**
+     * Metodo che verifica se la configurazione passata è uguale ad una delle 4 configurazioni iniziali.
+     * @param conf configurazione da verificare.
+     * @return numero della configurazione corrispondente, altrimenti ritorna 0.
+     */
+    public static int isInitialConfiguration(Configuration conf){
+        Configuration initConf;
+
+        for(int i = 1; i <= 4; i++){
+            initConf = new Configuration(i);
+            // Controlliamo se la configurazione è uguale alla configurazione iniziale iterata.
+            if((conf.toString()).equals(initConf.toString())){
+                //System.out.println(i);
+                return i;
+            }
+        }
+        // Nessuna corrispondenza trovata.
+        return 0;
+    }
+
+
+    /**
+     * Metodo per stampare una configurazione.
+     * @return sconf stringa che rappresenta la configurazione.
+     */
+    public String toString(){
+        String sconf = "";
+        for(Piece p : _pieces){
+            sconf = sconf + p.toString() + "\n";
+        }
+        return sconf;
+    }
 }
+
