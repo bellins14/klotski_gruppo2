@@ -58,14 +58,6 @@ ol {
   color: var(--primary-color)
 }
 
-a {
-  color: var(--accent-color);
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-
 /* tabs */
 .tab__container {
   position: relative;
@@ -169,12 +161,14 @@ code {
 
 /* links */
 .link {
+  color: var(--accent-color);
   text-decoration: none;
   transition: all 0.3s ease-out;
 }
 
 .link:hover {
-  color: var(--accent-color);
+  color: var(--primary-color);
+  text-decoration: underline;
 }
 
 .link--dark {
