@@ -4,29 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="styling">
-      <change afterPath="$PROJECT_DIR$/docs_gruppo2/resources/code/ClassDiagram(nuovo).plantuml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs_gruppo2/resources/code/ClassDiagram.plantuml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs_gruppo2/resources/code/DomainModel.plantuml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs_gruppo2/resources/code/InternalSequenceDiagram.plantuml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs_gruppo2/resources/code/SystemSequenceDiagram.plantuml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Class_Diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/Class_Diagram.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Domain_Model.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/Domain_Model.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Sequence_Diagram.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/Sequence_Diagram.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/Use_Cases.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/Use_Cases.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/ClassDiagram(nuovo).png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/diagrams/ClassDiagram(nuovo).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/ClassDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/diagrams/ClassDiagram.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/DomainModel.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/diagrams/DomainModel.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/InternalSequenceDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/diagrams/InternalSequenceDiagram.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/SystemSequenceDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/diagrams/SystemSequenceDiagram.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/diagrams/UseCasesDiagram.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/diagrams/UseCasesDiagram.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/icons/JavaDoc.jfif" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/icons/JavaDoc.jfif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/icons/SystemTest.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/icons/SystemTest.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/icons/TestResult.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/icons/TestResult.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs_gruppo2/img/icons/piece3.png" beforeDir="false" afterPath="$PROJECT_DIR$/docs_gruppo2/resources/img/icons/piece3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="ridivisione risorse" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -398,7 +376,21 @@
       <option name="project" value="LOCAL" />
       <updated>1686215709481</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="ridivisione risorse">
+      <created>1686216145825</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1686216145825</updated>
+    </task>
+    <task id="LOCAL-00028" summary="ridivisione risorse">
+      <created>1686216318873</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1686216318873</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -432,7 +424,8 @@
     <MESSAGE value="." />
     <MESSAGE value="aggiunta animazione per tutte le .myImg" />
     <MESSAGE value="styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="styling" />
+    <MESSAGE value="ridivisione risorse" />
+    <option name="LAST_COMMIT_MESSAGE" value="ridivisione risorse" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

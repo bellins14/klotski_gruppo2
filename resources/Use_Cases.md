@@ -300,7 +300,7 @@
 
 # Grafo Use Cases
 
-![UseCasesDiagram.png](/docs_gruppo2/resources/img/diagrams/UseCasesDiagram.png)
+![UseCasesDiagram.png](img/diagrams/UseCasesDiagram.png)
 
 ```plantuml
 @startuml

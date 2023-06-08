@@ -17,7 +17,7 @@
 ## Corrente
 Grafo senza la classe concettuale Klotski
 
-![Domain Model](resources/img/diagrams/DomainModel.png)
+![Domain Model](img/diagrams/DomainModel.png)
 
 ```plantuml
 @startuml
