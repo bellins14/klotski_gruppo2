@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static com.klotski.app.Constants.*;
+
 /**
  * Classe che fornisce dei metodi di utility per la scrittura fu file JSON.
  */
@@ -22,13 +24,13 @@ public class UtilityJackson {
      * Utile per la deep copy.
      * @param conf configurazione da serializzare.
      */
-    public static void serializeConfiguration(Configuration conf){
+    public static void serializeConfiguration(Configuration conf, String dcPathName){
         File f;
         FileWriter fw = null;
         try {
             ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
             // File usato come appoggio per la deep copy
-            f = new File("src/main/resources/com/klotski/app/json/ConfigurationDC.json");
+            f = new File(dcPathName);
             fw = new FileWriter(f); // Classe per la scrittura su file
             om.writeValue(fw, conf);
         } catch (IOException e) {
@@ -48,16 +50,16 @@ public class UtilityJackson {
     /**
      * Metodo che deserializza di un file JSON in una configurazione.
      * Utile per la deep copy.
-     * @return
+     * @return oggetto configurazione deserializzata
      */
-    public static Configuration deserializeConfiguration(){
+    public static Configuration deserializeConfiguration(String dcFilePathName){
         Configuration c = null;
         File f;
         FileReader fr = null;
 
         try {
             ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-            f = new File("src/main/resources/com/klotski/app/json/ConfigurationDC.json");
+            f = new File(dcFilePathName);
             fr = new FileReader(f); // Classe per la lettura da file
             c = om.readValue(fr, Configuration.class);
 
@@ -81,13 +83,13 @@ public class UtilityJackson {
      * su file JSON.
      * @param l stack di configuration.
      */
-    public static void  serializeConfigurationLog (Stack<Configuration> l){
+    public static void  serializeConfigurationLog (Stack<Configuration> l, String logFilePathName){
         File f;
         FileWriter fw = null;
 
         try {
             ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-            f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
+            f = new File(logFilePathName);
             fw = new FileWriter(f); // Classe per la scrittura su file
             om.writeValue(fw, l);
         } catch (IOException e) {
@@ -108,14 +110,14 @@ public class UtilityJackson {
      * Metodo di utility per ritornare uno stack già deserializzato di configurazioni.
      * @return log stack deserializzato.
      */
-    public static Stack<Configuration> deserializeConfigurationLog (){
+    public static Stack<Configuration> deserializeConfigurationLog (String logPathName){
         Stack<Configuration> log = new Stack<>();
         File f;
         FileReader fr = null;
 
         try {
             ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-            f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
+            f = new File(logPathName);
             fr= new FileReader(f); // Classe per la scrittura su file
             JsonNode rootNode = om.readTree(fr);
 

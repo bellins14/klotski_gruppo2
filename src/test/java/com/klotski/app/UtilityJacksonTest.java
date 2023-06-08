@@ -14,6 +14,9 @@ import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import static com.klotski.app.Constants.*;
+
+
 class UtilityJacksonTest {
 
     //Test del metodo serializeConfiguration
@@ -27,7 +30,7 @@ class UtilityJacksonTest {
         for (int i = 1; i <= 4; i++) {
             configuration = new Configuration(i);
 
-            UtilityJackson.serializeConfiguration(configuration);
+            UtilityJackson.serializeConfiguration(configuration, DC_FILE); //TODO: cambia con un file di test
 
             Configuration serializedConfiguration = null;
 
@@ -36,7 +39,7 @@ class UtilityJacksonTest {
 
             try {
                 ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-                f = new File("src/main/resources/com/klotski/app/json/ConfigurationDC.json");
+                f = new File(DC_FILE);
                 fr = new FileReader(f); // Classe per la lettura da file
                 serializedConfiguration = om.readValue(fr, Configuration.class);
             } catch (IOException e) {
@@ -72,9 +75,9 @@ class UtilityJacksonTest {
         for (int i = 1; i <= 4; i++) {
             configuration = new Configuration(i);
 
-            UtilityJackson.serializeConfiguration(configuration);
+            UtilityJackson.serializeConfiguration(configuration, DC_FILE); //cambia con un file di test
 
-            Configuration deserializedConfiguration = UtilityJackson.deserializeConfiguration();
+            Configuration deserializedConfiguration = UtilityJackson.deserializeConfiguration(DC_FILE);
 
             String expectedString = configuration.toString();
 
@@ -100,7 +103,7 @@ class UtilityJacksonTest {
         }
 
         //Utilizza il metodo per serializzare le configurazioni del log e salvarle su file
-        UtilityJackson.serializeConfigurationLog(testingLog);
+        UtilityJackson.serializeConfigurationLog(testingLog, LOG_FILE); //TODO: cambia con file di test
 
         //Crea il log e riempilo con gli elementi del log serializzato
         Stack<Configuration> serializedConfigurationLog = new Stack<>();
@@ -165,10 +168,10 @@ class UtilityJacksonTest {
         }
         
         //Salva lo stack su file
-        UtilityJackson.serializeConfigurationLog(testingLog);
+        UtilityJackson.serializeConfigurationLog(testingLog, LOG_FILE); //TODO: cambia con file di test
         
         //Usa il metodo per deserializzare le configurazioni dal file e passali ad un nuovo log
-        Stack<Configuration> deserializedConfigurationLog = UtilityJackson.deserializeConfigurationLog();
+        Stack<Configuration> deserializedConfigurationLog = UtilityJackson.deserializeConfigurationLog(LOG_FILE);
 
         //Controlla che i due log corrispondano
         // Per ogni configurazione dello stack di log

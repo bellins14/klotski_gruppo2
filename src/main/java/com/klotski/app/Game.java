@@ -13,6 +13,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Stack;
 
+import static com.klotski.app.Constants.*;
+
+
 public class Game {
     private int counter;
     private WebEngine webEngine;
@@ -100,12 +103,12 @@ public class Game {
         for (int i = 1; i < s; i++) {
             utility.push(log.pop());
         }
-        UtilityJackson.serializeConfiguration(log.peek());
+        UtilityJackson.serializeConfiguration(log.peek(), DC_FILE);
         s = utility.size();
         for (int i = 0; i < s; i++) {
             log.push(utility.pop());
         }
-        return UtilityJackson.deserializeConfiguration();
+        return UtilityJackson.deserializeConfiguration(DC_FILE);
     }
 
     public void nextBestMove(Pane blockPane, Configuration _configuration, Stack<Configuration>log, Text texcounter) throws IOException {
@@ -166,9 +169,9 @@ public class Game {
     }
 
     public void jacksonSerialize(Configuration _configuration, Stack<Configuration> log){
-        UtilityJackson.serializeConfiguration(_configuration);
-        log.push(UtilityJackson.deserializeConfiguration());
-        UtilityJackson.serializeConfigurationLog(log);
+        UtilityJackson.serializeConfiguration(_configuration, DC_FILE);
+        log.push(UtilityJackson.deserializeConfiguration(DC_FILE));
+        UtilityJackson.serializeConfigurationLog(log, LOG_FILE);
     }
 
 

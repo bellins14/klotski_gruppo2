@@ -3,6 +3,12 @@ package com.klotski.app;
 import javafx.scene.paint.Color;
 
 public class Constants {
+
+    //Serializzazione e scrittura su file
+
+    public static final String DC_FILE = "src/main/resources/com/klotski/app/json/ConfigurationDC.json";
+    public static final String LOG_FILE = "src/main/resources/com/klotski/app/json/ConfigurationLog.json";
+
     //Pezzi
 
     //Bordo

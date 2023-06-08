@@ -20,6 +20,9 @@ import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.klotski.app.Constants.*;
+
+
 /**
  * Classe che gestisce tutta la logica dell'applicazione.
  */
@@ -63,22 +66,22 @@ public class Controller {
     //primo metodo chiamato di default
     public void initialize() {
         // Leggiamo il log
-        log = UtilityJackson.deserializeConfigurationLog();
+        log = UtilityJackson.deserializeConfigurationLog(LOG_FILE);
         if (log.size() == Utility.EMPTY_LOG_SIZE) { // Il log è vuoto
             _configuration = new Configuration(selectedConf);
             game.jacksonSerialize(_configuration, log);
             game.setCounter(0);
 
         } else if (log.size() == Utility.SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale.
-            _configuration = UtilityJackson.deserializeConfiguration();
+            _configuration = UtilityJackson.deserializeConfiguration(DC_FILE);
             selectedConf = Configuration.isInitialConfiguration(_configuration);
             game.setCounter(0);
 
         } else { // Nel log c'è più di una configurazione
             _configuration = game.getInitConfiguration(log);
             selectedConf = Configuration.isInitialConfiguration(_configuration);
-            UtilityJackson.serializeConfiguration(log.peek());
-            _configuration = UtilityJackson.deserializeConfiguration();
+            UtilityJackson.serializeConfiguration(log.peek(), DC_FILE);
+            _configuration = UtilityJackson.deserializeConfiguration(DC_FILE);
             game.setCounter(log.size() - 1);
             textCounter.setText("Moves : " + game.getCounter());
         }
@@ -158,8 +161,8 @@ public class Controller {
         for (int i = 1; i < ls; i++) {
             log.pop();
         }
-        UtilityJackson.serializeConfigurationLog(log); // Aggiorno lo storico
-        UtilityJackson.serializeConfiguration(log.peek()); // Aggiorno la serializzazione
+        UtilityJackson.serializeConfigurationLog(log, LOG_FILE); // Aggiorno lo storico
+        UtilityJackson.serializeConfiguration(log.peek(), DC_FILE); // Aggiorno la serializzazione
         initialize();
     }
 
@@ -226,8 +229,8 @@ public class Controller {
             textCounter.setText("Moves : " + game.getCounter());
             blockPane.getChildren().clear();
             log.pop();
-            UtilityJackson.serializeConfigurationLog(log);
-            UtilityJackson.serializeConfiguration(log.peek());
+            UtilityJackson.serializeConfigurationLog(log, LOG_FILE);
+            UtilityJackson.serializeConfiguration(log.peek(), DC_FILE);
             initialize();
         } else {
             Utility.setAlert(Alert.AlertType.WARNING, "UNDO", "NON HAI SPOSTATO NESSUN BLOCCO!");
