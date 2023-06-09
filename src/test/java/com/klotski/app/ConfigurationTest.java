@@ -56,7 +56,6 @@ class ConfigurationTest {
     }
 
     //Test del costruttore con parametro p
-    //TODO: Test con configurazione diversa
     @Test
     public void testPParamConstructor() {
         System.out.println("test pParamConstructor");
@@ -449,7 +448,6 @@ class ConfigurationTest {
             assertEquals(i, Configuration.isInitialConfiguration(configuration));
         }
 
-        //TODO: Test con configurazione diversa
         //Test con configurazione diversa da quelle iniziali (per ognuna deve restituire il corrispettivo numero)
            // configuration = new Configuration();
            // assertEquals(0, Configuration.isInitialConfiguration(configuration));
@@ -569,7 +567,6 @@ class ConfigurationTest {
                     "      {\"shape\": [1, 1], \"position\": [4, 0] },\n" +
                     "\n");
 
-            //TODO: inserire configurazione di testing alternativa
 
             //Per ogni configurazione dell'array di testing
             for (int i=0; i<testingConfigurations.size(); i++) {

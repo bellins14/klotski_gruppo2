@@ -89,7 +89,6 @@ class UtilityJacksonTest {
             assertEquals(expectedString, deserializedConfiguration.toString());
         }
 
-        //TODO:test con configurazione alternativa
 
     }
 
