@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane prefHeight="724.0" prefWidth="632.0" style="-fx-background-color: #a3bded;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.klotski.app.Controller">
+<BorderPane prefHeight="724.0" prefWidth="632.0" style="-fx-background-color: #c0d8e9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.klotski.app.Controller">
    <bottom>
       <Text fx:id="textCounter" strokeType="OUTSIDE" strokeWidth="0.0" text="Moves : 0" wrappingWidth="138.13677978515625" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -31,19 +31,19 @@
          <children>
             <JFXButton focusTraversable="false" onAction="#configurationClicked" prefHeight="40.0" prefWidth="109.0" text="1" userData="1">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font></JFXButton>
             <JFXButton focusTraversable="false" onAction="#configurationClicked" prefHeight="40.0" prefWidth="109.0" text="2" userData="2">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font></JFXButton>
             <JFXButton focusTraversable="false" onAction="#configurationClicked" prefHeight="40.0" prefWidth="109.0" text="3" userData="3">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font></JFXButton>
             <JFXButton focusTraversable="false" onAction="#configurationClicked" prefHeight="40.0" prefWidth="109.0" text="4" userData="4">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font></JFXButton>
          </children>
          <opaqueInsets>
@@ -63,19 +63,19 @@
             <Insets left="20.0" top="50.0" />
          </BorderPane.margin>
          <children>
-            <JFXButton fx:id="reset" buttonType="RAISED" focusTraversable="false" onMouseClicked="#reset" prefHeight="40.0" prefWidth="107.0" styleClass="reset" text="RESET">
+            <JFXButton fx:id="reset" focusTraversable="false" onMouseClicked="#reset" prefHeight="40.0" prefWidth="107.0" styleClass="reset" text="RESET">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="NBM" buttonType="RAISED" focusTraversable="false" layoutX="10.0" layoutY="10.0" onMouseClicked="#nextBestMove" prefHeight="40.0" prefWidth="109.0" styleClass="reset" text="NBM">
+            <JFXButton fx:id="NBM" focusTraversable="false" layoutX="10.0" layoutY="10.0" onMouseClicked="#nextBestMove" prefHeight="40.0" prefWidth="109.0" styleClass="reset" text="NBM">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="undo" buttonType="RAISED" focusTraversable="false" layoutX="10.0" layoutY="53.0" onMouseClicked="#undo" prefHeight="40.0" prefWidth="109.0" styleClass="reset" text="UNDO">
+            <JFXButton fx:id="undo" focusTraversable="false" layoutX="10.0" layoutY="53.0" onMouseClicked="#undo" prefHeight="40.0" prefWidth="109.0" styleClass="reset" text="UNDO">
                <font>
-                  <Font name="System Bold Italic" size="20.0" />
+                  <Font name="System Bold" size="20.0" />
                </font>
             </JFXButton>
          </children>
