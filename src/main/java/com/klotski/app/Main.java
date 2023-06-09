@@ -12,7 +12,7 @@ import java.util.Objects;
 import static com.klotski.app.Constants.*;
 
 /**
- * Classe che rappresenta l'inizializzazione dell'interfaccia grafica
+ * Classe che rappresenta l'inizializzazione dell'UI
  */
 public class Main extends Application {
 
