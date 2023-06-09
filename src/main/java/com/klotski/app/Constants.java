@@ -66,8 +66,6 @@ public class Constants {
 
     //Script NBM
     public static final String NBM_SCRIPT = "JSON.stringify(window.klotski.solve(window.game))";
-    //Tempo per poter ri-cliccare il bottone NBM
-    public static final int NBM_BUTTON_TIMER_MILLIS = 500;
     //Path file HTML per poter risolvere l'NBM
     public static final String NBM_SOLVER_HTML_FILE = "src/main/resources/com/klotski/app/solver.html";
 
@@ -147,5 +145,8 @@ public class Constants {
     public static int[] config4PieceTypes = {3, 2, 1, 1, 1, 1, 0, 0, 0, 0};
     public static int[] config4PieceX = {100, 100, 300, 0, 300, 0, 300, 200, 100, 0};
     public static int[] config4PieceY = {0, 200, 200, 200, 0, 0, 400, 300, 300, 400};
+
+
+
 
 }
