@@ -20,8 +20,8 @@ public class Main extends Application {
      * Metodo principale per inizializzare l'applicazione
      *
      * @param stage oggetto della classe Stage che rappresenta l'elemento principale
-     *              in cui vengono visualizzate le interfacce grafiche dell'applicazione
-     * */
+     * in cui vengono visualizzate le interfacce grafiche dell'applicazione
+     */
     @Override
     public void start(Stage stage) {
 

@@ -7,21 +7,21 @@ import com.klotski.jacksonSupport.ConfigurationSerializer;
 
 import static com.klotski.app.Constants.*;
 
-//Dichiara a Jackson che questa classe ha un Serializer
-@JsonSerialize(using = ConfigurationSerializer.class)
-//Dichiara a Jackson che questa classe ha un Deserializer
-@JsonDeserialize(using = ConfigurationDeserializer.class)
-
-
 /**
  * Classe che rappresenta una configurazione del gioco del Klotski.
  * Una configurazione è intesa come l'insieme dei pezzi e la loro disposizione.
  * Identifica una (situazione di una) mossa del gioco.
  */
+//Dichiara a Jackson che questa classe ha un Serializer
+@JsonSerialize(using = ConfigurationSerializer.class)
+//Dichiara a Jackson che questa classe ha un Deserializer
+@JsonDeserialize(using = ConfigurationDeserializer.class)
 public class Configuration {
 
-    //Array di Pieces che rappresenta la configurazione
-    //Sarà ordinato dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM
+    /**
+     * Array di Pieces che rappresenta la configurazione.
+     * I blocchi saranno ordinati dal più grande al più piccolo, per comunicare più agevolmente con l'API BNM.
+     */
     private final Piece[] _pieces = new Piece[CONF_PIECES_NUM];
 
 
@@ -71,6 +71,7 @@ public class Configuration {
         return _pieces;
     }
 
+
     /**
      * Metodo che indica se il pezzo appartiene alla configurazione (per riferimento).
      * @return true se appartiene, false altrimenti
@@ -84,6 +85,7 @@ public class Configuration {
 
         return true;
     }
+
 
     /**
      * Metodo che setta i pezzi dell'array pieces.

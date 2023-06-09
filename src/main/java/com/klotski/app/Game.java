@@ -6,7 +6,7 @@ import static com.klotski.app.Constants.*;
 
 
 /**
- * Classe che rappresenta il gioco di Klotski. Dispone:
+ * Classe che rappresenta lo stato del gioco di Klotski. Dispone:
  * - del numero della configurazione di partenza (tra le 4 iniziali),
  * - della configurazione attuale dei pezzi,
  * - di un contatore delle mosse (a partire dalla configurazione iniziale)

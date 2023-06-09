@@ -2,7 +2,6 @@ package com.klotski.app;
 
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
-import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,12 +15,9 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
-import netscape.javascript.JSException;
 
 import java.io.*;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.klotski.app.Constants.*;
 
@@ -29,7 +25,7 @@ import static com.klotski.app.Constants.*;
 /**
  * Classe che gestisce l'interazione del gioco con la grafica (Java FX).
  */
-public class Controller {
+public class GameController {
 
     //Elementi di FXML:
 
