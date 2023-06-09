@@ -145,6 +145,13 @@ public class Game {
         return this._moveCounter;
     }
 
+    /**
+     * Metodo chiamato alla pressione delle frecce o dei tasti ASDW con blocco selezionato
+     * Muove il pezzo selezionato nella direzione designata di 100px, se possibile, altrimenti termina silenziosamente
+     * @param movingPiece pezzo da muovere
+     * @param dirIdx direzione in cui muoverlo
+     * @throws Exception se il blocco non appartiene alla config attuale del gioco
+     */
 
     public void movePiece(Piece movingPiece, int dirIdx) throws Exception{
 

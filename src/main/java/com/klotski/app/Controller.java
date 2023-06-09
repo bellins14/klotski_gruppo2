@@ -330,30 +330,4 @@ public class Controller {
         }
     }
 
-
-    /**
-     * Metodo chiamato alla pressione delle frecce o dei tasti ASDW con blocco selezionato
-     * Muove il pezzo selezionato nella direzione designata di 100px se possibile,
-     * altrimenti termina silenziosamente
-     * @param piece pezzo da muovere
-     * @param dirIdx direzione in cui muoverlo
-     */
-
-
-    /**
-     * Controlla (graficamente) se la configurazione attuale rappresenta una situazione di vittoria
-     */
-    private void checkWin() {
-        //Prende il pezzo piu' grande (che è sempre il primo)
-        Node node = blockPane.getChildren().get(0);
-
-        //Se si trova nella posizione di vittoria
-        if (node.getLayoutX() == WIN_X && node.getLayoutY() == WIN_Y) {
-            gameEnded = true;
-            //Lancia alert di vittoria
-            reset();
-            Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
-        }
-    }
-
 }
