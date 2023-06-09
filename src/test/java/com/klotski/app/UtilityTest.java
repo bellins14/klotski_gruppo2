@@ -134,9 +134,5 @@ class UtilityTest {
 
         //Controlla che si sovrappongano
         assertFalse(Utility.isNotOverlapping(currentPieces[9], pane, 100, 0));
-
-
-
-
     }
 }

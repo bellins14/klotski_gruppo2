@@ -75,7 +75,6 @@ public class Game {
             // e inizializza _configuration
             _configuration = UtilityJackson.deserializeConfiguration(_supportFilePathName);
 
-            //TODO: gestire la situazione in cui la configurazione nel file di log non è una di quelle iniziali
             //Controlla che sia una delle 4 configurazioni iniziali, prendi il numero e setta selectedConf
             _initialSelectedConf = Configuration.isInitialConfiguration(_configuration);
 
