@@ -64,6 +64,8 @@ public class Constants {
 
     //NBM:
 
+    //Script NBM
+    public static final String NBM_SCRIPT = "JSON.stringify(window.klotski.solve(window.game))";
     //Tempo per poter ri-cliccare il bottone NBM
     public static final int NBM_BUTTON_TIMER_MILLIS = 500;
     //Path file HTML per poter risolvere l'NBM

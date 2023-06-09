@@ -152,7 +152,7 @@ public class Controller {
      * Si occupa del reset alla configurazione di partenza designata.
      */
     @FXML
-    void reset() {
+    private void reset() {
 
         //Cambia la configurazione attuale di game con la configurazione iniziale
         game.setConfigurationToInitialConf(game.getInitialSelectedConf());
@@ -172,7 +172,7 @@ public class Controller {
      * @param event classe FXML che codifica un evento.
      */
     @FXML
-    void configurationClicked(ActionEvent event) {
+    private void configurationClicked(ActionEvent event) {
 
         //Prendi il bottone cliccato
         Button clickedButton = (Button) event.getSource();
@@ -208,7 +208,7 @@ public class Controller {
      * @throws IOException Eccezione per apertura/chiusura file "solver.html"
      */
     @FXML
-    void nextBestMove() throws IOException {
+    private void nextBestMove() throws IOException {
         if (Utility.isInternetConnected()) {
             NBM.setDisable(true);
 
@@ -218,7 +218,7 @@ public class Controller {
             this.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue == Worker.State.SUCCEEDED) {
                     // Esegui lo script JavaScript nella pagina caricata nella WebView
-                    Object result = webEngine.executeScript("JSON.stringify(window.klotski.solve(window.game))");
+                    Object result = webEngine.executeScript(NBM_SCRIPT);
                     if (result instanceof String jsonString) {
                         jsonString = jsonString.substring(1, 35);
                         //System.out.println(jsonString);
@@ -295,7 +295,7 @@ public class Controller {
      * Se non disponibile lancia un alert
      */
     @FXML
-    void undo() {
+    private void undo() {
         if (game.getMoveCounter() != 0) { //Se il counter è diverso da 0
 
             //Setta la configurazione attuale con quella precedente
@@ -323,7 +323,7 @@ public class Controller {
      * @param piece pezzo da muovere
      * @param dirIdx direzione in cui muoverlo
      */
-    public void movePiece(Piece piece, int dirIdx) {
+    private void movePiece(Piece piece, int dirIdx) {
         //Di quanti pixel muovere il pezzo
         double moveAmount = 100;
         //In base alla direzione in cui si intende muover il pezzo
@@ -363,9 +363,8 @@ public class Controller {
     /**
      * Controlla (graficamente) se la configurazione attuale rappresenta una situazione di vittoria
      * @return true se la configurazione attuale rappresenta una situazione di vittoria
-     * @return false altrimenti
+     * false altrimenti
      */
-
     private boolean checkWin() {
         //Prende il pezzo piu' grande (che e' sempre il primo)
         Node node = blockPane.getChildren().get(0);

@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
@@ -26,10 +25,10 @@ public class Utility {
      * Metodo per mostrare una finestra di alert.
      *
      * @param alertType tipo di alert
-     * @param title titolo dell'alert
-     * @param text contenuto dell'alert
+     * @param title     titolo dell'alert
+     * @param text      contenuto dell'alert
      */
-    public static void setAlert(Alert.AlertType alertType, String title, String text){
+    public static void setAlert(Alert.AlertType alertType, String title, String text) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -52,15 +51,14 @@ public class Utility {
 
             int responseCode = connection.getResponseCode();
             return (responseCode == HttpURLConnection.HTTP_OK);
-        }
-        catch (UnknownHostException host){
-            return  false;
-        }
-        catch (IOException | URISyntaxException e) {
+        } catch (UnknownHostException host) {
+            return false;
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
             return false;
         }
     }
+
     /**
      * Metodo che serve per riscrivere il file per la richiesta della NBM.
      *
