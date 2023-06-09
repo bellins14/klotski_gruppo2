@@ -125,14 +125,19 @@ public class Controller {
                 int keyCode = event.getCode().ordinal();
 
                 //Sposta il pezzo
-                game.movePiece(selectedPiece, keyCode);
+                try {
+                    game.movePiece(selectedPiece, keyCode);
+                    //Aggiorna il testo con il counter delle mosse
+                    textCounter.setText("Moves : " + game.getMoveCounter());
 
-                //Controlla se il giocatore ha vinto
-                checkWin();
+                }catch (Exception e){
+                    //Il giocatore ha vinto
+                    //Resetta il gioco
+                    reset();
+                    //Lancia alert di vittoria
+                    Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
 
-                //Aggiorna il testo con il counter delle mosse
-                textCounter.setText("Moves : " + game.getMoveCounter());
-
+                }
             }
 
         });
@@ -231,13 +236,30 @@ public class Controller {
                             //prendo il corrispettivo nodo che dovrò spostare
                             Node node = blockPane.getChildren().get(blockIdx);
 
-                            //chiamo il metodo per spostare il piece
-                            game.movePiece((Piece) node, dirIdx);
-                            //aggiorno il counter
-                            textCounter.setText("Moves : " + game.getMoveCounter());
-                            //Controlla se ha vinto
-                            checkWin();
-                            NBM.setDisable(false);
+                            try {
+                                //Sposta il pezzo
+                                game.movePiece((Piece) node, dirIdx);
+
+                                //riabilita il bottone NBM
+                                NBM.setDisable(false);
+
+                                //Aggiorna il testo con il counter delle mosse
+                                textCounter.setText("Moves : " + game.getMoveCounter());
+
+                            }catch (Exception e){
+                                //Il giocatore ha vinto
+
+                                //Resetta il gioco
+                                reset();
+
+                                //riabilita il bottone NBM
+                                NBM.setDisable(false);
+
+                                //Lancia alert di vittoria
+                                Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
+
+                            }
+
                         } // Fine if
                     }
                     if (newValue == Worker.State.FAILED) {

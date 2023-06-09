@@ -1,5 +1,8 @@
 package com.klotski.app;
 
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+
 import java.util.Stack;
 
 import static com.klotski.app.Constants.*;
@@ -41,10 +44,11 @@ public class Game {
      * Crea un gioco a partire dal file di log, e da un file di supporto per la serializzazione delle configurazioni
      * - se c'è una partita precedente la riprende
      * - altrimenti crea il gioco dalla configurazione iniziale di default (la numero 1)
-     * @param logFilePathName file di log (json) (se non esiste già viene creato)
+     *
+     * @param logFilePathName     file di log (json) (se non esiste già viene creato)
      * @param supportFilePathName file di supporto (json) (se non esiste già viene creato)
      */
-    public Game(String logFilePathName, String supportFilePathName){
+    public Game(String logFilePathName, String supportFilePathName) {
 
         //Inizializza i path dei file
         _logFilePathName = logFilePathName;
@@ -69,7 +73,7 @@ public class Game {
             _moveCounter = 0;
 
         } else if (_stackLog.size() == SINGLE_LOG_SIZE) { // Nel log c'è solo una configurazione, quella iniziale
-                                                                 // => c'è una partita precedente allo stadio iniziale
+            // => c'è una partita precedente allo stadio iniziale
 
             //Prende tale configurazione (in json) dal file di log, la converte in un oggetto Configuration
             // e inizializza _configuration
@@ -104,6 +108,7 @@ public class Game {
 
     /**
      * Metodo per ritornare il numero della configurazione iniziale associata alla configurazione attuale
+     *
      * @return _initialSelectedConf
      */
     public int getInitialSelectedConf() {
@@ -112,6 +117,7 @@ public class Game {
 
     /**
      * Metodo per ritornare la configurazione attuale
+     *
      * @return _configuration
      */
     public Configuration getConfiguration() {
@@ -120,6 +126,7 @@ public class Game {
 
     /**
      * Metodo per settare la configurazione attuale con la nuova configurazione passata
+     *
      * @param newConfiguration nuova configurazione passata
      */
     public void setConfiguration(Configuration newConfiguration) {
@@ -131,12 +138,15 @@ public class Game {
 
     /**
      * Metodo per ritornare il counter delle mosse
+     *
      * @return _moveCounter
      */
-    public int getMoveCounter() {return  this._moveCounter;}
+    public int getMoveCounter() {
+        return this._moveCounter;
+    }
 
 
-    public void movePiece(Piece movingPiece, int dirIdx) {
+    public void movePiece(Piece movingPiece, int dirIdx) throws Exception{
 
         //Di quanti pixel muovere il pezzo
         double moveAmount = 100;
@@ -145,7 +155,7 @@ public class Game {
         switch (dirIdx) {
 
             //DOWN
-            case S,ARROW_DOWN -> {
+            case S, ARROW_DOWN -> {
                 if (movingPiece.getLayoutY() + moveAmount + movingPiece.getHeight() <= MAX_PANE_HEIGHT
                         && Utility.isNotOverlapping(movingPiece, _configuration, 0, moveAmount)) {
                     //Muove il pezzo in giu di moveAmount
@@ -153,36 +163,40 @@ public class Game {
                 }
             }
             //RIGHT
-            case D,ARROW_RIGHT -> {
+            case D, ARROW_RIGHT -> {
                 if (movingPiece.getLayoutX() + moveAmount + movingPiece.getWidth() <= MAX_PANE_WIDTH
                         && Utility.isNotOverlapping(movingPiece, _configuration, moveAmount, 0)) {
                     movePieceRight(movingPiece, moveAmount);
                 }
             }
             //UP
-            case W,ARROW_UP -> {
+            case W, ARROW_UP -> {
                 if (movingPiece.getLayoutY() - moveAmount >= 0 && Utility.isNotOverlapping(movingPiece, _configuration, 0, -moveAmount)) {
                     movePieceUp(movingPiece, moveAmount);
                 }
             }
             //LEFT
-            case A,ARROW_LEFT -> {
+            case A, ARROW_LEFT -> {
                 if (movingPiece.getLayoutX() - moveAmount >= 0 && Utility.isNotOverlapping(movingPiece, _configuration, -moveAmount, 0)) {
                     movePieceLeft(movingPiece, moveAmount);
                 }
             }
         }
+
+        checkNotWin();
     }
+
     /**
      * Metodo per muovere un pezzo della configurazione attuale del gioco in basso
-     * @param piece pezzo da muovere
+     *
+     * @param piece      pezzo da muovere
      * @param moveAmount di quando muoverlo
      * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
     private void movePieceDown(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if(_configuration.doesPieceBelong(piece)){
+        if (_configuration.doesPieceBelong(piece)) {
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muove in giù il pezzo
@@ -199,14 +213,15 @@ public class Game {
 
     /**
      * Metodo per muovere un pezzo della configurazione attuale del gioco in alto
-     * @param piece pezzo da muovere
+     *
+     * @param piece      pezzo da muovere
      * @param moveAmount di quando muoverlo
      * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
     private void movePieceUp(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if(_configuration.doesPieceBelong(piece)){
+        if (_configuration.doesPieceBelong(piece)) {
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muove in su il pezzo
@@ -224,14 +239,15 @@ public class Game {
 
     /**
      * Metodo per muovere un pezzo della configurazione attuale del gioco a sx
-     * @param piece pezzo da muovere
+     *
+     * @param piece      pezzo da muovere
      * @param moveAmount di quando muoverlo
      * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
     private void movePieceLeft(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if(_configuration.doesPieceBelong(piece)){
+        if (_configuration.doesPieceBelong(piece)) {
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muovi a sx il pezzo
@@ -248,13 +264,14 @@ public class Game {
 
     /**
      * Metodo per muovere un pezzo della configurazione attuale del gioco a dx
-     * @param piece pezzo da muovere
+     *
+     * @param piece      pezzo da muovere
      * @param moveAmount di quando muoverlo
      * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
     private void movePieceRight(Piece piece, double moveAmount) {
         //Verifica che il pezzo appartenga alla configurazione
-        if(_configuration.doesPieceBelong(piece)){
+        if (_configuration.doesPieceBelong(piece)) {
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muovi a dx il pezzo
@@ -272,6 +289,7 @@ public class Game {
     /**
      * Metodo che resetta il gioco: setta la configurazione corrente con una configurazione iniziale
      * e resetta e aggiorna il log
+     *
      * @param confNumber configurazione iniziale
      * @throws IllegalArgumentException se confNumber non è compreso tra 1 e 4
      */
@@ -295,15 +313,17 @@ public class Game {
 
     }
 
-    /** Metodo che fa un undo: setta la configurazione corrente con la configurazione precedente, che viene presa dal log che viene aggiornato
+    /**
+     * Metodo che fa un undo: setta la configurazione corrente con la configurazione precedente, che viene presa dal log che viene aggiornato
+     *
      * @throws Exception se non è disponibile nessuna configurazione precedente
      */
-    public void undo() throws Exception{
+    public void undo() throws Exception {
 
         //Togli temporaneamente la configurazione attuale dallo Stack di log
         Configuration currentConfiguration = this._stackLog.pop();
 
-        if(this._stackLog.isEmpty()){ //Se non ci sono configurazioni precedenti sullo Stack di log
+        if (this._stackLog.isEmpty()) { //Se non ci sono configurazioni precedenti sullo Stack di log
             //Rimetti la configurazione corrente sullo Stack di log
             this._stackLog.push(currentConfiguration);
             throw new Exception();
@@ -319,10 +339,11 @@ public class Game {
 
     /**
      * Metodo che setta il numero della configurazione iniziale
+     *
      * @throws IllegalArgumentException se configurationNumber non è compreso tra 1 e 4
      */
-    private void setInitialSelectedConf(int i){
-        if(i<1||i>4) {
+    private void setInitialSelectedConf(int i) {
+        if (i < 1 || i > 4) {
             throw new IllegalArgumentException("configurationNumber non compreso tra 1 e 4");
         }
 
@@ -331,6 +352,7 @@ public class Game {
 
     /**
      * Metodo che estrapola la configurazione iniziale, associata alla configurazione corrente, dal log.
+     *
      * @return initConf configurazione iniziale estrapolata.
      */
     private Configuration getInitConfiguration() {
@@ -349,16 +371,28 @@ public class Game {
 
     /**
      * Metodo che converte la configurazione attuale in json e la inserisce sia nello Stack log che nel file log
-     *
      */
-    private void updateLogsWithCurrentConfiguration(){
-            //Serializza la configurazione corrente nel file di supporto
-            UtilityJackson.serializeConfiguration(_configuration, _supportFilePathName);
-            //Deserializza la configurazione corrente dal file di supporto e inseriscila nello Stack log
-            _stackLog.push(UtilityJackson.deserializeConfiguration(_supportFilePathName));
-            //Scrivi tutto lo Stack di log sul file di log
-            UtilityJackson.serializeConfigurationLog(_stackLog, _logFilePathName);
+    private void updateLogsWithCurrentConfiguration() {
+        //Serializza la configurazione corrente nel file di supporto
+        UtilityJackson.serializeConfiguration(_configuration, _supportFilePathName);
+        //Deserializza la configurazione corrente dal file di supporto e inseriscila nello Stack log
+        _stackLog.push(UtilityJackson.deserializeConfiguration(_supportFilePathName));
+        //Scrivi tutto lo Stack di log sul file di log
+        UtilityJackson.serializeConfigurationLog(_stackLog, _logFilePathName);
 
     }
 
+    /**
+     * Controlla che la configurazione attuale non rappresenti una situazione di vittoria
+     * @throws Exception se invece è una situazione di vittoria
+     */
+    private void checkNotWin() throws Exception{
+        //Prende il pezzo piu' grande (che è sempre il primo)
+        Piece pieceToCheck = _configuration.getPieces()[0];
+
+        //Se si trova nella posizione di vittoria
+        if (pieceToCheck.getLayoutX() == WIN_X && pieceToCheck.getLayoutY() == WIN_Y) {
+            throw new Exception();
+        }
+    }
 }
