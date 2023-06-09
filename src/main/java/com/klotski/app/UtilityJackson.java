@@ -43,7 +43,7 @@ public class UtilityJackson {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if (fw != null) {
                 try {
@@ -81,7 +81,7 @@ public class UtilityJackson {
             c = om.readValue(fr, Configuration.class);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if (fr != null) {
                 try {
@@ -118,7 +118,7 @@ public class UtilityJackson {
             om.writeValue(fw, stack);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if (fw != null) {
                 try {
@@ -164,7 +164,7 @@ public class UtilityJackson {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if (fr != null) {
                 try {
