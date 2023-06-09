@@ -1,11 +1,8 @@
 package com.klotski.app;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+
+import javafx.scene.layout.Pane;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxRobot;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -13,11 +10,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import static com.klotski.app.Constants.NBM_SOLVER_HTML_FILE;
-import static com.sun.javafx.webkit.KeyCodeMap.lookup;
+import static com.klotski.app.Constants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UtilityTest {
+
+    //File di test 11
+    private final String testDC11 = "src/test/testFiles/json/TestDC11.json";
+    private final String testLog11 = "src/test/testFiles/json/TestLog11.json";
+
 
     //Test del metodo isInternetConnected()
     //Eseguibile solo con la connessione a internet attiva e funzionante
@@ -105,5 +106,37 @@ class UtilityTest {
 
         //Controlla che l'intero estratto sia uguale a 30
         assertEquals(30, value3);
+    }
+
+    //Test del metodo isNotOverlapping()
+    @Test
+    void isNotOverlapping() {
+        System.out.println("test isNotOverlapping");
+
+        //Crea un Pane
+        Pane pane = new Pane();
+
+        //Crea un nuovo gioco
+        Game game = new Game(testLog11,testDC11);
+
+        //Prende i pezzi della configurazione attuale
+        Piece[] currentPieces = game.getConfiguration().getPieces();
+
+        //Per ogni pezzo
+        for (Piece cp: currentPieces) {
+
+            //Aggiunge il pezzo al pane
+            pane.getChildren().add(cp);
+        }
+
+        //Controlla che non si sovrappongano
+        assertTrue(Utility.isNotOverlapping(currentPieces[9], pane, 100, 100));
+
+        //Controlla che si sovrappongano
+        assertFalse(Utility.isNotOverlapping(currentPieces[9], pane, 100, 0));
+
+
+
+
     }
 }

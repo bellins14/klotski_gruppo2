@@ -70,7 +70,6 @@ public class Controller {
         //Crea un nuovo gioco
         game = new Game(LOG_FILE,DC_FILE);
 
-
         //Setta il counter con le mosse
         textCounter.setText("Moves : " + game.getMoveCounter());
 
@@ -365,7 +364,7 @@ public class Controller {
      * @return true se la configurazione attuale rappresenta una situazione di vittoria
      * false altrimenti
      */
-    private boolean checkWin() {
+    public boolean checkWin() {
         //Prende il pezzo piu' grande (che e' sempre il primo)
         Node node = blockPane.getChildren().get(0);
 
