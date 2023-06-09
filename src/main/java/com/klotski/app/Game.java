@@ -1,8 +1,5 @@
 package com.klotski.app;
 
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-
 import java.util.Stack;
 
 import static com.klotski.app.Constants.*;
