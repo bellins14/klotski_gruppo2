@@ -31,6 +31,7 @@
 - [ ] JavaDoc
 - [ ] Scrivere le Licenze e il codice altrui utilizzato
 - [ ] System Test (degli use cases a mano + report)
+- [ ] aggiungere e risolvere todo anche nel backlog del progetto così più figo
 - [ ] Manuale
 
 # Step da fare:
