@@ -152,8 +152,9 @@ public class Controller {
      */
     @FXML
     private void reset() {
+
         //Cambia la configurazione attuale di game con la configurazione iniziale
-        game.reset(game.getInitialSelectedConf());
+        game.reset();
 
         //Pulisce il pane
         blockPane.getChildren().clear();
@@ -178,20 +179,21 @@ public class Controller {
         //Prendi il numero della configurazione selezionata
         int configurationNumber = Integer.parseInt(clickedButton.getUserData().toString());
 
-        //Se la configurazione iniziale selezionata è diversa da quella attuale
-        if (game.getInitialSelectedConf() != configurationNumber) {
+        try {
+        //Cambia la configurazione attuale di game
+        game.resetToAnotherInitialConf(configurationNumber);
 
-            //Cambia la configurazione attuale di game
-            game.reset(configurationNumber);
+        //Aggiorna il testo con il counter delle mosse
+        textCounter.setText("Moves : " + game.getMoveCounter());
 
-            //Aggiorna il testo con il counter delle mosse
-            textCounter.setText("Moves : " + game.getMoveCounter());
+        //Pulisci il pane
+        blockPane.getChildren().clear();
 
-            //Pulisci il pane
-            blockPane.getChildren().clear();
+        //Fai ripartire l'inizializzazione
+        initialize();
 
-            //Fai ripartire l'inizializzazione
-            initialize();
+        }catch (Exception e){
+            //Non fare nulla
         }
     }
 

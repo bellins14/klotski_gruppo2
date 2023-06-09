@@ -286,15 +286,23 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
-    /**
-     * Metodo che resetta il gioco: setta la configurazione corrente con una configurazione iniziale
-     * e resetta e aggiorna il log
-     *
-     * @param confNumber configurazione iniziale
-     * @throws IllegalArgumentException se confNumber non è compreso tra 1 e 4
-     */
-    public void reset(int confNumber) throws IllegalArgumentException {
 
+    /**
+     * Metodo che resetta il gioco ad una configurazione iniziale:
+     * setta la configurazione corrente con una delle 4 configurazioni iniziali, diversa da quella iniziale corrente
+     * e resetta e aggiorna il log.
+     *
+     * @param confNumber configurazione iniziale a cui settare il gioco
+     * @throws Exception se confNumber la configurazione iniziale passata è la configurazione iniziale corrente
+     */
+    public void resetToAnotherInitialConf(int confNumber) throws Exception {
+
+        //Se la configurazione iniziale passata è la configurazione iniziale corrente termina silenziosamente
+        if(confNumber == _initialSelectedConf){
+            throw new Exception();
+        }
+
+        //Altrimenti
         //Crea la nuova configurazione iniziale
         Configuration newInitialConfiguration = new Configuration(confNumber); //Lancia IllegalArgumentException se confNumber <1 o >4
 
@@ -310,6 +318,27 @@ public class Game {
 
         //Aggiorna il numero della configurazione iniziale scelta
         setInitialSelectedConf(confNumber);
+
+    }
+
+    /**
+     * Metodo che resetta il gioco: setta la configurazione corrente con la sua configurazione iniziale
+     * e resetta e aggiorna il log
+     */
+    public void reset() throws IllegalArgumentException {
+
+        //Crea la nuova configurazione iniziale
+        Configuration newInitialConfiguration = new Configuration(_initialSelectedConf); //Lancia IllegalArgumentException se confNumber <1 o >4
+
+        //Se è stata creata la nuova configurazione iniziale
+        //Pulisci lo Stack di log
+        _stackLog.clear();
+
+        //Aggiorna la configurazione attuale con la nuova configurazione iniziale
+        setConfiguration(newInitialConfiguration);
+
+        //Resetta il counter delle mosse
+        _moveCounter = 0;
 
     }
 
