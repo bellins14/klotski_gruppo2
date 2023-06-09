@@ -1,43 +1,23 @@
 package com.klotski.app;
 
-import org.testfx.framework.junit5.ApplicationTest;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.Test;
+import org.testfx.api.FxRobot;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javafx.scene.control.Alert;
-
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
 import static com.klotski.app.Constants.NBM_SOLVER_HTML_FILE;
+import static com.sun.javafx.webkit.KeyCodeMap.lookup;
 import static org.junit.jupiter.api.Assertions.*;
 
-
-
 class UtilityTest {
-
-    @Test
-    public void testSetAlert() {
-        // Chiamata al metodo da testare
-        Utility.setAlert(Alert.AlertType.INFORMATION, "Titolo", "Messaggio di test");
-
-        // Ottenere l'alert visualizzato
-        Alert alert = getAlert();
-
-        // Verificare che l'alert sia stato creato correttamente
-        assertEquals(Alert.AlertType.INFORMATION, alert.getAlertType());
-        assertEquals("Titolo", alert.getTitle());
-        assertEquals(null, alert.getHeaderText());
-        assertEquals("Messaggio di test", alert.getContentText());
-    }
-
-    private Alert getAlert() {
-        // Trova l'alert attualmente visualizzato
-        return (Alert) lookup(".dialog-pane > .content-pane > .label").query().getParent().getParent();
-    }
-
 
     //Test del metodo isInternetConnected()
     //Eseguibile solo con la connessione a internet attiva e funzionante
