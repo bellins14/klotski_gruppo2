@@ -65,7 +65,7 @@ public class Piece extends Rectangle {
             this.setType(2);
         } else if (h == PIECE_3_HEIGHT && w == PIECE_3_WIDTH) {
             this.setType(3);
-        } else { //Se le dimensioni non corrispondono ad un pezzo adeguato lancia eccezione
+        } else { //Se le dimensioni non corrispondono a un pezzo adeguato lancia eccezione
             throw new IllegalArgumentException("Dimensioni non valide");
         }
 

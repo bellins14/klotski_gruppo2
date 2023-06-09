@@ -76,16 +76,16 @@ public class Constants {
     //Direction Indexes:
 
     //Arrows
-    public static final int ARROW_DOWN = 54;
-    public static final int ARROW_RIGHT = 39;
-    public static final int ARROW_UP = 58;
-    public static final int ARROW_LEFT = 36;
+    public static final int ARROW_DOWN = 19;
+    public static final int ARROW_RIGHT = 18;
+    public static final int ARROW_UP = 17;
+    public static final int ARROW_LEFT = 16;
 
     //Keyboard buttons
-    public static final int S = 19;
-    public static final int D = 18;
-    public static final int W = 17;
-    public static final int A = 16;
+    public static final int S = 54;
+    public static final int D = 39;
+    public static final int W = 58;
+    public static final int A = 36;
 
     //Pezzi:
 

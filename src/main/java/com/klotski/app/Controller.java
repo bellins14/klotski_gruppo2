@@ -49,6 +49,8 @@ public class Controller {
     private JFXButton NBM;
 
 
+    private boolean gameEnded = false;
+
     //Gioco
     private Game game;
 
@@ -66,10 +68,8 @@ public class Controller {
      * Inizializza la pane e gestisce gli input da mouse e da tastiera sui pezzi.
      */
     public void initialize() {
-
         //Crea un nuovo gioco
         game = new Game(LOG_FILE,DC_FILE);
-
 
         //Setta il counter con le mosse
         textCounter.setText("Moves : " + game.getMoveCounter());
@@ -131,10 +131,7 @@ public class Controller {
                 movePiece(selectedPiece, keyCode);
 
                 //Controlla se il giocatore ha vinto
-                if (checkWin()) {
-                    //Resetta
-                    reset();
-                }
+                checkWin();
 
                 //Aggiorna il testo con il counter delle mosse
                 textCounter.setText("Moves : " + game.getMoveCounter());
@@ -153,7 +150,6 @@ public class Controller {
      */
     @FXML
     private void reset() {
-
         //Cambia la configurazione attuale di game con la configurazione iniziale
         game.setConfigurationToInitialConf(game.getInitialSelectedConf());
 
@@ -209,43 +205,46 @@ public class Controller {
      */
     @FXML
     private void nextBestMove() throws IOException {
-        if (Utility.isInternetConnected()) {
+        //guardo se il computer è connesso a internet perché per lo script JS ci serve essere connessi
+        if (Utility.isInternetConnected() || !gameEnded) {
+            //disabilito il bottone per evitare che l'utente clicchi più volte e quindi mandi troppe richieste
             NBM.setDisable(true);
-
+            //aggiorno il file html dove è presente lo script con la configurazione attuale
             Utility.updateHTMLFile(game.getConfiguration());
+            //carico il file html
             loadHTMLFile();
+            //abilito JS
             this.webEngine.setJavaScriptEnabled(true);
+            //aggiungo un listener per vedere quando ha finito il caricamento del file
             this.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                //se il caricamento è andato a buon fine
                 if (newValue == Worker.State.SUCCEEDED) {
                     // Esegui lo script JavaScript nella pagina caricata nella WebView
                     Object result = webEngine.executeScript(NBM_SCRIPT);
+                    //se il risultato è una Stringa estrapolo le informazioni perché l'output
+                    //è {step: 1, blockIdx: 6, dirIdx: 0} quindi devo estrapolare le informazioni che
+                    //mi interessano
                     if (result instanceof String jsonString) {
                         jsonString = jsonString.substring(1, 35);
-                        //System.out.println(jsonString);
                         int blockIdx = Utility.extractIntValue(jsonString,"blockIdx");
                         int dirIdx =  Utility.extractIntValue(jsonString,"dirIdx");
                         //converto le mosse NBM in valori interi che corrispondo alle frecce della tastiera
-                        dirIdx = (dirIdx == 0) ? 19 : ((dirIdx == 1) ? 18 : ((dirIdx == 2) ? 17 : ((dirIdx == 3) ? 16 : -1)));
+                        dirIdx = (dirIdx == 0) ? ARROW_DOWN : ((dirIdx == 1) ? ARROW_RIGHT : ((dirIdx == 2) ? ARROW_UP : ((dirIdx == 3) ? ARROW_LEFT : -1)));
+                        //prendo il corrispettivo nodo che dovrò spostare
                         Node node = blockPane.getChildren().get(blockIdx);
 
-                        // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
-                        // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
-                        // quando viene eseguito `initialize()`
+                        //chiamo il metodo per spostare il piece
                         movePiece((Piece) node,dirIdx);
+                        //aggiorno il counter
                         textCounter.setText("Moves : " + game.getMoveCounter());
-
+                        //Controlla se ha vinto
+                        checkWin();
                     } // Fine if
                 }
                 if (newValue == Worker.State.FAILED) {
                     Utility.setAlert(Alert.AlertType.ERROR, "Errore", "Errore nel caricamento dello script");
                 }
             });
-
-            //Controlla se ha vinto
-            if (checkWin()) {
-                //Resetta
-                reset();
-            }
 
             //Imposta un timer per evitare che il bottone NBM possa essere premuto troppo velocemente
             Timer timer = new Timer();
@@ -362,21 +361,18 @@ public class Controller {
 
     /**
      * Controlla (graficamente) se la configurazione attuale rappresenta una situazione di vittoria
-     * @return true se la configurazione attuale rappresenta una situazione di vittoria
-     * false altrimenti
      */
-    private boolean checkWin() {
-        //Prende il pezzo piu' grande (che e' sempre il primo)
+    private void checkWin() {
+        //Prende il pezzo piu' grande (che è sempre il primo)
         Node node = blockPane.getChildren().get(0);
 
         //Se si trova nella posizione di vittoria
         if (node.getLayoutX() == WIN_X && node.getLayoutY() == WIN_Y) {
-
-            //Lancia alert di vittoria e ritorna true
+            gameEnded = true;
+            //Lancia alert di vittoria
+            reset();
             Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
-            return  true;
         }
-        return  false;
     }
 
 }

@@ -17,10 +17,10 @@ import static com.klotski.app.Constants.*;
 public class Main extends Application {
 
     /**
-     * Metodo principale per inzializzare l'applicazione
+     * Metodo principale per inizializzare l'applicazione
      *
      * @param stage oggetto della classe Stage che rappresenta l'elemento principale
-     *              in cui vengono visualizzate le interfaccie grafiche dell'applicazione
+     *              in cui vengono visualizzate le interfacce grafiche dell'applicazione
      * */
     @Override
     public void start(Stage stage) {
@@ -37,7 +37,7 @@ public class Main extends Application {
         // Carica il file "view.fxml", il quale corrisponde al file che viene utilizzato in Scene Builder per definire
         //l'interfaccia utente
         //Crea una scena che contiene il contenuto dell'interfaccia utente (1000 x 700)
-        Scene scene = null;
+        Scene scene;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(VIEW_FXML_FILENAME));
             scene = new Scene(fxmlLoader.load(), SCENE_V, SCENE_V1);

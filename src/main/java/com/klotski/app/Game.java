@@ -10,12 +10,12 @@ import static com.klotski.app.Constants.*;
  * - del numero della configurazione di partenza (tra le 4 iniziali),
  * - della configurazione attuale dei pezzi,
  * - di un contatore delle mosse (a partire dalla configurazione iniziale)
- * - del path del file di log (o storico o database) dove è salvata la partita (sottoforma di configurazioni)
+ * - del path del file di log (o storico o database) dove è salvata la partita (sotto forma di configurazioni)
  * - del path del file di supporto per la serializzazione/deserializzazione in json della configurazione attuale
  */
 public class Game {
 
-    //Indica quale configurazione iniziale e' selezionata tra le 4 disponibili
+    //Indica quale configurazione iniziale è selezionata tra le 4 disponibili
     private int _initialSelectedConf;
 
     //Configurazione attuale del gioco
@@ -25,7 +25,7 @@ public class Game {
     private int _moveCounter;
     //Stack di configurazioni
     // funge da log (un simil database) per il gioco
-    // ed e' sincronizzato con il file di Log ConfigurationLog
+    // ed è sincronizzato con il file di Log ConfigurationLog
     private Stack<Configuration> _stackLog;
 
     //Path del file di log dove con cui sincronizzare _stackLog
@@ -94,7 +94,7 @@ public class Game {
             //Prende l'ultima configurazione (in formato json) e la salva nel file di supporto (DC_FILE)
             UtilityJackson.serializeConfiguration(_stackLog.peek(), _supportFilePathName);
 
-            //Prende la configurazione dal file di supporto (json), crea un (oggetto) configurazione e inizializzaù
+            //Prende la configurazione dal file di supporto (json), crea un (oggetto) configurazione e inizializza
             // la configurazione corrente
             _configuration = UtilityJackson.deserializeConfiguration(_supportFilePathName);
 
@@ -145,7 +145,7 @@ public class Game {
     public void movePieceDown(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if(!_configuration.doesPieceBelong(piece)){
+        if(_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muove in giù il pezzo
@@ -169,7 +169,7 @@ public class Game {
     public void movePieceUp(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if(!_configuration.doesPieceBelong(piece)){
+        if(_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muove in su il pezzo
@@ -193,7 +193,7 @@ public class Game {
     public void movePieceLeft(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if(!_configuration.doesPieceBelong(piece)){
+        if(_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muovi a sx il pezzo
@@ -216,7 +216,7 @@ public class Game {
      */
     public void movePieceRight(Piece piece, double moveAmount) {
         //Verifica che il pezzo appartenga alla configurazione
-        if(!_configuration.doesPieceBelong(piece)){
+        if(_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muovi a dx il pezzo

@@ -133,7 +133,7 @@ public class UtilityJackson {
 
     /**
      * Metodo per tradurre un file di log (o storico o database) di configurazioni (in formato JSON)
-     * in uno Stack di oggetti Confiugration
+     * in uno Stack di oggetti Configuration
      * @param logPathName path del file di log.
      * @return Stack di oggetti Configurazioni.
      */

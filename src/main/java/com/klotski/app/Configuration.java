@@ -78,11 +78,11 @@ public class Configuration {
     public boolean doesPieceBelong(Piece piece) {
         for (Piece testPiece : _pieces) {
             if (piece == testPiece) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -169,7 +169,7 @@ public class Configuration {
 
 
     /**
-     * Metodo che verifica se la configurazione passata è uguale ad una delle 4 configurazioni iniziali.
+     * Metodo che verifica se la configurazione passata è uguale a una delle 4 configurazioni iniziali.
      * @param conf configurazione da verificare.
      * @return numero della configurazione corrispondente, altrimenti ritorna 0.
      */

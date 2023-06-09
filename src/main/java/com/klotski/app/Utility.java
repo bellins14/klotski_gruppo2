@@ -38,7 +38,7 @@ public class Utility {
 
 
     /**
-     * Metodo che si occupa di controllare se è presente una connessione ad internet, utilizzato per
+     * Metodo che si occupa di controllare se è presente una connessione a internet, utilizzato per
      * la NBM
      */
     public static boolean isInternetConnected() {
@@ -88,7 +88,7 @@ public class Utility {
 
 
     /**
-     * Metodo per estrarre l'intero associato ad una key di una stringa in formato JSON
+     * Metodo per estrarre l'intero associato a una key di una stringa in formato JSON
      * @param jsonString stringa in formato json.
      * @param key chiave.
      * @return intero associato
@@ -113,7 +113,7 @@ public class Utility {
      * @param piece pezzo che si vuole.
      * @param deltaX quantità di cui si muove il pezzo orizzontalmente.
      * @param deltaY quantità di cui si muove il pezzo verticalmente.
-     * @return false se si overlappa, true se è tutto a posto.
+     * @return false se overlap, true altrimenti.
      */
     public static boolean isNotOverlapping(Piece piece, Pane blockPane, double deltaX, double deltaY) {
         // Calcola la nuova posizione del bottone
