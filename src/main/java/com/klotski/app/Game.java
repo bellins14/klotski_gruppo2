@@ -135,13 +135,51 @@ public class Game {
      */
     public int getMoveCounter() {return  this._moveCounter;}
 
+
+    public void movePiece(Piece movingPiece, int dirIdx) {
+
+        //Di quanti pixel muovere il pezzo
+        double moveAmount = 100;
+
+        //In base alla direzione in cui si intende muover il pezzo
+        switch (dirIdx) {
+
+            //DOWN
+            case S,ARROW_DOWN -> {
+                if (movingPiece.getLayoutY() + moveAmount + movingPiece.getHeight() <= MAX_PANE_HEIGHT
+                        && Utility.isNotOverlapping(movingPiece, _configuration, 0, moveAmount)) {
+                    //Muove il pezzo in giu di moveAmount
+                    movePieceDown(movingPiece, moveAmount);
+                }
+            }
+            //RIGHT
+            case D,ARROW_RIGHT -> {
+                if (movingPiece.getLayoutX() + moveAmount + movingPiece.getWidth() <= MAX_PANE_WIDTH
+                        && Utility.isNotOverlapping(movingPiece, _configuration, moveAmount, 0)) {
+                    movePieceRight(movingPiece, moveAmount);
+                }
+            }
+            //UP
+            case W,ARROW_UP -> {
+                if (movingPiece.getLayoutY() - moveAmount >= 0 && Utility.isNotOverlapping(movingPiece, _configuration, 0, -moveAmount)) {
+                    movePieceUp(movingPiece, moveAmount);
+                }
+            }
+            //LEFT
+            case A,ARROW_LEFT -> {
+                if (movingPiece.getLayoutX() - moveAmount >= 0 && Utility.isNotOverlapping(movingPiece, _configuration, -moveAmount, 0)) {
+                    movePieceLeft(movingPiece, moveAmount);
+                }
+            }
+        }
+    }
     /**
      * Metodo per muovere un pezzo della configurazione attuale del gioco in basso
      * @param piece pezzo da muovere
      * @param moveAmount di quando muoverlo
      * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
-    public void movePieceDown(Piece piece, double moveAmount) {
+    private void movePieceDown(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
         if(_configuration.doesPieceBelong(piece)){
@@ -165,7 +203,7 @@ public class Game {
      * @param moveAmount di quando muoverlo
      * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
-    public void movePieceUp(Piece piece, double moveAmount) {
+    private void movePieceUp(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
         if(_configuration.doesPieceBelong(piece)){
@@ -183,13 +221,14 @@ public class Game {
         updateLogsWithCurrentConfiguration();
     }
 
+
     /**
      * Metodo per muovere un pezzo della configurazione attuale del gioco a sx
      * @param piece pezzo da muovere
      * @param moveAmount di quando muoverlo
      * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
-    public void movePieceLeft(Piece piece, double moveAmount) {
+    private void movePieceLeft(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
         if(_configuration.doesPieceBelong(piece)){
@@ -213,7 +252,7 @@ public class Game {
      * @param moveAmount di quando muoverlo
      * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
      */
-    public void movePieceRight(Piece piece, double moveAmount) {
+    private void movePieceRight(Piece piece, double moveAmount) {
         //Verifica che il pezzo appartenga alla configurazione
         if(_configuration.doesPieceBelong(piece)){
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
@@ -231,12 +270,12 @@ public class Game {
     }
 
     /**
-     * Metodo che setta la configurazione corrente con una configurazione iniziale
-     * Utile per fare reset o cambiare configurazione iniziale
+     * Metodo che resetta il gioco: setta la configurazione corrente con una configurazione iniziale
+     * e resetta e aggiorna il log
      * @param confNumber configurazione iniziale
      * @throws IllegalArgumentException se confNumber non è compreso tra 1 e 4
      */
-    public void setConfigurationToInitialConf(int confNumber) throws IllegalArgumentException {
+    public void reset(int confNumber) throws IllegalArgumentException {
 
         //Crea la nuova configurazione iniziale
         Configuration newInitialConfiguration = new Configuration(confNumber); //Lancia IllegalArgumentException se confNumber <1 o >4
@@ -256,11 +295,10 @@ public class Game {
 
     }
 
-    /** Metodo che setta la configurazione corrente con la configurazione precedente, che viene presa dal log
-     * Se non è disponibile nessuna configurazione precedente, termina silenziosamente
-     * Utile per fare undo
+    /** Metodo che fa un undo: setta la configurazione corrente con la configurazione precedente, che viene presa dal log che viene aggiornato
+     * @throws Exception se non è disponibile nessuna configurazione precedente
      */
-    public void setConfigurationToPreviousConf() {
+    public void undo() throws Exception{
 
         //Togli temporaneamente la configurazione attuale dallo Stack di log
         Configuration currentConfiguration = this._stackLog.pop();
@@ -268,7 +306,7 @@ public class Game {
         if(this._stackLog.isEmpty()){ //Se non ci sono configurazioni precedenti sullo Stack di log
             //Rimetti la configurazione corrente sullo Stack di log
             this._stackLog.push(currentConfiguration);
-            return;
+            throw new Exception();
         }
 
         //Altrimenti
@@ -277,7 +315,6 @@ public class Game {
 
         //Diminuisci il counter delle mosse
         _moveCounter--;
-
     }
 
     /**
@@ -324,11 +361,4 @@ public class Game {
 
     }
 
-    //debug
-    public String getPenultima(){
-        Configuration last = _stackLog.pop();
-        String out = _stackLog.pop().toString();
-        _stackLog.push(last);
-        return out;
-    }
 }

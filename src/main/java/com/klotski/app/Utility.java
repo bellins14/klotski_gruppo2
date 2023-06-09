@@ -112,26 +112,28 @@ public class Utility {
     /**
      * Metodo che controlla che non ci sia overlapping tra pezzi durante il loro spostamento.
      *
-     * @param piece pezzo che si vuole.
+     * @param movingPiece pezzo che si vuole.
      * @param deltaX quantità di cui si muove il pezzo orizzontalmente.
      * @param deltaY quantità di cui si muove il pezzo verticalmente.
      * @return false se overlap, true altrimenti.
      */
-    public static boolean isNotOverlapping(Piece piece, Pane blockPane, double deltaX, double deltaY) {
-        // Calcola la nuova posizione del bottone
-        double newX = piece.getLayoutX() + deltaX;
-        double newY = piece.getLayoutY() + deltaY;
+    public static boolean isNotOverlapping(Piece movingPiece, Configuration conf, double deltaX, double deltaY) {
 
-        // Itera su tutti gli elementi figli della Pane
-        ObservableList<Node> children = blockPane.getChildren();
-        for (Node child : children) {
-            // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
-            if (child instanceof Piece otherPiece && child != piece) {
-                // Verifica se il nuovo bottone si sovrappone all'altro bottone
-                if (newX + piece.getWidth() > otherPiece.getLayoutX() &&
-                        newX < otherPiece.getLayoutX() + otherPiece.getWidth() &&
-                        newY + piece.getHeight() > otherPiece.getLayoutY() &&
-                        newY < otherPiece.getLayoutY() + otherPiece.getHeight()) {
+        // Calcola la nuova posizione del movingPiece
+        double newX = movingPiece.getLayoutX() + deltaX;
+        double newY = movingPiece.getLayoutY() + deltaY;
+
+        // Per ogni elemento della configurazione
+        for (Piece confPiece : conf.getPieces()) {
+
+            //Se il pezzo controllato non è quello da spostare
+            if(confPiece != movingPiece){
+
+                //Se si sovrappongono
+                if (newX + movingPiece.getWidth() > confPiece.getLayoutX() &&
+                        newX < confPiece.getLayoutX() + confPiece.getWidth() &&
+                        newY + movingPiece.getHeight() > confPiece.getLayoutY() &&
+                        newY < confPiece.getLayoutY() + confPiece.getHeight()) {
                     return false;
                 }
             }

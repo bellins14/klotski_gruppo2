@@ -2,7 +2,6 @@ package com.klotski.app;
 
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
-import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,12 +15,9 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
-import netscape.javascript.JSException;
 
 import java.io.*;
 import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.klotski.app.Constants.*;
 
@@ -129,7 +125,7 @@ public class Controller {
                 int keyCode = event.getCode().ordinal();
 
                 //Sposta il pezzo
-                movePiece(selectedPiece, keyCode);
+                game.movePiece(selectedPiece, keyCode);
 
                 //Controlla se il giocatore ha vinto
                 checkWin();
@@ -152,7 +148,7 @@ public class Controller {
     @FXML
     private void reset() {
         //Cambia la configurazione attuale di game con la configurazione iniziale
-        game.setConfigurationToInitialConf(game.getInitialSelectedConf());
+        game.reset(game.getInitialSelectedConf());
 
         //Pulisce il pane
         blockPane.getChildren().clear();
@@ -181,7 +177,7 @@ public class Controller {
         if (game.getInitialSelectedConf() != configurationNumber) {
 
             //Cambia la configurazione attuale di game
-            game.setConfigurationToInitialConf(configurationNumber);
+            game.reset(configurationNumber);
 
             //Aggiorna il testo con il counter delle mosse
             textCounter.setText("Moves : " + game.getMoveCounter());
@@ -236,7 +232,7 @@ public class Controller {
                             Node node = blockPane.getChildren().get(blockIdx);
 
                             //chiamo il metodo per spostare il piece
-                            movePiece((Piece) node, dirIdx);
+                            game.movePiece((Piece) node, dirIdx);
                             //aggiorno il counter
                             textCounter.setText("Moves : " + game.getMoveCounter());
                             //Controlla se ha vinto
@@ -292,10 +288,9 @@ public class Controller {
      */
     @FXML
     private void undo() {
-        if (game.getMoveCounter() != 0) { //Se il counter è diverso da 0
-
+        try{
             //Setta la configurazione attuale con quella precedente
-            game.setConfigurationToPreviousConf();
+            game.undo();
 
             //Aggiorna il testo con il counter delle mosse
             textCounter.setText("Moves : " + game.getMoveCounter());
@@ -305,8 +300,8 @@ public class Controller {
 
             //Fai ripartire l'inizializzazione con il nuovo file di log
             initialize();
-
-        } else {
+        }catch (Exception e){
+            //Se non è possibile fare undo mostra un alert
             Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun pezzo!");
         }
     }
@@ -319,42 +314,7 @@ public class Controller {
      * @param piece pezzo da muovere
      * @param dirIdx direzione in cui muoverlo
      */
-    private void movePiece(Piece piece, int dirIdx) {
-        //Di quanti pixel muovere il pezzo
-        double moveAmount = 100;
-        //In base alla direzione in cui si intende muover il pezzo
-        switch (dirIdx) {
 
-            //DOWN
-            case S,ARROW_DOWN -> {
-                if (piece.getLayoutY() + moveAmount + piece.getHeight() <= MAX_PANE_HEIGHT
-                        && Utility.isNotOverlapping(piece, blockPane, 0, moveAmount)) {
-                    //Muove il pezzo in giu di moveAmount
-                    game.movePieceDown(piece, moveAmount);
-                    //blockMoved = true;
-                }
-            }
-            //RIGHT
-            case D,ARROW_RIGHT -> {
-                if (piece.getLayoutX() + moveAmount + piece.getWidth() <= MAX_PANE_WIDTH
-                        && Utility.isNotOverlapping(piece, blockPane, moveAmount, 0)) {
-                    game.movePieceRight(piece, moveAmount);
-                }
-            }
-            //UP
-            case W,ARROW_UP -> {
-                if (piece.getLayoutY() - moveAmount >= 0 && Utility.isNotOverlapping(piece, blockPane, 0, -moveAmount)) {
-                    game.movePieceUp(piece, moveAmount);
-                }
-            }
-            //LEFT
-            case A,ARROW_LEFT -> {
-                if (piece.getLayoutX() - moveAmount >= 0 && Utility.isNotOverlapping(piece, blockPane, -moveAmount, 0)) {
-                    game.movePieceLeft(piece, moveAmount);
-                }
-            }
-        }
-    }
 
     /**
      * Controlla (graficamente) se la configurazione attuale rappresenta una situazione di vittoria
