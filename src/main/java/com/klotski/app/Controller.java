@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
+import netscape.javascript.JSException;
 
 import java.io.*;
 import java.util.Objects;
@@ -207,55 +208,51 @@ public class Controller {
     private void nextBestMove() throws IOException {
         //guardo se il computer è connesso a internet perché per lo script JS ci serve essere connessi
         if (Utility.isInternetConnected() || !gameEnded) {
-            //disabilito il bottone per evitare che l'utente clicchi più volte e quindi mandi troppe richieste
-            NBM.setDisable(true);
-            //aggiorno il file html dove è presente lo script con la configurazione attuale
-            Utility.updateHTMLFile(game.getConfiguration());
-            //carico il file html
-            loadHTMLFile();
-            //abilito JS
-            this.webEngine.setJavaScriptEnabled(true);
-            //aggiungo un listener per vedere quando ha finito il caricamento del file
-            this.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-                //se il caricamento è andato a buon fine
-                if (newValue == Worker.State.SUCCEEDED) {
-                    // Esegui lo script JavaScript nella pagina caricata nella WebView
-                    Object result = webEngine.executeScript(NBM_SCRIPT);
-                    //se il risultato è una Stringa estrapolo le informazioni perché l'output
-                    //è {step: 1, blockIdx: 6, dirIdx: 0} quindi devo estrapolare le informazioni che
-                    //mi interessano
-                    if (result instanceof String jsonString) {
-                        jsonString = jsonString.substring(1, 35);
-                        int blockIdx = Utility.extractIntValue(jsonString,"blockIdx");
-                        int dirIdx =  Utility.extractIntValue(jsonString,"dirIdx");
-                        //converto le mosse NBM in valori interi che corrispondo alle frecce della tastiera
-                        dirIdx = (dirIdx == 0) ? ARROW_DOWN : ((dirIdx == 1) ? ARROW_RIGHT : ((dirIdx == 2) ? ARROW_UP : ((dirIdx == 3) ? ARROW_LEFT : -1)));
-                        //prendo il corrispettivo nodo che dovrò spostare
-                        Node node = blockPane.getChildren().get(blockIdx);
+            try {
+                //disabilito il bottone per evitare che l'utente clicchi più volte e quindi mandi troppe richieste
+                NBM.setDisable(true);
+                //aggiorno il file html dove è presente lo script con la configurazione attuale
+                Utility.updateHTMLFile(game.getConfiguration());
+                //carico il file html
+                loadHTMLFile();
+                //abilito JS
+                this.webEngine.setJavaScriptEnabled(true);
+                //aggiungo un listener per vedere quando ha finito il caricamento del file
+                this.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                    //se il caricamento è andato a buon fine
+                    if (newValue == Worker.State.SUCCEEDED) {
+                        // Esegui lo script JavaScript nella pagina caricata nella WebView
+                        Object result = webEngine.executeScript(NBM_SCRIPT);
+                        //se il risultato è una Stringa estrapolo le informazioni perché l'output
+                        //è {step: 1, blockIdx: 6, dirIdx: 0} quindi devo estrapolare le informazioni che
+                        //mi interessano
+                        if (result instanceof String jsonString) {
+                            jsonString = jsonString.substring(1, 35);
+                            int blockIdx = Utility.extractIntValue(jsonString, "blockIdx");
+                            int dirIdx = Utility.extractIntValue(jsonString, "dirIdx");
+                            //converto le mosse NBM in valori interi che corrispondo alle frecce della tastiera
+                            dirIdx = (dirIdx == 0) ? ARROW_DOWN : ((dirIdx == 1) ? ARROW_RIGHT : ((dirIdx == 2) ? ARROW_UP : ((dirIdx == 3) ? ARROW_LEFT : -1)));
+                            //prendo il corrispettivo nodo che dovrò spostare
+                            Node node = blockPane.getChildren().get(blockIdx);
 
-                        //chiamo il metodo per spostare il piece
-                        movePiece((Piece) node,dirIdx);
-                        //aggiorno il counter
-                        textCounter.setText("Moves : " + game.getMoveCounter());
-                        //Controlla se ha vinto
-                        checkWin();
-                    } // Fine if
-                }
-                if (newValue == Worker.State.FAILED) {
-                    Utility.setAlert(Alert.AlertType.ERROR, "Errore", "Errore nel caricamento dello script");
-                }
-            });
-
+                            //chiamo il metodo per spostare il piece
+                            movePiece((Piece) node, dirIdx);
+                            //aggiorno il counter
+                            textCounter.setText("Moves : " + game.getMoveCounter());
+                            //Controlla se ha vinto
+                            checkWin();
+                            NBM.setDisable(false);
+                        } // Fine if
+                    }
+                    if (newValue == Worker.State.FAILED) {
+                        Utility.setAlert(Alert.AlertType.ERROR, "Errore", "Errore nel caricamento dello script");
+                    }
+                });
+            }
+            catch (Exception e){
+                Utility.setAlert(Alert.AlertType.WARNING,"NBM","Caricamento dell'NBM in caricamento...");
+            }
             //Imposta un timer per evitare che il bottone NBM possa essere premuto troppo velocemente
-            Timer timer = new Timer();
-            TimerTask enableButtonNBM = new TimerTask() {
-                @Override
-                public void run() {
-                    Platform.runLater(() -> NBM.setDisable(false));
-                }
-            };
-
-            timer.schedule(enableButtonNBM, NBM_BUTTON_TIMER_MILLIS);
         } else {
             Utility.setAlert(Alert.AlertType.ERROR, "Errore", "NBM non disponibile, connettiti a internet");
         }
