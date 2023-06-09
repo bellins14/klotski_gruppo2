@@ -3,7 +3,6 @@ package com.klotski.app;
 import com.jfoenix.controls.*;
 import javafx.animation.StrokeTransition;
 import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,12 +11,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Duration;
+import netscape.javascript.JSException;
 
 import java.io.*;
 import java.util.Objects;
@@ -28,105 +27,115 @@ import static com.klotski.app.Constants.*;
 
 
 /**
- * Classe che gestisce tutta la logica dell'applicazione.
+ * Classe che gestisce l'interazione del gioco con la grafica (Java FX).
  */
 public class Controller {
-    //Pannello "Pane" dove andrò a inserire i vari Piece
+
+    //Elementi di FXML:
+
+    //Pannello "Pane" dove inserire i pezzi della configurazione attuale del gioco
     @FXML
     private Pane blockPane;
+    //Bottone undo
     @FXML
     private JFXButton undo;
     //Testo per il numero di mosse
     @FXML
     private Text textCounter;
+    //Bottone reset
     @FXML
     private JFXButton reset;
+    //Bottone NBM
     @FXML
     private JFXButton NBM;
+
+
+    private boolean gameEnded = false;
+
+    //Gioco
     private Game game;
 
-    //un bottone posso muoverlo con le frecce solo dopo averlo selezionato con il mouse
-    private Piece selectedBlock;
+    //Pezzo selezionato: un pezzo puo' essere mosso solo con le frecce della tastiera
+    // solo dopo essere stato selezionato con il mouse
+    private Piece selectedPiece;
 
+    //Necessario per la connessione all'NBM
     private WebEngine webEngine;
 
-
-
-
-    /**
-     * Costruttore di default
-     */
-    public Controller() {
-    }
-
+    //Costruttore non necessario
 
     /**
      * Metodo chiamato di default all'avvio dell'applicazione.
-     * Inizializza la pane e gestisce gli input da tastiera e da mouse sui blocchi.
+     * Inizializza la pane e gestisce gli input da mouse e da tastiera sui pezzi.
      */
-    //primo metodo chiamato di default
     public void initialize() {
-
         //Crea un nuovo gioco
-        game = new Game();
+        game = new Game(LOG_FILE,DC_FILE);
 
         //Setta il counter con le mosse
-        textCounter.setText("Moves : " + game.getCounter());
+        textCounter.setText("Moves : " + game.getMoveCounter());
 
-        //Setta la dimensione del pane
-        blockPane.setMaxWidth(400);
-        blockPane.setMaxHeight(500);
+        //Setta le dimensioni massime del pane
+        blockPane.setMaxHeight(MAX_PANE_HEIGHT);
+        blockPane.setMaxWidth(MAX_PANE_WIDTH);
 
-        //Prende i blocchi della configurazione attuale
-        Piece[] blocks = game.getConfiguration().getPieces();
+        //Setta il border color della pane
+        blockPane.setStyle(PANE_BORDER_COLOR);
 
-        //Per ogni blocco della configurazione attuale
-        for (Piece block : blocks) {
+        //Prende i pezzi della configurazione attuale
+        Piece[] currentPieces = game.getConfiguration().getPieces();
 
-            //Renderizza l'immagine del blocco (parte esclusivamente grafica)
-            Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(block.getImageName())).toString());
+        //Per ogni pezzo della configurazione attuale
+        for (Piece piece : currentPieces) {
+
+            //Renderizza l'immagine del pezzo (parte esclusivamente grafica)
+            Image pieceImage = new Image(Objects.requireNonNull(getClass().getResource(piece.getImageName())).toString());
             ImagePattern piecePattern = new ImagePattern(pieceImage);
-            block.setFill(piecePattern);
+            piece.setFill(piecePattern);
 
-            //Aggiunge il blocco al pane
-            blockPane.getChildren().add(block);
+            //Aggiunge il pezzo al pane
+            blockPane.getChildren().add(piece);
 
-            //forse va fuori
-            blockPane.setStyle("-fx-border-color: black");
 
             //Aggiunge un gestore eventi per la selezione di un bottone
-            block.setOnMouseClicked(event -> {
-                selectedBlock = (Piece) event.getSource();
-                for (Piece b : blocks) {
-                    b.setEffect(null);
-                    b.setStrokeWidth(3);
+            piece.setOnMouseClicked(event -> {
+                selectedPiece = (Piece) event.getSource();
+
+                //Diminuisci lo spessore per tutti i pezzi
+                for (Piece p : currentPieces) {
+                    p.setEffect(null);
+                    p.setStrokeWidth(UNSELECTED_PIECE_STROKE_WIDTH);
                 }
 
                 //Attiva l'illuminazione del pulsante selezionato
-                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(200), block);
-                strokeTransition.setFromValue(Color.grayRgb(3));
-                strokeTransition.setToValue(Color.grayRgb(6));
-                strokeTransition.setCycleCount(2);
-                strokeTransition.setAutoReverse(true);
+                StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(STROKE_TRANSITION_MILLIS), piece);
+                strokeTransition.setFromValue(STROKE_START_COLOR);
+                strokeTransition.setToValue(STROKE_END_COLOR);
+                strokeTransition.setCycleCount(CYCLE_COUNT);
+                strokeTransition.setAutoReverse(TRANSITION_AUTOREVERSE);
                 strokeTransition.play();
-                selectedBlock = block;
-                // aumenta lo spessore del bordo
-                block.setStrokeWidth(5);
+                selectedPiece = piece;
+
+                //Aumenta lo spessore del per il pezzo selezionato
+                piece.setStrokeWidth(SELECTED_PIECE_STROKE_WIDTH);
             });
         }
 
-        // Aggiunge un gestore eventi per la pressione dei tasti freccia
+        //Aggiunge un gestore eventi per la pressione dei tasti freccia
         blockPane.setOnKeyPressed(event -> {
-            if (selectedBlock != null) {
-                //di quanto si deve spostare il mio bottone selezionato
-                //tutte le casistiche per evitare che il bottone vada fuori dalla Pane e che non si sovrapponga con altri bottoni
-                //getCode mi traduce il comando da tastiera in un codice
+            if (selectedPiece != null) {
+
+                //getCode traduce il comando da tastiera in un codice
                 int keyCode = event.getCode().ordinal();
-                moveBlock(selectedBlock, keyCode);
-                if (checkWin(blockPane)) {
-                    reset();
-                }
-                textCounter.setText("Moves : " + game.getCounter());
+
+                //Sposta il pezzo
+                movePiece(selectedPiece, keyCode);
+
+                //Controlla se il giocatore ha vinto
+                checkWin();
+
+                //Aggiorna il testo con il counter delle mosse
+                textCounter.setText("Moves : " + game.getMoveCounter());
 
             }
 
@@ -137,40 +146,49 @@ public class Controller {
 
 
     /**
-     * Metodo che si occupa del reset alla configurazione di partenza designata.
+     * Metodo chiamato quando viene premuto il tasto reset
+     * Si occupa del reset alla configurazione di partenza designata.
      */
     @FXML
-    void reset() {
-
+    private void reset() {
         //Cambia la configurazione attuale di game con la configurazione iniziale
-        game.setConfigurationWithInitialConf(game.getInitialSelectedConf());
+        game.setConfigurationToInitialConf(game.getInitialSelectedConf());
 
-        //Aggiorna il testo con il counter delle mosse
-        textCounter.setText("Moves : " + game.getCounter());
+        //Pulisce il pane
         blockPane.getChildren().clear();
+
         //Fai ripartire l'inizializzazione
         initialize();
-
     }
 
 
     /**
-     * Metodo che si occupa del cambio di configurazione una volta cliccato il bottone apposito.
+     * Metodo chiamato quando viene premuto il tasto cambio di configurazione iniziale
+     * Si occupa di sostituire la configurazione attuale con la configurazione iniziale selezionata.
      *
      * @param event classe FXML che codifica un evento.
      */
     @FXML
-    void configurationClicked(ActionEvent event) {
+    private void configurationClicked(ActionEvent event) {
+
+        //Prendi il bottone cliccato
         Button clickedButton = (Button) event.getSource();
+
+        //Prendi il numero della configurazione selezionata
         int configurationNumber = Integer.parseInt(clickedButton.getUserData().toString());
 
         //Se la configurazione iniziale selezionata è diversa da quella attuale
         if (game.getInitialSelectedConf() != configurationNumber) {
+
             //Cambia la configurazione attuale di game
-            game.setConfigurationWithInitialConf(configurationNumber);
+            game.setConfigurationToInitialConf(configurationNumber);
+
             //Aggiorna il testo con il counter delle mosse
-            textCounter.setText("Moves : " + game.getCounter());
+            textCounter.setText("Moves : " + game.getMoveCounter());
+
+            //Pulisci il pane
             blockPane.getChildren().clear();
+
             //Fai ripartire l'inizializzazione
             initialize();
         }
@@ -178,7 +196,8 @@ public class Controller {
 
 
     /**
-     * Metodo che abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
+     * Metodo chiamato quando viene premuto il tasto NBM
+     * Abilita l'esecuzione di JavaScript nella WebView, quindi registra un listener per il cambio di stato del caricamento del worker della WebView.
      * Quando il caricamento è completato con successo (Worker.State.SUCCEEDED), viene eseguito uno script JavaScript nella pagina caricata (NBM).
      * Il risultato della NBM prodotto dallo script viene utilizzato per spostare un nodo nell'interfaccia utente.
      * In caso di errore durante il caricamento (Worker.State.FAILED), viene stampato un messaggio di errore.
@@ -186,51 +205,54 @@ public class Controller {
      * @throws IOException Eccezione per apertura/chiusura file "solver.html"
      */
     @FXML
-    void nextBestMove() throws IOException {
-        if (Utility.isInternetConnected()) {
-            NBM.setDisable(true);
+    private void nextBestMove() throws IOException {
+        //guardo se il computer è connesso a internet perché per lo script JS ci serve essere connessi
+        if (Utility.isInternetConnected() || !gameEnded) {
+            try {
+                //disabilito il bottone per evitare che l'utente clicchi più volte e quindi mandi troppe richieste
+                NBM.setDisable(true);
+                //aggiorno il file html dove è presente lo script con la configurazione attuale
+                Utility.updateHTMLFile(game.getConfiguration());
+                //carico il file html
+                loadHTMLFile();
+                //abilito JS
+                this.webEngine.setJavaScriptEnabled(true);
+                //aggiungo un listener per vedere quando ha finito il caricamento del file
+                this.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                    //se il caricamento è andato a buon fine
+                    if (newValue == Worker.State.SUCCEEDED) {
+                        // Esegui lo script JavaScript nella pagina caricata nella WebView
+                        Object result = webEngine.executeScript(NBM_SCRIPT);
+                        //se il risultato è una Stringa estrapolo le informazioni perché l'output
+                        //è {step: 1, blockIdx: 6, dirIdx: 0} quindi devo estrapolare le informazioni che
+                        //mi interessano
+                        if (result instanceof String jsonString) {
+                            jsonString = jsonString.substring(1, 35);
+                            int blockIdx = Utility.extractIntValue(jsonString, "blockIdx");
+                            int dirIdx = Utility.extractIntValue(jsonString, "dirIdx");
+                            //converto le mosse NBM in valori interi che corrispondo alle frecce della tastiera
+                            dirIdx = (dirIdx == 0) ? ARROW_DOWN : ((dirIdx == 1) ? ARROW_RIGHT : ((dirIdx == 2) ? ARROW_UP : ((dirIdx == 3) ? ARROW_LEFT : -1)));
+                            //prendo il corrispettivo nodo che dovrò spostare
+                            Node node = blockPane.getChildren().get(blockIdx);
 
-            Utility.updateHTMLFile(game.getConfiguration());
-            loadHTMLFile();
-            this.webEngine.setJavaScriptEnabled(true);
-            this.webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue == Worker.State.SUCCEEDED) {
-                    // Esegui lo script JavaScript nella pagina caricata nella WebView
-                    Object result = webEngine.executeScript("JSON.stringify(window.klotski.solve(window.game))");
-                    if (result instanceof String jsonString) {
-                        jsonString = jsonString.substring(1, 35);
-                        //System.out.println(jsonString);
-                        int blockIdx = Utility.extractIntValue(jsonString,"blockIdx");
-                        int dirIdx =  Utility.extractIntValue(jsonString,"dirIdx");
-                        //converto le mosse NBM in valori interi che corrispondo alle frecce della tastiera
-                        dirIdx = (dirIdx == 0) ? 19 : ((dirIdx == 1) ? 18 : ((dirIdx == 2) ? 17 : ((dirIdx == 3) ? 16 : -1)));
-                        Node node = blockPane.getChildren().get(blockIdx);
-
-                        // essendo ripetizione di codice per lo spostamento, capire se creare metodo unico da inserire
-                        // sia qua, sia quando vengono assegnati i comportamenti in base al tasto freccia (su giù dx sx)
-                        // quando viene eseguito `initialize()`
-                        moveBlock((Piece) node,dirIdx);
-                        textCounter.setText("Moves : " + game.getCounter());
-
-                    } // Fine if
-                }
-                if (newValue == Worker.State.FAILED) {
-                    Utility.setAlert(Alert.AlertType.ERROR, "Errore", "Errore nel caricamento dello script");
-                }
-            });
-
-            if (checkWin(blockPane)) {
-                reset();
+                            //chiamo il metodo per spostare il piece
+                            movePiece((Piece) node, dirIdx);
+                            //aggiorno il counter
+                            textCounter.setText("Moves : " + game.getMoveCounter());
+                            //Controlla se ha vinto
+                            checkWin();
+                            NBM.setDisable(false);
+                        } // Fine if
+                    }
+                    if (newValue == Worker.State.FAILED) {
+                        Utility.setAlert(Alert.AlertType.ERROR, "Errore", "Errore nel caricamento dello script");
+                    }
+                });
             }
-            Timer timer = new Timer();
-            TimerTask enableButtonNBM = new TimerTask() {
-                @Override
-                public void run() {
-                    Platform.runLater(() -> NBM.setDisable(false));
-                }
-            };
-
-            timer.schedule(enableButtonNBM, 500);
+            catch (Exception e){
+                Utility.setAlert(Alert.AlertType.WARNING,"NBM","Caricamento dell'NBM in caricamento...");
+            }
+            //Imposta un timer per evitare che il bottone NBM possa essere premuto troppo velocemente
         } else {
             Utility.setAlert(Alert.AlertType.ERROR, "Errore", "NBM non disponibile, connettiti a internet");
         }
@@ -238,10 +260,10 @@ public class Controller {
 
 
     /**
-     * Metodo che serve per caricare il file per il risolvimento della NBM.
+     * Metodo che carica il file per la risoluzione della NBM.
      */
-    public  void loadHTMLFile() {
-        File prova = new File("src/main/resources/com/klotski/app/solver.html");
+    private void loadHTMLFile() {
+        File prova = new File(NBM_SOLVER_HTML_FILE);
         if (prova.exists()) {
             try {
                 StringBuilder contentBuilder = new StringBuilder();
@@ -264,107 +286,90 @@ public class Controller {
     }
 
     /**
-     * Metodo che gestisce undo.
+     * Metodo chiamato quando viene premuto il tasto undo
+     * Sostituisce la configurazione attuale con quella precedente (se disponibile)
+     * Se non disponibile lancia un alert
      */
     @FXML
-    void undo() {
-        if (game.getCounter() != 0) {
-            game.setCounter(game.getCounter() - 1);
-            textCounter.setText("Moves : " + game.getCounter());
+    private void undo() {
+        if (game.getMoveCounter() != 0) { //Se il counter è diverso da 0
+
+            //Setta la configurazione attuale con quella precedente
+            game.setConfigurationToPreviousConf();
+
+            //Aggiorna il testo con il counter delle mosse
+            textCounter.setText("Moves : " + game.getMoveCounter());
+
+            //Pulisci il pane
             blockPane.getChildren().clear();
 
-            game.popLog();
-            UtilityJackson.serializeConfigurationLog(game.getLog(), LOG_FILE);
-            UtilityJackson.serializeConfiguration(game.getLog().peek(), DC_FILE);
+            //Fai ripartire l'inizializzazione con il nuovo file di log
             initialize();
+
         } else {
-            Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun blocco!");
+            Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun pezzo!");
         }
     }
 
 
-//TODO:separare logica muovi blocco in game
-    public void moveBlock(Piece block, int dirIdx) {
-        //boolean blockMoved = false;
+    /**
+     * Metodo chiamato alla pressione delle frecce o dei tasti ASDW con blocco selezionato
+     * Muove il pezzo selezionato nella direzione designata di 100px se possibile,
+     * altrimenti termina silenziosamente
+     * @param piece pezzo da muovere
+     * @param dirIdx direzione in cui muoverlo
+     */
+    private void movePiece(Piece piece, int dirIdx) {
+        //Di quanti pixel muovere il pezzo
         double moveAmount = 100;
+        //In base alla direzione in cui si intende muover il pezzo
         switch (dirIdx) {
-            //WASD
-            //58 su
-            //36 sx
-            //54 giu
-            //39 dx
+
             //DOWN
-            case 19,54 -> {
-                if (block.getLayoutY() + moveAmount + block.getHeight() <= 500
-                        && isNotOverlapping(block, 0, moveAmount)) {
-                    //Muove il blocco in giu di moveAmount
-                    game.moveBlockDown(block, moveAmount);
+            case S,ARROW_DOWN -> {
+                if (piece.getLayoutY() + moveAmount + piece.getHeight() <= MAX_PANE_HEIGHT
+                        && Utility.isNotOverlapping(piece, blockPane, 0, moveAmount)) {
+                    //Muove il pezzo in giu di moveAmount
+                    game.movePieceDown(piece, moveAmount);
                     //blockMoved = true;
                 }
             }
             //RIGHT
-            case 18,39 -> {
-                if (block.getLayoutX() + moveAmount + block.getWidth() <= 400
-                        && isNotOverlapping(block, moveAmount, 0)) {
-                    game.moveBlockRight(block, moveAmount);
+            case D,ARROW_RIGHT -> {
+                if (piece.getLayoutX() + moveAmount + piece.getWidth() <= MAX_PANE_WIDTH
+                        && Utility.isNotOverlapping(piece, blockPane, moveAmount, 0)) {
+                    game.movePieceRight(piece, moveAmount);
                 }
             }
             //UP
-            case 17,58 -> {
-                if (block.getLayoutY() - moveAmount >= 0 && isNotOverlapping(block, 0, -moveAmount)) {
-                    game.moveBlockUp(block, moveAmount);
+            case W,ARROW_UP -> {
+                if (piece.getLayoutY() - moveAmount >= 0 && Utility.isNotOverlapping(piece, blockPane, 0, -moveAmount)) {
+                    game.movePieceUp(piece, moveAmount);
                 }
             }
             //LEFT
-            case 16,36 -> {
-                if (block.getLayoutX() - moveAmount >= 0 && isNotOverlapping(block, -moveAmount, 0)) {
-                    game.moveBlockLeft(block, moveAmount);
+            case A,ARROW_LEFT -> {
+                if (piece.getLayoutX() - moveAmount >= 0 && Utility.isNotOverlapping(piece, blockPane, -moveAmount, 0)) {
+                    game.movePieceLeft(piece, moveAmount);
                 }
             }
         }
     }
 
     /**
-     * Metodo che gestisce la vittoria.
+     * Controlla (graficamente) se la configurazione attuale rappresenta una situazione di vittoria
      */
-
-    private boolean checkWin(Pane blockPane) {
+    private void checkWin() {
+        //Prende il pezzo piu' grande (che è sempre il primo)
         Node node = blockPane.getChildren().get(0);
-        if (node.getLayoutX() == 100 && node.getLayoutY() == 300) {
+
+        //Se si trova nella posizione di vittoria
+        if (node.getLayoutX() == WIN_X && node.getLayoutY() == WIN_Y) {
+            gameEnded = true;
+            //Lancia alert di vittoria
+            reset();
             Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
-            return  true;
         }
-        return  false;
     }
 
-    /**
-     * Metodo che controlla che non ci sia overlapping tra pezzi durante il loro spostamento.
-     *
-     * @param block pezzo che si vuole.
-     * @param deltaX quantità di cui si muove il pezzo orizzontalmente.
-     * @param deltaY quantità di cui si muove il pezzo verticalmente.
-     * @return false se si overlappa, true se è tutto a posto.
-     */
-    private boolean isNotOverlapping(Piece block, double deltaX, double deltaY) {
-        // Calcola la nuova posizione del bottone
-        double newX = block.getLayoutX() + deltaX;
-        double newY = block.getLayoutY() + deltaY;
-
-        // Itera su tutti gli elementi figli della Pane
-        ObservableList<Node> children = blockPane.getChildren();
-        for (Node child : children) {
-            // Verifica se l'elemento figlio è un bottone diverso da quello selezionato
-            if (child instanceof Piece otherPiece && child != block) {
-                // Verifica se il nuovo bottone si sovrappone all'altro bottone
-                if (newX + block.getWidth() > otherPiece.getLayoutX() &&
-                        newX < otherPiece.getLayoutX() + otherPiece.getWidth() &&
-                        newY + block.getHeight() > otherPiece.getLayoutY() &&
-                        newY < otherPiece.getLayoutY() + otherPiece.getHeight()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
 }

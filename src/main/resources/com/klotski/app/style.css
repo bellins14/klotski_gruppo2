@@ -7,10 +7,11 @@
 
 
 .reset{
-
-    -fx-background-color: #725a7a;
+    -fx-background-color:#D2B48C;
+    -fx-border-color: black;
 }
 
 #configuration JFXButton{
-    -fx-background-color: #725a7a;
+    -fx-border-color: black;
+    -fx-background-color: #D2B48C;
 }

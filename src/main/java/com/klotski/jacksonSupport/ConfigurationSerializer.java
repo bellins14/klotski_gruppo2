@@ -9,6 +9,7 @@ import com.klotski.app.Piece;
 import java.io.IOException;
 
 /**
+ * Classe di SUPPORTO alla LIBRERIA JACKSON
  * Classe che implementa il serializzatore Jackson per tradurre un oggetto della classe Configuration
  * in un formato JSON compatibile con l'applicazione
  */

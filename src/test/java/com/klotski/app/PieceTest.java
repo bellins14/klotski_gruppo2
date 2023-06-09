@@ -132,7 +132,7 @@ class PieceTest {
 
             //Controlla il bordo con spessore
             assertEquals(PIECE_STROKE_COLOR, piece.getStroke());
-            assertEquals(PIECE_STROKE_WIDTH, piece.getStrokeWidth());
+            assertEquals(UNSELECTED_PIECE_STROKE_WIDTH, piece.getStrokeWidth());
 
             //Controlla la curvatura degli angoli
             assertEquals(PIECE_ARC_DIM, piece.getArcHeight());

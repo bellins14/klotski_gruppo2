@@ -19,6 +19,11 @@ import static com.klotski.app.Constants.*;
 
 class UtilityJacksonTest {
 
+    //File di test 12
+    private final String testDC12 = "src/test/testFiles/json/TestDC12.json";
+    private final String testLog12 = "src/test/testFiles/json/TestLog12.json";
+
+
     //Test del metodo serializeConfiguration
     @Test
     void serializeConfiguration() {
@@ -30,7 +35,7 @@ class UtilityJacksonTest {
         for (int i = 1; i <= 4; i++) {
             configuration = new Configuration(i);
 
-            UtilityJackson.serializeConfiguration(configuration, DC_FILE); //TODO: cambia con un file di test
+            UtilityJackson.serializeConfiguration(configuration, testDC12);
 
             Configuration serializedConfiguration = null;
 
@@ -39,7 +44,7 @@ class UtilityJacksonTest {
 
             try {
                 ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-                f = new File(DC_FILE);
+                f = new File(testDC12);
                 fr = new FileReader(f); // Classe per la lettura da file
                 serializedConfiguration = om.readValue(fr, Configuration.class);
             } catch (IOException e) {
@@ -60,7 +65,6 @@ class UtilityJacksonTest {
             assertEquals(expectedString, serializedConfiguration.toString());
         }
 
-        //TODO:test con configurazione alternativa
 
     }
 
@@ -75,9 +79,9 @@ class UtilityJacksonTest {
         for (int i = 1; i <= 4; i++) {
             configuration = new Configuration(i);
 
-            UtilityJackson.serializeConfiguration(configuration, DC_FILE); //cambia con un file di test
+            UtilityJackson.serializeConfiguration(configuration, testDC12); //cambia con un file di test
 
-            Configuration deserializedConfiguration = UtilityJackson.deserializeConfiguration(DC_FILE);
+            Configuration deserializedConfiguration = UtilityJackson.deserializeConfiguration(testDC12);
 
             String expectedString = configuration.toString();
 
@@ -85,7 +89,6 @@ class UtilityJacksonTest {
             assertEquals(expectedString, deserializedConfiguration.toString());
         }
 
-        //TODO:test con configurazione alternativa
 
     }
 
@@ -103,7 +106,7 @@ class UtilityJacksonTest {
         }
 
         //Utilizza il metodo per serializzare le configurazioni del log e salvarle su file
-        UtilityJackson.serializeConfigurationLog(testingLog, LOG_FILE); //TODO: cambia con file di test
+        UtilityJackson.serializeConfigurationLog(testingLog, testLog12);
 
         //Crea il log e riempilo con gli elementi del log serializzato
         Stack<Configuration> serializedConfigurationLog = new Stack<>();
@@ -112,7 +115,7 @@ class UtilityJacksonTest {
 
         try {
             ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-            f = new File("src/main/resources/com/klotski/app/json/ConfigurationLog.json");
+            f = new File(testLog12);
             fr = new FileReader(f); // Classe per la lettura da file
             JsonNode rootNode = om.readTree(fr);
 
@@ -149,7 +152,6 @@ class UtilityJacksonTest {
             assertEquals(expectedString, serializedConfigurationLog.pop().toString());
         }
         
-        //TODO: testare con configurazione diversa da quelle iniziali
     }
 
 
@@ -168,10 +170,10 @@ class UtilityJacksonTest {
         }
         
         //Salva lo stack su file
-        UtilityJackson.serializeConfigurationLog(testingLog, LOG_FILE); //TODO: cambia con file di test
+        UtilityJackson.serializeConfigurationLog(testingLog, testLog12);
         
         //Usa il metodo per deserializzare le configurazioni dal file e passali ad un nuovo log
-        Stack<Configuration> deserializedConfigurationLog = UtilityJackson.deserializeConfigurationLog(LOG_FILE);
+        Stack<Configuration> deserializedConfigurationLog = UtilityJackson.deserializeConfigurationLog(testLog12);
 
         //Controlla che i due log corrispondano
         // Per ogni configurazione dello stack di log
@@ -181,9 +183,6 @@ class UtilityJacksonTest {
             //Controlla che la configurazione del log testato e la rispettiva configurazione di quello ottenuto corrispondano
             assertEquals(expectedString, deserializedConfigurationLog.pop().toString());
         }
-
-        //TODO: testare con configurazione diversa da quelle iniziali
-        
         
     }
 }

@@ -1,8 +1,5 @@
 package com.klotski.app;
 
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 import static com.klotski.app.Constants.*;
@@ -32,9 +29,9 @@ public class Piece extends Rectangle {
     }
 
 
-    /*  Ricordarsi che 100x100 è 100 di larghezza per 100 di altezza, mentre le coordinate del JSON sono
-        invertite.
-     */
+    //Ricorda che 100x100 è 100 di larghezza per 100 di altezza, mentre le coordinate del JSON sono
+    // invertite.
+
     /**
      * Costruttore che inizializza un pezzo a partire dal tipo.
      * @param pieceType tipo del pezzo: 0 = 100x100; 1 = 100x200; 2 = 200x100; 3 = 300x300.
@@ -68,13 +65,13 @@ public class Piece extends Rectangle {
             this.setType(2);
         } else if (h == PIECE_3_HEIGHT && w == PIECE_3_WIDTH) {
             this.setType(3);
-        } else { //Se le dimensioni non corrispondono ad un pezzo adeguato lancia eccezione
+        } else { //Se le dimensioni non corrispondono a un pezzo adeguato lancia eccezione
             throw new IllegalArgumentException("Dimensioni non valide");
         }
 
         //Setta un bordo nero di spessore 3
         this.setStroke(PIECE_STROKE_COLOR);
-        this.setStrokeWidth(PIECE_STROKE_WIDTH);
+        this.setStrokeWidth(UNSELECTED_PIECE_STROKE_WIDTH);
     }
 
 
@@ -127,7 +124,7 @@ public class Piece extends Rectangle {
 
         //Setta un bordo con spessore
         this.setStroke(PIECE_STROKE_COLOR);
-        this.setStrokeWidth(PIECE_STROKE_WIDTH);
+        this.setStrokeWidth(UNSELECTED_PIECE_STROKE_WIDTH);
 
         //Setta una curvatura degli angoli
         this.setArcHeight(PIECE_ARC_DIM);
@@ -137,23 +134,22 @@ public class Piece extends Rectangle {
 
     /**
      * Metodo per ritornare il tipo del pezzo
-     * @return _type;
+     * @return _type
      */
     public int getType(){ return this._type;}
 
 
     /**
      * Metodo per ritornare il nome dell'immagine
-     * @return _imageName;
+     * @return _imageName
      */
     public String getImageName(){
         return this._imageName;
     }
 
 
-
     /**
-     * Metodo che ritorna una string che rappresenta un piece in un formato utile per la
+     * Metodo che ritorna una stringa che rappresenta un piece in formato json utile per la
      * NBM.
      * @return stringa formattata.
      */

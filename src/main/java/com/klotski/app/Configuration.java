@@ -15,8 +15,8 @@ import static com.klotski.app.Constants.*;
 
 /**
  * Classe che rappresenta una configurazione del gioco del Klotski.
- * Una configurazione è intesa come l'insieme dei pezzi e relative posizioni che formano
- * il layout di gioco prima di una mossa.
+ * Una configurazione è intesa come l'insieme dei pezzi e la loro disposizione.
+ * Identifica una (situazione di una) mossa del gioco.
  */
 public class Configuration {
 
@@ -71,14 +71,18 @@ public class Configuration {
         return _pieces;
     }
 
+    /**
+     * Metodo che indica se il pezzo appartiene alla configurazione (per riferimento).
+     * @return true se appartiene, false altrimenti
+     */
     public boolean doesPieceBelong(Piece piece) {
         for (Piece testPiece : _pieces) {
             if (piece == testPiece) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -165,7 +169,7 @@ public class Configuration {
 
 
     /**
-     * Metodo che verifica se la configurazione passata è uguale ad una delle 4 configurazioni iniziali.
+     * Metodo che verifica se la configurazione passata è uguale a una delle 4 configurazioni iniziali.
      * @param conf configurazione da verificare.
      * @return numero della configurazione corrispondente, altrimenti ritorna 0.
      */

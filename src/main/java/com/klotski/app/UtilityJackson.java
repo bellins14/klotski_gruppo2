@@ -4,36 +4,46 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 
 /**
- * Classe che fornisce dei metodi di utility per la scrittura fu file JSON.
+ * Classe che fornisce dei metodi di utilità per la scrittura/lettura delle configurazioni su/da file JSON.
  */
 public class UtilityJackson {
 
+    private UtilityJackson() {
+        // Costruttore privato per evitare l'istanziazione della classe
+    }
+
     /**
-     * Metodo che serializza una configurazione in un file JSON.
-     * Utile per la deep copy.
-     * @param conf configurazione da serializzare.
+     * Metodo che serializza un oggetto configurazione in una stringa JSON e la salva su un file JSON di supporto.
+     * Necessario per effettuare una deep copy della configurazione
+     * @param conf oggetto configurazione da serializzare.
+     * @param supportFilePathName path del file di supporto (Necessario per effettuare una deep copy della configurazione)
      */
-    public static void serializeConfiguration(Configuration conf, String dcFilePathName){
+    public static void serializeConfiguration(Configuration conf, String supportFilePathName){
         File f;
         FileWriter fw = null;
         try {
-            ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
+            // Oggetto per mappare un oggetto in JSON
+            ObjectMapper om = new ObjectMapper();
+
             // File usato come appoggio per la deep copy
-            f = new File(dcFilePathName);
-            fw = new FileWriter(f); // Classe per la scrittura su file
+            f = new File(supportFilePathName);
+
+            // Per scrivere sul file
+            fw = new FileWriter(f);
+
+            // Scrittura sul file
             om.writeValue(fw, conf);
+
+
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if (fw != null) {
                 try {
@@ -47,23 +57,31 @@ public class UtilityJackson {
 
 
     /**
-     * Metodo che deserializza di un file JSON in una configurazione.
-     * Utile per la deep copy.
+     * Metodo che deserializza una configurazione in formato stringa JSON dal file di supporto
+     * e la converte in un oggetto configurazione.
+     * @param supportFilePathName path del file di supporto (Necessario per effettuare una deep copy della configurazione)
      * @return oggetto configurazione deserializzata
      */
-    public static Configuration deserializeConfiguration(String dcFilePathName){
+    public static Configuration deserializeConfiguration(String supportFilePathName){
         Configuration c = null;
         File f;
         FileReader fr = null;
 
         try {
-            ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
-            f = new File(dcFilePathName);
-            fr = new FileReader(f); // Classe per la lettura da file
+            // Oggetto per mappare un oggetto in JSON
+            ObjectMapper om = new ObjectMapper();
+
+            // File usato come appoggio per la deep copy
+            f = new File(supportFilePathName);
+
+            // Classe per la lettura da file
+            fr = new FileReader(f);
+
+            // Lettura da file
             c = om.readValue(fr, Configuration.class);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if (fr != null) {
                 try {
@@ -78,21 +96,29 @@ public class UtilityJackson {
 
 
     /**
-     * Metodo che serve per scrivere lo stack con il log delle configurazioni
-     * su file JSON.
-     * @param l stack di configuration.
+     * Metodo per trascrivere uno Stack di oggetti configurazioni in un file di log (o storico o database)
+     * in formato JSON
+     * @param stack Stack di oggetti Configuration.
      */
-    public static void  serializeConfigurationLog (Stack<Configuration> l, String logFilePathName){
+    public static void  serializeConfigurationLog (Stack<Configuration> stack, String logFilePathName){
         File f;
         FileWriter fw = null;
 
         try {
-            ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
+            // Oggetto per mappare un oggetto in JSON
+            ObjectMapper om = new ObjectMapper();
+
+            // File di log
             f = new File(logFilePathName);
-            fw = new FileWriter(f); // Classe per la scrittura su file
-            om.writeValue(fw, l);
+
+            // Classe per la scrittura su file
+            fw = new FileWriter(f);
+
+            // Scrive su file
+            om.writeValue(fw, stack);
+
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if (fw != null) {
                 try {
@@ -106,8 +132,10 @@ public class UtilityJackson {
 
 
     /**
-     * Metodo di utility per ritornare uno stack già deserializzato di configurazioni.
-     * @return log stack deserializzato.
+     * Metodo per tradurre un file di log (o storico o database) di configurazioni (in formato JSON)
+     * in uno Stack di oggetti Configuration
+     * @param logPathName path del file di log.
+     * @return Stack di oggetti Configurazioni.
      */
     public static Stack<Configuration> deserializeConfigurationLog (String logPathName){
         Stack<Configuration> log = new Stack<>();
@@ -115,9 +143,12 @@ public class UtilityJackson {
         FileReader fr = null;
 
         try {
-            ObjectMapper om = new ObjectMapper(); // Oggetto per mappare un oggetto in JSON
+            // Oggetto per mappare un oggetto in JSON
+            ObjectMapper om = new ObjectMapper();
             f = new File(logPathName);
-            fr= new FileReader(f); // Classe per la scrittura su file
+
+            // Classe per la scrittura su file
+            fr= new FileReader(f);
             JsonNode rootNode = om.readTree(fr);
 
             ArrayNode configurationsNode = (ArrayNode) rootNode;
@@ -133,7 +164,7 @@ public class UtilityJackson {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } finally {
             if (fr != null) {
                 try {
