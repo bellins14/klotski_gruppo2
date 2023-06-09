@@ -68,15 +68,24 @@ public class Controller {
         //Crea un nuovo gioco
         game = new Game(LOG_FILE,DC_FILE);
 
-        //Setta il counter con le mosse
-        textCounter.setText("Moves : " + game.getMoveCounter());
-
         //Setta le dimensioni massime del pane
         blockPane.setMaxHeight(MAX_PANE_HEIGHT);
         blockPane.setMaxWidth(MAX_PANE_WIDTH);
 
         //Setta il border color della pane
         blockPane.setStyle(PANE_BORDER_COLOR);
+
+        //Setta la blockPane con la configurazione attuale del gioco
+        updateBlockPane();
+    }
+
+    /**
+     * Metodo per aggiornare la blockPane con la configurazione attuale del gioco
+     */
+    private void updateBlockPane(){
+
+        //Pulisci la blockPane
+        blockPane.getChildren().clear();
 
         //Prende i pezzi della configurazione attuale
         Piece[] currentPieces = game.getConfiguration().getPieces();
@@ -91,7 +100,6 @@ public class Controller {
 
             //Aggiunge il pezzo al pane
             blockPane.getChildren().add(piece);
-
 
             //Aggiunge un gestore eventi per la selezione di un bottone
             piece.setOnMouseClicked(event -> {
@@ -141,6 +149,7 @@ public class Controller {
             }
 
         });
+
         // Per consentire il focus della tastiera sul pannello
         blockPane.setFocusTraversable(true);
     }
@@ -156,11 +165,8 @@ public class Controller {
         //Cambia la configurazione attuale di game con la configurazione iniziale
         game.reset();
 
-        //Pulisce il pane
-        blockPane.getChildren().clear();
-
-        //Fai ripartire l'inizializzazione
-        initialize();
+        //Aggiorna la blockPane con la nuova configurazione attuale del gioco
+        updateBlockPane();
     }
 
 
@@ -186,11 +192,8 @@ public class Controller {
         //Aggiorna il testo con il counter delle mosse
         textCounter.setText("Moves : " + game.getMoveCounter());
 
-        //Pulisci il pane
-        blockPane.getChildren().clear();
-
-        //Fai ripartire l'inizializzazione
-        initialize();
+        //Aggiorna la blockPane con la nuova configurazione attuale del gioco
+        updateBlockPane();
 
         }catch (Exception e){
             //Non fare nulla
@@ -319,11 +322,8 @@ public class Controller {
             //Aggiorna il testo con il counter delle mosse
             textCounter.setText("Moves : " + game.getMoveCounter());
 
-            //Pulisci il pane
-            blockPane.getChildren().clear();
-
-            //Fai ripartire l'inizializzazione con il nuovo file di log
-            initialize();
+            //Aggiorna la blockPane con la nuova configurazione attuale del gioco
+            updateBlockPane();
         }catch (Exception e){
             //Se non è possibile fare undo mostra un alert
             Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun pezzo!");
