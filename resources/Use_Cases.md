@@ -81,7 +81,7 @@
   </tr>
     <tr>
     <td><b>Note</b></td>
-    <td>La scelta della configurazione iniziale può sempre essere attuata, ma lo stato dell'eventuale partita in corso precedentemente verrà eliminato.</td>
+    <td>La scelta della configurazione iniziale può sempre essere attuata, ma la partita in corso verrà eliminata.</td>
   </tr>
 </table>
 
