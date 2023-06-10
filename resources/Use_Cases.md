@@ -335,6 +335,7 @@
   <tr>
     <td><b>Attori</b></td>
     <td>Klotski</td>
+    <td>Giocatore</td>
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
@@ -346,7 +347,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Il giocatore apre l'applicazione e visualizza l'ultima configurazione presente prima della chiusura del gioco.</td>
+    <td>Il giocatore apre l'applicazione e visualizza l'ultima configurazione salvata nello storico prima della chiusura del gioco.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
