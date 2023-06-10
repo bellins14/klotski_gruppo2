@@ -306,7 +306,7 @@ ActionEvent -up-> Controller : Descrizione del che cosa fa
 ```
 
 # Versione Potenzialmente Successiva
-![](img/diagrams/ClassDiagram(nuovo).png)
+![](img/diagrams/ClassDiagram(Nuovo).png)
 ```plantuml
 @startuml
 skinparam classAttributeIconSize 0
