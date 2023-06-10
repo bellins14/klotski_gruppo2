@@ -13,8 +13,6 @@
   <link rel="stylesheet" href="scribbler-doc.css">
   <link rel="author" href="humans.txt">
   <link rel="stylesheet" href="pictures_style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -34,11 +32,9 @@
     <aside class="doc__nav" >
       <ul>
         <li class="js-btn selected">Manuale</li>
-        <li class="js-btn">Use Cases</li>
-        <li class="js-btn">Domain Model</li>
-        <li class="js-btn">Design Class Model</li>
-        <li class="js-btn">Sequence Diagrams</li>
-        <li class="js-btn">Test</li>
+        <li class="js-btn">Specifiche</li>
+        <li class="js-btn">Design</li>
+        <li class="js-btn">Testing</li>
         <li class="js-btn">JavaDoc</li>
       </ul>
     </aside>
@@ -47,13 +43,25 @@
     <article class="doc__content">
       <section class="js-section">
         <h1 class="section__title" style="font-size: 33px;">Manuale</h1>
-        <h3>Come installare e lanciare il software</h3>
+        <!-- INTRODUZIONE -->
+        <h2>Introduzione</h2>
+        <p>
+          L’applicazione <b>Klotski</b> permette di giocare all’omonimo gioco: un puzzle a blocchi scorrevoli nella quale
+          l'obiettivo è spostare un blocco speciale in una posizione predefinita. La difficoltà sta proprio nello
+          muovere ingegnosamente gli altri pezzi all’interno del piano di gioco per far strada a quello speciale,
+          e riuscire a fargli raggiungere la posizione finale nel minor numero di mosse possibile.
+        </p>
+
+        <div class = "span-h2"></div>
+
+        <!-- SCARICARE ED INSTALLARE IL SOFTWARE -->
+        <h2>Scaricare ed installare il software</h2>
         <p>
           Per <b>scaricare il programma</b> in formato <b>.jar</b>, cliccare sul seguente tasto "<b>Download</b>":
         </p>
-        <div class="containter-fluid d-flex d-flex align-items-center justify-content-center">
+        <div style = "display: flex; justify-content: center; align-items: center;">
           <!-- Mettere il link download del jar -->
-          <button href="" type="button" class="btn btn-primary">Download</button>
+          <button href="" type="button" class="download-button">Download</button>
         </div>
         <br>
         <p>
@@ -66,71 +74,7 @@
           attraverso un IDE(eg. IntelliJ).
         </p>
 
-        <div class = "span-h3"></div>
-
-        <h3>Panoramica su come sono state realizzate le funzionalità richieste <br> e funzioni
-          riutilizzate da librerie esistenti</h3>
-        <ul>
-          <li>Interfaccia che consente di muovere i blocchi nelle posizioni consentite</li>
-          <li>Possibilità di scegliere alcune diverse configurazioni di partenza</li>
-          <li>Funzione di reset</li>
-          <li>Funzione di undo – fino all’inizio</li>
-          <li>Funzione «next best move»</li>
-          <li>Counter delle mosse effettuate</li>
-          <li>Possibilità di salvare lo stato corrente e di ripristinarlo</li>
-        </ul>
-
-        <div class = "span-h4"></div>
-
-        <h4>Interfaccia che consente di muovere i blocchi nelle posizioni consentite</h4>
-        <p>
-          ######## WORK IN PROGERESS ########
-        </p>
-
-        <div class = "span-h4"></div>
-
-        <h4>Possibilità di scegliere alcune diverse configurazioni di partenza</h4>
-        <p>
-          ######## WORK IN PROGERESS ########
-        </p>
-
-        <div class = "span-h4"></div>
-
-        <h4>Funzione di reset</h4>
-        <p>
-          ######## WORK IN PROGERESS ########
-        </p>
-
-        <div class = "span-h4"></div>
-
-        <h4>Funzione di undo – fino all’inizio</h4>
-        <p>
-          ######## WORK IN PROGERESS ########
-        </p>
-
-        <div class = "span-h4"></div>
-
-        <h4>Funzione «next best move»</h4>
-        <p>
-          ######## WORK IN PROGERESS ########
-        </p>
-
-        <div class = "span-h4"></div>
-
-        <h4>Counter delle mosse effettuate</h4>
-        <p>
-          ######## WORK IN PROGERESS ########
-        </p>
-
-        <div class = "span-h4"></div>
-
-        <h4>Possibilità di salvare lo stato corrente e di ripristinarlo</h4>
-        <p>
-          ######## WORK IN PROGERESS ########
-        </p>
-
-        <div class = "span-h4"></div>
-
+        <div class = "span-h2"></div>
 
         <table id="Librerie">
             <tr>
@@ -145,7 +89,6 @@
           <tr>
             <td align="center">javafx</td>
             <td>Per definire l’interfaccia grafica del programma</td>
-
           </tr>
         </table>
 

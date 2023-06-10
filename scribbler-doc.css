@@ -45,6 +45,8 @@ html, body {
   width: 28%;
   background-color: var(--bg-color);
   z-index: -1;
+  padding-top: 20px;
+  padding-bottom: 15px;
 }
 
 .doc__nav {
@@ -114,7 +116,7 @@ html, body {
   }
 }
 
-.span-h3{
+.span-h2{
     padding-bottom: 80px;
 }
 

@@ -52,11 +52,11 @@ hr {
 
 h2 {
   color: var(--primary-color);
+  font-weight: 400 !important;
 }
 
 h3 {
-  font-weight: 400 !important;
-  color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 h4 {

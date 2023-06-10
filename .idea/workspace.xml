@@ -4,84 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="WORK IN PROGRESS">
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/allclasses-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/allpackages-index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Api.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/EUTrustServicesApplication.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/GraphicNation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/GraphicResult.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/IllegalParameters.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/ImagesNations.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/LabelType.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Main.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/MainController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Nations.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/NoElementException.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Node.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/ResearchMethods.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/Results.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/TypeofService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/package-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/code/eutrustservicesapplication/package-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/code.eutrustservicesapplication/module-summary.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/constant-values.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/deprecated-list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/element-list" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/help-doc.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-10.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-11.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-12.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-13.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-14.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-4.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-5.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-7.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-8.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-9.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/jquery-ui.overrides.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/member-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/module-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/overview-tree.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/package-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/resources/glass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/resources/x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_55_fbf9ee_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_65_dadada_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_75_dadada_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_75_e6e6e6_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_glass_95_fef1ec_1x400.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-bg_highlight-soft_75_cccccc_1x100.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_222222_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_2e83ff_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_454545_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_888888_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/images/ui-icons_cd0a0a_256x240.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/jquery-3.5.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/jquery-ui.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/jquery-ui.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/jquery-ui.structure.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/search.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/serialized-form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/tag-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/type-search-index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pictures/DesignModel.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pictures/DomainModel.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pictures/InteractionsDiagram(ricerca).svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pictures/InteractionsDiagram(richiesta_lista_stati).svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pictures/InteractionsDiagram(richiesta_lista_tipi_servizio).svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pictures/Test Results - Test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pictures/UseCases.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pictures/Use_Case_corretto.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scribbler-doc.css" beforeDir="false" afterPath="$PROJECT_DIR$/scribbler-doc.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scribbler-global.css" beforeDir="false" afterPath="$PROJECT_DIR$/scribbler-global.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
