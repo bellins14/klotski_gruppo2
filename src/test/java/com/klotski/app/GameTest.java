@@ -337,10 +337,10 @@ class GameTest {
         assertThrows(IllegalArgumentException.class, ()->{game.movePiece(notBleongingPiece1, ARROW_LEFT);});
     }
 
-    //Test del metodo setConfigurationToInitialConf()
+    //Test del metodo resetToAnotherInitialConf()
     @Test
-    void setConfigurationToInitialConf() {
-        System.out.println("test setConfigurationToInitialConf");
+    void resetToAnotherInitialConf() throws Exception{
+        System.out.println("test resetToAnotherInitialConf");
 
         //Esegui il test con 2 file json di test
 
@@ -351,14 +351,13 @@ class GameTest {
         for(int i=1; i<=4; i++){
 
             //Setta la configurazione attuale alla configurazione iniziale numero i
-            game.reset(i);
+            game.resetToAnotherInitialConf(i);
 
             //Configurazione attesa
             Configuration expectedConfiguration = new Configuration(i);
 
             //Controlla che la config attuale sia effettivamente la corrispettiva conf iniziale
             assertEquals(expectedConfiguration.toString(),game.getConfiguration().toString());
-
         }
 
         //Crea un gioco con il decimo file log di test
@@ -368,7 +367,7 @@ class GameTest {
         for(int i=1; i<=4; i++){
 
             //Setta la configurazione attuale alla configurazione iniziale numero i
-            game.reset(i);
+            game.resetToAnotherInitialConf(i);
 
             //Configurazione attesa
             Configuration expectedConfiguration = new Configuration(i);
@@ -380,9 +379,9 @@ class GameTest {
 
     }
 
-    //Test del metodo setConfigurationToInitialConf() con input illegali
+    //Test del metodo resetToAnotherInitialConfConf() con input illegali
     @Test
-    void setConfigurationToInitialConfIllegal() {
+    void resetToAnotherInitialConfIllegal() throws Exception{
         System.out.println("test setConfigurationToInitialConfIllegal");
 
         //Esegui il test con 2 file json di test
@@ -391,16 +390,23 @@ class GameTest {
         game = new Game(testLog9, testDC9);
 
         //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.reset(0);});
+        assertThrows(Exception.class, ()->{game.resetToAnotherInitialConf(0);});
+
 
         //Crea un gioco con il decimo file log di test
         game = new Game(testLog10, testDC10);
 
         //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.reset(0);});
+        assertThrows(Exception.class, ()->{game.resetToAnotherInitialConf(0);});
+
+        //Controlla che venga lanciata eccezione
+        game.resetToAnotherInitialConf(2);
+        assertThrows(Exception.class, ()->{game.resetToAnotherInitialConf(2);});
+
+
     }
 
-
+/*
 
     //Test del metodo setConfigurationToPreviousConf()
     @Test
@@ -445,7 +451,9 @@ class GameTest {
         game.setConfiguration(actualConfig);
     }
 
-*/
+
+     */
+
 }
 
 

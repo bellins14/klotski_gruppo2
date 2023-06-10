@@ -206,8 +206,8 @@ public class Game {
      */
     public void resetToAnotherInitialConf(int confNumber) throws Exception {
 
-        //Se la configurazione iniziale passata è la configurazione iniziale corrente termina silenziosamente
-        if(confNumber == _initialSelectedConf){
+        //Se la configurazione iniziale passata è la configurazione iniziale corrente oppure non è tra le 4 iniziali, lancia eccezione
+        if(confNumber == _initialSelectedConf || confNumber>4 || confNumber <1){
             throw new Exception();
         }
 
