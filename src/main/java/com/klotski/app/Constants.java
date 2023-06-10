@@ -46,12 +46,12 @@ public class Constants {
     /**
      * Dimensione del log quando è vuoto.
      */
-    static  int EMPTY_LOG_SIZE = 0;
+    public static  int EMPTY_LOG_SIZE = 0;
 
     /**
      * Dimensione del log quando ha una configurazione iniziale.
      */
-    static int SINGLE_LOG_SIZE = 1;
+    public static int SINGLE_LOG_SIZE = 1;
 
 
     //JFX Scene:
