@@ -123,6 +123,10 @@ public class Constants {
      */
     public static final int WIN_Y = 300;
 
+    //Di quanti px muovere ciascun pezzo nel gioco
+    public static final double MOVE_AMOUNT = 100;
+
+
 
     //NBM:
     /**

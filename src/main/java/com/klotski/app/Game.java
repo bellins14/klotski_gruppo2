@@ -147,150 +147,54 @@ public class Game {
      * Muove il pezzo selezionato nella direzione designata di 100px, se possibile, altrimenti termina silenziosamente
      * @param movingPiece pezzo da muovere
      * @param dirIdx direzione in cui muoverlo
-     * @throws Exception se il blocco non appartiene alla config attuale del gioco
+     * @throws Exception se la partita si trova in una configurazione di vittoria
+     * @throws IllegalArgumentException se il blocco non appartiene alla config attuale del gioco
      */
 
     public void movePiece(Piece movingPiece, int dirIdx) throws Exception{
 
-        //Di quanti pixel muovere il pezzo
-        double moveAmount = 100;
+        //Verifica che il pezzo appartenga alla configurazione
+        if (!_configuration.doesPieceBelong(movingPiece)) {
+            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
+        }
 
         //In base alla direzione in cui si intende muover il pezzo
         switch (dirIdx) {
 
             //DOWN
             case S, ARROW_DOWN -> {
-                if (movingPiece.getLayoutY() + moveAmount + movingPiece.getHeight() <= MAX_PANE_HEIGHT
-                        && Utility.isNotOverlapping(movingPiece, _configuration, 0, moveAmount)) {
-                    //Muove il pezzo in giu di moveAmount
-                    movePieceDown(movingPiece, moveAmount);
+                if (movingPiece.getLayoutY() + MOVE_AMOUNT + movingPiece.getHeight() <= MAX_PANE_HEIGHT
+                        && Utility.isNotOverlapping(movingPiece, _configuration, 0, MOVE_AMOUNT)) {
+                    //Muove il pezzo in giu
+                    movePieceDown(movingPiece);
                 }
             }
             //RIGHT
             case D, ARROW_RIGHT -> {
-                if (movingPiece.getLayoutX() + moveAmount + movingPiece.getWidth() <= MAX_PANE_WIDTH
-                        && Utility.isNotOverlapping(movingPiece, _configuration, moveAmount, 0)) {
-                    movePieceRight(movingPiece, moveAmount);
+                if (movingPiece.getLayoutX() + MOVE_AMOUNT + movingPiece.getWidth() <= MAX_PANE_WIDTH
+                        && Utility.isNotOverlapping(movingPiece, _configuration, MOVE_AMOUNT, 0)) {
+                    //Muove il pezzo a dx
+                    movePieceRight(movingPiece);
                 }
             }
             //UP
             case W, ARROW_UP -> {
-                if (movingPiece.getLayoutY() - moveAmount >= 0 && Utility.isNotOverlapping(movingPiece, _configuration, 0, -moveAmount)) {
-                    movePieceUp(movingPiece, moveAmount);
+                if (movingPiece.getLayoutY() - MOVE_AMOUNT >= 0 && Utility.isNotOverlapping(movingPiece, _configuration, 0, -MOVE_AMOUNT)) {
+                    //Muove il pezzo in alto
+                    movePieceUp(movingPiece);
                 }
             }
             //LEFT
             case A, ARROW_LEFT -> {
-                if (movingPiece.getLayoutX() - moveAmount >= 0 && Utility.isNotOverlapping(movingPiece, _configuration, -moveAmount, 0)) {
-                    movePieceLeft(movingPiece, moveAmount);
+                if (movingPiece.getLayoutX() - MOVE_AMOUNT >= 0 && Utility.isNotOverlapping(movingPiece, _configuration, -MOVE_AMOUNT, 0)) {
+                    //Muove il pezzo a sx
+                    movePieceLeft(movingPiece);
                 }
             }
         }
 
         checkNotWin();
     }
-
-    /**
-     * Metodo per muovere un pezzo della configurazione attuale del gioco in basso
-     *
-     * @param piece      pezzo da muovere
-     * @param moveAmount di quando muoverlo
-     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
-     */
-    private void movePieceDown(Piece piece, double moveAmount) {
-
-        //Verifica che il pezzo appartenga alla configurazione
-        if (!_configuration.doesPieceBelong(piece)) {
-            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
-        }
-
-        //Muove in giù il pezzo
-        piece.setLayoutY(piece.getLayoutY() + moveAmount);
-
-        //Incrementa il counter delle mosse
-        this._moveCounter++;
-
-        //La configurazione attuale (_configuration) si aggiorna automaticamente il pezzo spostato
-
-        //Aggiorna lo stack di log e il file di log con la nuova configurazione attuale
-        updateLogsWithCurrentConfiguration();
-    }
-
-    /**
-     * Metodo per muovere un pezzo della configurazione attuale del gioco in alto
-     *
-     * @param piece      pezzo da muovere
-     * @param moveAmount di quando muoverlo
-     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
-     */
-    private void movePieceUp(Piece piece, double moveAmount) {
-
-        //Verifica che il pezzo appartenga alla configurazione
-        if (!_configuration.doesPieceBelong(piece)) {
-            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
-        }
-        //Muove in su il pezzo
-        piece.setLayoutY(piece.getLayoutY() - moveAmount);
-
-        //Incrementa il counter delle mosse
-        this._moveCounter++;
-
-        //La configurazione attuale (_configuration) si aggiorna automaticamente il pezzo spostato
-
-        //Aggiorna lo stack di log e il file di log con la nuova configurazione attuale
-        updateLogsWithCurrentConfiguration();
-    }
-
-
-    /**
-     * Metodo per muovere un pezzo della configurazione attuale del gioco a sx
-     *
-     * @param piece      pezzo da muovere
-     * @param moveAmount di quando muoverlo
-     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
-     */
-    private void movePieceLeft(Piece piece, double moveAmount) {
-
-        //Verifica che il pezzo appartenga alla configurazione
-        if (!_configuration.doesPieceBelong(piece)) {
-            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
-        }
-        //Muovi a sx il pezzo
-        piece.setLayoutX(piece.getLayoutX() - moveAmount);
-
-        //Incrementa il counter delle mosse
-        this._moveCounter++;
-
-        //La configurazione attuale (_configuration) si aggiorna automaticamente il pezzo spostato
-
-        //Aggiorna lo stack di log e il file di log con la nuova configurazione attuale
-        updateLogsWithCurrentConfiguration();
-    }
-
-    /**
-     * Metodo per muovere un pezzo della configurazione attuale del gioco a dx
-     *
-     * @param piece      pezzo da muovere
-     * @param moveAmount di quando muoverlo
-     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
-     */
-    private void movePieceRight(Piece piece, double moveAmount) {
-        //Verifica che il pezzo appartenga alla configurazione
-        if (!_configuration.doesPieceBelong(piece)) {
-            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
-        }
-        //Muovi a dx il pezzo
-        piece.setLayoutX(piece.getLayoutX() + moveAmount);
-
-        //Incrementa il counter delle mosse
-        this._moveCounter++;
-
-        //La configurazione attuale (_configuration) si aggiorna automaticamente il pezzo spostato
-
-        //Aggiorna lo stack di log e il file di log con la nuova configurazione attuale
-        updateLogsWithCurrentConfiguration();
-    }
-
 
     /**
      * Metodo che resetta il gioco ad una configurazione iniziale:
@@ -428,5 +332,102 @@ public class Game {
         if (pieceToCheck.getLayoutX() == WIN_X && pieceToCheck.getLayoutY() == WIN_Y) {
             throw new Exception();
         }
+    }
+
+    /**
+     * Metodo per muovere un pezzo della configurazione attuale del gioco in basso
+     *
+     * @param piece pezzo da muovere
+     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
+     */
+    private void movePieceDown(Piece piece) {
+
+        //Verifica che il pezzo appartenga alla configurazione
+        if (!_configuration.doesPieceBelong(piece)) {
+            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
+        }
+
+        //Muove in giù il pezzo
+        piece.setLayoutY(piece.getLayoutY() + Constants.MOVE_AMOUNT);
+
+        //Incrementa il counter delle mosse
+        this._moveCounter++;
+
+        //La configurazione attuale (_configuration) si aggiorna automaticamente il pezzo spostato
+
+        //Aggiorna lo stack di log e il file di log con la nuova configurazione attuale
+        updateLogsWithCurrentConfiguration();
+    }
+
+    /**
+     * Metodo per muovere un pezzo della configurazione attuale del gioco in alto
+     *
+     * @param piece pezzo da muovere
+     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
+     */
+    private void movePieceUp(Piece piece) {
+
+        //Verifica che il pezzo appartenga alla configurazione
+        if (!_configuration.doesPieceBelong(piece)) {
+            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
+        }
+        //Muove in su il pezzo
+        piece.setLayoutY(piece.getLayoutY() - Constants.MOVE_AMOUNT);
+
+        //Incrementa il counter delle mosse
+        this._moveCounter++;
+
+        //La configurazione attuale (_configuration) si aggiorna automaticamente il pezzo spostato
+
+        //Aggiorna lo stack di log e il file di log con la nuova configurazione attuale
+        updateLogsWithCurrentConfiguration();
+    }
+
+
+    /**
+     * Metodo per muovere un pezzo della configurazione attuale del gioco a sx
+     *
+     * @param piece pezzo da muovere
+     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
+     */
+    private void movePieceLeft(Piece piece) {
+
+        //Verifica che il pezzo appartenga alla configurazione
+        if (!_configuration.doesPieceBelong(piece)) {
+            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
+        }
+        //Muovi a sx il pezzo
+        piece.setLayoutX(piece.getLayoutX() - Constants.MOVE_AMOUNT);
+
+        //Incrementa il counter delle mosse
+        this._moveCounter++;
+
+        //La configurazione attuale (_configuration) si aggiorna automaticamente il pezzo spostato
+
+        //Aggiorna lo stack di log e il file di log con la nuova configurazione attuale
+        updateLogsWithCurrentConfiguration();
+    }
+
+    /**
+     * Metodo per muovere un pezzo della configurazione attuale del gioco a dx
+     *
+     * @param piece pezzo da muovere
+     * @throws IllegalArgumentException se il pezzo non appartiene alla configurazione attuale del gioco
+     */
+    private void movePieceRight(Piece piece) {
+        //Verifica che il pezzo appartenga alla configurazione
+        if (!_configuration.doesPieceBelong(piece)) {
+            throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
+        }
+        //Muovi a dx il pezzo
+        piece.setLayoutX(piece.getLayoutX() + Constants.MOVE_AMOUNT);
+
+        //Incrementa il counter delle mosse
+        this._moveCounter++;
+
+        //La configurazione attuale (_configuration) si aggiorna automaticamente il pezzo spostato
+
+        //Aggiorna lo stack di log e il file di log con la nuova configurazione attuale
+        updateLogsWithCurrentConfiguration();
     }
 }

@@ -52,20 +52,13 @@ class GameTest {
     private final String testLog10 = "src/test/testFiles/json/TestLog10.json";
 
 
-    //Eseguito una volta prima di ogni test
-    @BeforeEach
-    public void setUpBeforeEach() {
-        System.out.println("setUpBeforeEach");
-
-        //Crea un gioco con i due file di log e di supporto
-        game = new Game(LOG_FILE, DC_FILE);
-
-    }
-
     //Test del costruttore con 2 parametri
     @Test
     public void testTwoParamConstructor() {
         System.out.println("test twoParamConstructor");
+
+        //Crea un gioco con il primo file log di test
+        game = new Game(testLog1, testDC1);
 
         //Controlla che non ritorni null
         assertNotNull(game);
@@ -287,41 +280,49 @@ class GameTest {
         assertEquals(9, game.getMoveCounter());
     }
 
-    //Test del metodo movePieceDown()
+    //Test del metodo movePiece()
     @Test
-    void movePieceDown() {
-        System.out.println("test movePieceDown");
+    void movePiece() throws Exception {
+        System.out.println("test movePiece");
 
         //Esegui il test con 2 file json di test
 
         //Crea un gioco con il settimo file log di test
         game = new Game(testLog7, testDC7);
 
-        //Muovi il primo pezzo della configurazione corrente in basso di 100
+        //Sistema il file di log 7 con la prima configurazione iniziale
+        game.reset();
+
+        //Prendi l'ultimo pezzo della configurazione corrente
         Configuration currentConfig1 = game.getConfiguration();
-        Piece pieceOfcurrentConfig1 = currentConfig1.getPieces()[0];
-        double currentPiece1Y = pieceOfcurrentConfig1.getLayoutY();
-        game.movePieceDown(pieceOfcurrentConfig1, 100);
+        Piece pieceOfcurrentConfig1 = currentConfig1.getPieces()[1];
+        double currentPiece1X = pieceOfcurrentConfig1.getLayoutX();
 
-        //Controlla che si sia spostato di 100
-        assertEquals(100, pieceOfcurrentConfig1.getLayoutY()-currentPiece1Y);
 
-        //Crea un gioco con l'ottavo file log di test
-        game = new Game(testLog8, testDC8);
+        //Muovilo a sinistra con ARROW_LEFT
+        game.movePiece(pieceOfcurrentConfig1, ARROW_LEFT);
 
-        //Muovi il primo pezzo della configurazione corrente in basso di 200
-        Configuration currentConfig2 = game.getConfiguration();
-        Piece pieceOfcurrentConfig2 = currentConfig2.getPieces()[0];
-        double currentPiece2Y = pieceOfcurrentConfig2.getLayoutY();
-        game.movePieceDown(pieceOfcurrentConfig2, 200);
+        //Controlla che si sia spostato di MOVE_AMOUNT px a sx
+        assertEquals(-MOVE_AMOUNT, pieceOfcurrentConfig1.getLayoutX()-currentPiece1X);
 
-        //Controlla che si sia spostato di 200
-        assertEquals(200, pieceOfcurrentConfig2.getLayoutY()-currentPiece2Y);
+        //Sistema il file di log 7
+        game.reset();
+
+        //Prendi di nuovo quel pezzo
+        pieceOfcurrentConfig1 = game.getConfiguration().getPieces()[9];
+        currentPiece1X = pieceOfcurrentConfig1.getLayoutX();
+
+        //Prova a spostarlo dove non è possibile
+        game.movePiece(pieceOfcurrentConfig1, ARROW_RIGHT);
+
+        //Controlla che non lo abbia spostato
+        assertEquals(0, pieceOfcurrentConfig1.getLayoutX()-currentPiece1X);
+
     }
 
     //Test del metodo movePieceDown() con input illegali
     @Test
-    void movePieceDownIllegal() {
+    void movePieceIllegal() {
         System.out.println("test movePieceDownIllegal");
 
         //Esegui il test con 2 file json di test
@@ -333,194 +334,8 @@ class GameTest {
         Piece notBleongingPiece1 = new Piece();
 
         //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePieceDown(notBleongingPiece1, 100);});
-
-        //Crea un gioco con l'ottavo file log di test
-        game = new Game(testLog8, testDC8);
-
-        //Pezzo che non appartiene al gioco
-        Piece notBleongingPiece2 = new Piece();
-
-        //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePieceDown(notBleongingPiece2, 100);});
+        assertThrows(IllegalArgumentException.class, ()->{game.movePiece(notBleongingPiece1, ARROW_LEFT);});
     }
-
-    //Test del metodo movePieceUp()
-    @Test
-    void movePieceUp() {
-        System.out.println("test movePieceUp");
-
-        //Esegui il test con 2 file json di test
-
-        //Crea un gioco con il settimo file log di test
-        game = new Game(testLog7, testDC7);
-
-        //Muovi il primo pezzo della configurazione corrente in alto di 100
-        Configuration currentConfig1 = game.getConfiguration();
-        Piece pieceOfcurrentConfig1 = currentConfig1.getPieces()[0];
-        double currentPiece1Y = pieceOfcurrentConfig1.getLayoutY();
-        game.movePieceUp(pieceOfcurrentConfig1, 100);
-
-        //Controlla che si sia spostato di 100
-        assertEquals(100, currentPiece1Y-pieceOfcurrentConfig1.getLayoutY());
-
-        //Crea un gioco con l'ottavo file log di test
-        game = new Game(testLog8, testDC8);
-
-        //Muovi il primo pezzo della configurazione corrente in basso di 200
-        Configuration currentConfig2 = game.getConfiguration();
-        Piece pieceOfcurrentConfig2 = currentConfig2.getPieces()[0];
-        double currentPiece2Y = pieceOfcurrentConfig2.getLayoutY();
-        game.movePieceUp(pieceOfcurrentConfig2, 200);
-
-        //Controlla che si sia spostato di 200
-        assertEquals(200, currentPiece2Y-pieceOfcurrentConfig2.getLayoutY());
-
-    }
-
-    //Test del metodo movePieceDown() con input illegali
-    @Test
-    void movePieceUpIllegal() {
-        System.out.println("test movePieceUpIllegal");
-
-        //Esegui il test con 2 file json di test
-
-        //Crea un gioco con il settimo file log di test
-        game = new Game(testLog7, testDC7);
-
-        //Pezzo che non appartiene al gioco
-        Piece notBleongingPiece1 = new Piece();
-
-        //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePieceUp(notBleongingPiece1, 100);});
-
-        //Crea un gioco con l'ottavo file log di test
-        game = new Game(testLog8, testDC8);
-
-        //Pezzo che non appartiene al gioco
-        Piece notBleongingPiece2 = new Piece();
-
-        //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePieceUp(notBleongingPiece2, 100);});
-    }
-
-    //Test del metodo movePieceLeft()
-    @Test
-    void movePieceLeft() {
-        System.out.println("test movePieceLeft");
-
-        //Esegui il test con 2 file json di test
-
-        //Crea un gioco con il settimo file log di test
-        game = new Game(testLog7, testDC7);
-
-        //Muovi il primo pezzo della configurazione corrente a dx di 100
-        Configuration currentConfig1 = game.getConfiguration();
-        Piece pieceOfcurrentConfig1 = currentConfig1.getPieces()[0];
-        double currentPiece1X = pieceOfcurrentConfig1.getLayoutX();
-        game.movePieceRight(pieceOfcurrentConfig1, 100);
-
-        //Controlla che si sia spostato di 100
-        assertEquals(100, pieceOfcurrentConfig1.getLayoutX()-currentPiece1X);
-
-        //Crea un gioco con l'ottavo file log di test
-        game = new Game(testLog8, testDC8);
-
-        //Muovi il primo pezzo della configurazione corrente in basso di 200
-        Configuration currentConfig2 = game.getConfiguration();
-        Piece pieceOfcurrentConfig2 = currentConfig2.getPieces()[0];
-        double currentPiece2X = pieceOfcurrentConfig2.getLayoutX();
-        game.movePieceLeft(pieceOfcurrentConfig2, 200);
-
-        //Controlla che si sia spostato di 200
-        assertEquals(200, currentPiece2X-pieceOfcurrentConfig2.getLayoutX());
-
-    }
-
-    //Test del metodo movePieceLeft() con input illegali
-    @Test
-    void movePieceLeftIllegal() {
-        System.out.println("test movePieceLeftIllegal");
-
-        //Esegui il test con 2 file json di test
-
-        //Crea un gioco con il settimo file log di test
-        game = new Game(testLog7, testDC7);
-
-        //Pezzo che non appartiene al gioco
-        Piece notBleongingPiece1 = new Piece();
-
-        //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePieceLeft(notBleongingPiece1, 100);});
-
-        //Crea un gioco con l'ottavo file log di test
-        game = new Game(testLog8, testDC8);
-
-        //Pezzo che non appartiene al gioco
-        Piece notBleongingPiece2 = new Piece();
-
-        //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePieceLeft(notBleongingPiece2, 100);});
-    }
-
-    //Test del metodo movePieceRight()
-    @Test
-    void movePieceRight() {
-        System.out.println("test movePieceRight");
-
-        //Esegui il test con 2 file json di test
-
-        //Crea un gioco con il settimo file log di test
-        game = new Game(testLog7, testDC7);
-
-        //Muovi il primo pezzo della configurazione corrente a dx di 100
-        Configuration currentConfig1 = game.getConfiguration();
-        Piece pieceOfcurrentConfig1 = currentConfig1.getPieces()[0];
-        double currentPiece1X = pieceOfcurrentConfig1.getLayoutX();
-        game.movePieceRight(pieceOfcurrentConfig1, 100);
-
-        //Controlla che si sia spostato di 100
-        assertEquals(100, pieceOfcurrentConfig1.getLayoutX()- currentPiece1X);
-
-        //Crea un gioco con l'ottavo file log di test
-        game = new Game(testLog8, testDC8);
-
-        //Muovi il primo pezzo della configurazione corrente in basso di 200
-        Configuration currentConfig2 = game.getConfiguration();
-        Piece pieceOfcurrentConfig2 = currentConfig2.getPieces()[0];
-        double currentPiece2X = pieceOfcurrentConfig2.getLayoutX();
-        game.movePieceRight(pieceOfcurrentConfig2, 200);
-
-        //Controlla che si sia spostato di 200
-        assertEquals(200, pieceOfcurrentConfig2.getLayoutX()-currentPiece2X);
-    }
-
-    //Test del metodo movePieceRight() con input illegali
-    @Test
-    void movePieceRightIllegal() {
-        System.out.println("test movePieceRightIllegal");
-
-        //Esegui il test con 2 file json di test
-
-        //Crea un gioco con il settimo file log di test
-        game = new Game(testLog7, testDC7);
-
-        //Pezzo che non appartiene al gioco
-        Piece notBleongingPiece1 = new Piece();
-
-        //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePieceRight(notBleongingPiece1, 100);});
-
-        //Crea un gioco con l'ottavo file log di test
-        game = new Game(testLog8, testDC8);
-
-        //Pezzo che non appartiene al gioco
-        Piece notBleongingPiece2 = new Piece();
-
-        //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePieceRight(notBleongingPiece2, 100);});
-    }
-
 
     //Test del metodo setConfigurationToInitialConf()
     @Test
@@ -630,7 +445,7 @@ class GameTest {
         game.setConfiguration(actualConfig);
     }
 
-
+*/
 }
 
 
