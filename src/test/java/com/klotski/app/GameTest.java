@@ -1,6 +1,5 @@
 package com.klotski.app;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
@@ -50,6 +49,11 @@ class GameTest {
     //File di test 10
     private final String testDC10 = "src/test/testFiles/json/TestDC10.json";
     private final String testLog10 = "src/test/testFiles/json/TestLog10.json";
+
+    //File di test 13
+    private final String testDC13 = "src/test/testFiles/json/TestDC13.json";
+    private final String testLog13 = "src/test/testFiles/json/TestLog13.json";
+
 
 
     //Test del costruttore con 2 parametri
@@ -245,7 +249,6 @@ class GameTest {
         assertEquals(game.getConfiguration().toString(), UtilityJackson.deserializeConfiguration(testDC6).toString());
 
 
-
     }
 
     //Test del metodo getMoveCounter()
@@ -303,7 +306,7 @@ class GameTest {
         game.movePiece(pieceOfcurrentConfig1, ARROW_LEFT);
 
         //Controlla che si sia spostato di MOVE_AMOUNT px a sx
-        assertEquals(-MOVE_AMOUNT, pieceOfcurrentConfig1.getLayoutX()-currentPiece1X);
+        assertEquals(-MOVE_AMOUNT, pieceOfcurrentConfig1.getLayoutX() - currentPiece1X);
 
         //Sistema il file di log 7
         game.reset();
@@ -316,7 +319,7 @@ class GameTest {
         game.movePiece(pieceOfcurrentConfig1, ARROW_RIGHT);
 
         //Controlla che non lo abbia spostato
-        assertEquals(0, pieceOfcurrentConfig1.getLayoutX()-currentPiece1X);
+        assertEquals(0, pieceOfcurrentConfig1.getLayoutX() - currentPiece1X);
 
     }
 
@@ -334,12 +337,14 @@ class GameTest {
         Piece notBleongingPiece1 = new Piece();
 
         //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.movePiece(notBleongingPiece1, ARROW_LEFT);});
+        assertThrows(IllegalArgumentException.class, () -> {
+            game.movePiece(notBleongingPiece1, ARROW_LEFT);
+        });
     }
 
     //Test del metodo resetToAnotherInitialConf()
     @Test
-    void resetToAnotherInitialConf() throws Exception{
+    void resetToAnotherInitialConf() throws Exception {
         System.out.println("test resetToAnotherInitialConf");
 
         //Esegui il test con 2 file json di test
@@ -348,7 +353,7 @@ class GameTest {
         game = new Game(testLog9, testDC9);
 
         //Testa con ognuna delle 4 configurazioni iniziali
-        for(int i=1; i<=4; i++){
+        for (int i = 1; i <= 4; i++) {
 
             //Setta la configurazione attuale alla configurazione iniziale numero i
             game.resetToAnotherInitialConf(i);
@@ -357,14 +362,14 @@ class GameTest {
             Configuration expectedConfiguration = new Configuration(i);
 
             //Controlla che la config attuale sia effettivamente la corrispettiva conf iniziale
-            assertEquals(expectedConfiguration.toString(),game.getConfiguration().toString());
+            assertEquals(expectedConfiguration.toString(), game.getConfiguration().toString());
         }
 
         //Crea un gioco con il decimo file log di test
         game = new Game(testLog10, testDC10);
 
         //Testa con ognuna delle 4 configurazioni iniziali
-        for(int i=1; i<=4; i++){
+        for (int i = 1; i <= 4; i++) {
 
             //Setta la configurazione attuale alla configurazione iniziale numero i
             game.resetToAnotherInitialConf(i);
@@ -373,7 +378,7 @@ class GameTest {
             Configuration expectedConfiguration = new Configuration(i);
 
             //Controlla che la config attuale sia effettivamente la corrispettiva conf iniziale
-            assertEquals(expectedConfiguration.toString(),game.getConfiguration().toString());
+            assertEquals(expectedConfiguration.toString(), game.getConfiguration().toString());
 
         }
 
@@ -381,7 +386,7 @@ class GameTest {
 
     //Test del metodo resetToAnotherInitialConfConf() con input illegali
     @Test
-    void resetToAnotherInitialConfIllegal() throws Exception{
+    void resetToAnotherInitialConfIllegal() throws Exception {
         System.out.println("test setConfigurationToInitialConfIllegal");
 
         //Esegui il test con 2 file json di test
@@ -390,24 +395,31 @@ class GameTest {
         game = new Game(testLog9, testDC9);
 
         //Controlla che venga lanciata eccezione
-        assertThrows(Exception.class, ()->{game.resetToAnotherInitialConf(0);});
+        assertThrows(Exception.class, () -> {
+            game.resetToAnotherInitialConf(0);
+        });
 
 
         //Crea un gioco con il decimo file log di test
         game = new Game(testLog10, testDC10);
 
         //Controlla che venga lanciata eccezione
-        assertThrows(Exception.class, ()->{game.resetToAnotherInitialConf(0);});
+        assertThrows(Exception.class, () -> {
+            game.resetToAnotherInitialConf(0);
+        });
 
         //Controlla che venga lanciata eccezione
         game.resetToAnotherInitialConf(2);
-        assertThrows(Exception.class, ()->{game.resetToAnotherInitialConf(2);});
+        assertThrows(Exception.class, () -> {
+            game.resetToAnotherInitialConf(2);
+        });
 
 
     }
+
     //Test del metodo reset()
     @Test
-    void reset(){
+    void reset() {
         System.out.println("test reset");
 
         //Esegui il test con 2 file json di test
@@ -416,19 +428,19 @@ class GameTest {
         game = new Game(testLog8, testDC8);
 
         //Effettua un reset del gioco
-            game.reset();
+        game.reset();
 
         //Configurazione attesa
         Configuration expectedConfiguration = new Configuration(1);
 
         //Controlla che la config attuale sia effettivamente la corrispettiva conf iniziale
-        assertEquals(expectedConfiguration.toString(),game.getConfiguration().toString());
-        }
+        assertEquals(expectedConfiguration.toString(), game.getConfiguration().toString());
+    }
 
-/*
+
     //Test del metodo undo()
     @Test
-    void undo() {
+    void undo() throws Exception {
         System.out.println("test undo");
 
         //Crea un gioco con il primo file log di test
@@ -469,9 +481,23 @@ class GameTest {
         game.setConfiguration(actualConfig);
     }
 
- */
-}
+    //Test con situazione illegale del metodo undo()
+    @Test
+    void undoIllegal() {
+        System.out.println("test undoIllegal");
 
+        //Crea un gioco con il tredicesimo file log di test che ha solo una configurazione iniziale
+        game = new Game(testLog13, testDC13);
+
+        //Controlla che venga lanciata eccezione
+        assertThrows(Exception.class, () -> {
+            game.undo();
+        });
+
+
+
+    }
+}
 
 
 
