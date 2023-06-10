@@ -309,7 +309,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), la partita deve essere salcata in modo che, se il programma dovesse essere chiuso, all'avvio successivo lo la partita possa essere ripristinato.</td>
+    <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), la partita deve essere salvata in modo che, se il programma dovesse essere chiuso, all'avvio successivo, la partita possa essere ripristinata.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
