@@ -234,7 +234,7 @@ public class Game {
      * Metodo che resetta il gioco: setta la configurazione corrente con la sua configurazione iniziale
      * e resetta e aggiorna il log
      */
-    public void reset() throws IllegalArgumentException {
+    public void reset(){
 
         //Crea la nuova configurazione iniziale
         Configuration newInitialConfiguration = new Configuration(_initialSelectedConf); //Lancia IllegalArgumentException se confNumber <1 o >4
