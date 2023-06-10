@@ -334,7 +334,7 @@
   </tr>
   <tr>
     <td><b>Attori</b></td>
-    <td>Gioco</td>
+    <td>Klotski</td>
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
