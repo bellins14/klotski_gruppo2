@@ -334,7 +334,6 @@
   </tr>
   <tr>
     <td><b>Attori</b></td>
-    <td>Klotski</td>
     <td>Giocatore</td>
   </tr>
   <tr>
