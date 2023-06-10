@@ -204,7 +204,7 @@
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
-    <td>Richiedere <<next best move>></td>
+    <td>Richiedere "next best move"</td>
   </tr>
   <tr>
     <td><b>Attori</b></td>
