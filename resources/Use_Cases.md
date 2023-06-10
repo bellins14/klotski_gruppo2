@@ -223,7 +223,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>La disposizione dei blocchi ritorna alla cofigurazione precedente rispetto al quella corrente.</td>
+    <td>La disposizione dei blocchi ritorna alla cofigurazione precedente rispetto a quella corrente.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
