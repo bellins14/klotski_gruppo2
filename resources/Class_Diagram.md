@@ -215,7 +215,7 @@ Controller "1" -right-> "1" Utility : Utilizza
 
 ## Deprecato
 
-![Class Diagram](img/diagrams/ClassDiagram(Nuovo).png)
+![Class Diagram](img/diagrams/ClassDiagram(nuovo).png)
 
 ```plantuml
 @startuml
