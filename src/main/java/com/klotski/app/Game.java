@@ -200,9 +200,10 @@ public class Game {
     private void movePieceDown(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if (_configuration.doesPieceBelong(piece)) {
+        if (!_configuration.doesPieceBelong(piece)) {
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
+
         //Muove in giù il pezzo
         piece.setLayoutY(piece.getLayoutY() + moveAmount);
 
@@ -225,7 +226,7 @@ public class Game {
     private void movePieceUp(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if (_configuration.doesPieceBelong(piece)) {
+        if (!_configuration.doesPieceBelong(piece)) {
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muove in su il pezzo
@@ -251,7 +252,7 @@ public class Game {
     private void movePieceLeft(Piece piece, double moveAmount) {
 
         //Verifica che il pezzo appartenga alla configurazione
-        if (_configuration.doesPieceBelong(piece)) {
+        if (!_configuration.doesPieceBelong(piece)) {
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muovi a sx il pezzo
@@ -275,7 +276,7 @@ public class Game {
      */
     private void movePieceRight(Piece piece, double moveAmount) {
         //Verifica che il pezzo appartenga alla configurazione
-        if (_configuration.doesPieceBelong(piece)) {
+        if (!_configuration.doesPieceBelong(piece)) {
             throw new IllegalArgumentException("Il pezzo non appartiene alla configurazione attuale del gioco");
         }
         //Muovi a dx il pezzo

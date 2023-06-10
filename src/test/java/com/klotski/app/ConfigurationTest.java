@@ -437,6 +437,32 @@ class ConfigurationTest {
         });
     }
 
+    //Test del metodo doesPieceBelong
+    @Test
+    void doesPieceBelong() {
+        System.out.println("test doesPieceBelong");
+
+        //Test con le 4 configurazioni iniziali
+        for(int i=1; i<=4; i++) {
+
+            //Crea la configurazione iniziale i
+            configuration = new Configuration(i);
+
+            //Prendi il suo primo pezzo
+            Piece testingPiece = configuration.getPieces()[0];
+
+            //Controlla che appartenga alla configurazione
+            assertTrue(configuration.doesPieceBelong(testingPiece));
+
+            //Crea un pezzo che non appartiene alla configurazione
+            testingPiece = new Piece(3);
+
+            //Controlla che non appartenga alla configurazione
+            assertFalse(configuration.doesPieceBelong(testingPiece));
+        }
+
+    }
+
     //Test del metodo isInitialConfiguration
     @Test
     void isInitialConfiguration() {
@@ -448,9 +474,13 @@ class ConfigurationTest {
             assertEquals(i, Configuration.isInitialConfiguration(configuration));
         }
 
-        //Test con configurazione diversa da quelle iniziali (per ognuna deve restituire il corrispettivo numero)
-           // configuration = new Configuration();
-           // assertEquals(0, Configuration.isInitialConfiguration(configuration));
+        //Test con configurazione diversa da quelle iniziali e di soli pezzo di tipo 0
+        Piece[] zeroPieces = new Piece[10];
+        for(int i=0; i<10;i++){
+            zeroPieces[i] = new Piece();
+        }
+        configuration = new Configuration(zeroPieces);
+           assertEquals(0, Configuration.isInitialConfiguration(configuration));
     }
 
     //Test del metodo toString()

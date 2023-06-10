@@ -2,6 +2,7 @@ package com.klotski.app;
 
 
 import javafx.scene.layout.Pane;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

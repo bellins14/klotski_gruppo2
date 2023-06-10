@@ -72,20 +72,6 @@ public class Configuration {
     }
 
 
-    /**
-     * Metodo che indica se il pezzo appartiene alla configurazione (per riferimento).
-     * @return true se appartiene, false altrimenti
-     */
-    public boolean doesPieceBelong(Piece piece) {
-        for (Piece testPiece : _pieces) {
-            if (piece == testPiece) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
 
     /**
      * Metodo che setta i pezzi dell'array pieces.
@@ -167,6 +153,20 @@ public class Configuration {
         }
 
         return positions;
+    }
+
+    /**
+     * Metodo che indica se il pezzo appartiene alla configurazione (per riferimento).
+     * @return true se appartiene, false altrimenti
+     */
+    public boolean doesPieceBelong(Piece piece) {
+        for (Piece testPiece : _pieces) {
+            if (piece == testPiece) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
