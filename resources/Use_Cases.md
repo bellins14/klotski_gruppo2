@@ -5,7 +5,7 @@
 4. Visualizzare counter delle mosse effettuate
 5. Utilizzare funzione di reset
 6. Utilizzare funzione di undo
-7. Richiedere "next best move"
+7. Visualizzare "next best move"
 8. Salvare la partita
 9. Ripristinare partita salvata
 10. Fornire "next best move"
@@ -245,7 +245,7 @@
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
-    <td>Richiedere "next best move"</td>
+    <td>Visualizzare "next best move"</td>
   </tr>
   <tr>
     <td><b>Attori</b></td>
@@ -430,7 +430,7 @@ rectangle "Klotski" {
   usecase "Utilizzare funzione di reset" as reset
   usecase "Utilizzare funzione di undo" as undo
   usecase "Fornire «next best move»" as make_nbm
-  usecase "Richiedere «next best move»" as nbm
+  usecase "Visualizzare «next best move»" as nbm
 }
 
 Giocatore -- current_conf
