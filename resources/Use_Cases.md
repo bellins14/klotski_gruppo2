@@ -189,7 +189,7 @@
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
-    <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla.</td>
+    <td>Se il giocatore non ha ancora effettuato una mossa, il reset non fa nulla.</td>
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
