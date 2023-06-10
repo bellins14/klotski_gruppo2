@@ -216,7 +216,7 @@
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>La partita non deve essere finita.</td>
+    <td>La partita non deve essere finita, il giocatore deve essere connesso ad Internet.</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
@@ -342,7 +342,7 @@
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa.</td>
+    <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa, il giocatore deve voler visualizzare l'utlima configurazione, avviando la partita.</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
@@ -361,6 +361,161 @@
     <td>-</td>
   </tr>
 </table>
+
+
+
+### Use Case 10
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Fornire "next best move"</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>NBM_Script</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il sistema esterno NBM_Script calcola l'NBM.</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Il giocatore deve essere connesso ad internet.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Il sistema esterno calcola l'NBM e la fornisce.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Il sistema esterno non riesce a calcolare l'NBM per qualche motivo.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Il sistema esterno non riceve la richiesta o non riesce ad inviare una rosposta a causa dell'interruzione della connessione.</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>L'NBM deve esssere elaborata.</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
+
+
+### Use Case 11
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Aggiornare lo storico</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Klotski</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il sistema aggiorna lo storico, e lo memorizza su un supporto.</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Il supporto sulla quale viene memorizzato lo storico deve essere presente.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Il sistema esterno scrive lo storico sul supporto.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Se il supporto non c'è, deve crearlo e poi scriverci al suo interno.</td>
+  </tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Il supporto deve essere chiuso, per evitare inconsistenze.</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
+
+
+### Use Case 12
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Leggere lo storico</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Klotski</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il sistema legge il supporto, prelevando informa</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Il supporto sulla quale viene memorizzato lo storico deve essere presente.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Il sistema esterno scrive lo storico sul supporto.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Se il supporto non c'è, deve crearlo e poi scriverci al suo interno.</td>
+  </tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Il supporto deve essere chiuso, per evitare inconsistenze.</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
+
+
+### Use Case 14
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Vincere</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il giocatore vince la partita.</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Il giocatore deve aver mosso un blocco in una posizione consentita.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Il giocatore sposta il blocco speciale nella posizione che determina la posizione di vittoria.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Il giocatore non vince perché non ha ancora spostato il blocco speciale nella posizione che determina la posizione di vittoria.</td>
+  </tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>L</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
+
 
 # Grafo Use Cases
 
