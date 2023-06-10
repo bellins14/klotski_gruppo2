@@ -66,7 +66,7 @@ public class Utility {
      *
      * @throws IOException Eccezione per scrittura file "solver.html"
      */
-    static void updateHTMLFile(Configuration _configuration) throws IOException {
+    public static void updateHTMLFile(Configuration _configuration) throws IOException {
         ObjectMapper om = new ObjectMapper();
         String game = "<html lang=\"en\">\n" +
                 "<head>\n" +
