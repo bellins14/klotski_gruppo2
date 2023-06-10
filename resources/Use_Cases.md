@@ -1,92 +1,17 @@
 # Use Cases
-1. Scegliere configurazione iniziale
-2. Muovere i blocchi nelle posizioni consentite
-3. Utilizzare funzione di reset
-4. Utilizzare funzione di undo
-5. Richiedere "next best move"
-6. Visualizzare counter delle mosse effettuate
-7. Salvare lo stato corrente
-8. Ripristinare partita salvata
-
+1. Visualizzare configurazione corrente
+2. Scegliere configurazione iniziale
+3. Muovere i blocchi nelle posizioni consentite
+4. Visualizzare counter delle mosse effettuate
+5. Utilizzare funzione di reset
+6. Utilizzare funzione di undo
+7. Richiedere "next best move"
+8. Salvare la partita
+9. Ripristinare partita salvata
+10. Fornire "next best move"
 
 
 ### Use Case 1
-<table>
-  <tr>
-    <td><b>Nome dello Use Case</b>
-    <td>Scegliere configurazione iniziale</td>
-  </tr>
-  <tr>
-    <td><b>Attori</b></td>
-    <td>Giocatore</td>
-  </tr>
-  <tr>
-    <td><b>Descrizione</b></td>
-    <td>Il giocatore può selezionare una tra quattro configurazioni iniziali per cominciare a giocare.</td>
-  </tr>
-  <tr>
-    <td><b>Precondizioni</b></td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Principale</b></td>
-    <td>Viene impostata dal programma la disposizione iniziale dei blocchi scelta dal giocatore.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Alternativo</b></td>
-    <td>La partita può iniziare o andare avanti con la configurazione fornita dal programma.</td>
-  </tr>
-  <tr>
-    <td><b>Post-Condizioni</b></td>
-    <td>Resettare il counter delle mosse e lo stato corrente.</td>
-  </tr>
-    <tr>
-    <td><b>Note</b></td>
-    <td>La scelta della configurazione iniziale può sempre essere attuata, ma lo stato dell'eventuale partita in corso precedentemente verrà eliminato.</td>
-  </tr>
-</table>
-
-
-
-### Use Case 2
-<table>
-  <tr>
-    <td><b>Nome dello Use Case</b>
-    <td>Muovere i blocchi nelle posizioni consentite</td>
-  </tr>
-  <tr>
-    <td><b>Attori</b></td>
-    <td>Giocatore</td>
-  </tr>
-  <tr>
-    <td><b>Descrizione</b></td>
-    <td>Il giocatore può traslare un blocco per mossa negli spazi liberi che lo possono contenere.</td>
-  </tr>
-  <tr>
-    <td><b>Precondizioni</b></td>
-    <td>Deve esistere una posizione consentita, ossia uno spazio libero.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Principale</b></td>
-    <td>Il blocco selezionato viene spostato di una posizione nella direzione scelta dal giocatore.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Alternativo</b></td>
-    <td>Il blocco selezionato non si muove.</td>
-  </tr>
-  <tr>
-    <td><b>Post-Condizioni</b></td>
-    <td>Incrementare il counter delle mosse, aggiornare lo stato corrente.</td>
-  </tr>
-    <tr>
-    <td><b>Note</b></td>
-    <td>-</td>
-  </tr>
-</table>
-
-
-
-### Use Case 3
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
@@ -124,7 +49,123 @@
 
 
 
+### Use Case 2
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Scegliere configurazione iniziale</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il giocatore può selezionare una tra quattro configurazioni iniziali per cominciare a giocare.</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Viene impostata dal programma la disposizione iniziale dei blocchi scelta dal giocatore.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>La partita può iniziare o andare avanti con la configurazione fornita dal programma.</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Resettare il counter delle mosse e lo stato corrente.</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>La scelta della configurazione iniziale può sempre essere attuata, ma lo stato dell'eventuale partita in corso precedentemente verrà eliminato.</td>
+  </tr>
+</table>
+
+
+
+### Use Case 3
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Muovere i blocchi nelle posizioni consentite</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il giocatore può traslare un blocco per mossa negli spazi liberi che lo possono contenere.</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Deve esistere una posizione consentita, ossia uno spazio libero.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Il blocco selezionato viene spostato di una posizione nella direzione scelta dal giocatore.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Il blocco selezionato non si muove.</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Incrementare il counter delle mosse, aggiornare lo stato corrente.</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
+
+
 ### Use Case 4
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Visualizzare counter delle mosse effettuate</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il giocatore deve ruscire a visualizzare il counter delle mosse effettuate fino a quel momento.</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte fino a quel
+        momento.
+    </td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Ogni volta che il giocatore fa una mossa qualcosa, il counter viene aggiornato e mostrato.</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>-</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
+
+
+### Use Case 5
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
@@ -162,7 +203,7 @@
 
 
 
-### Use Case 5
+### Use Case 6
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
@@ -200,7 +241,7 @@
 
 
 
-### Use Case 6
+### Use Case 7
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
@@ -247,51 +288,11 @@
 
 
 
-### Use Case 7
-<table>
-  <tr>
-    <td><b>Nome dello Use Case</b>
-    <td>Visualizzare counter delle mosse effettuate</td>
-  </tr>
-  <tr>
-    <td><b>Attori</b></td>
-    <td>Giocatore</td>
-  </tr>
-  <tr>
-    <td><b>Descrizione</b></td>
-    <td>Il giocatore deve ruscire a visualizzare il counter delle mosse effettuate fino a quel momento.</td>
-  </tr>
-  <tr>
-    <td><b>Precondizioni</b></td>
-    <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte fino a quel
-        momento.
-    </td>
-  </tr>
-  <tr>
-    <td><b>Scenario Principale</b></td>
-    <td>Ogni volta che il giocatore fa una mossa qualcosa, il counter viene aggiornato e mostrato.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Alternativo</b></td>
-    <td>-</td>
-  </tr>
-  <tr>
-    <td><b>Post-Condizioni</b></td>
-    <td>-</td>
-  </tr>
-    <tr>
-    <td><b>Note</b></td>
-    <td>-</td>
-  </tr>
-</table>
-
-
-
 ### Use Case 8
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
-    <td>Salvare lo stato corrente</td>
+    <td>Salvare la partita</td>
   </tr>
   <tr>
     <td><b>Attori</b></td>
@@ -397,117 +398,6 @@
   <tr>
     <td><b>Post-Condizioni</b></td>
     <td>L'NBM deve esssere elaborata.</td>
-  </tr>
-    <tr>
-    <td><b>Note</b></td>
-    <td>-</td>
-  </tr>
-</table>
-
-
-
-### Use Case 11
-<table>
-  <tr>
-    <td><b>Nome dello Use Case</b>
-    <td>Aggiornare lo storico</td>
-  </tr>
-  <tr>
-    <td><b>Attori</b></td>
-    <td>Klotski</td>
-  </tr>
-  <tr>
-    <td><b>Descrizione</b></td>
-    <td>Il sistema aggiorna lo storico, e lo memorizza su un supporto.</td>
-  </tr>
-  <tr>
-    <td><b>Precondizioni</b></td>
-    <td>Il supporto sulla quale viene memorizzato lo storico deve essere presente.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Principale</b></td>
-    <td>Il sistema esterno scrive lo storico sul supporto.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Alternativo</b></td>
-    <td>Se il supporto non c'è, deve crearlo e poi scriverci al suo interno.</td>
-  </tr>
-    <td><b>Post-Condizioni</b></td>
-    <td>Il supporto deve essere chiuso, per evitare inconsistenze.</td>
-  </tr>
-    <tr>
-    <td><b>Note</b></td>
-    <td>-</td>
-  </tr>
-</table>
-
-
-
-### Use Case 12
-<table>
-  <tr>
-    <td><b>Nome dello Use Case</b>
-    <td>Leggere lo storico</td>
-  </tr>
-  <tr>
-    <td><b>Attori</b></td>
-    <td>Klotski</td>
-  </tr>
-  <tr>
-    <td><b>Descrizione</b></td>
-    <td>Il sistema legge il supporto, prelevando informa</td>
-  </tr>
-  <tr>
-    <td><b>Precondizioni</b></td>
-    <td>Il supporto sulla quale viene memorizzato lo storico deve essere presente.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Principale</b></td>
-    <td>Il sistema esterno scrive lo storico sul supporto.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Alternativo</b></td>
-    <td>Se il supporto non c'è, deve crearlo e poi scriverci al suo interno.</td>
-  </tr>
-    <td><b>Post-Condizioni</b></td>
-    <td>Il supporto deve essere chiuso, per evitare inconsistenze.</td>
-  </tr>
-    <tr>
-    <td><b>Note</b></td>
-    <td>-</td>
-  </tr>
-</table>
-
-
-
-### Use Case 14
-<table>
-  <tr>
-    <td><b>Nome dello Use Case</b>
-    <td>Vincere</td>
-  </tr>
-  <tr>
-    <td><b>Attori</b></td>
-    <td>Giocatore</td>
-  </tr>
-  <tr>
-    <td><b>Descrizione</b></td>
-    <td>Il giocatore vince la partita.</td>
-  </tr>
-  <tr>
-    <td><b>Precondizioni</b></td>
-    <td>Il giocatore deve aver mosso un blocco in una posizione consentita.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Principale</b></td>
-    <td>Il giocatore sposta il blocco speciale nella posizione che determina la posizione di vittoria.</td>
-  </tr>
-  <tr>
-    <td><b>Scenario Alternativo</b></td>
-    <td>Il giocatore non vince perché non ha ancora spostato il blocco speciale nella posizione che determina la posizione di vittoria.</td>
-  </tr>
-    <td><b>Post-Condizioni</b></td>
-    <td>L</td>
   </tr>
     <tr>
     <td><b>Note</b></td>
