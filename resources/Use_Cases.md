@@ -69,15 +69,15 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Viene impostata dal programma la disposizione iniziale dei blocchi scelta dal giocatore.</td>
+    <td>Viene impostata dal programma la disposizione iniziale dei blocchi in base alla configurazione iniziale scelta dal giocatore.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
-    <td>La partita può iniziare o andare avanti con la configurazione fornita dal programma.</td>
+    <td>La partita può iniziare o andare avanti con la configurazione corrente.</td>
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
-    <td>Resettare il counter delle mosse e lo stato corrente.</td>
+    <td>Resettare il counter delle mosse e la partita.</td>
   </tr>
     <tr>
     <td><b>Note</b></td>
@@ -115,7 +115,7 @@
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
-    <td>Incrementare il counter delle mosse, aggiornare lo stato corrente.</td>
+    <td>Incrementare il counter delle mosse, salvare la partita.</td>
   </tr>
     <tr>
     <td><b>Note</b></td>
@@ -147,7 +147,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Ogni volta che il giocatore fa una mossa qualcosa, il counter viene aggiornato e mostrato.</td>
+    <td>Ogni volta che il giocatore fa qualcosa, il counter viene aggiornato e visualizzato dal giocatore stesso.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -193,7 +193,7 @@
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
-    <td>Resettare il counter delle mosse, salvare lo stato corrente.</td>
+    <td>Resettare il counter delle mosse e la partita.</td>
   </tr>
     <tr>
     <td><b>Note</b></td>
@@ -215,15 +215,15 @@
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
-    <td>Il giocatore può scegliere di annullare una o più mosse, in ordine cronologico, dalla più recente alla meno recente, fino alla situazione di partenza</td>
+    <td>Il giocatore può scegliere di annullare una o più mosse, in ordine cronologico, dalla più recente alla meno recente, fino alla situazione di partenza.</td>
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>Deve essere stata eseguita almeno una mossa</td>
+    <td>Deve essere stata eseguita almeno una mossa prima di richiamare la funzionalità.</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>La disposizione dei blocchi ritorna allo stato precedente rispetto alla configurazione corrente.</td>
+    <td>La disposizione dei blocchi ritorna alla cofigurazione precedente rispetto al quella corrente.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -231,7 +231,7 @@
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
-    <td>Decrementare il counter delle mosse, salvare lo stato corrente.</td>
+    <td>Decrementare il counter delle mosse, salvare la partita.</td>
   </tr>
     <tr>
     <td><b>Note</b></td>
@@ -257,7 +257,7 @@
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>La partita non deve essere finita, il giocatore deve essere connesso ad Internet.</td>
+    <td>Il giocatore deve essere connesso ad Internet.</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
@@ -265,7 +265,7 @@
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
-    <td>Viene visualizzato un messaggio "NBM non disponibile, connettiti ad internet" nel caso il giocatore non sia connesso.</td>
+    <td>Viene visualizzato un messaggio "NBM non disponibile, connettiti ad Internet" nel caso il giocatore non sia connesso.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -278,7 +278,7 @@
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
-    <td>Incrementare il counter delle mosse, salvare lo stato corrente.</td>
+    <td>Incrementare il counter delle mosse, salvare la partita.</td>
   </tr>
     <tr>
     <td><b>Note</b></td>
@@ -296,20 +296,20 @@
   </tr>
   <tr>
     <td><b>Attori</b></td>
-    <td>Klotski</td>
+    <td>Giocatore</td>
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
-    <td>Il gioco deve sempre salvare lo stato corrente.
+    <td>Il giocatore deve poter salvare la partita.
     </td>
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>-</td>
+    <td>Il giocatore ha fatto qualcosa.</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), il gioco deve salvare automaticamente lo stato della partita, in modo che, se il programma dovesse essere chiuso, all'avvio successivo lo stato della partita possa essere ripristinato.</td>
+    <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), la partita deve essere salcata in modo che, se il programma dovesse essere chiuso, all'avvio successivo lo la partita possa essere ripristinato.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -321,7 +321,7 @@
   </tr>
     <tr>
     <td><b>Note</b></td>
-    <td>Lo stato corrente corrisponde a tutte le configurazioni generate fino a quel momento e, di conseguenza, il counter.</td>
+    <td>La partita è rappresentata da tutte le configurazioni generate fino a quel momento (più la configurazione iniziale) e, di conseguenza, dal counter delle mosse.</td>
   </tr>
 </table>
 
@@ -339,15 +339,15 @@
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
-    <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultimo stato salvato.</td>
+    <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultima configurazione salvata.</td>
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa, il giocatore deve voler visualizzare l'utlima configurazione, avviando la partita.</td>
+    <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa, il giocatore deve voler visualizzare l'ultima configurazione, avviando la partita.</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Il giocatore apre l'applicazione e visualizza l'ultima configurazione salvata nello storico prima della chiusura del gioco.</td>
+    <td>Il giocatore apre l'applicazione e visualizza l'ultima configurazione salvata alla chiusura del gioco.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -381,7 +381,7 @@
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>Il giocatore deve essere connesso ad internet.</td>
+    <td>Il giocatore deve essere connesso ad Internet.</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
