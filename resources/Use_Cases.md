@@ -393,11 +393,11 @@
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
-    <td>Il sistema esterno non riceve la richiesta o non riesce ad inviare una rosposta a causa dell'interruzione della connessione.</td>
+    <td>Il sistema esterno non riceve la richiesta o non riesce ad inviare una risposta a causa dell'interruzione della connessione.</td>
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
-    <td>L'NBM deve esssere elaborata.</td>
+    <td>L'NBM deve esssere elaborata e mostrata.</td>
   </tr>
     <tr>
     <td><b>Note</b></td>
