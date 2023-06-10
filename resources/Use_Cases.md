@@ -376,11 +376,11 @@ actor NBM_Script
 
 rectangle "Klotski" {
   usecase "Visualizzare configurazione corrente" as current_conf
+  usecase "Scegliere configurazione iniziale" as init_conf
   usecase "Visualizzare counter delle mosse effettuate" as counter
   usecase "Ripristinare la partita salvata" as restore
   usecase "Leggere lo storico" as read_log
   usecase "Aggiornare lo storico" as update_log
-  usecase "Scegliere configurazione iniziale" as init_conf
   usecase "Muovere i blocchi nelle posizioni consentite" as move
   usecase "Vincere" as win
   usecase "Utilizzare funzione di reset" as reset
@@ -393,7 +393,7 @@ rectangle "Klotski" {
 Giocatore -- current_conf
 current_conf -[dashed]-> read_log: "<<includes>>"
 Giocatore -- init_conf
-init_conf -[dashed]-> update_log: "<<includes>>"
+init_conf -down[dashed]-> update_log: "<<includes>>"
 Giocatore -- move
 move -[dashed]-> update_log: "<<includes>>"
 move <-[dashed]right- win: "<<extends>>"
@@ -406,7 +406,7 @@ undo -[dashed]-> update_log: "<<includes>>"
 reset -[dashed]-> update_log: "<<includes>>"
 Giocatore -- nbm
 save <-[dashed]left- update_log: "<<includes>>"
-Giocatore -- restore
+restore -left[dashed]-> current_conf: "<<extends>>"
 restore -[dashed]-> read_log: "<<includes>>"
 NBM_Script -up- make_nbm
 nbm -[dashed]-> make_nbm: "<<includes>>"
