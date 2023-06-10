@@ -536,7 +536,7 @@ class GameTest {
         for(int i=1; i<=4; i++){
 
             //Setta la configurazione attuale alla configurazione iniziale numero i
-            game.setConfigurationToInitialConf(i);
+            game.reset(i);
 
             //Configurazione attesa
             Configuration expectedConfiguration = new Configuration(i);
@@ -553,7 +553,7 @@ class GameTest {
         for(int i=1; i<=4; i++){
 
             //Setta la configurazione attuale alla configurazione iniziale numero i
-            game.setConfigurationToInitialConf(i);
+            game.reset(i);
 
             //Configurazione attesa
             Configuration expectedConfiguration = new Configuration(i);
@@ -576,13 +576,13 @@ class GameTest {
         game = new Game(testLog9, testDC9);
 
         //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.setConfigurationToInitialConf(0);});
+        assertThrows(IllegalArgumentException.class, ()->{game.reset(0);});
 
         //Crea un gioco con il decimo file log di test
         game = new Game(testLog10, testDC10);
 
         //Controlla che venga lanciata eccezione
-        assertThrows(IllegalArgumentException.class, ()->{game.setConfigurationToInitialConf(0);});
+        assertThrows(IllegalArgumentException.class, ()->{game.reset(0);});
     }
 
 
@@ -599,7 +599,7 @@ class GameTest {
         Configuration actualConfig = game.getConfiguration();
 
         //Setta la configurazione attuale con quella precedente
-        game.setConfigurationToPreviousConf();
+        game.undo();
 
         //Configurazione precedente attesa
         String testLog1ExpectedPreviousConfig = "      {\"shape\": [2, 2], \"position\": [0, 1] },\n" +

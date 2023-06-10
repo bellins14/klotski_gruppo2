@@ -68,15 +68,24 @@ public class GameController {
         //Crea un nuovo gioco
         game = new Game(LOG_FILE,DC_FILE);
 
-        //Setta il counter con le mosse
-        textCounter.setText("Moves : " + game.getMoveCounter());
-
         //Setta le dimensioni massime del pane
         blockPane.setMaxHeight(MAX_PANE_HEIGHT);
         blockPane.setMaxWidth(MAX_PANE_WIDTH);
 
         //Setta il border color della pane
         blockPane.setStyle(PANE_BORDER_COLOR);
+
+        //Setta la blockPane con la configurazione attuale del gioco
+        updateBlockPaneAndCounter();
+    }
+
+    /**
+     * Metodo per aggiornare la blockPane con la configurazione attuale del gioco
+     */
+    private void updateBlockPaneAndCounter(){
+
+        //Pulisci la blockPane
+        blockPane.getChildren().clear();
 
         //Prende i pezzi della configurazione attuale
         Piece[] currentPieces = game.getConfiguration().getPieces();
@@ -91,7 +100,6 @@ public class GameController {
 
             //Aggiunge il pezzo al pane
             blockPane.getChildren().add(piece);
-
 
             //Aggiunge un gestore eventi per la selezione di un bottone
             piece.setOnMouseClicked(event -> {
@@ -125,19 +133,29 @@ public class GameController {
                 int keyCode = event.getCode().ordinal();
 
                 //Sposta il pezzo
-                movePiece(selectedPiece, keyCode);
+                try {
+                    game.movePiece(selectedPiece, keyCode);
+                    //Aggiorna il testo con il counter delle mosse
+                    textCounter.setText("Moves : " + game.getMoveCounter());
 
-                //Controlla se il giocatore ha vinto
-                checkWin();
+                }catch (Exception e){
+                    //Il giocatore ha vinto
+                    //Resetta il gioco
+                    reset();
+                    //Lancia alert di vittoria
+                    Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
 
-                //Aggiorna il testo con il counter delle mosse
-                textCounter.setText("Moves : " + game.getMoveCounter());
-
+                }
             }
 
         });
+
         // Per consentire il focus della tastiera sul pannello
         blockPane.setFocusTraversable(true);
+
+        //Aggiorna il testo con il counter delle mosse
+        textCounter.setText("Moves : " + game.getMoveCounter());
+
     }
 
 
@@ -147,14 +165,12 @@ public class GameController {
      */
     @FXML
     private void reset() {
+
         //Cambia la configurazione attuale di game con la configurazione iniziale
-        game.setConfigurationToInitialConf(game.getInitialSelectedConf());
+        game.reset();
 
-        //Pulisce il pane
-        blockPane.getChildren().clear();
-
-        //Fai ripartire l'inizializzazione
-        initialize();
+        //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter
+        updateBlockPaneAndCounter();
     }
 
 
@@ -173,20 +189,15 @@ public class GameController {
         //Prendi il numero della configurazione selezionata
         int configurationNumber = Integer.parseInt(clickedButton.getUserData().toString());
 
-        //Se la configurazione iniziale selezionata è diversa da quella attuale
-        if (game.getInitialSelectedConf() != configurationNumber) {
+        try {
+        //Cambia la configurazione attuale di game
+        game.resetToAnotherInitialConf(configurationNumber);
 
-            //Cambia la configurazione attuale di game
-            game.setConfigurationToInitialConf(configurationNumber);
+        //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter
+        updateBlockPaneAndCounter();
 
-            //Aggiorna il testo con il counter delle mosse
-            textCounter.setText("Moves : " + game.getMoveCounter());
-
-            //Pulisci il pane
-            blockPane.getChildren().clear();
-
-            //Fai ripartire l'inizializzazione
-            initialize();
+        }catch (Exception e){
+            //Non fare nulla
         }
     }
 
@@ -231,13 +242,30 @@ public class GameController {
                             //prendo il corrispettivo nodo che dovrò spostare
                             Node node = blockPane.getChildren().get(blockIdx);
 
-                            //chiamo il metodo per spostare il piece
-                            movePiece((Piece) node, dirIdx);
-                            //aggiorno il counter
-                            textCounter.setText("Moves : " + game.getMoveCounter());
-                            //Controlla se ha vinto
-                            checkWin();
-                            NBM.setDisable(false);
+                            try {
+                                //Sposta il pezzo
+                                game.movePiece((Piece) node, dirIdx);
+
+                                //riabilita il bottone NBM
+                                NBM.setDisable(false);
+
+                                //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter
+                                updateBlockPaneAndCounter();
+
+                            }catch (Exception e){
+                                //Il giocatore ha vinto
+
+                                //Resetta il gioco
+                                reset();
+
+                                //riabilita il bottone NBM
+                                NBM.setDisable(false);
+
+                                //Lancia alert di vittoria
+                                Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
+
+                            }
+
                         } // Fine if
                     }
                     if (newValue == Worker.State.FAILED) {
@@ -288,83 +316,16 @@ public class GameController {
      */
     @FXML
     private void undo() {
-        if (game.getMoveCounter() != 0) { //Se il counter è diverso da 0
-
+        try{
             //Setta la configurazione attuale con quella precedente
-            game.setConfigurationToPreviousConf();
+            game.undo();
 
-            //Aggiorna il testo con il counter delle mosse
-            textCounter.setText("Moves : " + game.getMoveCounter());
+            //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter
+            updateBlockPaneAndCounter();
 
-            //Pulisci il pane
-            blockPane.getChildren().clear();
-
-            //Fai ripartire l'inizializzazione con il nuovo file di log
-            initialize();
-
-        } else {
+        }catch (Exception e){
+            //Se non è possibile fare undo mostra un alert
             Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun pezzo!");
-        }
-    }
-
-
-    /**
-     * Metodo chiamato alla pressione delle frecce o dei tasti ASDW con blocco selezionato
-     * Muove il pezzo selezionato nella direzione designata di 100px se possibile,
-     * altrimenti termina silenziosamente
-     * @param piece pezzo da muovere
-     * @param dirIdx direzione in cui muoverlo
-     */
-    private void movePiece(Piece piece, int dirIdx) {
-        //Di quanti pixel muovere il pezzo
-        double moveAmount = 100;
-        //In base alla direzione in cui si intende muover il pezzo
-        switch (dirIdx) {
-
-            //DOWN
-            case S,ARROW_DOWN -> {
-                if (piece.getLayoutY() + moveAmount + piece.getHeight() <= MAX_PANE_HEIGHT
-                        && Utility.isNotOverlapping(piece, blockPane, 0, moveAmount)) {
-                    //Muove il pezzo in giu di moveAmount
-                    game.movePieceDown(piece, moveAmount);
-                    //blockMoved = true;
-                }
-            }
-            //RIGHT
-            case D,ARROW_RIGHT -> {
-                if (piece.getLayoutX() + moveAmount + piece.getWidth() <= MAX_PANE_WIDTH
-                        && Utility.isNotOverlapping(piece, blockPane, moveAmount, 0)) {
-                    game.movePieceRight(piece, moveAmount);
-                }
-            }
-            //UP
-            case W,ARROW_UP -> {
-                if (piece.getLayoutY() - moveAmount >= 0 && Utility.isNotOverlapping(piece, blockPane, 0, -moveAmount)) {
-                    game.movePieceUp(piece, moveAmount);
-                }
-            }
-            //LEFT
-            case A,ARROW_LEFT -> {
-                if (piece.getLayoutX() - moveAmount >= 0 && Utility.isNotOverlapping(piece, blockPane, -moveAmount, 0)) {
-                    game.movePieceLeft(piece, moveAmount);
-                }
-            }
-        }
-    }
-
-    /**
-     * Controlla (graficamente) se la configurazione attuale rappresenta una situazione di vittoria
-     */
-    private void checkWin() {
-        //Prende il pezzo piu' grande (che è sempre il primo)
-        Node node = blockPane.getChildren().get(0);
-
-        //Se si trova nella posizione di vittoria
-        if (node.getLayoutX() == WIN_X && node.getLayoutY() == WIN_Y) {
-            gameEnded = true;
-            //Lancia alert di vittoria
-            reset();
-            Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
         }
     }
 
