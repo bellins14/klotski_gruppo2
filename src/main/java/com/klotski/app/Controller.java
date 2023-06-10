@@ -25,7 +25,7 @@ import static com.klotski.app.Constants.*;
 /**
  * Classe che gestisce l'interazione del gioco con la grafica (Java FX).
  */
-public class GameController {
+public class Controller {
 
     //Elementi di FXML:
 
