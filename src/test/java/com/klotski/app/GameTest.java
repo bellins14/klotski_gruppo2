@@ -405,13 +405,31 @@ class GameTest {
 
 
     }
-
-/*
-
-    //Test del metodo setConfigurationToPreviousConf()
+    //Test del metodo reset()
     @Test
-    void setConfigurationToPreviousConf() {
-        System.out.println("test setConfigurationToPreviousConf");
+    void reset(){
+        System.out.println("test reset");
+
+        //Esegui il test con 2 file json di test
+
+        //Crea un gioco con l'ottavo file log di test
+        game = new Game(testLog8, testDC8);
+
+        //Effettua un reset del gioco
+            game.reset();
+
+        //Configurazione attesa
+        Configuration expectedConfiguration = new Configuration(1);
+
+        //Controlla che la config attuale sia effettivamente la corrispettiva conf iniziale
+        assertEquals(expectedConfiguration.toString(),game.getConfiguration().toString());
+        }
+
+
+    //Test del metodo undo()
+    @Test
+    void undo() {
+        System.out.println("test undo");
 
         //Crea un gioco con il primo file log di test
         game = new Game(testLog1, testDC1);
@@ -450,10 +468,6 @@ class GameTest {
         //Rimetti la config attuale nel file di log, per poter ripetere il test
         game.setConfiguration(actualConfig);
     }
-
-
-     */
-
 }
 
 
