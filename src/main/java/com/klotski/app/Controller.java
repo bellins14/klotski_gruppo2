@@ -140,8 +140,10 @@ public class Controller {
 
                 }catch (Exception e){
                     //Il giocatore ha vinto
-                    //Resetta il gioco
-                    reset();
+
+                    //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter (gioco resettato)
+                    updateBlockPaneAndCounter();
+
                     //Lancia alert di vittoria
                     Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
 
@@ -255,8 +257,8 @@ public class Controller {
                             }catch (Exception e){
                                 //Il giocatore ha vinto
 
-                                //Resetta il gioco
-                                reset();
+                                //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter (gioco resettato)
+                                updateBlockPaneAndCounter();
 
                                 //riabilita il bottone NBM
                                 NBM.setDisable(false);
