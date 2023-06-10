@@ -1,0 +1,26 @@
+Index: src/main/resources/com/klotski/app/json/ConfigurationLog.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[{\"blocks\":[{\"shape\":[2,2],\"position\":[0,1]},{\"shape\":[1,2],\"position\":[2,1]},{\"shape\":[2,1],\"position\":[2,3]},{\"shape\":[2,1],\"position\":[2,0]},{\"shape\":[2,1],\"position\":[0,3]},{\"shape\":[2,1],\"position\":[0,0]},{\"shape\":[1,1],\"position\":[4,3]},{\"shape\":[1,1],\"position\":[3,2]},{\"shape\":[1,1],\"position\":[3,1]},{\"shape\":[1,1],\"position\":[4,0]}],\"boardSize\":[5,4],\"escapePoint\":[3,1]}]
+===================================================================
+diff --git a/src/main/resources/com/klotski/app/json/ConfigurationLog.json b/src/main/resources/com/klotski/app/json/ConfigurationLog.json
+--- a/src/main/resources/com/klotski/app/json/ConfigurationLog.json	
++++ b/src/main/resources/com/klotski/app/json/ConfigurationLog.json	
+@@ -1,1 +1,1 @@
+-[{"blocks":[{"shape":[2,2],"position":[0,1]},{"shape":[1,2],"position":[2,1]},{"shape":[2,1],"position":[2,3]},{"shape":[2,1],"position":[2,0]},{"shape":[2,1],"position":[0,3]},{"shape":[2,1],"position":[0,0]},{"shape":[1,1],"position":[4,3]},{"shape":[1,1],"position":[3,2]},{"shape":[1,1],"position":[3,1]},{"shape":[1,1],"position":[4,0]}],"boardSize":[5,4],"escapePoint":[3,1]}]
+\ No newline at end of file
++[{"blocks":[{"shape":[2,2],"position":[0,1]},{"shape":[1,2],"position":[4,2]},{"shape":[1,2],"position":[4,0]},{"shape":[2,1],"position":[1,3]},{"shape":[2,1],"position":[2,1]},{"shape":[2,1],"position":[1,0]},{"shape":[1,1],"position":[3,3]},{"shape":[1,1],"position":[3,0]},{"shape":[1,1],"position":[0,3]},{"shape":[1,1],"position":[0,0]}],"boardSize":[5,4],"escapePoint":[3,1]}]
+\ No newline at end of file
+Index: src/main/resources/com/klotski/app/json/ConfigurationDC.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\"blocks\":[{\"shape\":[2,2],\"position\":[0,1]},{\"shape\":[1,2],\"position\":[2,1]},{\"shape\":[2,1],\"position\":[2,3]},{\"shape\":[2,1],\"position\":[2,0]},{\"shape\":[2,1],\"position\":[0,3]},{\"shape\":[2,1],\"position\":[0,0]},{\"shape\":[1,1],\"position\":[4,3]},{\"shape\":[1,1],\"position\":[3,2]},{\"shape\":[1,1],\"position\":[3,1]},{\"shape\":[1,1],\"position\":[4,0]}],\"boardSize\":[5,4],\"escapePoint\":[3,1]}
+===================================================================
+diff --git a/src/main/resources/com/klotski/app/json/ConfigurationDC.json b/src/main/resources/com/klotski/app/json/ConfigurationDC.json
+--- a/src/main/resources/com/klotski/app/json/ConfigurationDC.json	
++++ b/src/main/resources/com/klotski/app/json/ConfigurationDC.json	
+@@ -1,1 +1,1 @@
+-{"blocks":[{"shape":[2,2],"position":[0,1]},{"shape":[1,2],"position":[2,1]},{"shape":[2,1],"position":[2,3]},{"shape":[2,1],"position":[2,0]},{"shape":[2,1],"position":[0,3]},{"shape":[2,1],"position":[0,0]},{"shape":[1,1],"position":[4,3]},{"shape":[1,1],"position":[3,2]},{"shape":[1,1],"position":[3,1]},{"shape":[1,1],"position":[4,0]}],"boardSize":[5,4],"escapePoint":[3,1]}
+\ No newline at end of file
++{"blocks":[{"shape":[2,2],"position":[0,1]},{"shape":[1,2],"position":[4,2]},{"shape":[1,2],"position":[4,0]},{"shape":[2,1],"position":[1,3]},{"shape":[2,1],"position":[2,1]},{"shape":[2,1],"position":[1,0]},{"shape":[1,1],"position":[3,3]},{"shape":[1,1],"position":[3,0]},{"shape":[1,1],"position":[0,3]},{"shape":[1,1],"position":[0,0]}],"boardSize":[5,4],"escapePoint":[3,1]}
+\ No newline at end of file
