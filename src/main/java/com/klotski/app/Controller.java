@@ -76,13 +76,13 @@ public class Controller {
         blockPane.setStyle(PANE_BORDER_COLOR);
 
         //Setta la blockPane con la configurazione attuale del gioco
-        updateBlockPane();
+        updateBlockPaneAndCounter();
     }
 
     /**
      * Metodo per aggiornare la blockPane con la configurazione attuale del gioco
      */
-    private void updateBlockPane(){
+    private void updateBlockPaneAndCounter(){
 
         //Pulisci la blockPane
         blockPane.getChildren().clear();
@@ -152,6 +152,10 @@ public class Controller {
 
         // Per consentire il focus della tastiera sul pannello
         blockPane.setFocusTraversable(true);
+
+        //Aggiorna il testo con il counter delle mosse
+        textCounter.setText("Moves : " + game.getMoveCounter());
+
     }
 
 
@@ -165,8 +169,8 @@ public class Controller {
         //Cambia la configurazione attuale di game con la configurazione iniziale
         game.reset();
 
-        //Aggiorna la blockPane con la nuova configurazione attuale del gioco
-        updateBlockPane();
+        //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter
+        updateBlockPaneAndCounter();
     }
 
 
@@ -189,11 +193,8 @@ public class Controller {
         //Cambia la configurazione attuale di game
         game.resetToAnotherInitialConf(configurationNumber);
 
-        //Aggiorna il testo con il counter delle mosse
-        textCounter.setText("Moves : " + game.getMoveCounter());
-
-        //Aggiorna la blockPane con la nuova configurazione attuale del gioco
-        updateBlockPane();
+        //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter
+        updateBlockPaneAndCounter();
 
         }catch (Exception e){
             //Non fare nulla
@@ -248,8 +249,8 @@ public class Controller {
                                 //riabilita il bottone NBM
                                 NBM.setDisable(false);
 
-                                //Aggiorna il testo con il counter delle mosse
-                                textCounter.setText("Moves : " + game.getMoveCounter());
+                                //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter
+                                updateBlockPaneAndCounter();
 
                             }catch (Exception e){
                                 //Il giocatore ha vinto
@@ -319,11 +320,9 @@ public class Controller {
             //Setta la configurazione attuale con quella precedente
             game.undo();
 
-            //Aggiorna il testo con il counter delle mosse
-            textCounter.setText("Moves : " + game.getMoveCounter());
+            //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter
+            updateBlockPaneAndCounter();
 
-            //Aggiorna la blockPane con la nuova configurazione attuale del gioco
-            updateBlockPane();
         }catch (Exception e){
             //Se non è possibile fare undo mostra un alert
             Utility.setAlert(Alert.AlertType.WARNING, "Undo", "Non hai spostato nessun pezzo!");
