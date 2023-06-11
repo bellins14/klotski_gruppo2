@@ -111,25 +111,25 @@ participant Piece
 
 Giocatore -> Controller: muovi(pezzo, keyCode)
 Controller -> Game: movePiece(piece, keyCode)
-alt keyCode == up
+alt keyCode == UP
 Game -> Game: movePieceUp(piece)
 
 Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
-else keyCode == down 
+else keyCode == DOWN 
 Game -> Game: movePieceDown(piece)
 
 Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
-else keyCode == right 
+else keyCode == RIGHT 
 Game -> Game: movePieceRight(piece)
 
 Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
-else keyCode == left 
+else keyCode == LEFT 
 Game -> Game: movePieceLeft(piece)
 
 Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
@@ -138,10 +138,12 @@ Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 end
 
 Game -> Game: checkNotWin()
+Game -> Configuration: pieceToCheck = _configuration.getPieces()[0]
+Configuration --> Game: pieceToCheck
 
-alt vittoria
+alt pieceToCheck in posizione di vittoria
 Game -> Game: reset();
-Game -> Controller: Exception()
+Game --> Controller: Exception()
 Controller -> Controller: updateBlockPaneAndCounter();
 Controller -> Utility: setAlert("Hai vinto")
 Utility --> Giocatore: alert "Hai vinto"
@@ -150,6 +152,7 @@ Controller-->Giocatore: configurazione_iniziale \ncounter_azzerato
 
 
 else altrimenti
+Controller -> Controller: updateCounter();
 Controller-->Giocatore: configurazione_aggiornata,\n++counter
 end
 
