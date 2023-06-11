@@ -14,7 +14,7 @@ object Blocco{
   posizione
 }
 
-object Partita
+object Gioco
 object StoricoConfigurazioni
 object NBM_Script
 object NBM
@@ -39,7 +39,7 @@ Configurazione "1" *-right- "10" Blocco : \nContiene\n
 
 StoricoConfigurazioni "1" *-right- "1..n" Configurazione : \nContiene\n
 
-StoricoConfigurazioni "1" -left-* "1" Partita : \nContiene\n
+StoricoConfigurazioni "1" -left-* "1" Gioco : \nContiene\n
 
 NBM_Script "1" -right-> "1" NBM : \nFornisce\n
 
@@ -47,20 +47,21 @@ Giocatore "1" -right-> "1" Reset : Richiede
 
 Giocatore "1" -left-> "1" Vittoria : Visualizza
 
-Partita "1" --> "1" Vittoria : Segnala
+Gioco "1" --> "1" Vittoria : Segnala
 
 Giocatore "1" --> "0.." Undo : Richiede
 
 Giocatore "1" --> "1" NBM : Richiede
 
-NBM "1" -right-> "1" Partita : Modifica
+NBM "1" -right-> "1" Gioco : Modifica
 
 Giocatore "1" --> "1" ContatoreMosse : Visualizza
 
-ContatoreMosse "1" -down-* "1" Partita : Contiene
+ContatoreMosse "1" -down-* "1" Gioco : Contiene
 
-Reset "1" -right-> "1" Partita : Modifica
+Reset "1" -right-> "1" Gioco : Modifica
 
-Undo "1" --> "1" Partita : Modifica
+Undo "1" --> "1" Gioco : Modifica
 
-@enduml```
+@enduml
+```
