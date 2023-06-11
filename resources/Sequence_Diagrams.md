@@ -242,6 +242,7 @@ end
 ```plantuml
 @startuml
 !theme materia-outline
+autonumber
 
 skinparam ArrowColor #00B4D8
 skinparam ActorBorderColor #03045E
@@ -260,20 +261,28 @@ participant Controller
 participant Game
 
 Giocatore -> Controller: undo()
+activate Controller
 Controller -> Game: undo()
+activate Game
 
 alt _stackLog.isEmpty()
 Game --> Controller: Exception()
 Controller -> Utility: setAlert("Non hai mosso nessun blocco")
+activate Utility
 Utility --> Giocatore: alert "Non hai mosso nessun blocco"
+deactivate Utility
+
 
 else altrimenti
 Game -> Game: setConfiguration(_stackLog.pop()) 
 Game -> Game: updateLogsWithCurrentConfiguration()
 Game -> Game:_moveCounter--
 Game --> Controller
+deactivate Game
+
 Controller -> Controller: updateBlockPaneAndCounter()
 Controller --> Giocatore: configurazione_precedente,\n--counter
+deactivate Controller
 
 end
 
