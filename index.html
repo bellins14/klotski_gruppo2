@@ -47,8 +47,8 @@
         <!-- INTRODUZIONE -->
         <h2>Introduzione</h2>
         <p>
-          L’applicazione <b>Klotski</b> permette di giocare all’omonimo gioco: un puzzle a blocchi scorrevoli nella quale
-          l'obiettivo è spostare un blocco speciale in una posizione predefinita. La difficoltà sta proprio nello
+          L'applicazione <b>Klotski</b> permette di giocare all’omonimo gioco: un puzzle a blocchi scorrevoli nella quale
+          l'obiettivo è spostare un blocco speciale in una posizione predefinita. La difficoltà sta nel
           muovere ingegnosamente gli altri pezzi all’interno del piano di gioco per far strada a quello speciale,
           e riuscire a fargli raggiungere la posizione finale nel minor numero di mosse possibile.
         </p>
@@ -99,12 +99,12 @@
         <!-- SCARICARE ED INSTALLARE IL SOFTWARE -->
         <h2>Descrizione del progetto e implementazione delle specifiche</h2>
         <p>
-          Nelle prime fasi di sviluppo del progetto, si sono visionate, discusse e approfondite le specifiche,
-          con l’idea di affrontare, così facendo, le fasi di progettazione e di sviluppo più linearmente possibile.
+          Nelle prime fasi di sviluppo del progetto sono state discusse e approfondite le specifiche,
+          con l’idea di affrontare le fasi di progettazione e di sviluppo più linearmente possibile.
         </p>
         <p>
-          Dopo aver portato a termine la fase di definizione delle specifiche e di design (le quali deliverables
-          sono allegate nelle sezioni successive) si è proceduto con lo sviluppo vero e proprio dell’applicazione.
+          Dopo aver portato a termine la fase di definizione delle specifiche e di design (le quali "deliverables"
+          sono allegate nelle sezioni successive) è stato avviato lo sviluppo vero e proprio dell’applicazione.
         </p>
         <p>
           L’idea principale, che è alla base della realizzazione delle funzionalità del software, è stata quella di
@@ -115,29 +115,29 @@
 
         <h3>Interfaccia grafica e spostamento dei blocchi</h3>
         <p>
-          Per realizzare la GUI, si è fatto uso della libreria grafica di JavaFX. È stato utilizzato, inoltre, il
-          software SceneBuilder per una disposizione più agevole degli elementi grafici, e per la successiva generazione
-          del file fxml, che codifica l’interfaccia tramite il linguaggio di markup di JavaFX.
+          Per realizzare la GUI sono stati utilizzati la libreria grafica di JavaFX e il
+          software SceneBuilder per una disposizione più agevole degli elementi grafici e per la successiva generazione
+          del file fxml, il quale codifica l’interfaccia tramite il linguaggio di markup di JavaFX.
         </p>
         <p>
           I blocchi sono stati implementati tramite l’estensione di un componente di JavaFX, così da poter gestire la
-          logica dello spostamento degli stessi - evitando, per esempio, che si sovrapponessero, o facendo in modo che
-          restassero nei limiti del piano di gioco -  semplicemente prelevando le informazioni dagli attributi forniti
+          logica dello spostamento di questi ultimi - evitando, per esempio, che si sovrapponessero, o facendo in modo che
+          restassero nei limiti del piano di gioco - semplicemente prelevando le informazioni dagli attributi forniti
           direttamente dalla libreria.
         </p>
         <p>
-          A completare l’interfaccia, si sono aggiunti dei bottoni, presi dal set di componenti JFoenix. A ciascun
+          Per completare l’interfaccia sono stati aggiunti dei bottoni, selezionati tra i componenti JFoenix. A ciascun
           bottone è stata associata una funzionalità. Le funzionalità sono state implementate tramite una logica
-          triggerata da eventi scatenati dall’utente compiendo determinate azioni sulla GUI.
+          innescata da eventi scatenati dall’utente compiendo determinate azioni sulla GUI.
         </p>
         <div class = "span-h3"></div>
 
         <h3>Possibilità di salvare lo stato corrente e di ripristinarlo</h3>
         <p>
-          Questa funzionalità è strettamente collegata alle altre. Per memorizzare lo stato corrente, e permettere il
-          suo ripristino una volta chiusa e riaperta l’applicazione, si è pensato di tenere traccia, in uno stack,
-          delle configurazioni generate ogni volta dallo spostamento del singolo blocco. La memorizzazione di questo
-          storico avviene su file JSON, che si aggiorna ad ogni mossa. Per gestire la scrittura e la lettura su file
+          Questa funzionalità è strettamente collegata alle altre. Per memorizzare lo stato corrente e permettere il
+          suo ripristino una volta chiusa e riaperta l’applicazione, si è pensato di tenere traccia, tramite uno stack,
+          delle varie configurazioni generate ogni volta che un singolo blocco viene spostato. La memorizzazione di questo
+          storico avviene su file JSON, il quale si aggiorna ad ogni mossa. Per gestire la scrittura e la lettura su file
           è stata utilizzata la libreria Jackson.
         </p>
         <div class = "span-h3"></div>
@@ -316,6 +316,7 @@
         <table>
           <tr>
             <th><b id="UC1">Use Case 1</b></th>
+          </tr>
           <tr>
             <td><b>Nome dello Use Case</b>
             <td>Scegliere configurazione iniziale</td>
