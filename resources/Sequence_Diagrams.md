@@ -287,6 +287,7 @@ Configuration --> Game: newInitialConfiguration
 Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
 Game -> Game: updateLogsWithCurrentConfiguration();
 Game -> Game: _moveCounter = 0 
+Game --> Controller
 Controller -> Controller: updateBlockPaneAndCounter()
 Controller --> Giocatore: configurazione_iniziale \ncounter_azzerato
 
