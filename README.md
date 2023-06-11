@@ -8,7 +8,7 @@ _**piece3**, **piece1**, **piece2**, **piece0**_
 ---
 
 ## Documentazione e istruzioni per l'utilizzo
-Tutta la documentazione è consultabile o tramite il sito [klotskigruppo2.it](klotskigruppo2.it) oppure spostandosi sul branch [docs](https://github.com/bellins14/klotski_gruppo2/tree/docs).
+Tutta la documentazione è consultabile o tramite il sito [klotskigruppo2.it](http://klotskigruppo2.it/) oppure spostandosi sul branch [docs](https://github.com/bellins14/klotski_gruppo2/tree/docs).
 Le istruzioni su come installare l'applicazione e giocare sono contenute nel manuale all'inizio del sito (altrimenti sempre sul branch sopra indicato).
 
 ## Diritti e licenze
