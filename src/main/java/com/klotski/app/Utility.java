@@ -17,9 +17,10 @@ import static com.klotski.app.Constants.*;
  * Classe che fornisce dei metodi di utilità per le classi del Klotski.
  */
 public class Utility {
-
+    /**
+     * Costruttore privato per evitare l'instanziazione della classe
+     */
     private Utility() {
-        // Costruttore privato per evitare l'istanziazione della classe
     }
 
 

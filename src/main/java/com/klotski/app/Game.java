@@ -14,25 +14,39 @@ import static com.klotski.app.Constants.*;
  * - del path del file di supporto per la serializzazione/deserializzazione in json della configurazione attuale
  */
 public class Game {
-
-    //Indica quale configurazione iniziale è selezionata tra le 4 disponibili
+    /**
+     * Indica quale configurazione iniziale è selezionata tra le 4 disponibili
+     *
+     */
     private int _initialSelectedConf;
-
-    //Configurazione attuale del gioco
+    /**
+     * Configurazione attuale del gioco
+     *
+     */
     private Configuration _configuration;
-
-    //Contatore delle mosse
+    /**
+     * Contatore delle mosse
+     *
+     */
     private int _moveCounter;
-    //Stack di configurazioni
-    // funge da log (un simil database) per il gioco
-    // ed è sincronizzato con il file di Log ConfigurationLog
+
+    /**
+     * Stack di configurazioni
+     * funge da log (un simil database) per il gioco
+     * ed è sincronizzato con il file di Log ConfigurationLog
+     */
     private Stack<Configuration> _stackLog;
 
-    //Path del file di log dove con cui sincronizzare _stackLog
-    // e che funge da storico delle mosse
+    /**
+     * Path del file di log dove con cui sincronizzare _stackLog
+     * e che funge da storico delle mosse
+     */
     private final String _logFilePathName;
 
-    //Path del file di supporto per le serializzazione in json delle Configurazioni
+    /**
+     * Path del file di supporto per le serializzazione in json delle Configurazioni
+     *
+     */
     private final String _supportFilePathName;
 
 

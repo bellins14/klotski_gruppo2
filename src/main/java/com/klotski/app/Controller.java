@@ -28,37 +28,49 @@ import static com.klotski.app.Constants.*;
 public class Controller {
 
     //Elementi di FXML:
-
-    //Pannello "Pane" dove inserire i pezzi della configurazione attuale del gioco
+    /**
+     * Pannello "Pane" dove inserire i pezzi della configurazione attuale del gioco
+     */
     @FXML
     private Pane blockPane;
-    //Bottone undo
+    /**
+     * Bottone undo
+     */
     @FXML
     private JFXButton undo;
-    //Testo per il numero di mosse
+    /**
+     * Testo per il numero di mosse
+     */
     @FXML
     private Text textCounter;
-    //Bottone reset
+    /**
+     * Bottone reset
+     */
     @FXML
     private JFXButton reset;
-    //Bottone NBM
+    /**
+     * Bottone NBM
+     */
     @FXML
     private JFXButton NBM;
 
-
+    /**
+     * booleano per check vittoria
+     */
     private boolean gameEnded = false;
-
-    //Gioco
+    /**
+     * Gioco
+     */
     private Game game;
-
-    //Pezzo selezionato: un pezzo puo' essere mosso solo con le frecce della tastiera
-    // solo dopo essere stato selezionato con il mouse
+    /**
+     * Pezzo selezionato: un pezzo puo' essere mosso solo con le frecce della tastiera
+     * solo dopo essere stato selezionato con il mouse
+     */
     private Piece selectedPiece;
-
-    //Necessario per la connessione all'NBM
+    /**
+     *Necessario per la connessione all'NBM
+     */
     private WebEngine webEngine;
-
-    //Costruttore non necessario
 
     /**
      * Metodo chiamato di default all'avvio dell'applicazione.

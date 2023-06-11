@@ -14,9 +14,11 @@ import java.util.Stack;
  * Classe che fornisce dei metodi di utilità per la scrittura/lettura delle configurazioni su/da file JSON.
  */
 public class UtilityJackson {
-
+    /**
+     * Costruttore privato per evitare l'istanziazione della classe
+     *
+     */
     private UtilityJackson() {
-        // Costruttore privato per evitare l'istanziazione della classe
     }
 
     /**

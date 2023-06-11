@@ -8,11 +8,13 @@ import static com.klotski.app.Constants.*;
  * Classe che rappresenta un pezzo del Klotski.
  */
 public class Piece extends Rectangle {
-
-    //Nome dell'immagine associata al pezzo
+    /**
+     * Nome dell'immagine associata al pezzo
+     */
     private String _imageName;
-
-    //Tipo del pezzo (può variare da 0 a 3)
+    /**
+     * Tipo del pezzo (può variare da 0 a 3)
+     */
     private int _type;
 
 

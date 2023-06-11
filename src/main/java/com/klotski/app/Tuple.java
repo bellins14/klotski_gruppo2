@@ -5,11 +5,13 @@ package com.klotski.app;
  * le coordinate dei Piece
  */
 public class Tuple {
-
-    //Coordinata X
+    /**
+     * Coordinata X
+     */
     public final int _x;
-
-    //Coordinata Y
+    /**
+     * Coordinata Y
+     */
     public final int _y;
 
 
