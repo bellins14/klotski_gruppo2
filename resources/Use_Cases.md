@@ -1,7 +1,7 @@
 # Use Cases
 1. Visualizzare configurazione corrente
 2. Scegliere configurazione iniziale
-3. Muovere i blocchi nelle posizioni consentite
+3. Muovere i pezzi nelle posizioni consentite
 4. Visualizzare counter delle mosse effettuate
 5. Utilizzare funzione di reset
 6. Utilizzare funzione di undo
@@ -92,7 +92,7 @@
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
-    <td>Muovere i blocchi nelle posizioni consentite</td>
+    <td>Muovere i pezzi nelle posizioni consentite</td>
   </tr>
   <tr>
     <td><b>Attori</b></td>
