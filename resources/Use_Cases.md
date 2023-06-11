@@ -138,7 +138,7 @@
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
-    <td>Il giocatore deve ruscire a visualizzare il counter delle mosse effettuate fino a quel momento.</td>
+    <td>Il giocatore deve riuscire a visualizzare il counter delle mosse effettuate fino a quel momento.</td>
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
@@ -224,7 +224,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>La disposizione dei pezzi ritorna alla cofigurazione precedente rispetto a quella corrente.</td>
+    <td>La disposizione dei pezzi ritorna alla configurazione precedente rispetto a quella corrente.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -270,11 +270,11 @@
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
-    <td>Viene visualizzato un messaggio "Errore nel caricamento dell'NBM" nel caso sia andato storto qualcosa.</td>
+    <td>Viene visualizzato un messaggio "Errore nel caricamento della NBM" nel caso sia andato storto qualcosa.</td>
   </tr>
    <tr>
     <td><b>Scenario Alternativo</b></td>
-    <td>Viene visualizzato un messaggio "Caricamento dell'NBM in corso..." nel caso il giocatore stia richiedendo l'NBM di nuovo prima di averla ricevuta.
+    <td>Viene visualizzato un messaggio "Caricamento della NBM in corso..." nel caso il giocatore stia richiedendo la NBM di nuovo prima di averla ricevuta.
     </td>
   </tr>
   <tr>
@@ -378,7 +378,7 @@
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
-    <td>Il sistema esterno NBM_Script calcola l'NBM.</td>
+    <td>Il sistema esterno NBM_Script calcola la NBM.</td>
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
@@ -386,11 +386,11 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Il sistema esterno calcola l'NBM e la fornisce.</td>
+    <td>Il sistema esterno calcola la NBM e la fornisce.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
-    <td>Il sistema esterno non riesce a calcolare l'NBM per qualche motivo.</td>
+    <td>Il sistema esterno non riesce a calcolare la NBM per qualche motivo.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -398,7 +398,7 @@
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
-    <td>L'NBM deve esssere elaborata e mostrata.</td>
+    <td>L'NBM deve essere elaborata e mostrata.</td>
   </tr>
     <tr>
     <td><b>Note</b></td>

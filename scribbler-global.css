@@ -22,7 +22,7 @@ html, body {
   background-color: white;
 }
 
-p {
+p, li {
   font-weight: 400;
   color: #4A4A4A;
 }
