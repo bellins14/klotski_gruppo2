@@ -83,7 +83,7 @@ end
 
 ## muovi(pezzo, keyCode)
 
-![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram1.png)
+![InternalSequenceDiagram1.png](img/diagrams/InternalSequenceDiagram1.png)
 
 ```plantuml
 @startuml
@@ -164,7 +164,7 @@ end
 
 ## cambia_configurazione(configurazione_alternativa)
 
-![InternalSequenceDiagram3.png](img/diagrams/InternalSequenceDiagram2.png)
+![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram2.png)
 
 ```plantuml
 @startuml
@@ -185,7 +185,6 @@ skinparam BackgroundColor #FFFFFF
 actor Giocatore 
 participant Controller
 participant Game
-participant Piece
 
 
 Giocatore -> Controller: configurationClicked()
@@ -200,6 +199,7 @@ Configuration --> Game: newInitialConfiguration
 Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
 Game -> Game: updateLogsWithCurrentConfiguration();
 Game -> Game: _moveCounter = 0 \nsetInitialSelectedConf(confNumber)
+Game --> Controller
 Controller -> Controller: updateBlockPaneAndCounter()
 Controller --> Giocatore: configurazione_alternativa \ncounter_azzerato
 
@@ -210,7 +210,7 @@ end
 
 ## undo()
 
-![InternalSequenceDiagram4.png](img/diagrams/InternalSequenceDiagram3.png)
+![InternalSequenceDiagram3.png](img/diagrams/InternalSequenceDiagram3.png)
 
 ```plantuml
 @startuml
@@ -257,7 +257,7 @@ end
 
 ## reset()
 
-![InternalSequenceDiagram5.png](img/diagrams/InternalSequenceDiagram4.png)
+![InternalSequenceDiagram4.png](img/diagrams/InternalSequenceDiagram4.png)
 
 ```plantuml
 @startuml
@@ -297,7 +297,7 @@ Controller --> Giocatore: configurazione_iniziale \ncounter_azzerato
 
 ## richiedi_NBM()
 
-![InternalSequenceDiagram6.png](img/diagrams/InternalSequenceDiagram5.png)
+![InternalSequenceDiagram5.png](img/diagrams/InternalSequenceDiagram5.png)
 
 ```plantuml
 @startuml
