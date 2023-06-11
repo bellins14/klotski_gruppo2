@@ -195,8 +195,7 @@ alt configurationNumber == _initialSelectedConf
 Game --> Controller: Exception
 
 else configurationNumber != _initialSelectedConf
-Game->Game: _initialSelectedConf = configurationNumber
-Game -> Configuration: newInitialConfiguration = new Configuration(_initialSelectedConf)
+Game -> Configuration: newInitialConfiguration = new Configuration(configurationNumber)
 Configuration --> Game: newInitialConfiguration
 Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
 Game -> Game: updateLogsWithCurrentConfiguration();
