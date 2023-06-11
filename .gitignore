@@ -2,7 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-klotski_files/solver.html
+klotski/klotski_files/solver.html
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
