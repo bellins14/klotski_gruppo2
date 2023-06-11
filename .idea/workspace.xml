@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="Sistemate gli ISD">
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="Aggiunta sollecitazione javadoc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/img/diagrams/ClassDiagram.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +31,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/com/project/klotski/Tuple.java" root0="FORCE_HIGHLIGHTING" />
@@ -515,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686506713640</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Aggiunta sollecitazione javadoc">
+      <created>1686507730087</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1686507730087</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,7 +540,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="tolti blocchi di codice commentati" />
     <MESSAGE value="sostituzione `button` con `block`" />
     <MESSAGE value="nuovo link nelle note" />
     <MESSAGE value="ordinato meglio classi Configuration, Piece, Controller" />
@@ -558,7 +564,8 @@
     <MESSAGE value="adjustments" />
     <MESSAGE value="Aggiunto il class diagram sistemato" />
     <MESSAGE value="Sistemate gli ISD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sistemate gli ISD" />
+    <MESSAGE value="Aggiunta sollecitazione javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta sollecitazione javadoc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
