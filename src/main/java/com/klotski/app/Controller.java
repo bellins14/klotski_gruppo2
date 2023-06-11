@@ -78,7 +78,7 @@ public class Controller {
      */
     public void initialize() {
         //Crea un nuovo gioco
-        game = new Game(Utility.LOG_FILE(),Utility.DC_FILE());
+        game = new Game(LOG_FILE,DC_FILE);
 
         //Setta le dimensioni massime del pane
         blockPane.setMaxHeight(MAX_PANE_HEIGHT);
@@ -301,7 +301,7 @@ public class Controller {
      * Metodo che carica il file per la risoluzione della NBM.
      */
     private void loadHTMLFile() {
-        File prova = new File(Utility.NBM_SOLVER_HTML_FILE());
+        File prova = new File(NBM_SOLVER_HTML_FILE);
         if (prova.exists()) {
             try {
                 StringBuilder contentBuilder = new StringBuilder();
