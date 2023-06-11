@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="NBM che ha bisogno del suo tempo">
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="ready">
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -529,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686509341456</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="ready">
+      <created>1686511975875</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1686511975875</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,7 +552,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="nuovo link nelle note" />
     <MESSAGE value="ordinato meglio classi Configuration, Piece, Controller" />
     <MESSAGE value="aggiustata imageFill" />
     <MESSAGE value="creati test (da sviluppare)" />
@@ -572,7 +576,8 @@
     <MESSAGE value="Sistemate gli ISD" />
     <MESSAGE value="Aggiunta sollecitazione javadoc" />
     <MESSAGE value="NBM che ha bisogno del suo tempo" />
-    <option name="LAST_COMMIT_MESSAGE" value="NBM che ha bisogno del suo tempo" />
+    <MESSAGE value="ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="ready" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
