@@ -113,24 +113,28 @@ alt keyCode == UP
 Game -> Game: movePieceUp(piece)
 
 Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
+Piece --> Game
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 else keyCode == DOWN 
 Game -> Game: movePieceDown(piece)
 
 Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
+Piece --> Game
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 else keyCode == RIGHT 
 Game -> Game: movePieceRight(piece)
 
 Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
+Piece --> Game
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 else keyCode == LEFT 
 Game -> Game: movePieceLeft(piece)
 
 Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
+Piece --> Game
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 end
@@ -153,8 +157,6 @@ else altrimenti
 Controller -> Controller: updateCounter();
 Controller-->Giocatore: configurazione_aggiornata,\n++counter
 end
-
-
 
 @enduml
 ```
