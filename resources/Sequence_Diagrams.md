@@ -188,6 +188,7 @@ end
 @startuml
 !theme materia-outline
 
+autonumber
 skinparam ArrowColor #00B4D8
 skinparam ActorBorderColor #03045E
 skinparam ActorFontColor #03045E
@@ -206,20 +207,28 @@ participant Game
 
 
 Giocatore -> Controller: configurationClicked()
+activate Controller
 Controller -> Game: resetToAnotherInitialConf(configurationNumber)
+activate Game
 
 alt configurationNumber == _initialSelectedConf
 Game --> Controller: Exception
 
 else configurationNumber != _initialSelectedConf
 Game -> Configuration: newInitialConfiguration = new Configuration(configurationNumber)
+activate Configuration
 Configuration --> Game: newInitialConfiguration
+deactivate Configuration
+
 Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
 Game -> Game: updateLogsWithCurrentConfiguration();
 Game -> Game: _moveCounter = 0 \nsetInitialSelectedConf(confNumber)
 Game --> Controller
+deactivate Game
+
 Controller -> Controller: updateBlockPaneAndCounter()
 Controller --> Giocatore: configurazione_alternativa \ncounter_azzerato
+deactivate Controller
 
 end
 @enduml
