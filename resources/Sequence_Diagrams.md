@@ -4,6 +4,7 @@
 
 ```plantuml
 @startuml
+@startuml
 !theme materia-outline
 
 skinparam ArrowColor #00B4D8
@@ -63,16 +64,13 @@ else
     Giocatore -> Sistema: richiedi_NBM()
     
     critical 
-    alt NBM precedente in caricamento
-      Sistema --> Giocatore: alert "NBM in caricamento"
-      
-      else altrimenti
       
       alt connessione ad internet funzionante
         Sistema --> Giocatore: configurazione_aggiornata_con_NBM, \n++counter
         
       else connessione ad internet non funzionante
-        Sistema --> Giocatore: alert "NBM non disponibile, connetti a internet" 
+        Sistema --> Giocatore: alert "NBM non disponibile, connetti a internet"
+      end
     end
 end
 @enduml
