@@ -85,7 +85,7 @@ end
 
 ## muovi(pezzo, keyCode)
 
-![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram2.png)
+![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram1.png)
 
 ```plantuml
 @startuml
@@ -161,7 +161,7 @@ end
 
 ## cambia_configurazione(configurazione_alternativa)
 
-![InternalSequenceDiagram3.png](img/diagrams/InternalSequenceDiagram3.png)
+![InternalSequenceDiagram3.png](img/diagrams/InternalSequenceDiagram2.png)
 
 ```plantuml
 @startuml
@@ -208,7 +208,7 @@ end
 
 ## undo()
 
-![InternalSequenceDiagram4.png](img/diagrams/InternalSequenceDiagram4.png)
+![InternalSequenceDiagram4.png](img/diagrams/InternalSequenceDiagram3.png)
 
 ```plantuml
 @startuml
@@ -252,7 +252,7 @@ end
 
 ## reset()
 
-![InternalSequenceDiagram5.png](img/diagrams/InternalSequenceDiagram5.png)
+![InternalSequenceDiagram5.png](img/diagrams/InternalSequenceDiagram4.png)
 
 ```plantuml
 @startuml
@@ -288,7 +288,7 @@ Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
 ## richiedi_NBM()
 
-![InternalSequenceDiagram6.png](img/diagrams/InternalSequenceDiagram6.png)
+![InternalSequenceDiagram6.png](img/diagrams/InternalSequenceDiagram5.png)
 
 ```plantuml
 @startuml
