@@ -33,270 +33,227 @@
 <div class="wrapper">
     <aside class="doc__nav">
         <ul>
-            <li class="js-btn selected">Manuale</li>
-            <li class="js-btn">Specifiche</li>
+            <li class="js-btn selected">Manual</li>
+            <li class="js-btn">Specifications</li>
             <li class="js-btn">Design</li>
             <li class="js-btn">Testing</li>
             <li class="js-btn">JavaDoc</li>
+
         </ul>
     </aside>
 
 
     <article class="doc__content">
         <section class="js-section">
-            <h1 class="section__title" style="font-size: 33px;">Manuale</h1>
-            <!-- INTRODUZIONE -->
-            <h2>Introduzione</h2>
+            <h1 class="section__title" style="font-size: 33px;">Manual</h1>
+            <!-- INTRODUCTION -->
+            <h2>Introduction</h2>
             <p>
-                L'applicazione <b>Klotski</b> permette di giocare all’omonimo gioco: un puzzle a blocchi scorrevoli nel
-                quale
-                l'obiettivo è spostare un blocco speciale in una posizione predefinita. La difficoltà sta nel
-                muovere ingegnosamente gli altri pezzi all’interno del piano di gioco per far strada a quello speciale,
-                e riuscire a fargli raggiungere la posizione finale nel minor numero di mosse possibile.
+                The <b>Klotski</b> application allows you to play the eponymous game: a sliding block puzzle
+                where the goal is to move a special block to a predefined position. The challenge lies in
+                cleverly maneuvering the other pieces within the game board to make way for the special one,
+                and to succeed in getting it to the final position in the fewest possible moves.
             </p>
             <div class="span-h2"></div>
 
-
-            <!-- TECNOLOGIE UTILIZZATE -->
-            <h2>Tecnologie utilizzate</h2>
-            <table id="Librerie">
+            <!-- TECHNOLOGIES USED -->
+            <h2>Technologies Used</h2>
+            <table id="Libraries">
                 <tr>
-                    <th><b>Nome</b></th>
-                    <th><b>Versione</b></th>
-                    <th><b>Descrizione</b></th>
+                    <th><b>Name</b></th>
+                    <th><b>Version</b></th>
+                    <th><b>Description</b></th>
                 </tr>
                 <tr>
                     <td align="center">Java</td>
                     <td align="center">20</td>
-                    <td>Ambiente e linguaggio di programmazione utilizzato per sviluppare l’applicazione.</td>
+                    <td>Environment and programming language used to develop the application.</td>
                 </tr>
                 <tr>
                     <td align="center">JavaFX</td>
                     <td align="center">20.0.1</td>
-                    <td>Piattaforma per lo sviluppo di applicazioni client, basata su Java.</td>
+                    <td>Platform for client application development, based on Java.</td>
                 </tr>
                 <tr>
                     <td align="center">JFoenix</td>
                     <td align="center">9.0.1</td>
-                    <td>Libreria Java open source che implementa Google Material Design utilizzando componenti Java.
+                    <td>Open-source Java library that implements Google Material Design using Java components.
                     </td>
                 </tr>
                 <tr>
                     <td align="center">Jackson</td>
                     <td align="center">2.12.3</td>
-                    <td>Libreria Java per la serializzazione di oggetti Java in oggetti JSON e viceversa.</td>
+                    <td>Java library for serializing Java objects to JSON and vice versa.</td>
                 </tr>
                 <tr>
                     <td align="center">JUnit</td>
                     <td align="center">5.9.1</td>
-                    <td>Framework per il testing automatico di classi Java.</td>
+                    <td>Framework for automated testing of Java classes.</td>
                 </tr>
                 <tr>
                     <td align="center">SceneBuilder</td>
                     <td align="center">19.0.0</td>
-                    <td>Software per la costruzione di una GUI JavaFX tramite "drag and drop".</td>
+                    <td>Software for building a JavaFX GUI using "drag and drop."</td>
                 </tr>
             </table>
             <p>
-                Si consiglia, alla fine, di consultare anche il <b>Javadoc</b> allegato per capire al meglio
-                l'integrazione delle librerie.
+                In the end, it is recommended to consult the attached <b>Javadoc</b> for a better understanding
+                of library integration.
             </p>
             <div class="span-h2"></div>
 
-            <!-- SCARICARE ED INSTALLARE IL SOFTWARE -->
-            <h2>Descrizione del progetto e implementazione delle specifiche</h2>
+            <!-- PROJECT DESCRIPTION AND IMPLEMENTATION DETAILS -->
+            <h2>Project Description and Implementation</h2>
             <p>
-                Nelle prime fasi di sviluppo del progetto sono state discusse e approfondite le specifiche,
-                con l’idea di affrontare le fasi di progettazione e di sviluppo più linearmente possibile.
+                In the early stages of project development, specifications were discussed and explored with the idea
+                of tackling the design and development phases as linearly as possible.
             </p>
             <p>
-                Dopo aver portato a termine la fase di definizione delle specifiche e di design (le quali "deliverables"
-                sono allegate nelle sezioni successive) è stato avviato lo sviluppo vero e proprio dell’applicazione.
+                After completing the specification and design phases (whose "deliverables" are attached in the
+                following sections), the actual development of the application was initiated.
             </p>
             <p>
-                L’idea principale, che è alla base della realizzazione delle funzionalità del software, è stata quella
-                di
-                utilizzare il concetto di “configurazione”, rappresentante l’insieme dei pezzi che compongono il puzzle
-                e le
-                loro posizioni in un determinato momento (o mossa).
+                The main idea underlying the implementation of the software's features was to use the concept of
+                "configuration," representing the set of pieces that make up the puzzle and their positions at a
+                given moment (or move).
             </p>
             <div class="span-h3"></div>
 
-            <h3>Interfaccia grafica e spostamento dei blocchi</h3>
+            <h3>Graphical Interface and Block Movement</h3>
             <p>
-                Per realizzare la GUI sono stati utilizzati la libreria grafica di JavaFX e il
-                software SceneBuilder per una disposizione più agevole degli elementi grafici e per la successiva
-                generazione
-                del file <code>.fxml</code>, il quale codifica l’interfaccia tramite il linguaggio di markup di JavaFX.
+                To create the GUI, the JavaFX graphics library and SceneBuilder software were used for easier
+                arrangement of graphical elements and the subsequent generation of the <code>.fxml</code> file,
+                which encodes the interface using JavaFX markup language.
             </p>
             <p>
-                I blocchi sono stati implementati tramite l’estensione del componente <code>Rectangle</code> di JavaFX,
-                così da poter gestire la
-                logica dello spostamento di questi ultimi - evitando, per esempio, che si sovrapponessero, o facendo in
-                modo che
-                restassero nei limiti del piano di gioco - semplicemente prelevando le informazioni dagli attributi
-                forniti
-                direttamente dalla libreria.
+                The blocks were implemented by extending the <code>Rectangle</code> component of JavaFX, allowing
+                for the management of block movement logic - preventing overlap, ensuring they stay within the game
+                board's boundaries, and extracting information from attributes provided directly by the library.
             </p>
             <p>
-                Per completare l’interfaccia sono stati aggiunti dei bottoni, selezionati tra i componenti JFoenix. A
-                ciascun
-                bottone è stata associata una funzionalità, ognuna delle quali è stata implementata tramite una logica
-                innescata da eventi scatenati dall’utente compiendo determinate azioni sulla GUI.
+                To complete the interface, buttons were added, selected from JFoenix components. Each button was
+                associated with a functionality, each of which was implemented through logic triggered by user
+                actions on the GUI.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Possibilità di salvare lo stato corrente e di ripristinarlo</h3>
+            <h3>Possibility to Save the Current State and Restore It</h3>
             <p>
-                Questa funzionalità è strettamente collegata alle altre. Per memorizzare lo stato corrente e permettere
-                il
-                suo ripristino una volta chiusa e riaperta l’applicazione, si è pensato di tenere traccia, tramite uno
-                "stack",
-                delle varie configurazioni generate ogni volta che un singolo blocco viene spostato. La memorizzazione
-                di questo
-                storico avviene su file JSON, il quale si aggiorna ad ogni mossa. Per gestire la scrittura e la lettura
-                su file
-                è stata utilizzata la libreria Jackson.
+                This feature is closely related to the others. To save the current state and allow its restoration
+                once the application is closed and reopened, we decided to keep track of various configurations
+                generated every time a single block is moved. This history is stored in a JSON file, which is updated
+                with each move. The Jackson library was used to handle file writing and reading.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Scegliere fra diverse configurazioni di partenza</h3>
+            <h3>Choosing from Different Initial Configurations</h3>
             <p>
-                Ad alcuni bottoni è stata associata la funzionalità di cambio configurazione. Le configurazioni
-                iniziali selezionabili sono memorizzate all’interno del codice.<br>
-                <cite> Notare che il cambio di configurazione comporta un reset dello storico.</cite>
+                The functionality of changing configuration was associated with some buttons. The selectable
+                initial configurations are stored within the code.<br>
+                <cite> Please note that changing the configuration results in a reset of the history.</cite>
             </p>
             <div class="span-h3"></div>
 
-            <h3>Resettare la partita </h3>
+            <h3>Resetting the Game</h3>
             <p>
-                Tramite l’apposito bottone, è possibile resettare la partita visualizzando la
-                configurazione dalla quale si era iniziato a giocare.
+                Through the dedicated button, you can reset the game by returning to the initial configuration from which you started playing.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Tornare indietro di una mossa</h3>
+            <h3>Undoing a Move</h3>
             <p>
-                Tramite l’apposito bottone, è possibile tornare indietro di una mossa; questa operazione è implementata
-                tramite
-                l’eliminazione dell’ultima configurazione dallo storico e la visualizzazione della penultima.
+                Using the appropriate button, you can undo one move; this operation is implemented by removing the last configuration from the history and displaying the penultimate one.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Next best move</h3>
+            <h3>Next Best Move</h3>
             <p>
-                Tramite l’apposito bottone, è possibile fare eseguire al gioco la miglior mossa possibile partendo dallo
-                stato
-                in cui si trova la partita quando la NBM viene richiesta. La logica che permette di usufruire di questa
-                funzionalità è implementata da un sistema esterno
+                With the dedicated button, you can make the game execute the best possible move starting from the current state of the game when NBM is requested. The logic enabling this functionality is implemented by an external system
                 (<a href="https://unpkg.co/klotski/dist/klotski.min.js"
-                    target="_blank">link allo script</a>).
-                La connessione fra quest'ultimo e il software è stata creata tramite due classi di JavaFX: WebView,
-                per “mappare” il contenuto di una pagina web, e WebEngine, per modificare una pagina web tramite
-                WebView.
-                Con questa infrastruttura è stato possibile interrogare il sistema esterno ed elaborare la sua risposta.
-                La configurazione risultante viene memorizzata nello storico come mossa.
+                    target="_blank">link to the script</a>).
+                The connection between the latter and the software was created using two JavaFX classes: WebView, to "map" the content of a web page, and WebEngine, to modify a web page through WebView.
+                With this infrastructure, it was possible to query the external system and process its response.
+                The resulting configuration is stored in the history as a move.
             </p>
             <div class="span-h3"></div>
 
-            <h3>Counter delle mosse effettuate</h3>
+            <h3>Move Counter</h3>
             <p>
-                E’ previsto un "counter" per il conteggio delle mosse di una partita, il quale corrisponde alla
-                dimensione
-                dello storico senza tenere conto della configurazione iniziale (segue questa logica per tutte le altre
-                funzionalità).
+                A "counter" is provided to count the moves in a game, which corresponds to the size of the history without considering the initial configuration (this logic applies to all other features).
             </p>
             <div class="span-h3"></div>
 
             <p>
-                Al termine dello sviluppo, è stato svolto un refactoring del codice per permettere un testing efficiente
-                e
-                rigoroso, anche tramite JUnit (le "deliverables" relative al testing sono disponibili nelle sezioni
-                successive).
+                At the end of the development, code refactoring was performed to enable efficient and rigorous testing, including the use of JUnit (the testing deliverables are available in the following sections).
             </p>
             <div class="span-h2"></div>
 
-            <!-- SCARICARE ED INSTALLARE IL SOFTWARE -->
-            <h2>Scaricare ed installare il software</h2>
+            <!-- DOWNLOAD AND INSTALL THE SOFTWARE -->
+            <h2>Download and Install the Software</h2>
             <h3>Jar</h3>
             <p>
-                Per <b>scaricare il programma</b> in formato <code>.jar</code>, cliccare sul bottone Windows o macOS:
+                To <b>download the program</b> in <code>.jar</code> format, click on the Windows or macOS button:
             </p>
 
             <div style="display: flex; justify-content: center; align-items: center;">
-                <!-- Mettere il link download del jar -->
+                <!-- Put the jar download link -->
 
                 <button id="downloadButton1" title="windows version" type="button" class="btn-primary" style="margin-left: 20px"
-                    data-url="https://github.com/bellins14/klotski_gruppo2/releases/download/v0.0.0/klotski_gruppo2-windows.zip"
-                    data-file="klotski_gruppo2-windows.zip" onclick="getZipFile(this)">
+                        data-url="https://github.com/bellins14/klotski_gruppo2/releases/download/v0.0.0/klotski_gruppo2-windows.zip"
+                        data-file="klotski_gruppo2-windows.zip" onclick="getZipFile(this)">
                     <i class="fa fa-windows" style="font-size: 30px; color: var(--primary-color)"></i>
                 </button>
 
                 <button id="downloadButton2" title="macOS version" type="button" class="btn-primary" style="margin-left: 20px"
-                data-url="https://github.com/bellins14/klotski_gruppo2/releases/download/v0.0.1/klotski_gruppo2-macOS.zip"
-                data-file="klotski_gruppo2-macOS.zip"
-                onclick="getZipFile(this)">
-                <i class="fa fa-apple" style="font-size: 30px; color: var(--primary-color)"></i></button>
+                        data-url="https://github.com/bellins14/klotski_gruppo2/releases/download/v0.0.1/klotski_gruppo2-macOS.zip"
+                        data-file="klotski_gruppo2-macOS.zip"
+                        onclick="getZipFile(this)">
+                    <i class="fa fa-apple" style="font-size: 30px; color: var(--primary-color)"></i></button>
             </div>
 
             <p>
-                Una volta terminato il download del file <code>.zip</code>, estrarne il contenuto in una locazione a
-                piacere all’interno
-                del proprio dispositivo. Sarà presente una directory contenente una cartella e un file:
+                Once the <code>.zip</code> file download is complete, extract its contents to a location of your choice on your device. There will be a directory containing a folder and a file:
             </p>
             <ul>
                 <li>
-                    <b>/klotski_files</b>, nella quale sono contenuti i file necessari per il salvataggio delle partite
-                    e la richiesta della NBM. È stato scelto di allocarli esternamente poiché non era possibile renderizzarli
-                    ed utilizzarli all’interno del file <code>.jar</code>.
+                    <b>/klotski_files</b>, which contains the files necessary for game saving and NBM request. It was chosen to allocate them externally because it was not possible to render and use them within the <code>.jar</code> file.
                 </li>
                 <br>
                 <li>
-                    <b><code>klotski.jar</code></b>, l'applicazione.
+                    <b><code>klotski.jar</code></b>, the application.
                 </li>
             </ul>
             <p>
-                Per avviare l’applicazione, <b>fare doppio click sul file <code>klotski.jar</code></b>. L’esecuzione in
-                questa modalità del programma è possibile <b>previa installazione del JRE</b>.
+                To start the application, <b>double click on the <code>klotski.jar</code> file</b>. Running the program in this mode is possible <b>after installing the JRE</b>.
             </p>
-            <cite>Per eseguire il file klotski.jar è necessario che sia nella stessa directory della cartella klotski_files.</cite>
-            <cite>Per mancanza di supporti alternativi, si garantisce il funzionamento su Windows 10 e mac-OS Monterey 12.6</cite>
+            <cite>To run the klotski.jar file, it must be in the same directory as the klotski_files folder.</cite>
+            <cite>Due to a lack of alternative support, functionality is guaranteed on Windows 10 and macOS Monterey 12.6</cite>
 
             <br>
-            <h3>Nota: macOS</h3>
+            <h3>Note: macOS</h3>
             <p>
-                Se, nel tentativo di eseguire il file .jar appare l'avviso 'Impossibile aprire “klotski.jar” perché proviene da uno sviluppatore non identificato', è possibile eseguirlo ugualmente tramite: Tasto destro > Apri > Apri
+                If, when attempting to run the .jar file, the alert 'Unable to open “klotski.jar” because it is from an unidentified developer' appears, you can still run it through: Right-click > Open > Open
             </p>
             <div class="span-h3"></div>
 
-
-
-
             <h3>IDE</h3>
             <p>
-                Nel caso ci siano problemi con la precedente modalità d'installazione, si consiglia di <b>clonare la
-                repository
-                presente al link in alto a destra</b>, aprire il progetto scaricato tramite un <b>IDE</b> (ad esempio
-                IntelliJ) ed eseguire il
-                file <code>Main.java</code> presente al seguente percorso:
+                If there are issues with the previous installation method, it is recommended to <b>clone the repository</b> at the link in the upper right corner, open the downloaded project with an <b>IDE</b> (such as IntelliJ), and run the
+                <code>Main.java</code> file located at the following path:
                 <b>src/main/java/com/klotski/app/Main.java</b>
                 <br><br>
-                Per l’esecuzione è necessaria l'installazione della <b>jdk</b> (preferibilmente <b>versione 20</b>).
+                Execution requires the installation of the <b>jdk</b> (preferably <b>version 20</b>).
             </p>
             <div class="span-h2"></div>
 
-            <!-- COME GIOCARE -->
-            <h2>Come giocare</h2>
+            <!-- HOW TO PLAY -->
+            <h2>How to Play</h2>
             <img src="resources/img/other/Applicazione.png" alt="Klotski" title="screenshot" width="100%">
             <p>
-                Per <b>muovere un blocco</b>, basterà semplicemente <b>selezionarlo cliccandolo</b> e <b>muoverlo</b>
-                utilizzando le <b>frecce
-                direzionali</b>, o <b>WASD</b>. <br><br>
-                Per <b>cambiare configurazione</b>, basterà <b>cliccare</b> uno dei <b>bottoni numerati</b> a destra del
-                puzzle. <br><br>
-                Per richiedere le <b>funzioni</b>, basterà <b>cliccare</b> i relativi <b>bottoni a sinistra</b> del
-                puzzle. <br><br>
-                <b>Nota:</b> la NBM potrebbe richiedere del tempo, soprattutto alla prima esecuzione.
+                To <b>move a block</b>, simply <b>click on it</b> and <b>move it</b> using the <b>arrow keys</b> or <b>WASD</b>. <br><br>
+                To <b>change configuration</b>, simply <b>click</b> one of the <b>numbered buttons</b> to the right of the puzzle. <br><br>
+                To request the <b>functions</b>, simply <b>click</b> the corresponding <b>buttons to the left</b> of the puzzle. <br><br>
+                <b>Note:</b> NBM may take some time, especially on the first run.
             </p>
             <div class="span-h2"></div>
 
@@ -305,55 +262,61 @@
             <h3>GRASP</h3>
             <h4>Creator</h4>
             <p>
-                La classe <code>Piece</code> è stata progettata seguendo il pattern "Creator".
-                <code>Configuration</code>, infatti, istanzia e aggrega
-                oggetti della classe <code>Piece</code>. Anche <code>Configuration</code>, a sua volta, è contenuta ed
-                istanziata in <code>Game</code>.
+                The <code>Piece</code> class was designed following the "Creator" pattern.
+                <code>Configuration</code> indeed instantiates and aggregates
+                objects of the <code>Piece</code> class. Also, <code>Configuration</code> is contained and instantiated in <code>Game</code>.
             </p>
             <div class="span-h4"></div>
 
             <h4>Controller</h4>
             <p>
-                La classe <code>Controller</code> è semplicemente ciò che dice di essere: un "controller", ossia un
-                oggetto che si occupa
-                della comunicazione tra interfaccia grafica e sistema. Questa classe si occupa di recepire gli input
-                forniti
-                dall’utente attraverso la GUI, richiamare successivamente le funzioni implementate in altre classi che
-                sopperiscono alla logica della richiesta, per poi ricevere i risultati e aggiornare l’interfaccia di
-                conseguenza.
+                The <code>Controller</code> class is simply what it says it is: a "controller," an object responsible for
+                communication between the graphical interface and the system. This class is responsible for receiving the user inputs provided through the GUI, subsequently invoking functions implemented in other classes that handle the request's logic, and then receiving the results and updating the interface accordingly.
             </p>
             <div class="span-h4"></div>
 
             <h4>Low Coupling</h4>
             <p>
-                Tutte le classi di questo software sono state progettate in modo da limitare il più possibile il
-                "coupling",
-                cioè l’impatto che una modifica ad una classe potrebbe avere sull’intero progetto.
+                All classes in this software were designed to limit coupling as much as possible, i.e., the impact that a change to one class could have on the entire project.
             </p>
             <div class="span-h4"></div>
 
             <h4>High Cohesion</h4>
             <p>
-                Tutte le classi di questo software sono state progettate in modo da rappresentare il più possibile
-                concetti
-                atomici e separati.
+                All classes in this software were designed to represent atomic and separate concepts as much as possible.
             </p>
             <div class="span-h4"></div>
 
             <h4>Pure Fabrication</h4>
             <p>
-                Ci siamo accorti, durante la fase di design, che sarebbe stata comoda una classe che gestisse tutta la
-                logica
-                dietro ad una partita di Klotski. Con questo scopo è stata "fabbricata" la classe <code>Game</code>.
+                During the design phase, it was noticed that a class to handle all the logic behind a game of Klotski would be convenient. With this purpose, the <code>Game</code> class was "fabricated."
             </p>
             <div class="span-h3"></div>
 
             <h3>GoF</h3>
             <h4>Facade</h4>
             <p>
-                La classe <code>Controller</code> funge anche da interfaccia per l'NBM_Script. In pratica è l'unica
-                facciata che connette il
-                sistema con gli altri attori esterni, e questo rispecchia il design pattern "Facade".
+                The <code>Controller</code> class also serves as an interface for the NBM_Script. In practice, it is the only facade that connects the system with other external actors, which reflects the "Facade" design pattern.
+            </p>
+
+            <div class="span-h4"></div>
+
+            <h4>Low Coupling</h4>
+            <p>
+                All classes in this software were designed to limit coupling as much as possible, i.e., the impact that a change to one class could have on the entire project.
+            </p>
+            <h4>High Cohesion</h4>
+            <p>
+                All classes in this software were designed to represent atomic and separate concepts as much as possible.
+            </p>
+            <h4>Pure Fabrication</h4>
+            <p>
+                During the design phase, it was noticed that a class to handle all the logic behind a game of Klotski would be convenient. With this purpose, the `Game` class was "fabricated."
+            </p>
+            <h3>GoF</h3>
+            <h4>Facade</h4>
+            <p>
+                The `Controller` class also serves as an interface for the NBM_Script. In practice, it is the only facade that connects the system with other external actors, which reflects the "Facade" design pattern.
             </p>
 
 
@@ -362,7 +325,7 @@
         <hr/>  <!-- ---------------------------------------------------------------------- -->
 
         <section class="js-section">
-            <h1 class="section__title" style="font-size: 33px;">Specifiche</h1>
+            <h1 class="section__title" style="font-size: 33px;">Specifications</h1>
 
             <!--IMMAGINE USE CASES-->
             <img class="myImg" src="resources/img/diagrams/UseCasesDiagram.png" alt="Use Cases" title="Use Cases"
@@ -372,19 +335,17 @@
                 <div id="caption"></div>
             </div>
             <ol>
-                <li><a href="#UC1" style="color: var(--accent-color)">Visualizzare configurazione corrente</a></li>
-                <li><a href="#UC2" style="color: var(--accent-color)">Scegliere configurazione iniziale</a></li>
-                <li><a href="#UC3" style="color: var(--accent-color)">Muovere i blocchi nelle posizioni consentite</a>
-                </li>
-                <li><a href="#UC4" style="color: var(--accent-color)">Visualizzare counter delle mosse effettuate</a>
-                </li>
-                <li><a href="#UC5" style="color: var(--accent-color)">Utilizzare funzione di reset</a></li>
-                <li><a href="#UC6" style="color: var(--accent-color)">Utilizzare funzione di undo</a></li>
-                <li><a href="#UC7" style="color: var(--accent-color)">Visualizzare "next best move"</a></li>
-                <li><a href="#UC8" style="color: var(--accent-color)">Salvare la partita</a></li>
-                <li><a href="#UC9" style="color: var(--accent-color)">Ripristinare partita salvata</a></li>
-                <li><a href="#UC10" style="color: var(--accent-color)">Fornire "next best move"</a></li>
-                <li><a href="#UC11" style="color: var(--accent-color)">Vincere</a></li>
+                <li><a href="#UC1" style="color: var(--accent-color)">View current configuration</a></li>
+                <li><a href="#UC2" style="color: var(--accent-color)">Choose initial configuration</a></li>
+                <li><a href="#UC3" style="color: var(--accent-color)">Move pieces to allowed positions</a></li>
+                <li><a href="#UC4" style="color: var(--accent-color)">View move counter</a></li>
+                <li><a href="#UC5" style="color: var(--accent-color)">Use reset function</a></li>
+                <li><a href="#UC6" style="color: var(--accent-color)">Use undo function</a></li>
+                <li><a href="#UC7" style="color: var(--accent-color)">View "next best move"</a></li>
+                <li><a href="#UC8" style="color: var(--accent-color)">Save the game</a></li>
+                <li><a href="#UC9" style="color: var(--accent-color)">Restore saved game</a></li>
+                <li><a href="#UC10" style="color: var(--accent-color)">Provide "next best move"</a></li>
+                <li><a href="#UC11" style="color: var(--accent-color)">Win</a></li>
             </ol>
 
             <!--TABELLA UC1-->
@@ -393,56 +354,55 @@
                     <th><b id="UC1">Use Case 1</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Visualizzare configurazione corrente</td>
+                    <td><b> Use Case Name</b>
+                    <td>View current configuration</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il giocatore deve visualizzare a video la configurazione corrente.</td>
+                    <td><b>Description</b></td>
+                    <td>The player must be able to view the current configuration on the screen.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
+                    <td><b>Preconditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Viene mostrata al giocatore l'ultima configurazione presente nello storico.</td>
-                </tr>
+                    <td><b>Main Scenario</b></td>
+                    <td>The last configuration stored in the history is displayed to the player.</td>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
+                    <td><b>Alternative Scenario</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
+                    <td><b>Post-Conditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
+                    <td><b>Notes</b></td>
                     <td>-</td>
                 </tr>
             </table>
 
             <!--TABELLA UC2-->
+
             <table>
                 <tr>
                     <th><b id="UC2">Use Case 2</b></th>
                 </tr>
                 <tr>
                     <td><b>Nome dello Use Case</b>
-                    <td>Scegliere configurazione iniziale</td>
+                    <td>Choose Initial Configuration</td>
                 </tr>
                 <tr>
                     <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td>Player</td>
                 </tr>
                 <tr>
                     <td><b>Descrizione</b></td>
-                    <td>Il giocatore può selezionare una tra quattro configurazioni iniziali per cominciare a giocare.
-                    </td>
+                    <td>The player can select one of four initial configurations to start playing.</td>
                 </tr>
                 <tr>
                     <td><b>Precondizioni</b></td>
@@ -450,25 +410,22 @@
                 </tr>
                 <tr>
                     <td><b>Scenario Principale</b></td>
-                    <td>Viene impostata dal programma la disposizione iniziale dei pezzi in base alla configurazione
-                        iniziale scelta dal giocatore.
-                    </td>
+                    <td>The program sets up the initial arrangement of pieces based on the configuration chosen by the player.</td>
                 </tr>
                 <tr>
                     <td><b>Scenario Alternativo</b></td>
-                    <td>La partita può iniziare o andare avanti con la configurazione corrente.</td>
+                    <td>The game can start or continue with the current configuration.</td>
                 </tr>
                 <tr>
                     <td><b>Post-Condizioni</b></td>
-                    <td>Resettare il counter delle mosse e la partita.</td>
+                    <td>Reset the move counter and the game.</td>
                 </tr>
                 <tr>
                     <td><b>Note</b></td>
-                    <td>La scelta della configurazione iniziale può sempre essere attuata, ma la partita in corso verrà
-                        eliminata.
-                    </td>
+                    <td>The choice of the initial configuration can always be made, but the ongoing game will be deleted.</td>
                 </tr>
             </table>
+
 
             <!--TABELLA UC3-->
             <table>
@@ -476,35 +433,35 @@
                     <th><b id="UC3">Use Case 3</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Muovere i pezzi nelle posizioni consentite</td>
+                    <td><b>Use Case Name</b>
+                    <td>Move Pieces to Allowed Positions</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il giocatore può traslare un pezzo per mossa negli spazi liberi che lo possono contenere.</td>
+                    <td><b>Description</b></td>
+                    <td>The player can move a piece one position per turn to an empty space that can accommodate it.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
-                    <td>Deve esistere una posizione consentita, ossia uno spazio libero.</td>
+                    <td><b>Preconditions</b></td>
+                    <td>There must be an allowed position, i.e., an empty space.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Il pezzo selezionato viene spostato di una posizione nella direzione scelta dal giocatore.</td>
+                    <td><b>Main Scenario</b></td>
+                    <td>The selected piece is moved one position in the direction chosen by the player.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Il pezzo selezionato non si muove.</td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The selected piece does not move.</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
-                    <td>Incrementare il counter delle mosse, salvare la partita.</td>
+                    <td><b>Post-Conditions</b></td>
+                    <td>Increase the move counter, save the game.</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
+                    <td><b>Notes</b></td>
                     <td>-</td>
                 </tr>
             </table>
@@ -515,45 +472,39 @@
                     <th><b id="UC4">Use Case 4</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Visualizzare counter delle mosse effettuate</td>
+                    <td><b>Use Case Name</b>
+                    <td>Display Moves Counter</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il giocatore deve riuscire a visualizzare il counter delle mosse effettuate fino a quel
-                        momento.
-                    </td>
+                    <td><b>Description</b></td>
+                    <td>The player must be able to view the number of moves made so far.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
-                    <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte
-                        fino a quel
-                        momento.
-                    </td>
+                    <td><b>Preconditions</b></td>
+                    <td>A counter must be present in the graphical interface displaying the number of moves made up to that point.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Ogni volta che il giocatore fa qualcosa, il counter viene aggiornato e visualizzato dal
-                        giocatore stesso.
-                    </td>
+                    <td><b>Main Scenario</b></td>
+                    <td>Whenever the player takes an action, the counter is updated and displayed to the player.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
+                    <td><b>Alternative Scenario</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
+                    <td><b>Post-Conditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
+                    <td><b>Notes</b></td>
                     <td>-</td>
                 </tr>
             </table>
+
 
             <!--TABELLA UC5-->
             <table>
@@ -561,41 +512,39 @@
                     <th><b id="UC5">Use Case 5</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Utilizzare funzione di reset</td>
+                    <td><b>Use Case Name</b>
+                    <td>Use Reset Function</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il giocatore può resettare la partita attraverso un tasto dedicato.</td>
+                    <td><b>Description</b></td>
+                    <td>The player can reset the game using a dedicated button.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
+                    <td><b>Preconditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>In qualsiasi momento il giocatore può decidere di resettare la partita premendo il tasto
-                        "reset". I pezzi devono essere sistemati nella configurazione iniziale relativa alla partita che
-                        stava giocando.
-                    </td>
+                    <td><b>Main Scenario</b></td>
+                    <td>At any time, the player can choose to reset the game by pressing the "reset" button. Pieces must be arranged in the initial configuration related to the game they were playing.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Se il giocatore non ha ancora effettuato una mossa, il reset non fa nulla.</td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>If the player has not made a move yet, the reset does nothing.</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
-                    <td>Resettare il counter delle mosse e la partita.</td>
+                    <td><b>Post-Conditions</b></td>
+                    <td>Reset the move counter and the game.</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
+                    <td><b>Notes</b></td>
                     <td>-</td>
                 </tr>
             </table>
+
 
             <!--TABELLA UC6-->
             <table>
@@ -603,43 +552,39 @@
                     <th><b id="UC6">Use Case 6</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Utilizzare funzione di undo</td>
+                    <td><b>Use Case Name</b>
+                    <td>Use Undo Function</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il giocatore può scegliere di annullare una mossa attraverso il tasto dedicato.</td>
+                    <td><b>Description</b></td>
+                    <td>The player can choose to undo a move using a dedicated button.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
-                    <td>Deve essere stata eseguita almeno una mossa prima di richiamare la funzionalità.</td>
+                    <td><b>Preconditions</b></td>
+                    <td>At least one move must have been made before invoking the functionality.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>La disposizione dei pezzi ritorna alla configurazione precedente rispetto a quella corrente.
-                    </td>
+                    <td><b>Main Scenario</b></td>
+                    <td>The arrangement of the pieces reverts to the previous configuration relative to the current one.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Non viene applicata alcuna modifica allo stato di gioco, viene segnalato al giocatore che non ci
-                        sono mosse da annullare.
-                    </td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>No modifications are applied to the game state, and the player is notified that there are no moves to undo.</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
-                    <td>Decrementare il counter delle mosse, salvare la partita.</td>
+                    <td><b>Post-Conditions</b></td>
+                    <td>Decrease the move counter, save the game.</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
-                    <td>Il giocatore può annullare quante mosse vuole, tornando indietro nello storico della partita,
-                        fino alla configurazione iniziale.
-                    </td>
+                    <td><b>Notes</b></td>
+                    <td>The player can undo as many moves as they wish, going back through the game's history to the initial configuration.</td>
                 </tr>
             </table>
+
 
             <!--TABELLA UC7-->
             <table>
@@ -647,56 +592,47 @@
                     <th><b id="UC7">Use Case 7</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Visualizzare "next best move"</td>
+                    <td><b>Use Case Name</b>
+                    <td>Display "Next Best Move"</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il giocatore visualizza una configurazione che rappresenta la mossa migliore rispetto alla
-                        configurazione precedente.
-                    </td>
+                    <td><b>Description</b></td>
+                    <td>The player sees a configuration representing the best move compared to the previous configuration.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
-                    <td>Il giocatore deve essere connesso ad Internet.</td>
+                    <td><b>Preconditions</b></td>
+                    <td>The player must be connected to the internet.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Ogni volta che si richiede la NBM, un pezzo alla volta verrà spostato in modo da ottenere la
-                        vittoria nel minor numero di mosse necessarie.
-                    </td>
+                    <td><b>Main Scenario</b></td>
+                    <td>Whenever "Next Best Move" is requested, one piece at a time will be moved to achieve victory in the fewest possible moves.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Viene visualizzato un messaggio "NBM non disponibile, connettiti ad Internet" nel caso il
-                        giocatore non sia connesso.
-                    </td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The message "NBM not available, connect to the Internet" is displayed if the player is not connected.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Viene visualizzato un messaggio "Errore nel caricamento della NBM" nel caso sia andato storto
-                        qualcosa.
-                    </td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The message "Error loading NBM" is displayed if something goes wrong.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Viene visualizzato un messaggio "Caricamento della NBM in corso..." nel caso il giocatore stia
-                        richiedendo la NBM di nuovo prima di averla ricevuta.
-                    </td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The message "Loading NBM..." is displayed if the player requests the NBM again before receiving it.</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
-                    <td>Incrementare il counter delle mosse, salvare la partita.</td>
+                    <td><b>Post-Conditions</b></td>
+                    <td>Increase the move counter, save the game.</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
+                    <td><b>Notes</b></td>
                     <td>-</td>
                 </tr>
             </table>
+
 
             <!--TABELLA UC8-->
             <table>
@@ -704,45 +640,39 @@
                     <th><b id="UC8">Use Case 8</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Salvare la partita</td>
+                    <td><b>Use Case Name</b>
+                    <td>Save the Game</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il giocatore deve poter salvare la partita.
-                    </td>
+                    <td><b>Description</b></td>
+                    <td>The player must be able to save the game.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
-                    <td>Il giocatore ha fatto qualcosa.</td>
+                    <td><b>Preconditions</b></td>
+                    <td>The player has taken some action.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei pezzi (mossa,
-                        undo, reset o scelta della configurazione iniziale), la partita deve essere salvata in modo che,
-                        se il programma dovesse essere chiuso, all'avvio successivo, la partita possa essere
-                        ripristinata.
-                    </td>
+                    <td><b>Main Scenario</b></td>
+                    <td>Whenever the player performs an action that affects the arrangement of the pieces (move, undo, reset, or choose the initial configuration), the game must be saved so that if the program is closed, the game can be resumed upon the next launch.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
+                    <td><b>Alternative Scenario</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
+                    <td><b>Post-Conditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
-                    <td>La partita è rappresentata da tutte le configurazioni generate fino a quel momento (più la
-                        configurazione iniziale) e, di conseguenza, dal counter delle mosse.
-                    </td>
+                    <td><b>Notes</b></td>
+                    <td>The game is represented by all configurations generated up to that point (plus the initial configuration) and, consequently, by the move counter.</td>
                 </tr>
             </table>
+
 
             <!--TABELLA UC9-->
             <table>
@@ -750,42 +680,45 @@
                     <th><b id="UC9">Use Case 9</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Ripristinare partita salvata</td>
+                    <td><b>Use Case Name</b></td>
+                    <td>Restore Saved Game</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultima configurazione salvata.</td>
+                    <td><b>Description</b></td>
+                    <td>When the player reopens the application, the game loads the last saved configuration.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
-                    <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa,
-                        il giocatore deve voler visualizzare l'ultima configurazione, avviando la partita.
+                    <td><b>Preconditions</b></td>
+                    <td>
+                        <ul>
+                            <li>A game save must be present.</li>
+                            <li>The loaded game must not have already concluded.</li>
+                            <li>The player must want to view the last configuration by starting the game.</li>
+                        </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Il giocatore apre l'applicazione e visualizza l'ultima configurazione salvata alla chiusura del
-                        gioco.
-                    </td>
+                    <td><b>Main Scenario</b></td>
+                    <td>The player opens the application and views the last saved configuration from when the game was last closed.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
+                    <td><b>Alternative Scenario</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
+                    <td><b>Post-Conditions</b></td>
                     <td>-</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
+                    <td><b>Notes</b></td>
                     <td>-</td>
                 </tr>
             </table>
+
 
             <!--TABELLA UC10-->
             <table>
@@ -793,44 +726,45 @@
                     <th><b id="UC10">Use Case 10</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Fornire "next best move"</td>
+                    <td><b>Use Case Name</b></td>
+                    <td>Provide "next best move"</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
+                    <td><b>Actors</b></td>
                     <td>NBM_Script</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il sistema esterno NBM_Script calcola la NBM.</td>
+                    <td><b>Description</b></td>
+                    <td>The external system NBM_Script calculates the NBM (Next Best Move).</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
-                    <td>Il giocatore deve essere connesso ad Internet.</td>
+                    <td><b>Preconditions</b></td>
+                    <td>The player must be connected to the internet.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Il sistema esterno calcola la NBM e la fornisce.</td>
+                    <td><b>Main Scenario</b></td>
+                    <td>The external system calculates the NBM and provides it.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Il sistema esterno non riesce a calcolare la NBM per qualche motivo.</td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The external system fails to calculate the NBM for some reason.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Il sistema esterno non riceve la richiesta o non riesce ad inviare una risposta a causa
-                        dell'interruzione della connessione.
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The external system does not receive the request or cannot send a response due to a
+                        connection interruption.
                     </td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
-                    <td>L'NBM deve essere elaborata e mostrata.</td>
+                    <td><b>Post-Conditions</b></td>
+                    <td>The NBM must be processed and displayed.</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
+                    <td><b>Notes</b></td>
                     <td>-</td>
                 </tr>
             </table>
+
 
             <!--TABELLA UC11-->
             <table>
@@ -838,42 +772,39 @@
                     <th><b id="UC11">Use Case 11</b></th>
                 </tr>
                 <tr>
-                    <td><b>Nome dello Use Case</b>
-                    <td>Vincere</td>
+                    <td><b>Use Case Name</b></td>
+                    <td>Win</td>
                 </tr>
                 <tr>
-                    <td><b>Attori</b></td>
-                    <td>Giocatore</td>
+                    <td><b>Actors</b></td>
+                    <td>Player</td>
                 </tr>
                 <tr>
-                    <td><b>Descrizione</b></td>
-                    <td>Il giocatore deve poter vincere.</td>
+                    <td><b>Description</b></td>
+                    <td>The player must be able to win.</td>
                 </tr>
                 <tr>
-                    <td><b>Precondizioni</b></td>
-                    <td>Il giocatore deve aver mosso il pezzo speciale nella posizione di vittoria (in basso in
-                        centro).
-                    </td>
+                    <td><b>Preconditions</b></td>
+                    <td>The player must have moved the special piece to the winning position (bottom center).</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Principale</b></td>
-                    <td>Al giocatore viene segnalato che ha vinto.</td>
+                    <td><b>Main Scenario</b></td>
+                    <td>The player is notified that they have won.</td>
                 </tr>
                 <tr>
-                    <td><b>Scenario Alternativo</b></td>
-                    <td>Il giocatore, con la mossa corrente, non ha raggiunto la posizione di vittoria col pezzo
-                        speciale.
-                    </td>
+                    <td><b>Alternative Scenario</b></td>
+                    <td>The player, with the current move, has not reached the winning position with the special piece.</td>
                 </tr>
                 <tr>
-                    <td><b>Post-Condizioni</b></td>
-                    <td>Il counter delle mosse viene azzerato, la partita viene resettata.</td>
+                    <td><b>Post-Conditions</b></td>
+                    <td>The move counter is reset, and the game is reset.</td>
                 </tr>
                 <tr>
-                    <td><b>Note</b></td>
+                    <td><b>Notes</b></td>
                     <td>-</td>
                 </tr>
             </table>
+
         </section>
 
         <hr/>
@@ -898,10 +829,9 @@
                  style="display:block; margin-left:auto; margin-right:auto">
 
             <h3>Internal Sequence Diagrams</h3>
-            <h4>muovi(pezzo, keyCode)</h4>
+            <h4>move(piece, keyCode)</h4>
             <p>
-                La sequenza numerata all'interno dei costrutti <code>alt</code> non è da intendersi come rigorosa,
-                in quanto vengono eseguiti alternativamente, ma è indicativa.
+                The numbered sequence within the <code>alt</code> constructs should not be taken as strict, as they are executed alternatively but indicative.
             </p>
             <!--IMMAGINE -->
             <img class="myImg" src="resources/img/diagrams/InternalSequenceDiagram1.png" alt="muovi(pezzo, keyCode)"
@@ -910,11 +840,11 @@
 
             <div class="span-h4"></div>
 
-            <h4>cambia_configurazione(configurazione_alternativa)</h4>
+            <h4>change_configuration(alternative_configuration)</h4>
             <p>
-                La sequenza numerata all'interno dei costrutti <code>alt</code> non è da intendersi come rigorosa,
-                in quanto vengono eseguiti alternativamente, ma è indicativa.
+                The numbered sequence within the <code>alt</code> constructs should not be taken as strict, as they are executed alternatively but indicative.
             </p>
+
             <!--IMMAGINE -->
             <img class="myImg" src="resources/img/diagrams/InternalSequenceDiagram2.png" alt="cambia_configurazione(configurazione_alternativa)"
                  title="cambia_configurazione(configurazione_alternativa)" height="90%" width="90%"
@@ -925,9 +855,9 @@
 
             <h4>undo()</h4>
             <p>
-                La sequenza numerata all'interno dei costrutti <code>alt</code> non è da intendersi come rigorosa,
-                in quanto vengono eseguiti alternativamente, ma è indicativa.
+                The numbered sequence within the <code>alt</code> constructs should not be taken as strict, as they are executed alternatively but indicative.
             </p>
+
             <!--IMMAGINE -->
             <img class="myImg" src="resources/img/diagrams/InternalSequenceDiagram3.png"
                  alt="undo()"
@@ -947,10 +877,9 @@
             <div class="span-h4"></div>
 
 
-            <h4>richiedi_NBM()</h4>
+            <h4>request_NBM()</h4>
             <p>
-                La sequenza numerata all'interno dei costrutti <code>alt</code> non è da intendersi come rigorosa,
-                in quanto vengono eseguiti alternativamente, ma è indicativa.
+                The numbered sequence within the <code>alt</code> constructs should not be taken as strict, as they are executed alternatively but indicative.
             </p>
             <!--IMMAGINE -->
             <img class="myImg" src="resources/img/diagrams/InternalSequenceDiagram5.png" alt="richiedi_NBM()" title="richiedi_NBM()"
@@ -974,7 +903,7 @@
                                  title="Unit Tests Results" alt="Unit Tests Results"
                                  style="display:block; margin-left:auto; margin-right:auto"></a>
                         <figcaption>
-                            <p style="text-align: center;">Clicca per vedere i risultati degli Unit Tests</p>
+                            <p style="text-align: center;">Click to view the results of the Unit Tests</p>
                         </figcaption>
                     </figure>
                     <div>
@@ -986,7 +915,7 @@
                                      title="System Tests" alt="System Tests"
                                      style="display:block; margin-left:auto; margin-right:auto"></a>
                             <figcaption>
-                                <p style="text-align: center;">Clicca per vedere i System Tests</p>
+                                <p style="text-align: center;">Click to view the System Tests</p>
                             </figcaption>
                         </figure>
                     </div>
@@ -1005,7 +934,7 @@
                     <img src="resources/img/icons/JavaDoc.jfif" width="20%" height="20%" title="Java Doc" alt="Java Doc"
                          style="display:block; margin-left:auto; margin-right:auto"></a>
                 <figcaption>
-                    <p style="text-align: center;">Clicca per vedere il JavaDoc</p>
+                    <p style="text-align: center;">Click to view the JavaDoc</p>
                 </figcaption>
             </figure>
         </section>
