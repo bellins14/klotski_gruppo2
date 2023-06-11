@@ -231,8 +231,6 @@ skinparam BackgroundColor #FFFFFF
 actor Giocatore 
 participant Controller
 participant Game
-participant Piece
-
 
 Giocatore -> Controller: undo()
 Controller -> Game: undo()
@@ -246,6 +244,7 @@ else altrimenti
 Game -> Game: setConfiguration(_stackLog.pop()) 
 Game -> Game: updateLogsWithCurrentConfiguration()
 Game -> Game:_moveCounter--
+Game --> Controller
 Controller -> Controller: updateBlockPaneAndCounter()
 Controller --> Giocatore: configurazione_precedente,\n--counter
 
