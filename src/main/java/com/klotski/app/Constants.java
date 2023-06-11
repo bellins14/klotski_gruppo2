@@ -36,12 +36,12 @@ public class Constants {
     /**
      * File di supporto per la serializzazione (json).
      */
-    public static final String DC_FILE = "src/main/resources/com/klotski/app/json/ConfigurationDC.json";
+    //public static final String DC_FILE = "src/main/resources/com/klotski/app/json/ConfigurationDC.json";
 
     /**
      * File di log (o storico o database) delle mosse (in forma di stringhe json di configurazioni).
      */
-    public static final String LOG_FILE = "src/main/resources/com/klotski/app/json/ConfigurationLog.json";
+    //public static final String LOG_FILE = "src/main/resources/com/klotski/app/json/ConfigurationLog.json";
 
     /**
      * Dimensione del log quando è vuoto.
@@ -139,7 +139,7 @@ public class Constants {
     /**
      * Path file HTML per poter risolvere l'NBM.
      */
-    public static final String NBM_SOLVER_HTML_FILE = "src/main/resources/com/klotski/app/solver.html";
+    //public static final String NBM_SOLVER_HTML_FILE = "src/main/resources/com/klotski/app/solver.html";
 
 
 

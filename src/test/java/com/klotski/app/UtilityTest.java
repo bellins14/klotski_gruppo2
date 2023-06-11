@@ -44,7 +44,7 @@ class UtilityTest {
         }, "Expected updateHTMLFile() not to throw an exception.");
 
         //Verifica che il file sia stato creato correttamente
-        File file = new File(NBM_SOLVER_HTML_FILE);
+        File file = new File(Utility.NBM_SOLVER_HTML_FILE());
         assertTrue(file.exists(), "Expected HTML file to be created.");
 
         //Verifica il contenuto del file
