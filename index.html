@@ -24,7 +24,7 @@
       <div class="menu__item toggle"><span></span></div>
       <li class="menu__item">
         <a href="https://github.com/bellins14/klotski_gruppo2.git" class="link link--dark">
-          <i class="fa fa-github"></i><span style="margin-left: 4px">Github</span>
+          <i class="fa fa-github"></i><span style="margin-left: 4px">Source code</span>
         </a>
       </li>
     </ul>
@@ -144,34 +144,36 @@
 
         <h3>Scegliere fra diverse configurazioni di partenza</h3>
         <p>
-          Ad alcuni bottoni è stata associata la funzionalità di cambio visualizzazione ad una prefissata
-          configurazione. Le configurazioni iniziali, che si possono scegliere, sono memorizzate all’interno del codice.
-          Da notare che il cambio di configurazione comporta un reset dello storico.
+          Ad alcuni bottoni è stata associata la funzionalità di cambio configurazione. Le configurazioni
+          iniziali selezionabili sono memorizzate all’interno del codice.<br>
+          <cite> Notare che il cambio di configurazione comporta un reset dello storico. </cite>
         </p>
         <div class = "span-h3"></div>
 
         <h3>Resettare la partita </h3>
         <p>
-          Tramite l’apposito bottone, è possibile resettare la partita, quindi anche lo storico, visualizzando la
-          configurazione iniziale per quella partita.
+          Tramite l’apposito bottone, è possibile resettare la partita visualizzando la
+          configurazione dalla quale si era iniziato a giocare.
         </p>
         <div class = "span-h3"></div>
 
         <h3>Tornare indietro di una mossa</h3>
         <p>
-          Tramite l’apposito bottone, è possibile tornare indietro di una mossa. Questa operazione è implementata tramite
-          l’eliminazione dell’ultima configurazione dallo storico, e la visualizzazione della penultima.
+          Tramite l’apposito bottone, è possibile tornare indietro di una mossa; questa operazione è implementata tramite
+          l’eliminazione dell’ultima configurazione dallo storico e la visualizzazione della penultima.
         </p>
         <div class = "span-h3"></div>
 
         <h3>Next best move</h3>
         <p>
-          Tramite l’apposito bottone, è possibile visualizzare una configurazione che rappresenta la mossa migliore
-          possibile che si può fare a partire dalla mossa precedente. La logica che permette di usufruire di questa
-          funzionalità è implementata da un sistema esterno. La connessione fra il software e questo sistema esterno è
-          stata creata tramite due classi di JavaFX: WebView, che “mappa” il contenuto di una pagina web, e WebEngine,
-          che permette di modificare una pagina web tramite WebView. Con questa infrastruttura è stato possibile
-          interrogare il sistema esterno, ed elaborare la sua risposta. La configurazione risultante viene memorizzata
+          Tramite l’apposito bottone, è possibile fare eseguire al gioco la miglior mossa possibile partendo dallo stato
+          in cui si trova la partita quando viene richiesta. La logica che permette di usufruire di questa
+          funzionalità è implementata da un sistema esterno
+          (<a href="https://github.com/MatteoTonello/EUTrustServicesApp/blob/main/out/artifacts/EUTrustServicesApplication_jar/EUTrustServicesApplication.jar" target="_blank">link allo script</a>).
+          La connessione fra quest'ultimo e il software è
+          stata creata tramite due classi di JavaFX: WebView, per “mappare” il contenuto di una pagina web, e WebEngine,
+          per modificare una pagina web tramite WebView. Con questa infrastruttura è stato possibile
+          interrogare il sistema esterno ed elaborare la sua risposta. La configurazione risultante viene memorizzata
           nello storico come mossa.
         </p>
         <div class = "span-h3"></div>
@@ -302,20 +304,62 @@
           <div id="caption"></div>
         </div>
         <ol>
-          <li><a href="#UC1" style="color: var(--accent-color)">Scegliere configurazione iniziale</a></li>
-          <li><a href="#UC2" style="color: var(--accent-color)">Muovere i blocchi nelle posizioni consentite</a></li>
-          <li><a href="#UC3" style="color: var(--accent-color)">Utilizzare funzione di reset</a></li>
-          <li><a href="#UC4" style="color: var(--accent-color)">Utilizzare funzione di undo</a></li>
-          <li><a href="#UC5" style="color: var(--accent-color)">Richiedere "next best move"</a></li>
-          <li><a href="#UC6" style="color: var(--accent-color)">Visualizzare counter delle mosse effettuate</a></li>
-          <li><a href="#UC7" style="color: var(--accent-color)">Salvare lo stato corrente</a></li>
-          <li><a href="#UC8" style="color: var(--accent-color)">Ripristinare partita salvata</a></li>
+          <li><a href="#UC1" style="color: var(--accent-color)">Visualizzare configurazione corrente</a></li>
+          <li><a href="#UC2" style="color: var(--accent-color)">Scegliere configurazione iniziale</a></li>
+          <li><a href="#UC3" style="color: var(--accent-color)">Muovere i blocchi nelle posizioni consentite</a></li>
+          <li><a href="#UC4" style="color: var(--accent-color)">Visualizzare counter delle mosse effettuate</a></li>
+          <li><a href="#UC5" style="color: var(--accent-color)">Utilizzare funzione di reset</a></li>
+          <li><a href="#UC6" style="color: var(--accent-color)">Utilizzare funzione di undo</a></li>
+          <li><a href="#UC7" style="color: var(--accent-color)">Visualizzare "next best move"</a></li>
+          <li><a href="#UC8" style="color: var(--accent-color)">Salvare la partita</a></li>
+          <li><a href="#UC9" style="color: var(--accent-color)">Ripristinare partita salvata</a></li>
+          <li><a href="#UC10" style="color: var(--accent-color)">Fornire "next best move"</a></li>
+          <li><a href="#UC11" style="color: var(--accent-color)">Vincere</a></li>
         </ol>
 
-        <!--TABELLA UC 1-->
+        <!--TABELLA UC1-->
         <table>
           <tr>
             <th><b id="UC1">Use Case 1</b></th>
+          </tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Visualizzare configurazione corrente</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Giocatore</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il giocatore deve visualizzare a video la configurazione corrente.</td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>Viene mostrata al giocatore l'ultima configurazione presente nello storico.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC2-->
+        <table>
+          <tr>
+            <th><b id="UC2">Use Case 2</b></th>
           </tr>
           <tr>
             <td><b>Nome dello Use Case</b>
@@ -327,65 +371,27 @@
           </tr>
           <tr>
             <td><b>Descrizione</b></td>
-            <td>Il giocatore può selezionare una tra quattro configurazioni iniziali da cui partire con il gioco</td>
+            <td>Il giocatore può selezionare una tra quattro configurazioni iniziali per cominciare a giocare.</td>
           </tr>
           <tr>
             <td><b>Precondizioni</b></td>
-            <td>Nessuna mossa deve essere stata effettuata, oppure deve essere stato appena indotto un reset della partita</td>
-          </tr>
-          <tr>
-            <td><b>Scenario Principale</b></td>
-            <td>Viene impostata dal programma la disposizione iniziale dei blocchi scelta dal giocatore</td>
-          </tr>
-          <tr>
-            <td><b>Scenario Alternativo</b></td>
-            <td>La partita può iniziare con la configurazione fornita dal programma</td>
-          </tr>
-          <tr>
-            <td><b>Post-Condizioni</b></td>
-            <td>Resettare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
-          </tr>
-          <tr>
-            <td><b>Note</b></td>
-            <td>Valutare se è sempre possibile determinare il "next best move" dalla condizione iniziale</td>
-          </tr>
-        </table>
-
-        <!--TABELLA UC2-->
-        <table>
-          <tr>
-            <th><b id="UC2">Use Case 2</b></th>
-          <tr>
-            <td><b>Nome dello Use Case</b>
-            <td>Muovere i blocchi nelle posizioni consentite</td>
-          </tr>
-          <tr>
-            <td><b>Attori</b></td>
-            <td>Giocatore</td>
-          </tr>
-          <tr>
-            <td><b>Descrizione</b></td>
-            <td>Il giocatore può muovere i blocchi in uno degli spazi liberi sufficientemente grandi</td>
-          </tr>
-          <tr>
-            <td><b>Precondizioni</b></td>
-            <td>Deve esistere una posizione consentita, ossia uno spazio libero</td>
-          </tr>
-          <tr>
-            <td><b>Scenario Principale</b></td>
-            <td>Il blocco selezionato viene spostato di una posizione nella direzione scelta dal giocatore</td>
-          </tr>
-          <tr>
-            <td><b>Scenario Alternativo</b></td>
-            <td>Il blocco selezionato non si muove</td>
-          </tr>
-          <tr>
-            <td><b>Post-Condizioni</b></td>
-            <td>Incrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
-          </tr>
-          <tr>
-            <td><b>Note</b></td>
             <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>Viene impostata dal programma la disposizione iniziale dei pezzi in base alla configurazione iniziale scelta dal giocatore.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>La partita può iniziare o andare avanti con la configurazione corrente.</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>Resettare il counter delle mosse e la partita.</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>La scelta della configurazione iniziale può sempre essere attuata, ma la partita in corso verrà eliminata.</td>
           </tr>
         </table>
 
@@ -396,7 +402,7 @@
           </tr>
           <tr>
             <td><b>Nome dello Use Case</b>
-            <td>Utilizzare funzione di reset</td>
+            <td>Muovere i blocchi nelle posizioni consentite</td>
           </tr>
           <tr>
             <td><b>Attori</b></td>
@@ -404,23 +410,23 @@
           </tr>
           <tr>
             <td><b>Descrizione</b></td>
-            <td>Il giocatore può resettare la partita attraverso un tasto dedicato. </td>
+            <td>Il giocatore può traslare un pezzo per mossa negli spazi liberi che lo possono contenere.</td>
           </tr>
           <tr>
             <td><b>Precondizioni</b></td>
-            <td>-</td>
+            <td>Deve esistere una posizione consentita, ossia uno spazio libero.</td>
           </tr>
           <tr>
             <td><b>Scenario Principale</b></td>
-            <td>In qualsiasi momento l giocatore può decidere di resettare la partita premendo il tasto "reset". I blocchi devono essere sistemati nella configurazione iniziale</td>
+            <td>Il pezzo selezionato viene spostato di una posizione nella direzione scelta dal giocatore.</td>
           </tr>
           <tr>
             <td><b>Scenario Alternativo</b></td>
-            <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
+            <td>Il pezzo selezionato non si muove.</td>
           </tr>
           <tr>
             <td><b>Post-Condizioni</b></td>
-            <td>Resettare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+            <td>Incrementare il counter delle mosse, salvare la partita.</td>
           </tr>
           <tr>
             <td><b>Note</b></td>
@@ -435,7 +441,7 @@
           </tr>
           <tr>
             <td><b>Nome dello Use Case</b>
-            <td>Utilizzare funzione di undo</td>
+            <td>Visualizzare counter delle mosse effettuate</td>
           </tr>
           <tr>
             <td><b>Attori</b></td>
@@ -443,23 +449,25 @@
           </tr>
           <tr>
             <td><b>Descrizione</b></td>
-            <td>Il giocatore può scegliere di annullare una o più mosse, in ordine cronologico dalla più recente alla meno recente, fino alla situazione di partenza</td>
+            <td>Il giocatore deve ruscire a visualizzare il counter delle mosse effettuate fino a quel momento.</td>
           </tr>
           <tr>
             <td><b>Precondizioni</b></td>
-            <td>Deve essere stata eseguita almeno una mossa</td>
+            <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte fino a quel
+              momento.
+            </td>
           </tr>
           <tr>
             <td><b>Scenario Principale</b></td>
-            <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
+            <td>Ogni volta che il giocatore fa qualcosa, il counter viene aggiornato e visualizzato dal giocatore stesso.</td>
           </tr>
           <tr>
             <td><b>Scenario Alternativo</b></td>
-            <td>Non viene applicata alcuna modifica allo stato di gioco</td>
+            <td>-</td>
           </tr>
           <tr>
             <td><b>Post-Condizioni</b></td>
-            <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+            <td>-</td>
           </tr>
           <tr>
             <td><b>Note</b></td>
@@ -474,31 +482,31 @@
           </tr>
           <tr>
             <td><b>Nome dello Use Case</b>
-            <td>Next Best Move</td>
+            <td>Utilizzare funzione di reset</td>
           </tr>
           <tr>
             <td><b>Attori</b></td>
-            <td>Giocatore(?)</td>
+            <td>Giocatore</td>
           </tr>
           <tr>
             <td><b>Descrizione</b></td>
-            <td>Viene fornita la mossa migliore per quella configurazione</td>
+            <td>Il giocatore può resettare la partita attraverso un tasto dedicato.</td>
           </tr>
           <tr>
             <td><b>Precondizioni</b></td>
-            <td>La partita non deve essere finita</td>
+            <td>-</td>
           </tr>
           <tr>
             <td><b>Scenario Principale</b></td>
-            <td>ogni volta che si clicca su questo bottone un blocco alla volta verrà spostato in modo da ottenere la vittoria nel minor numero di mosse necessarie.</td>
+            <td>In qualsiasi momento il giocatore può decidere di resettare la partita premendo il tasto "reset". I pezzi devono essere sistemati nella configurazione iniziale relativa alla partita che stava giocando.</td>
           </tr>
           <tr>
             <td><b>Scenario Alternativo</b></td>
-            <td>Viene visualizzato il messaggio "Mossa non disponibile"</td>
+            <td>Se il giocatore non ha ancora effettuato una mossa, il reset non fa nulla.</td>
           </tr>
           <tr>
             <td><b>Post-Condizioni</b></td>
-            <td>Incrementare il counter delle mosse, salvare lo stato corrente, calcolare la next best move</td>
+            <td>Resettare il counter delle mosse e la partita.</td>
           </tr>
           <tr>
             <td><b>Note</b></td>
@@ -513,7 +521,7 @@
           </tr>
           <tr>
             <td><b>Nome dello Use Case</b>
-            <td>Visualizzare counter delle mosse effettuate</td>
+            <td>Utilizzare funzione di undo</td>
           </tr>
           <tr>
             <td><b>Attori</b></td>
@@ -521,29 +529,27 @@
           </tr>
           <tr>
             <td><b>Descrizione</b></td>
-            <td>Il giocatore deve riuscire a visualizzare il counter delle mosse</td>
+            <td>Il giocatore può scegliere di annullare una mossa attraverso il tasto dedicato.</td>
           </tr>
           <tr>
             <td><b>Precondizioni</b></td>
-            <td>Deve essere disposto un counter nell'interfaccia grafica che mostra il numero di mosse svolte fino a quel
-              momento
-            </td>
+            <td>Deve essere stata eseguita almeno una mossa prima di richiamare la funzionalità.</td>
           </tr>
           <tr>
             <td><b>Scenario Principale</b></td>
-            <td>Ogni volta che il giocatore fa una mossa, il counter viene aumentato</td>
+            <td>La disposizione dei pezzi ritorna alla cofigurazione precedente rispetto a quella corrente.</td>
           </tr>
           <tr>
             <td><b>Scenario Alternativo</b></td>
-            <td>-</td>
+            <td>Non viene applicata alcuna modifica allo stato di gioco, viene segnalato al giocatore che non ci sono mosse da annullare.</td>
           </tr>
           <tr>
             <td><b>Post-Condizioni</b></td>
-            <td>-</td>
+            <td>Decrementare il counter delle mosse, salvare la partita.</td>
           </tr>
           <tr>
             <td><b>Note</b></td>
-            <td>-</td>
+            <td>Il giocatore può annullare quante mosse vuole, tornando indietro nello storico della partita, fino alla configurazione iniziale.</td>
           </tr>
         </table>
 
@@ -554,35 +560,44 @@
           </tr>
           <tr>
             <td><b>Nome dello Use Case</b>
-            <td>Salvare lo stato corrente</td>
+            <td>Visualizzare "next best move"</td>
           </tr>
           <tr>
             <td><b>Attori</b></td>
-            <td>Gioco</td>
+            <td>Giocatore</td>
           </tr>
           <tr>
             <td><b>Descrizione</b></td>
-            <td>Il gioco deve sempre salvare lo stato corrente </td>
+            <td>Il giocatore visualizza una configurazione che rappresenta la mossa migliore rispetto alla configurazione precedente.</td>
           </tr>
           <tr>
             <td><b>Precondizioni</b></td>
-            <td>-</td>
+            <td>Il giocatore deve essere connesso ad Internet.</td>
           </tr>
           <tr>
             <td><b>Scenario Principale</b></td>
-            <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), il gioco deve salvare automaticamente lo stato della partita, in modo che, se il programma dovesse essere chiuso, all'avvio successivo lo stato della partita possa essere ripristinato</td>
+            <td>Ogni volta che si richiede la NBM, un pezzo alla volta verrà spostato in modo da ottenere la vittoria nel minor numero di mosse necessarie.</td>
           </tr>
           <tr>
             <td><b>Scenario Alternativo</b></td>
-            <td>Se il giocatore non ha ancora effettuato alcuna mossa, il reset non fa nulla </td>
+            <td>Viene visualizzato un messaggio "NBM non disponibile, connettiti ad Internet" nel caso il giocatore non sia connesso.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Viene visualizzato un messaggio "Errore nel caricamento dell'NBM" nel caso sia andato storto qualcosa.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Viene visualizzato un messaggio "Caricamento dell'NBM in corso..." nel caso il giocatore stia richiedendo l'NBM di nuovo prima di averla ricevuta.
+            </td>
           </tr>
           <tr>
             <td><b>Post-Condizioni</b></td>
-            <td>-</td>
+            <td>Incrementare il counter delle mosse, salvare la partita.</td>
           </tr>
           <tr>
             <td><b>Note</b></td>
-            <td>Lo stato corrente deve comprendere la configurazione dei blocchi, le configurazioni iniziali, il counter delle mosse, lo storico delle mosse</td>
+            <td>-</td>
           </tr>
         </table>
 
@@ -592,33 +607,154 @@
             <th><b id="UC8">Use Case 8</b></th>
           </tr>
           <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Salvare la partita</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Giocatore</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il giocatore deve poter salvare la partita.
+            </td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>Il giocatore ha fatto qualcosa.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei pezzi (mossa, undo, reset o scelta della configurazione iniziale), la partita deve essere salvata in modo che, se il programma dovesse essere chiuso, all'avvio successivo, la partita possa essere ripristinata.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>La partita è rappresentata da tutte le configurazioni generate fino a quel momento (più la configurazione iniziale) e, di conseguenza, dal counter delle mosse.</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC9-->
+        <table>
+          <tr>
+            <th><b id="UC9">Use Case 9</b></th>
+          </tr>
           <tr>
             <td><b>Nome dello Use Case</b>
             <td>Ripristinare partita salvata</td>
           </tr>
           <tr>
             <td><b>Attori</b></td>
-            <td>Gioco</td>
+            <td>Giocatore</td>
           </tr>
           <tr>
             <td><b>Descrizione</b></td>
-            <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultimo stato salvato</td>
+            <td>Quando il giocatore riapre l'applicazione, il gioco carica l'ultima configurazione salvata.</td>
           </tr>
           <tr>
             <td><b>Precondizioni</b></td>
-            <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa</td>
+            <td>Deve essere presente un salvataggio di gioco, la partita caricata non deve essere già conclusa, il giocatore deve voler visualizzare l'ultima configurazione, avviando la partita.</td>
           </tr>
           <tr>
             <td><b>Scenario Principale</b></td>
-            <td>La disposizione dei blocchi ritorna allo stato precedente alla mossa eseguita che si vuole annullare</td>
+            <td>Il giocatore apre l'applicazione e visualizza l'ultima configurazione salvata alla chiusura del gioco.</td>
           </tr>
           <tr>
             <td><b>Scenario Alternativo</b></td>
-            <td>Non viene applicata alcuna modifica allo stato di gioco</td>
+            <td>-</td>
           </tr>
           <tr>
             <td><b>Post-Condizioni</b></td>
-            <td>Decrementare il counter delle mosse, salvare lo stato corrente, elaborare "next best move"</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC10-->
+        <table>
+          <tr>
+            <th><b id="UC10">Use Case 10</b></th>
+          </tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Fornire "next best move"</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>NBM_Script</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il sistema esterno NBM_Script calcola l'NBM.</td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>Il giocatore deve essere connesso ad Internet.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>Il sistema esterno calcola l'NBM e la fornisce.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Il sistema esterno non riesce a calcolare l'NBM per qualche motivo.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Il sistema esterno non riceve la richiesta o non riesce ad inviare una risposta a causa dell'interruzione della connessione.</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>L'NBM deve esssere elaborata e mostrata.</td>
+          </tr>
+          <tr>
+            <td><b>Note</b></td>
+            <td>-</td>
+          </tr>
+        </table>
+
+        <!--TABELLA UC11-->
+        <table>
+          <tr>
+            <th><b id="UC11">Use Case 11</b></th>
+          </tr>
+          <tr>
+            <td><b>Nome dello Use Case</b>
+            <td>Vincere</td>
+          </tr>
+          <tr>
+            <td><b>Attori</b></td>
+            <td>Giocatore</td>
+          </tr>
+          <tr>
+            <td><b>Descrizione</b></td>
+            <td>Il giocatore deve poter vincere.</td>
+          </tr>
+          <tr>
+            <td><b>Precondizioni</b></td>
+            <td>Il giocatore deve aver mosso il pezzo speciale nella posizione di vittoria (in basso in centro).</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Principale</b></td>
+            <td>Al giocatore viene segnalato che ha vinto.</td>
+          </tr>
+          <tr>
+            <td><b>Scenario Alternativo</b></td>
+            <td>Il giocatore, con la mossa corrente, non ha raggiunto la posizione di vittoria col pezzo speciale.</td>
+          </tr>
+          <tr>
+            <td><b>Post-Condizioni</b></td>
+            <td>Il counter delle mosse viene azzerato, la partita viene resettata.</td>
           </tr>
           <tr>
             <td><b>Note</b></td>
