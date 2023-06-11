@@ -298,139 +298,78 @@ skinparam DatabaseFontColor #03045E
 skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
-participant Partita
-database Log
-participant NBM_Script
+participant Controller
+participant Game
+participant Piece
+participant Utility
+actor NBM_Script
 
-Giocatore -> Partita: esegui_NBM()
 
-Partita -> NBM_Script: richiedi_NBM(configurazione_corrente)
-NBM_Script -> NBM_Script: calcola_NBM()
-NBM_Script --> Partita: restituisci(configurazione_NBM)
-    
-Partita -> Partita: aggiorna_configurazione_corrente(configurazione_NBM)\ncounter++
-Partita -> Partita: aggiorna_storico_configurazioni(configurazione_corrente)
-Partita -> Log: scrivi(storico_configurazioni)
+Giocatore -> Controller: nextBestMove()
 
-Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
+Controller -> Utility : isInternetConnected()
+
+alt connessione non internet funzionante
+  
+  Controller --> Giocatore : alert "NBM non disponibile, connetti a internet" 
+  
+else connessione ad internet funzionante
+
+  Controller -> Utility : updateHTMLFile()
+  
+  Controller -> Controller : loadHTMLFile()
+  
+  Controller -> NBM_Script : Richiedi NBM
+  
+  NBM_Script -> NBM_Script : Calcola NBM
+  
+  NBM_Script --> Controller : NBM
+  
+  Controller -> Game: movePiece(piece, keyCode)
+  alt keyCode == up
+  Game -> Game: movePieceUp(piece)
+  
+  Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
+  Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+  
+  else keyCode == down 
+  Game -> Game: movePieceDown(piece)
+  
+  Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
+  Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+  
+  else keyCode == right 
+  Game -> Game: movePieceRight(piece)
+  
+  Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
+  Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+  
+  else keyCode == left 
+  Game -> Game: movePieceLeft(piece)
+  
+  Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
+  Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+  
+  end
+  
+  Game -> Game: checkNotWin()
+  
+  alt vittoria
+  Game -> Game: reset();
+  Game --> Controller: Exception()
+  Controller -> Controller: updateBlockPaneAndCounter();
+  Controller -> Utility: setAlert("Hai vinto")
+  Utility --> Giocatore: alert "Hai vinto"
+  Controller --> Giocatore: configurazione_iniziale \ncounter_azzerato
+  
+  
+  
+  else altrimenti
+  Controller-->Giocatore: configurazione_aggiornata,\n++counter
+  end
+end
+
 
 @enduml
-```
-
-
-## Internal Sequence Diagram - Completo(da Eliminare)
-
-![InternalSequenceDiagram.png](img/diagrams/InternalSequenceDiagram.png)
-
-```plantuml
-@startuml
-!theme materia-outline
-
-actor Giocatore 
-participant Partita #ff00ff
-database Database #99FF99
-participant API #ff0000
-skinparam BackgroundColor #FFFFFF
-
-
-Giocatore -> Partita: inizia_partita()
-
-Partita -> Database: richiedi_storico_stati()
-Database -> Database: controlla()
-
-
-alt storico disponibile
-    Database --> Partita: restituisci(storico_stati)
-
-else storico non disponibile
-    Database --> Partita: eccezione(nessuno_storico)
-    Partita -> Database: richiedi_configurazioni()
-    Database --> Partita: restituisci(configurazioni)
-    Partita -> Partita: scegli_configurazione_iniziale(configurazioni)
-
-end
-
-Partita -> API: richiedi_NBM(configurazione_corrente)
-API --> Partita: restituisci(NBM)
-
-Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
-
-par 
-    Giocatore -> Partita: muovi(blocco)
-    
-    critical 
-    alt vittoria
-      Partita --> Giocatore:messaggio("hai vinto")
-
-      else altrimenti
-      Partita -> Partita: aggiorna_configurazione_corrente()\ncounter++
-      Partita -> Partita: aggiorna_storico_stati(nuovo_stato)
-      Partita -> Database: upload(storico_stati)
-    
-      Partita -> API: richiedi_NBM(configurazione_corrente)
-      API --> Partita: restituisci(NBM)
-      Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
-
-    end
-
-    end
-
-else 
-    Giocatore -> Partita: cambia_configurazione(configurazione_alternativa)
-    
-    critical
-      Partita -> Partita: aggiorna_configuazione_corrente(configurazione_alternativa)\nreset_counter()\nreset_storico_stati()
-      Partita -> Partita: aggiorna_storico_stati(nuovo_stato)
-      Partita -> Database: upload(storico_stati)
-      
-      Partita -> API: richiedi_NBM(configurazione_corrente)
-      API --> Partita: restituisci(NBM)
-      
-      Partita-->Giocatore: mostra(configurazione_corrente,\ncounter)
-    end
-    
-else 
-    Giocatore -> Partita: undo()
-
-    critical
-      Partita -> Partita: aggiorna_configurazione_corrente(stato_precedente[configurazione_corrente])\ncounter--
-      Partita -> Partita: rimuovi_ultimo_stato(storico_stati)
-      Partita -> Database: upload(storico_stati)
-      
-      Partita -> API: richiedi_NBM(configurazione_corrente)
-      API --> Partita: restituisci(NBM)
-      
-      Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
-
-    end
-    
-else 
-    Giocatore -> Partita: reset()
-    critical
-      Partita -> Partita: aggiorna_configurazione_corrente(configurazione_iniziale)\nreset_counter()
-      Partita -> Partita: reset_storico_stati()
-      Partita -> Database: upload(storico_stati)
-      
-      Partita -> API: richiedi_NBM(configurazione_corrente)
-      API --> Partita: restituisci(NBM)    
-      
-      Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
-
-    end
-    
-Giocatore -> Partita: esegui_NBM()
-    
-    critical 
-      Partita -> Partita: aggiorna_configurazione_corrente()\ncounter++
-      Partita -> Partita: aggiorna_storico_stati(nuovo_stato)
-      Partita -> Database: upload(storico_stati)
-    
-      Partita -> API: richiedi_NBM(configurazione_corrente)
-      API --> Partita: restituisci(NBM)
-      Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
-
-
-    end
-end
 @enduml
 ```
