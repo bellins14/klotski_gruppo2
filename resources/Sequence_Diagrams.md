@@ -83,7 +83,6 @@ end
 # Internal Sequence Diagrams
 
 
-
 ## muovi(pezzo, keyCode)
 
 ![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram2.png)
@@ -219,20 +218,24 @@ skinparam DatabaseFontColor #03045E
 skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
-participant Partita
-database Log
+participant Controller
+participant Game
+participant Piece
 
-Giocatore -> Partita: undo()
 
-alt counter > 0
-  Partita -> Partita: rimuovi_ultima_configurazione(storico_configurazioni)
-  Partita -> Partita: aggiorna_configurazione_corrente(ultima_configurazione(storico_configurazioni)\ncounter--
-  Partita -> Log: scrivi(storico_configurazioni)
-else counter == 0
-  Partita --> Giocatore: messaggio("Impossibile tornare indietro")
+Giocatore -> Controller: undo()
+Controller -> Game: undo()
+
+alt _stackLog.isEmpty()
+Game --> Controller: Exception()
+Utility --> Giocatore: alert "Non hai mosso nessun blocco"
+
+else altrimenti
+Game -> Game: setConfiguration(_stackLog.pop()) \n_moveCounter--;
+Controller -> Controller: updateBlockPaneAndCounter();
+Controller --> Giocatore: configurazione_precedente,\n--counter
+
 end
-
-Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
 @enduml
 ```
