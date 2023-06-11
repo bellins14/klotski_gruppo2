@@ -46,12 +46,12 @@ public class Constants {
     /**
      * Dimensione del log quando è vuoto.
      */
-    static  int EMPTY_LOG_SIZE = 0;
+    public static  int EMPTY_LOG_SIZE = 0;
 
     /**
      * Dimensione del log quando ha una configurazione iniziale.
      */
-    static int SINGLE_LOG_SIZE = 1;
+    public static int SINGLE_LOG_SIZE = 1;
 
 
     //JFX Scene:
@@ -335,17 +335,17 @@ public class Constants {
     /**
      * Array contenente i valori dei tipi di blocchi contenuti nella configurazione iniziale 4.
      */
-    public static int[] config4PieceTypes = {3, 2, 1, 1, 1, 1, 0, 0, 0, 0};
+    public static final int[] config4PieceTypes = {3, 2, 1, 1, 1, 1, 0, 0, 0, 0};
 
     /**
      * Array contenente i valori delle coordinate X dei blocchi contenuti nella configurazione iniziale 4.
      */
-    public static int[] config4PieceX = {100, 100, 300, 0, 300, 0, 300, 200, 100, 0};
+    public static final int[] config4PieceX = {100, 100, 300, 0, 300, 0, 300, 200, 100, 0};
 
     /**
      * Array contenente i valori delle coordinate Y dei blocchi contenuti nella configurazione iniziale 3.
      */
-    public static int[] config4PieceY = {0, 200, 200, 200, 0, 0, 400, 300, 300, 400};
+    public static final int[] config4PieceY = {0, 200, 200, 200, 0, 0, 400, 300, 300, 400};
 
     /**
      * Costruttore vuoto privato per rendere la classe statica.
