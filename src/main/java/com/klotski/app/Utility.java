@@ -43,6 +43,7 @@ public class Utility {
     /**
      * Metodo che si occupa di controllare se è presente una connessione a internet, utilizzato per
      * la NBM
+     * @return true o false se la connessione è up o down
      */
     public static boolean isInternetConnected() {
 
@@ -64,7 +65,7 @@ public class Utility {
 
     /**
      * Metodo che serve per riscrivere il file per la richiesta della NBM.
-     *
+     * @param _configuration configurazione attuale.
      * @throws IOException Eccezione per scrittura file "solver.html"
      */
     public static void updateHTMLFile(Configuration _configuration) throws IOException {
@@ -114,6 +115,7 @@ public class Utility {
      * Metodo che controlla che non ci sia overlapping tra pezzi durante il loro spostamento.
      *
      * @param movingPiece pezzo che si vuole.
+     * @param conf configurazione attuale.
      * @param deltaX quantità di cui si muove il pezzo orizzontalmente.
      * @param deltaY quantità di cui si muove il pezzo verticalmente.
      * @return false se overlap, true altrimenti.

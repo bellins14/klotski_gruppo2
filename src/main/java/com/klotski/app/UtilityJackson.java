@@ -101,6 +101,7 @@ public class UtilityJackson {
      * Metodo per trascrivere uno Stack di oggetti configurazioni in un file di log (o storico o database)
      * in formato JSON
      * @param stack Stack di oggetti Configuration.
+     * @param logFilePathName filePath.
      */
     public static void  serializeConfigurationLog (Stack<Configuration> stack, String logFilePathName){
         File f;

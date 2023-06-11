@@ -157,7 +157,8 @@ public class Configuration {
 
     /**
      * Metodo che indica se il pezzo appartiene alla configurazione (per riferimento).
-     * @return true se appartiene, false altrimenti
+     * @param piece pezzo da controllare.
+     * @return true se appartiene, false altrimenti.
      */
     public boolean doesPieceBelong(Piece piece) {
         for (Piece testPiece : _pieces) {

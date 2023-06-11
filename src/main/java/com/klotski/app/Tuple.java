@@ -2,7 +2,7 @@ package com.klotski.app;
 
 /**
  * Classe che rappresenta una Tupla (struttura dati) per gestire meglio
- * le coordinate dei Piece
+ * le coordinate dei Piece.
  */
 public class Tuple {
     /**
@@ -17,6 +17,8 @@ public class Tuple {
 
     /**
      * Costruttore con parametri che inizializza coordinata "X" e coordinata "Y"
+     * @param x del pezzo
+     * @param y del pezzo
      */
     public Tuple(int x, int y) {
         this._x = x;
@@ -24,11 +26,13 @@ public class Tuple {
     }
     /**
      * Metodo che ritorna la posizione "X"
+     * @return x
      */
     public int getX() {return  this._x;}
 
     /**
      * Metodo che ritorna la posizione "Y"
+     * @return  y
      */
     public int getY() {return this._y;}
 }

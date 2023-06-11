@@ -3,7 +3,7 @@ package com.klotski.app;
 import javafx.scene.paint.Color;
 
 /**
- * Classe contenente
+ * Classe contenente tutte le costanti utilizzate.
  */
 public class Constants {
 
@@ -123,7 +123,9 @@ public class Constants {
      */
     public static final int WIN_Y = 300;
 
-    //Di quanti px muovere ciascun pezzo nel gioco
+    /**
+     * Di quanti px muovere ciascun pezzo nel gioco.
+     */
     public static final double MOVE_AMOUNT = 100;
 
 
