@@ -278,7 +278,6 @@ skinparam BackgroundColor #FFFFFF
 actor Giocatore 
 participant Controller
 participant Game
-participant Piece
 
 
 Giocatore -> Controller: reset()
@@ -288,7 +287,7 @@ Game -> Configuration: newInitialConfiguration = new Configuration(_initialSelec
 Configuration --> Game: newInitialConfiguration
 Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
 Game -> Game: updateLogsWithCurrentConfiguration();
-Game -> Game: _moveCounter = 0 \nsetInitialSelectedConf(confNumber)
+Game -> Game: _moveCounter = 0 
 Controller -> Controller: updateBlockPaneAndCounter()
 Controller --> Giocatore: configurazione_iniziale \ncounter_azzerato
 
@@ -389,6 +388,5 @@ else connessione ad internet funzionante
 end
 
 
-@enduml
 @enduml
 ```
