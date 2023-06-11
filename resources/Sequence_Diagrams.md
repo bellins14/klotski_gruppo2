@@ -19,18 +19,17 @@ skinparam ParticipantBackgroundColor #90E0EF
 actor Giocatore
 participant Sistema
 
-Giocatore -> Sistema: inizia_partita()
 Sistema --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
 par
-    Giocatore -> Sistema: muovi(blocco)
+    Giocatore -> Sistema: muovi(pezzo)
     
     critical 
       alt vittoria
-        Sistema --> Giocatore: messaggio("Hai vinto")
+        Sistema --> Giocatore: alert "Hai vinto", \nconfigurazione_iniziale \ncounter_azzerato
 
       else altrimenti
-        Sistema --> Giocatore: mostra(configurazione_aggiornata,\ncounter++)
+        Sistema --> Giocatore: configurazione_aggiornata,\n++counter
       end
     end
     
@@ -38,7 +37,7 @@ else
     Giocatore -> Sistema: cambia_configurazione(configurazione_alternativa)
     
     critical 
-      Sistema --> Giocatore: mostra(configurazione_alternativa,\ncounter_azzerato)
+      Sistema --> Giocatore: configurazione_alternativa,\ncounter_azzerato
     end
 
 else 
@@ -46,10 +45,10 @@ else
     
     critical 
       alt counter > 0 
-        Sistema --> Giocatore: mostra(configurazione_aggiornata,\ncounter--)
+        Sistema --> Giocatore: configurazione_precedente,\n--counter
         
       else counter == 0
-        Sistema --> Giocatore: messaggio("Impossibile tornare indietro")
+        Sistema --> Giocatore: alert "Non hai mosso nessun blocco"
       end
     end
     
@@ -57,18 +56,23 @@ else
     Giocatore -> Sistema: reset()
     
     critical 
-      Sistema --> Giocatore: mostra(configurazione_iniziale,\ncounter_azzerato)
+      Sistema --> Giocatore: configurazione_iniziale,\ncounter_azzerato
     end
 
 else 
     Giocatore -> Sistema: richiedi_NBM()
     
     critical 
-      alt connessione ad internet
-        Sistema --> Giocatore: mostra(NBM)
-        
+    alt NBM precedente in caricamento
+      Sistema --> Giocatore: alert "NBM in caricamento"
+      
       else altrimenti
-        Sistema --> Giocatore: messaggio("Next best move non disponibile")
+      
+      alt connessione ad internet funzionante
+        Sistema --> Giocatore: configurazione_aggiornata_con_NBM, \n++counter
+        
+      else connessione ad internet non funzionante
+        Sistema --> Giocatore: alert "NBM non disponibile, connetti a internet" 
     end
 end
 @enduml
