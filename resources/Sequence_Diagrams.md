@@ -297,7 +297,7 @@ end
 ```plantuml
 @startuml
 !theme materia-outline
-
+autonumber
 skinparam ArrowColor #00B4D8
 skinparam ActorBorderColor #03045E
 skinparam ActorFontColor #03045E
@@ -316,16 +316,24 @@ participant Game
 
 
 Giocatore -> Controller: reset()
+activate Controller
 Controller -> Game: reset()
+activate Game
 
 Game -> Configuration: newInitialConfiguration = new Configuration(_initialSelectedConf)
+activate Configuration
 Configuration --> Game: newInitialConfiguration
+deactivate Configuration
 Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
 Game -> Game: updateLogsWithCurrentConfiguration();
 Game -> Game: _moveCounter = 0 
 Game --> Controller
+deactivate Game
+
 Controller -> Controller: updateBlockPaneAndCounter()
 Controller --> Giocatore: configurazione_iniziale \ncounter_azzerato
+deactivate Controller
+
 
 @enduml
 ```
