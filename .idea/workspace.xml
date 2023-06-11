@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="Aggiunti i testResults di JUnit">
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="Sistemata la struttura del sito.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -472,7 +471,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686434551165</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Sistemata la struttura del sito.">
+      <created>1686435534102</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1686435534102</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -513,7 +519,8 @@
     <MESSAGE value="Tolto boostrap. Inizio del refactoring" />
     <MESSAGE value="Sistemata la parte del manuale. Aggiunto STR." />
     <MESSAGE value="Aggiunti i testResults di JUnit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunti i testResults di JUnit" />
+    <MESSAGE value="Sistemata la struttura del sito." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sistemata la struttura del sito." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
