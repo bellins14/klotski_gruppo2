@@ -22,7 +22,7 @@ participant Sistema
 Sistema --> Giocatore: mostra(configurazione_corrente,\ncounter)
 
 par
-    Giocatore -> Sistema: muovi(pezzo)
+    Giocatore -> Sistema: muovi(pezzo, direzione)
     
     critical 
       alt vittoria
@@ -82,53 +82,9 @@ end
 
 # Internal Sequence Diagrams
 
-## inizia_partita()
-
-![InternalSequenceDiagram1.png](img/diagrams/InternalSequenceDiagram1.png)
-
-```plantuml
-@startuml
-!theme materia-outline
-
-skinparam ArrowColor #00B4D8
-skinparam ActorBorderColor #03045E
-skinparam ActorFontColor #03045E
-skinparam ActorBackgroundColor #CAF0F8
-skinparam ParticipantFontColor #03045E
-skinparam ParticipantBorderColor #03045E
-skinparam ParticipantBackgroundColor #90E0EF
-skinparam DatabaseBorderColor #03045E
-skinparam DatabaseBackgroundColor #00B4D8
-skinparam DatabaseFontColor #03045E
-skinparam BackgroundColor #FFFFFF
-
-actor Giocatore 
-participant Partita
-database Log
-
-Giocatore -> Partita: inizia_partita()
-
-Partita -> Log: leggi_storico_configurazioni()
-Log -> Log: controlla()
 
 
-alt storico disponibile
-    Log --> Partita: restituisci(storico_configurazioni)
-    Partita -> Partita: preleva_ultima_configurazione(storico_configurazioni) \ninizializza_configurazione_corrente(ultima_configurazione) \ncalcola_counter(storico_configurazioni)
-
-else storico non disponibile o vuoto
-    Log --> Partita: eccezione(nessuno_storico)
-    Partita -> Partita: ininizializza_configurazione_corrente(configurazione_iniziale) \n inizializza_counter(0) \naggiorna_storico_configurazioni(configurazione_iniziale)
-    Partita -> Log: scrivi(storico_configurazioni)
-end
-
-Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
-
-@enduml
-```
-
-
-## muovi(blocco)
+## muovi(pezzo, keyCode)
 
 ![InternalSequenceDiagram2.png](img/diagrams/InternalSequenceDiagram2.png)
 
@@ -149,23 +105,57 @@ skinparam DatabaseFontColor #03045E
 skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
-participant Partita
-database Log
+participant Controller
+participant Game
+participant Piece
 
-Giocatore -> Partita: muovi(blocco)
- 
-critical 
-  alt vittoria
-    Partita --> Giocatore:messaggio("hai vinto")
 
-  else altrimenti
-    Partita -> Partita: aggiorna_configurazione_corrente()\ncounter++
-    Partita -> Partita: aggiorna_storico_configurazioni(configurazione_corrente)
-    Partita -> Log: scrivi(storico_configurazioni)
-    Partita --> Giocatore: mostra(configurazione_corrente,\ncounter)
+Giocatore -> Controller: muovi(pezzo, keyCode)
+Controller -> Game: movePiece(piece, keyCode)
+alt keyCode == up
+Game -> Game: movePieceUp(piece)
+
+Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
+Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+
+else keyCode == down 
+Game -> Game: movePieceDown(piece)
+
+Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
+Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+
+else keyCode == right 
+Game -> Game: movePieceRight(piece)
+
+Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
+Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+
+else keyCode == left 
+Game -> Game: movePieceLeft(piece)
+
+Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
+Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 end
-    
+
+Game -> Game: checkNotWin()
+
+alt vittoria
+Game -> Game: reset();
+Game -> Controller: Exception()
+Controller -> Controller: updateBlockPaneAndCounter();
+Controller -> Utility: setAlert("Hai vinto")
+Utility --> Giocatore: alert "Hai vinto"
+Controller-->Giocatore: configurazione_iniziale \ncounter_azzerato
+
+
+
+else altrimenti
+Controller-->Giocatore: configurazione_aggiornata,\n++counter
+end
+
+
+
 @enduml
 ```
 
