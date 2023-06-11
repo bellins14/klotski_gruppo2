@@ -147,6 +147,7 @@ public class Controller {
                 //Sposta il pezzo
                 try {
                     game.movePiece(selectedPiece, keyCode);
+
                     //Aggiorna il testo con il counter delle mosse
                     textCounter.setText("Moves : " + game.getMoveCounter());
 
