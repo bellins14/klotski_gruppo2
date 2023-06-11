@@ -272,11 +272,11 @@ public class Controller {
                                 //Aggiorna la blockPane con la nuova configurazione attuale del gioco e il counter (gioco resettato)
                                 updateBlockPaneAndCounter();
 
-                                //riabilita il bottone NBM
+                                //Riabilita il bottone NBM
                                 NBM.setDisable(false);
 
                                 //Lancia alert di vittoria
-                                Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto");
+                                Utility.setAlert(Alert.AlertType.INFORMATION, "Vittoria", "Hai vinto in "+e.getMessage()+" mosse");
 
                             }
 

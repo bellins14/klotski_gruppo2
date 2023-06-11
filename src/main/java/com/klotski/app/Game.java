@@ -344,10 +344,11 @@ public class Game {
 
         //Se si trova nella posizione di vittoria
         if (pieceToCheck.getLayoutX() == WIN_X && pieceToCheck.getLayoutY() == WIN_Y) {
+            int oldCounter = this._moveCounter;
             //Resetta il gioco
             this.reset();
-            //avvisa che è stato vinto il gioco
-            throw new Exception();
+            //avvisa che è stato vinto il gioco in oldCounter mosse
+            throw new Exception(String.valueOf(oldCounter));
         }
     }
 
