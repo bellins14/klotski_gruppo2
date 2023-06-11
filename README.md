@@ -15,3 +15,4 @@ Le istruzioni su come installare l'applicazione e giocare sono contenute nel man
 Per il nostro codice sono state utilizzate varie fonti:
 * per la NBM, il github di [jeantimex](https://github.com/jeantimex/Klotski)
 * per le texture dei blocchi, immagini di [Mojang](https://www.minecraft.net/en-us/terms#commercial)
+> Il seguente progetto non è nulla di ufficiale Mojang, non è stato approvato, non è in alcun modo associato alla suddetta
