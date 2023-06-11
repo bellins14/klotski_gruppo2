@@ -185,7 +185,7 @@
                 stato
                 in cui si trova la partita quando la NBM viene richiesta. La logica che permette di usufruire di questa
                 funzionalità è implementata da un sistema esterno
-                (<a href="https://github.com/MatteoTonello/EUTrustServicesApp/blob/main/out/artifacts/EUTrustServicesApplication_jar/EUTrustServicesApplication.jar"
+                (<a href="https://unpkg.co/klotski/dist/klotski.min.js"
                     target="_blank">link allo script</a>).
                 La connessione fra quest'ultimo e il software è stata creata tramite due classi di JavaFX: WebView,
                 per “mappare” il contenuto di una pagina web, e WebEngine, per modificare una pagina web tramite
@@ -216,47 +216,45 @@
             <h2>Scaricare ed installare il software</h2>
             <h3>Jar</h3>
             <p>
-                Per <b>scaricare il programma</b> in formato <code>.jar</code>, cliccare sul seguente tasto
-                "<b>Download</b>":
+                Per <b>scaricare il programma</b> in formato <code>.jar</code>, cliccare sul bottone Windows o macOS:
             </p>
+
             <div style="display: flex; justify-content: center; align-items: center;">
                 <!-- Mettere il link download del jar -->
 
                 <button id="downloadButton1" type="button" class="btn-primary" style="margin-left: 20px"
-                        data-url="https://github.com/bellins14/klotski_gruppo2/releases/download/v0.0.0/klotski_gruppo2-windows.zip"
-                        data-file="nome_del_tuo_file.zip" onclick="getZipFile(this)"><i class="fa fa-windows"
-                                                                                        style="font-size: 30px; color: var(--primary-color)"></i>
+                    data-url="https://github.com/bellins14/klotski_gruppo2/releases/download/v0.0.0/klotski_gruppo2-windows.zip"
+                    data-file="nome_del_tuo_file.zip" onclick="getZipFile(this)">
+                    <i class="fa fa-windows" style="font-size: 30px; color: var(--primary-color)"></i>
                 </button>
 
                 <button id="downloadButton2" type="button" class="btn-primary" style="margin-left: 20px"
-                        data-url="https://www.google.com" data-file="altro_nome_del_file.zip"
-                        onclick="getZipFile(this)"><i class="fa fa-apple"
-                                                      style="font-size: 30px; color: var(--primary-color)"></i></button>
-
+                data-url="https://www.google.com" data-file="altro_nome_del_file.zip"
+                onclick="getZipFile(this)">
+                <i class="fa fa-apple" style="font-size: 30px; color: var(--primary-color)"></i></button>
             </div>
+
             <p>
                 Una volta terminato il download del file <code>.zip</code>, estrarne il contenuto in una locazione a
                 piacere all’interno
-                del proprio dispositivo. Saranno presenti una directory e un file eseguibile:
+                del proprio dispositivo. Sarà presente una directory contenente una cartella e un file:
             </p>
             <ul>
                 <li>
                     <b>/klotski_files</b>, nella quale sono contenuti i file necessari per il salvataggio delle partite
-                    e la
-                    richiesta della NBM. È stato scelto di allocarli esternamente poiché non era possibile renderizzarli
-                    ed
-                    utilizzarli all’interno del file <code>.jar</code>.
+                    e la richiesta della NBM. È stato scelto di allocarli esternamente poiché non era possibile renderizzarli
+                    ed utilizzarli all’interno del file <code>.jar</code>.
                 </li>
                 <br>
                 <li>
-                    <b><code>klotski.jar</code></b>, l'applicazione</b>.
+                    <b><code>klotski.jar</code></b>, l'applicazione.
                 </li>
             </ul>
             <p>
                 Per avviare l’applicazione, <b>fare doppio click sul file <code>klotski.jar</code></b>. L’esecuzione in
-                questa modalità del programma
-                è possibile su qualsiasi sistema operativo, <b>previa installazione del JRE</b>.
+                questa modalità del programma è possibile <b>previa installazione del JRE</b>.
             </p>
+            <cite>Per eseguire il file klotski.jar è necessario che sia nella stessa directory della cartella klotski_files.</cite>
             <div class="span-h3"></div>
 
             <h3>IDE</h3>

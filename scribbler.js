@@ -158,19 +158,20 @@ modal.onclick = function() {
   }, 400);
 }
 
+// per scaricare file da github releases
 document.addEventListener('DOMContentLoaded', function() {
-    function getZipFile(button) {
-      var link = button.getAttribute('data-url');
-      var fileName = button.getAttribute('data-file');
-      window.location.href = link;
-    }
+  function getZipFile(button) {
+    var link = button.getAttribute('data-url');
+    var fileName = button.getAttribute('data-file');
+    window.location.href = link;
+  }
 
-    document.getElementById('downloadButton1').addEventListener('click', function() {
-      getZipFile(this);
-    });
-
-    document.getElementById('downloadButton2').addEventListener('click', function() {
-      getZipFile(this);
-    });
+  document.getElementById('downloadButton1').addEventListener('click', function() {
+    getZipFile(this);
   });
+
+  document.getElementById('downloadButton2').addEventListener('click', function() {
+    getZipFile(this);
+  });
+});
 
