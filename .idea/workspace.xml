@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="Aggiunta sollecitazione javadoc">
+    <list default="true" id="f0a7f3fe-cbff-47a3-8d6b-96a7575b787d" name="Changes" comment="NBM che ha bisogno del suo tempo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/img/diagrams/ClassDiagram.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -522,7 +521,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686507730087</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="NBM che ha bisogno del suo tempo">
+      <created>1686509341456</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1686509341456</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -540,7 +546,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sostituzione `button` con `block`" />
     <MESSAGE value="nuovo link nelle note" />
     <MESSAGE value="ordinato meglio classi Configuration, Piece, Controller" />
     <MESSAGE value="aggiustata imageFill" />
@@ -565,7 +570,8 @@
     <MESSAGE value="Aggiunto il class diagram sistemato" />
     <MESSAGE value="Sistemate gli ISD" />
     <MESSAGE value="Aggiunta sollecitazione javadoc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunta sollecitazione javadoc" />
+    <MESSAGE value="NBM che ha bisogno del suo tempo" />
+    <option name="LAST_COMMIT_MESSAGE" value="NBM che ha bisogno del suo tempo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
