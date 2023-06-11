@@ -239,11 +239,14 @@ Controller -> Game: undo()
 
 alt _stackLog.isEmpty()
 Game --> Controller: Exception()
+Controller -> Utility: setAlert("Non hai mosso nessun blocco")
 Utility --> Giocatore: alert "Non hai mosso nessun blocco"
 
 else altrimenti
-Game -> Game: setConfiguration(_stackLog.pop()) \n_moveCounter--;
-Controller -> Controller: updateBlockPaneAndCounter();
+Game -> Game: setConfiguration(_stackLog.pop()) 
+Game -> Game: updateLogsWithCurrentConfiguration()
+Game -> Game:_moveCounter--
+Controller -> Controller: updateBlockPaneAndCounter()
 Controller --> Giocatore: configurazione_precedente,\n--counter
 
 end
