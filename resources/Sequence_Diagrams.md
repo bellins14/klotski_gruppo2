@@ -328,12 +328,17 @@ Giocatore -> Controller: nextBestMove()
 Controller -> Utility : isInternetConnected()
 
 alt connessione non internet funzionante
-  
-  Controller --> Giocatore : alert "NBM non disponibile, connetti a internet" 
+  Utility --> Controller: false
+  Controller -> Utility: setAlert("NBM non disponibile, connetti a internet")
+  Utility --> Giocatore : alert "NBM non disponibile, connetti a internet" 
   
 else connessione ad internet funzionante
+Utility --> Controller : true
 
-  Controller -> Utility : updateHTMLFile()
+  Controller -> Game: getConfiguration()
+  Game --> Controller: configuration
+  Controller -> Utility : updateHTMLFile(configuration)
+  Utility --> Controller : 
   
   Controller -> Controller : loadHTMLFile()
   
@@ -343,49 +348,54 @@ else connessione ad internet funzionante
   
   NBM_Script --> Controller : NBM
   
-  Controller -> Game: movePiece(piece, keyCode)
-  alt keyCode == up
-  Game -> Game: movePieceUp(piece)
-  
-  Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
-  Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-  
-  else keyCode == down 
-  Game -> Game: movePieceDown(piece)
-  
-  Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
-  Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-  
-  else keyCode == right 
-  Game -> Game: movePieceRight(piece)
-  
-  Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
-  Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-  
-  else keyCode == left 
-  Game -> Game: movePieceLeft(piece)
-  
-  Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
-  Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
-  
-  end
-  
-  Game -> Game: checkNotWin()
-  
-  alt vittoria
-  Game -> Game: reset();
-  Game --> Controller: Exception()
-  Controller -> Controller: updateBlockPaneAndCounter();
-  Controller -> Utility: setAlert("Hai vinto")
-  Utility --> Giocatore: alert "Hai vinto"
-  Controller --> Giocatore: configurazione_iniziale \ncounter_azzerato
-  
-  
-  
-  else altrimenti
-  Controller-->Giocatore: configurazione_aggiornata,\n++counter
-  end
+Controller -> Game: movePiece(piece, keyCode)
+alt keyCode == UP
+Game -> Game: movePieceUp(piece)
+
+Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
+Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+
+else keyCode == DOWN 
+Game -> Game: movePieceDown(piece)
+
+Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
+Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+
+else keyCode == RIGHT 
+Game -> Game: movePieceRight(piece)
+
+Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
+Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+
+else keyCode == LEFT 
+Game -> Game: movePieceLeft(piece)
+
+Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
+Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
+
 end
+
+Game -> Game: checkNotWin()
+Game -> Configuration: pieceToCheck = _configuration.getPieces()[0]
+Configuration --> Game: pieceToCheck
+
+alt pieceToCheck in posizione di vittoria
+Game -> Game: reset();
+Game --> Controller: Exception()
+Controller -> Controller: updateBlockPaneAndCounter();
+Controller -> Utility: setAlert("Hai vinto")
+Utility --> Giocatore: alert "Hai vinto"
+Controller-->Giocatore: configurazione_iniziale \ncounter_azzerato
+
+
+
+else altrimenti
+Controller -> Controller: updateCounter();
+Controller-->Giocatore: configurazione_aggiornata,\n++counter
+end
+
+end
+
 
 
 @enduml
