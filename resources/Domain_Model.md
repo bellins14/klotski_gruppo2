@@ -23,6 +23,7 @@ object Undo
 object ConfigurazioneIniziale
 object ConfigurazioneCorrente
 object ContatoreMosse
+object Vittoria
 
 Giocatore "1" --> "1" ConfigurazioneIniziale : Sceglie
 
@@ -42,7 +43,11 @@ StoricoConfigurazioni "1" -left-* "1" Partita : \nContiene\n
 
 NBM_Script "1" -right-> "1" NBM : \nFornisce\n
 
-Giocatore "1" --> "1" Reset : Richiede
+Giocatore "1" -right-> "1" Reset : Richiede
+
+Giocatore "1" -left-> "1" Vittoria : Visualizza
+
+Partita "1" --> "1" Vittoria : Segnala
 
 Giocatore "1" --> "0.." Undo : Richiede
 
@@ -58,5 +63,4 @@ Reset "1" -right-> "1" Partita : Modifica
 
 Undo "1" --> "1" Partita : Modifica
 
-@enduml
-```
+@enduml```
