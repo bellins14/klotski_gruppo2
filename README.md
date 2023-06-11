@@ -10,4 +10,6 @@ by Gruppo 2 (Bellinato, Bordin, Caon, Menegale)
 ```cmd
 $ java -jar klotski.jar
 ```
-> Per eseguire il file klotski.jar è necessario che sia nella stessa directory della cartella klotski_files
+> Per eseguire il file klotski.jar è necessario che sia nella stessa directory della cartella klotski_files.
+> 
+> Questa installazione è eseguibile soltanto su sistemi operativi Windows.
