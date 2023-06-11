@@ -215,7 +215,7 @@
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
-    <td>Il giocatore può scegliere di annullare una o più mosse, in ordine cronologico, dalla più recente alla meno recente, fino alla situazione di partenza.</td>
+    <td>Il giocatore può scegliere di annullare una mossa attraverso il tasto dedicato.</td>
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
@@ -235,7 +235,7 @@
   </tr>
     <tr>
     <td><b>Note</b></td>
-    <td>-</td>
+    <td>Il giocatore può annullare quante mosse vuole, tornando indietro nello storico della partita, fino alla configurazione iniziale.</td>
   </tr>
 </table>
 
