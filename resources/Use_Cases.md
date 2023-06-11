@@ -424,7 +424,7 @@
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>Il giocatore deve aver effettuato una mossa.</td>
+    <td>Il giocatore deve aver mosso il pezzo speciale nella posizione di vittoria (in basso in centro).</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
