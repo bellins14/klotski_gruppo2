@@ -9,6 +9,7 @@
 8. Salvare la partita
 9. Ripristinare partita salvata
 10. Fornire "next best move"
+11. Vincere
 
 
 ### Use Case 1
@@ -398,6 +399,44 @@
   <tr>
     <td><b>Post-Condizioni</b></td>
     <td>L'NBM deve esssere elaborata e mostrata.</td>
+  </tr>
+    <tr>
+    <td><b>Note</b></td>
+    <td>-</td>
+  </tr>
+</table>
+
+
+
+### Use Case 10
+<table>
+  <tr>
+    <td><b>Nome dello Use Case</b>
+    <td>Vincere</td>
+  </tr>
+  <tr>
+    <td><b>Attori</b></td>
+    <td>Giocatore</td>
+  </tr>
+  <tr>
+    <td><b>Descrizione</b></td>
+    <td>Il giocatore deve poter vincere.</td>
+  </tr>
+  <tr>
+    <td><b>Precondizioni</b></td>
+    <td>Il giocatore deve aver effettuato una mossa</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Principale</b></td>
+    <td>Al giocatore viene segnalato che ha vinto</td>
+  </tr>
+  <tr>
+    <td><b>Scenario Alternativo</b></td>
+    <td>Il giocatore, con la mossa corrente, non ha raggiunto la posizione di vittoria col pezzo speciale.</td>
+  </tr>
+  <tr>
+    <td><b>Post-Condizioni</b></td>
+    <td>Il counter delle mosse viene azzerato, la partita viene resettata.</td>
   </tr>
     <tr>
     <td><b>Note</b></td>
