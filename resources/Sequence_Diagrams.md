@@ -346,7 +346,7 @@ deactivate Controller
 ```plantuml
 @startuml
 !theme materia-outline
-
+autonumber
 skinparam ArrowColor #00B4D8
 skinparam ActorBorderColor #03045E
 skinparam ActorFontColor #03045E
@@ -368,67 +368,105 @@ actor NBM_Script
 
 
 Giocatore -> Controller: nextBestMove()
+activate Controller
 
 Controller -> Utility : isInternetConnected()
+activate Utility
 
 alt connessione non internet funzionante
   Utility --> Controller: false
+  deactivate Utility
+
   Controller -> Utility: setAlert("NBM non disponibile, connetti a internet")
+  activate Utility
+
   Utility --> Giocatore : alert "NBM non disponibile, connetti a internet" 
-  
+
+
 else connessione ad internet funzionante
+
 Utility --> Controller : true
+deactivate Utility
+
 
   Controller -> Game: getConfiguration()
+  activate Game
+
   Game --> Controller: configuration
+  deactivate Game
   Controller -> Utility : updateHTMLFile(configuration)
+  activate Utility
+
   Utility --> Controller : 
+  deactivate Utility
+
   
   Controller -> Controller : loadHTMLFile()
   
   Controller -> NBM_Script : Richiedi NBM
-  
+  activate NBM_Script
   NBM_Script -> NBM_Script : Calcola NBM
   
   NBM_Script --> Controller : NBM
+    deactivate NBM_Script
+
   
 Controller -> Game: movePiece(piece, keyCode)
+activate Game
+
 alt keyCode == UP
 Game -> Game: movePieceUp(piece)
 
 Game -> Piece: setLayoutY(piece.getLayoutY - MOVE_AMOUNT)
+activate Piece
+Piece --> Game
+deactivate Piece
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 else keyCode == DOWN 
 Game -> Game: movePieceDown(piece)
 
 Game -> Piece: setLayoutY(piece.getLayoutY + MOVE_AMOUNT)
+activate Piece
+Piece --> Game
+deactivate Piece
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 else keyCode == RIGHT 
 Game -> Game: movePieceRight(piece)
 
 Game -> Piece: setLayoutX(piece.getLayoutX + MOVE_AMOUNT)
+activate Piece
+Piece --> Game
+deactivate Piece
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 else keyCode == LEFT 
 Game -> Game: movePieceLeft(piece)
 
 Game -> Piece: setLayoutX(piece.getLayoutX - MOVE_AMOUNT)
+activate Piece
+Piece --> Game
+deactivate Piece
 Game -> Game: _moveCounter++ \nupdateLogsWithCurrentConfiguration()
 
 end
 
 Game -> Game: checkNotWin()
 Game -> Configuration: pieceToCheck = _configuration.getPieces()[0]
+activate Configuration
 Configuration --> Game: pieceToCheck
+deactivate Configuration
 
 alt pieceToCheck in posizione di vittoria
 Game -> Game: reset();
 Game --> Controller: Exception()
+deactivate Game
 Controller -> Controller: updateBlockPaneAndCounter();
 Controller -> Utility: setAlert("Hai vinto")
+activate Utility
 Utility --> Giocatore: alert "Hai vinto"
+deactivate Utility
 Controller-->Giocatore: configurazione_iniziale \ncounter_azzerato
 
 
@@ -436,9 +474,11 @@ Controller-->Giocatore: configurazione_iniziale \ncounter_azzerato
 else altrimenti
 Controller -> Controller: updateCounter();
 Controller-->Giocatore: configurazione_aggiornata,\n++counter
+deactivate Controller
 end
 
 end
+
 
 
 
