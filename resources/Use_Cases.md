@@ -1,7 +1,7 @@
 # Use Cases
 1. Visualizzare configurazione corrente
 2. Scegliere configurazione iniziale
-3. Muovere i blocchi nelle posizioni consentite
+3. Muovere i pezzi nelle posizioni consentite
 4. Visualizzare counter delle mosse effettuate
 5. Utilizzare funzione di reset
 6. Utilizzare funzione di undo
@@ -69,7 +69,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Viene impostata dal programma la disposizione iniziale dei blocchi in base alla configurazione iniziale scelta dal giocatore.</td>
+    <td>Viene impostata dal programma la disposizione iniziale dei pezzi in base alla configurazione iniziale scelta dal giocatore.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -91,7 +91,7 @@
 <table>
   <tr>
     <td><b>Nome dello Use Case</b>
-    <td>Muovere i blocchi nelle posizioni consentite</td>
+    <td>Muovere i pezzi nelle posizioni consentite</td>
   </tr>
   <tr>
     <td><b>Attori</b></td>
@@ -99,7 +99,7 @@
   </tr>
   <tr>
     <td><b>Descrizione</b></td>
-    <td>Il giocatore può traslare un blocco per mossa negli spazi liberi che lo possono contenere.</td>
+    <td>Il giocatore può traslare un pezzo per mossa negli spazi liberi che lo possono contenere.</td>
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
@@ -107,11 +107,11 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Il blocco selezionato viene spostato di una posizione nella direzione scelta dal giocatore.</td>
+    <td>Il pezzo selezionato viene spostato di una posizione nella direzione scelta dal giocatore.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
-    <td>Il blocco selezionato non si muove.</td>
+    <td>Il pezzo selezionato non si muove.</td>
   </tr>
   <tr>
     <td><b>Post-Condizioni</b></td>
@@ -185,7 +185,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>In qualsiasi momento il giocatore può decidere di resettare la partita premendo il tasto "reset". I blocchi devono essere sistemati nella configurazione iniziale relativa alla partita che stava giocando.</td>
+    <td>In qualsiasi momento il giocatore può decidere di resettare la partita premendo il tasto "reset". I pezzi devono essere sistemati nella configurazione iniziale relativa alla partita che stava giocando.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -223,7 +223,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>La disposizione dei blocchi ritorna alla cofigurazione precedente rispetto a quella corrente.</td>
+    <td>La disposizione dei pezzi ritorna alla cofigurazione precedente rispetto a quella corrente.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -261,7 +261,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Ogni volta che si richiede la NBM, un blocco alla volta verrà spostato in modo da ottenere la vittoria nel minor numero di mosse necessarie.</td>
+    <td>Ogni volta che si richiede la NBM, un pezzo alla volta verrà spostato in modo da ottenere la vittoria nel minor numero di mosse necessarie.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -309,7 +309,7 @@
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei blocchi (mossa, undo, reset o scelta della configurazione iniziale), la partita deve essere salvata in modo che, se il programma dovesse essere chiuso, all'avvio successivo, la partita possa essere ripristinata.</td>
+    <td>Ogni volta che il giocatore effettua un'azione che impatta sulla disposizione dei pezzi (mossa, undo, reset o scelta della configurazione iniziale), la partita deve essere salvata in modo che, se il programma dovesse essere chiuso, all'avvio successivo, la partita possa essere ripristinata.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
@@ -425,7 +425,7 @@ rectangle "Klotski" {
   usecase "Visualizzare counter delle mosse effettuate" as counter
   usecase "Ripristinare la partita salvata" as restore
   usecase "Salvare la partita" as update_log
-  usecase "Muovere i blocchi nelle posizioni consentite" as move
+  usecase "Muovere i pezzi nelle posizioni consentite" as move
   usecase "Vincere" as win
   usecase "Utilizzare funzione di reset" as reset
   usecase "Utilizzare funzione di undo" as undo
