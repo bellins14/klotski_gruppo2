@@ -85,7 +85,7 @@ public class Utility {
                 "</script>" +
                 "</body>\n" +
                 "</html>";
-        FileWriter file = new FileWriter(NBM_SOLVER_HTML_FILE);
+        FileWriter file = new FileWriter(Utility.NBM_SOLVER_HTML_FILE());
         file.write(game);
         file.close();
     }
@@ -143,5 +143,26 @@ public class Utility {
         }
 
         return true;
+    }
+
+
+    public static  String DC_FILE(){
+        String currentWorkingDirectory = System.getProperty("user.dir");
+        File currentDirectory = new File(currentWorkingDirectory);
+        String formattedPath = currentDirectory.toString().replace("\\", "\\\\");
+        return formattedPath+"\\\\klotski_files\\\\ConfigurationDC.json";
+    }
+    public static  String LOG_FILE(){
+        String currentWorkingDirectory = System.getProperty("user.dir");
+        File currentDirectory = new File(currentWorkingDirectory);
+        String formattedPath = currentDirectory.toString().replace("\\", "\\\\");
+        return formattedPath+"\\\\klotski_files\\\\ConfigurationLog.json";
+    }
+
+    public static  String NBM_SOLVER_HTML_FILE(){
+        String currentWorkingDirectory = System.getProperty("user.dir");
+        File currentDirectory = new File(currentWorkingDirectory);
+        String formattedPath = currentDirectory.toString().replace("\\", "\\\\");
+        return formattedPath+"\\\\klotski_files\\\\solver.html";
     }
 }
