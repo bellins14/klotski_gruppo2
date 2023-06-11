@@ -424,11 +424,11 @@
   </tr>
   <tr>
     <td><b>Precondizioni</b></td>
-    <td>Il giocatore deve aver effettuato una mossa</td>
+    <td>Il giocatore deve aver effettuato una mossa.</td>
   </tr>
   <tr>
     <td><b>Scenario Principale</b></td>
-    <td>Al giocatore viene segnalato che ha vinto</td>
+    <td>Al giocatore viene segnalato che ha vinto.</td>
   </tr>
   <tr>
     <td><b>Scenario Alternativo</b></td>
