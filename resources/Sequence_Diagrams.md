@@ -180,19 +180,28 @@ skinparam DatabaseFontColor #03045E
 skinparam BackgroundColor #FFFFFF
 
 actor Giocatore 
-participant Partita
-database Log
-
-Giocatore -> Partita: cambia_configurazione(configurazione_alternativa)
-    
-
-Partita -> Partita: aggiorna_configurazione_corrente(configurazione_alternativa)\nreset_counter()
-Partita -> Partita: reset_storico_configurazioni() \naggiorna_storico_configurazioni(configurazione_corrente)
-Partita -> Log: scrivi(storico_configurazioni)
+participant Controller
+participant Game
+participant Piece
 
 
-Partita-->Giocatore: mostra(configurazione_corrente,\ncounter)
+Giocatore -> Controller: configurationClicked()
+Controller -> Game: resetToAnotherInitialConf(configurationNumber)
 
+alt configurationNumber == _initialSelectedConf
+Game --> Controller: Exception
+
+else configurationNumber != _initialSelectedConf
+
+Game -> Configuration: newInitialConfiguration = new Configuration(_initialSelectedConf)
+Configuration --> Game: newInitialConfiguration
+Game -> Game: _stackLog.clear() \nsetConfiguration(newInitialConfiguration)
+Game -> Game: updateLogsWithCurrentConfiguration();
+Game -> Game: _moveCounter = 0 \nsetInitialSelectedConf(confNumber)
+Controller -> Controller: updateBlockPaneAndCounter()
+Controller --> Giocatore: configurazione_alternativa \ncounter_azzerato
+
+end
 @enduml
 ```
 
